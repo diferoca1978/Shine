@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "raleway";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("/fonts/Raleway-VariableFont_wght.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "playfair";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("/fonts/PlayfairDisplay-VariableFont_wght.woff2") format("woff2");
+}
+
+
+
+@theme {
+    /* Configuración de fuentes */
+    --font-raleway: raleway, system-ui, sans-serif;
+    --font-playfair: playfair, system-ui, serif;
+
+    /* Configuración de pesos de fuente */
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 900;
+
+    /* Colores */
+    --color-soft-gold: oklch(0.8987 0.119 87.54);
+    --color-light-marfil: oklch(0.9643 0.007 88.64);
+    --color-gray-stone: oklch(0.8853 0 0);
+    --color-soft-lavender: oklch(0.8166 0.0659 291.7);
+    --color-smoky-black: oklch(0.3052 0 0);
+    --color-sand-rose: oklch(0.7638 0.0655 28.26);
+    --color-sage-green: oklch(0.761 0.0408 138.18);
+    --color-deep-plum: oklch(0.3911 0.0534 7.52);
+}
