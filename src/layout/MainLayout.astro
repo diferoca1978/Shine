@@ -1,27 +1,92 @@
 ---
-import "@/styles/global.css"
+import "@/styles/global.css";
+
+import SEOHead from "@/components/SEOHead.astro";
+import {
+	DEFAULT_SEO,
+	ORGANIZATION_SCHEMA,
+	WEBSITE_SCHEMA,
+	generatePageSEO,
+	type JSONLDSchema,
+} from "@/config/seo";
+import type { SEOProps } from "astro-seo";
+
+interface Props {
+	title?: string;
+	description?: string;
+	seoProps?: SEOProps;
+	aditionalSchemas?: JSONLDSchema[];
+	path?: string;
+	image?: string;
+	noIndex?: boolean;
+}
+
+const {
+	title,
+	description,
+	seoProps,
+	aditionalSchemas = [],
+	path = Astro.url.pathname,
+	image,
+	noIndex = false,
+} = Astro.props;
+
+// Generate seo props if not provided
+
+const finalSeoProps =
+	seoProps || (title && description)
+		? generatePageSEO({
+				title: title || "",
+				description: description || "",
+				path,
+				image,
+				noindex: noIndex || false,
+			})
+		: DEFAULT_SEO;
+
+// Base schemas that are always added to all pages
+const baseSchemas: JSONLDSchema[] = [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA];
+const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link
+			rel="icon"
+			type="image/png"
+			href="/favicon-16x16.png"
+			sizes="16x16"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			href="/favicon-32x32.png"
+			sizes="32x32"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			href="/android-chrome-192x192.png"
+			sizes="192x192"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			href="/android-chrome-512x512.png"
+			sizes="512x512"
+		/>
+		<link rel="shortcut icon" href="/favicon.ico" />
 
-		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-		<link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
-		<link rel="icon" type="image/png" href="/android-chrome-512x512.png" sizes="512x512">
-		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="sitemap" href="/sitemap-index.xml" />
 
-		<title>Shine</title>
+		<SEOHead seoProps={finalSeoProps} schemas={allSchemas} />
 	</head>
 	<body class="w-full p-0 m-0 overflow-x-hidden">
-        
-        <main class="w-full mx-auto bg-softWhite">
-            <slot />
-         </main>
-		
+		<main class="w-full mx-auto bg-softWhite">
+			<slot />
+		</main>
 	</body>
 </html>

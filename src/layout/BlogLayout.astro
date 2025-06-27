@@ -1,0 +1,50 @@
+---
+import MainLayout from "@/layout/MainLayout.astro";
+import {
+    generateBlogSchema,
+    generateBreadcrumbSchema,
+    type JSONLDSchema,
+} from "@/config/seo";
+
+interface Props {
+    title?: string;
+    description: string;
+    posts?: Array<{
+        id: string;
+        title: string;
+        description: string;
+        publishDate: Date;
+        tags?: string[];
+        image?: string;
+    }>;
+}
+
+const { title, description, posts } = Astro.props;
+
+// Create array of additional schemas with correct typing
+const aditionalSchemas: JSONLDSchema[] = [];
+
+// Breadcrumb to the blog
+const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: "Blog", url: "/blog" },
+]);
+
+aditionalSchemas.push(breadcrumbSchema);
+
+// Logic to generate blog schema if posts are provided
+
+if (posts && posts.length > 0) {
+    const blogSchema = generateBlogSchema(posts);
+    aditionalSchemas.push(blogSchema);
+}
+---
+
+<MainLayout
+    title={title}
+    description={description}
+    path="/blog"
+    aditionalSchemas={aditionalSchemas}
+>
+    <slot />
+</MainLayout>

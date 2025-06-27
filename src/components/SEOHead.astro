@@ -1,0 +1,22 @@
+---
+import { SEO } from "astro-seo";
+import type { SEOProps } from "astro-seo";
+import type { JSONLDSchema } from "@/config/seo";
+
+interface Props {
+  seoProps: SEOProps;
+  schemas?: JSONLDSchema[]; // To avoid the Type sctict error from typescript, more flexible.
+}
+
+const { seoProps, schemas = [] } = Astro.props;
+---
+
+<SEO {...seoProps} />
+
+{
+  schemas.map((schema, index) => (
+    <Fragment key={`schema-${index}`}>
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    </Fragment>
+  ))
+}
