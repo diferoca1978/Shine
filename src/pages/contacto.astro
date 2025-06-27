@@ -1,0 +1,18 @@
+---
+import MainLayout from "@/layout/MainLayout.astro";
+import { generateBreadcrumbSchema } from "@/config/seo";
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: "Contacto", url: "/contacto" },
+]);
+---
+
+<MainLayout
+    title="Contacto"
+    description="Contáctanos para discutir cómo podemos ayudarte a transformar tu presencia digital con autenticidad y propósito."
+    path="/contacto"
+    aditionalSchemas={[breadcrumbSchema]}
+>
+    <h1>Contacto</h1>
+</MainLayout>

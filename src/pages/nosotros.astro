@@ -1,0 +1,18 @@
+---
+import MainLayout from "@/layout/MainLayout.astro";
+import { generateBreadcrumbSchema } from "@/config/seo";
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Inicio", url: "/" },
+    { name: "Nosotros", url: "/nosotros" },
+]);
+---
+
+<MainLayout
+    title="Nosotros"
+    description="Conoce el equipo detrás de Shine y nuestra misión de transformar presencias digitales con autenticidad y propósito."
+    path="/nosotros"
+    aditionalSchemas={[breadcrumbSchema]}
+>
+    <h1>Nosotros</h1>
+</MainLayout>
