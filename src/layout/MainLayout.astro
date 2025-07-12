@@ -10,6 +10,8 @@ import {
 	type JSONLDSchema,
 } from "@/config/seo";
 import type { SEOProps } from "astro-seo";
+import BgTexture from "@/components/global/BgTexture.astro";
+import CursorFollower from "@/components/global/CursorFollower.astro";
 
 interface Props {
 	title?: string;
@@ -85,6 +87,8 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 		<SEOHead seoProps={finalSeoProps} schemas={allSchemas} />
 	</head>
 	<body class="w-full p-0 m-0 overflow-x-hidden">
+		<BgTexture />
+		<CursorFollower />
 		<main class="w-full mx-auto bg-softWhite">
 			<slot />
 		</main>

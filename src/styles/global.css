@@ -1,74 +1,62 @@
+@font-face {
+  font-family: playfair;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("/fonts/Playfair-VariableFont_opsz,wdth,wght.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: poppins;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("/fonts/Poppins-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: open-sans;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("/fonts/OpenSans-Regular.woff2") format("woff2");
+}
+
 @import "tailwindcss";
 
-
-@font-face {
-    font-family: playfair;
-    font-display: swap;
-    src: url("/fonts/Playfair_9pt-Regular.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: poppins;
-    font-display: swap;
-    src: url("/fonts/Poppins-Regular.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: open-sans;
-    font-display: swap;
-    src: url("/fonts/OpenSans-Regular.woff2") format("woff2");
-}
-
 @layer base {
-    h1 {
-        font-family: var(--font-playfair);
-    }
+  h1 {
+    font-family: var(--font-playfair);
+  }
 
-    h2 {
-        font-family: var(--font-poppins);
-    }
+  h2,
+  h3 {
+    font-family: var(--font-poppins);
+  }
 
-    p {
-        font-family: var(--font-open-sans);
-    }
+  p,
+  button {
+    font-family: var(--font-open-sans);
+  }
 
-    a {
-        font-family: var(--font-poppins);
-    }
-
-    button {
-        font-family: var(--font-poppins);
-    }
+  a {
+    font-family: var(--font-poppins);
+  }
 }
-
-@layer components {
-    .btn-primary {
-        @apply px-6 py-2 bg-deepplum text-softWhite font-medium rounded-3xl transition duration-400 text-center shadow-lg shadow-deepplum/20 hover:bg-smokyBlack
-    }
-
-    .btn-secondary {
-        @apply px-6 py-2 bg-salviaGreen text-smokyBlack font-medium rounded-3xl transition duration-400 text-center shadow-lg shadow-salviaGreen/20 hover:bg-smokyBlack hover:text-softWhite;
-    }
-
-}
-
-
 
 
 @theme {
-    --font-playfair: playfair, sans-serif;
-    --font-poppins: poppins, sans-serif;
-    --font-open-sans: open-sans, sans-serif;
+  --font-playfair: playfair, sans-serif;
+  --font-poppins: poppins, sans-serif;
+  --font-open-sans: open-sans, sans-serif;
 
 
-    --color-softWhite: oklch(0.997 0 0);
-    --color-softBeige: oklch(0.9643 0.007 88.64);
-    --color-acecentGold: oklch(0.8987 0.119 87.54);
-    --color-lavender: oklch(0.8166 0.0659 291.7);
-    --color-salviaGreen: oklch(0.761 0.0408 138.18);
-    --color-accentGreen: oklch(0.5366 0.081 179.54);
-    --color-smokyBlack: oklch(0.3052 0 0);
-    --color-sandRose: oklch(0.7638 0.0655 28.26);
-    --color-deepplum: oklch(0.3911 0.0534 7.52);
+
+  --color-softWhite: oklch(0.997 0 0);
+  --color-softBeige: oklch(0.9643 0.007 88.64);
+  --color-accentGold: oklch(0.8987 0.119 87.54);
+  --color-softLavender: oklch(0.8166 0.0659 291.7);
+  --color-salviaGreen: oklch(0.761 0.0408 138.18);
+  --color-accentGreen: oklch(0.5366 0.081 179.54);
+  --color-smokyBlack: oklch(0.3052 0 0);
+  --color-sandRose: oklch(0.7638 0.0655 28.26);
+  --color-deepplum: oklch(0.3911 0.0534 7.52);
 
 }
