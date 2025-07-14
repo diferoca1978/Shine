@@ -1,0 +1,68 @@
+---
+import { twMerge } from "tailwind-merge";
+const { type, href, rel, target, variant, className, id } = Astro.props;
+
+export interface Props {
+  type?: "button" | "submit" | "reset";
+  href?: string;
+  rel?: string;
+  target?: "_self" | "_blank" | "_parent" | "_top";
+  variant?: "primary" | "secondary" | "tertiary";
+  className?: string;
+  id?: string;
+}
+
+/**
+ * Variants: Defines predefined styling options for the 'variant' prop.
+ * - primary: Gradient button from deepplum to lavender with white text and hover effects.
+ * - secondary: Bordered button with deepplum accents and hover effects.
+ * - tertiary: Subtle salviaGreen button with transparent background and hover effects.
+ */
+
+const variants = {
+  primary:
+    "flex items-center text-smokyBlack font-medium bg-softBeige border border-salviaGreen hover:shadow-md hover:shadow-accentGreen/60 hover:scale-105 hover:bg-salviaGreen hover:text-softWhite transform transition-all ease-in-out duration-500",
+  secondary:
+    "flex items-center text-deepplum font-semibold bg-softWhite border-2 border-salviaGreen hover:shadow-md hover:shadow-accentGreen/60 hover:scale-105 hover:bg-accentGold hover:text-deepplum transform transition-all ease-in-out duration-500",
+  tertiary:
+    "flex items-center font-open-sans text-deepplum font-semibold bg-softWhite border-2 border-deepplum hover:shadow-md hover:shadow-deepplum/60 hover:scale-105 hover:bg-sandRose hover:text-softWhite hover:border-softWhite transform transition-all ease-in-out duration-500",
+};
+---
+
+{
+  /*
+Button Component:
+This component dynamically renders either a `<button>` element or an `<a>` (link) element based on the provided `href` prop.
+
+- If the `href` prop is provided, an `<a>` tag is rendered to allow navigation.
+- If no `href` is provided, a `<button>` tag is rendered for performing actions and supports the `type` attribute (e.g., 'button', 'submit', or 'reset') to specify its behavior.
+
+Both types of elements share a similar structure and styling logic, with customization through the `variant`, `className`, and `id` props.
+*/
+}
+
+{
+  href ? (
+    <a
+      id={id}
+      href={href}
+      rel={rel ? rel : undefined}
+      target={target ? target : undefined}
+      class={twMerge(
+        `rounded-xl px-6 py-2.5 text-center focus:outline-hidden ${variants[variant ?? "primary"]} ${className || ""}`,
+      )}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      id={id}
+      type={type || "button"}
+      class={twMerge(
+        `rounded-xl px-6 py-2.5 text-center focus:outline-hidden ${variants[variant ?? "primary"]} ${className || ""}`,
+      )}
+    >
+      <slot />
+    </button>
+  )
+}
