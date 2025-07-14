@@ -1,52 +1,80 @@
 @font-face {
-  font-family: playfair;
+  font-family: 'playfair';
   font-display: swap;
-  font-weight: 200 800;
-  src: url("/fonts/Playfair-VariableFont_opsz,wdth,wght.woff2") format("woff2");
+  font-weight: 700;
+  src: url("/fonts/PlayfairDisplay-VariableFont_wdth,wght.ttf") format("woff2");
 }
 
 @font-face {
-  font-family: poppins;
+  font-family: 'playfairBold';
   font-display: swap;
-  font-weight: 200 800;
+  font-weight: 700;
+  src: url("/fonts/PlayfairDisplayBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: 'playfairExtraBold';
+  font-display: swap;
+  font-weight: 800;
+  src: url("/fonts/PlayfairDisplayExtraBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: 'poppins';
+  font-display: swap;
+  font-weight: 400;
   src: url("/fonts/Poppins-Regular.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: open-sans;
+  font-family: 'poppinsSemiBold';
   font-display: swap;
-  font-weight: 200 800;
-  src: url("/fonts/OpenSans-Regular.woff2") format("woff2");
+  font-weight: 700;
+  src: url("/fonts/PoppinsSemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: 'openSans', ;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url("/fonts/OpenSans-VariableFont_wdth,wght.ttf") format("woff2");
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  font-weight: 100 800;
+  src: url("/fonts/Montserrat-VariableFont_wdth,wght.ttf") format("woff2");
 }
 
 @import "tailwindcss";
 
 @layer base {
-  h1 {
-    font-family: var(--font-playfair);
+  * {
+    box-sizing: border-box;
   }
 
-  h2,
-  h3 {
-    font-family: var(--font-poppins);
+  html {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
-  p,
-  button {
-    font-family: var(--font-open-sans);
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
-  a {
-    font-family: var(--font-poppins);
-  }
 }
 
 
 @theme {
-  --font-playfair: playfair, sans-serif;
-  --font-poppins: poppins, sans-serif;
-  --font-open-sans: open-sans, sans-serif;
-
+  --font-playfair: playfair, system-ui, sans-serif;
+  --font-playfairBold: playfairBold, system-ui, sans-serif;
+  --font-playfairExtraBold: playfairExtraBold, system-ui, sans-serif;
+  --font-poppins: poppins, system-ui, sans-serif;
+  --font-poppinsSemiBold: poppinsSemiBold, system-ui, sans-serif;
+  --font-opensans: openSans, system-ui, sans-serif;
+  --font-montserrat: montserrat, sans-serif;
 
 
   --color-softWhite: oklch(0.997 0 0);
@@ -59,4 +87,6 @@
   --color-sandRose: oklch(0.7638 0.0655 28.26);
   --color-deepplum: oklch(0.3911 0.0534 7.52);
 
+
+  --breakpoint-md: 835px
 }

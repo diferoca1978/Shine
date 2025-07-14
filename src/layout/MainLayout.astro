@@ -12,6 +12,7 @@ import {
 import type { SEOProps } from "astro-seo";
 import BgTexture from "@/components/global/BgTexture.astro";
 import CursorFollower from "@/components/global/CursorFollower.astro";
+import NavBar from "@/components/global/NavBar.astro";
 
 interface Props {
 	title?: string;
@@ -56,18 +57,8 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link
-			rel="icon"
-			type="image/png"
-			href="/favicon-16x16.png"
-			sizes="16x16"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			href="/favicon-32x32.png"
-			sizes="32x32"
-		/>
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
 		<link
 			rel="icon"
 			type="image/png"
@@ -89,6 +80,7 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 	<body class="w-full p-0 m-0 overflow-x-hidden">
 		<BgTexture />
 		<CursorFollower />
+		<NavBar />
 		<main class="w-full mx-auto bg-softWhite">
 			<slot />
 		</main>
