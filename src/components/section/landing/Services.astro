@@ -1,0 +1,38 @@
+---
+import WebDesing from "@/assets/images/diseñoweb.webp";
+import { Image } from "astro:assets";
+---
+
+<section id="services" class="w-full mx-auto">
+  <div
+    id="main-container"
+    class="flex flex-col items-center justify-center max-w-6xl mx-auto px-8 py-5"
+  >
+    <h1
+      class="text-smokyBlack font-montserrat font-extrabold text-center text-[min(10vw,62px)] max-w-prose"
+    >
+      nuestros servicios
+    </h1>
+    <div
+      id="service"
+      class="flex flex-col items-center justify-center md:flex-row md:gap-10"
+    >
+      <Image
+        src={WebDesing}
+        alt="diseño web estratégico"
+        width={500}
+        height={500}
+      />
+      <h2
+        class="text-smokyBlack font-openSans text-[min(5vw,24px)] max-w-prose px-8"
+      >
+        Transformamos tu presencia digital en una plataforma de crecimiento
+        medible, diseñada para atraer, cautivar y convertir a tu cliente ideal.
+      </h2>
+    </div>
+    <div id="service" class=""></div>
+    <div id="service" class=""></div>
+    <div id="service" class=""></div>
+    <div id="service" class=""></div>
+  </div>
+</section>
