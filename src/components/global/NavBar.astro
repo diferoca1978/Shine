@@ -11,7 +11,7 @@ const currentPath = Astro.url.pathname;
   <nav
     class="relative mx-2 flex w-full max-w-6xl basis-full flex-wrap items-center justify-between px-4 py-2 md:flex-nowrap lg:mx-auto"
   >
-    <div class="flex items-center">
+    <div id="logo-container" class="flex items-center transition-opacity duration-300 ease-in-out">
       <a href="/" aria-label="Home">
         <Logo class="h-14 w-auto object-contain md:h-20 md:w-64" />
       </a>
@@ -22,7 +22,7 @@ const currentPath = Astro.url.pathname;
       <button
         id="btn-open"
         type="button"
-        class="cursor-pointer focus:outline-none md:hidden"
+        class="cursor-pointer focus:outline-none lg:hidden"
       >
         <MenuIcon
           id="open-icon"
@@ -37,7 +37,8 @@ const currentPath = Astro.url.pathname;
 
     {/* Desktop menu */}
     <div
-      class="hidden bg-smokyBlack/10 backdrop-blur-2xl rounded-4xl py-1 px-2 items-center space-x-2 md:flex"
+      id="desktop-menu"
+      class="hidden bg-smokyBlack/10 backdrop-blur-2xl rounded-4xl py-1 px-2 items-center space-x-2 lg:flex"
     >
       {
         navBarLinksConst.map((item) => (
@@ -55,7 +56,7 @@ const currentPath = Astro.url.pathname;
     {/* Mobile menu */}
     <div
       id="mobile-menu"
-      class="text-softWhite bg-smokyBlack absolute top-16 right-0 left-0 z-50 hidden overflow-visible rounded-4xl md:hidden"
+      class="text-softWhite bg-smokyBlack absolute top-16 right-0 left-0 z-50 hidden overflow-visible rounded-4xl lg:hidden"
     >
       <div
         class="flex h-full flex-col items-start justify-center space-y-2 py-5 px-5"
@@ -79,11 +80,19 @@ const currentPath = Astro.url.pathname;
 <!-- Add padding to body to account for fixed header -->
 <style>
   body {
-    padding-top: 80px;
+    padding-top: 60px;
+  }
+
+  @media (width < 768px) {
+    body {
+      padding-top: 80px;
+    }
   }
 </style>
 
 <script>
+  import { navbarAnimation } from "@/utils/scripts/navbarAnimation.js";
+
   const menu = document.querySelector("#mobile-menu") as HTMLDivElement;
   const btn = document.querySelector("#btn-open") as HTMLButtonElement;
   const openIcon = document.querySelector("#open-icon") as HTMLButtonElement;
@@ -101,5 +110,8 @@ const currentPath = Astro.url.pathname;
         closeIcon.classList.toggle("hidden");
       });
     }
+
+    // Initialize navbar scroll animation
+    navbarAnimation();
   });
 </script>
