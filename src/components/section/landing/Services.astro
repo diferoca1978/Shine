@@ -1,38 +1,85 @@
 ---
 import WebDesing from "@/assets/images/diseñoweb.webp";
+import ReDesing from "@/assets/images/rediseñoweb.webp";
+import Auditoria from "@/assets/images/auditoria.webp";
+import SocialContent from "@/assets/images/contenidoredes.webp";
+import Optimizacion from "@/assets/images/optimizacioncanales.webp";
 import { Image } from "astro:assets";
+
+const services = [
+  {
+    title: "Diseño web estratégico",
+    content: "Creamos sitios web estratégicos centrados en el usuario, con flujos claros y optimizados para buscadores y conversiones.",
+    image: WebDesing,
+    alt: "diseño web estratégico"
+  },
+  {
+    title: "Rediseño web",
+    content: "Rediseñamos y optimizamos tu web para ofrecer una experiencia de navegación actual, profesional y efectiva.",
+    image: ReDesing,
+    alt: "rediseño web"
+  },
+  {
+    title: "Auditoria marketing digital",
+    content: "Analizamos tus canales digitales y entregamos un plan de acción claro para optimizar resultados.",
+    image: Auditoria,
+    alt: "auditoria marketing digital"
+  },
+  {
+    title: "Estrategia de contenidos para redes sociales",
+    content: "Diseñamos un plan estratégico adaptado a tu voz, para generar autoridad sin sacrificar tu esencia.",
+    image: SocialContent,
+    alt: "contenido para redes sociales"
+  },
+  {
+    title: "Optimización de canales digitales",
+    content: "Optimizamos perfiles en Google Mi Negocio, WhatsApp y más, para fortalecer tu reputación online y facilitar la conversión.",
+    image: Optimizacion,
+    alt: "optimización de canales digitales"
+  }
+];
 ---
 
-<section id="services" class="w-full mx-auto">
-  <div
-    id="main-container"
-    class="flex flex-col items-center justify-center max-w-6xl mx-auto px-8 py-5"
-  >
-    <h1
-      class="text-smokyBlack font-montserrat font-extrabold text-center text-[min(10vw,62px)] max-w-prose"
-    >
-      nuestros servicios
-    </h1>
-    <div
-      id="service"
-      class="flex flex-col items-center justify-center md:flex-row md:gap-10"
-    >
-      <Image
-        src={WebDesing}
-        alt="diseño web estratégico"
-        width={500}
-        height={500}
-      />
-      <h2
-        class="text-smokyBlack font-openSans text-[min(5vw,24px)] max-w-prose px-8"
-      >
-        Transformamos tu presencia digital en una plataforma de crecimiento
-        medible, diseñada para atraer, cautivar y convertir a tu cliente ideal.
-      </h2>
+<section id="services" class="services-section relative min-h-screen">
+  <div class="wrapper w-full h-screen relative">
+    <h2 class="sr-only">Nuestros Servicios</h2>
+    
+    <!-- Indicadores laterales -->
+    <div class="indicators absolute left-8 top-0 mt-[10vh] hidden h-[80vh] w-1 flex-col justify-between gap-2">
+      {services.map(() => (
+        <div class="indicator w-full grow bg-smokyBlack/30"></div>
+      ))}
     </div>
-    <div id="service" class=""></div>
-    <div id="service" class=""></div>
-    <div id="service" class=""></div>
-    <div id="service" class=""></div>
+    
+    <!-- Servicios -->
+    {services.map(({ title, content, image, alt }) => (
+      <div class="point flex h-screen w-full flex-col items-center justify-center gap-x-20 gap-y-12 p-16 md:flex-row lg:gap-x-40">
+        <div class="w-full max-w-md">
+          <Image
+            src={image}
+            alt={alt}
+            width={500}
+            height={500}
+            class="w-full h-auto"
+          />
+        </div>
+        <article class="flex flex-col gap-8 max-w-2xl">
+          <h3 class="text-smokyBlack font-montserrat font-extrabold text-center md:text-left text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight">
+            {title}
+          </h3>
+          <p class="text-smokyBlack font-openSans text-lg md:text-xl leading-relaxed">
+            {content}
+          </p>
+        </article>
+      </div>
+    ))}
   </div>
 </section>
+
+<script>
+  import { servicesAnimation } from "@/utils/scripts/servicesAnimation.js";
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    servicesAnimation();
+  });
+</script>

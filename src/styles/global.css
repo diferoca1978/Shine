@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'playfair';
   font-display: swap;
-  font-weight: 700;
-  src: url("/fonts/PlayfairDisplay-VariableFont_wdth,wght.ttf") format("woff2");
+  font-weight: 100 800;
+  src: url("/fonts/PlayfairDisplay-VariableFont_wght.woff2") format("woff2");
 }
 
 @font-face {
@@ -34,17 +34,17 @@
 }
 
 @font-face {
-  font-family: 'openSans', ;
+  font-family: 'openSans';
   font-display: swap;
   font-weight: 100 800;
-  src: url("/fonts/OpenSans-VariableFont_wdth,wght.ttf") format("woff2");
+  src: url("/fonts/OpenSans-VariableFont_wdth,wght.woff2") format("woff2");
 }
 
 @font-face {
   font-family: 'Montserrat';
   font-display: swap;
   font-weight: 100 800;
-  src: url("/fonts/Montserrat-VariableFont_wdth,wght.ttf") format("woff2");
+  src: url("/fonts/Montserrat-VariableFont_wdth.woff2") format("woff2");
 }
 
 @import "tailwindcss";
