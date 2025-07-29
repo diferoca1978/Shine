@@ -14,7 +14,6 @@ export default defineConfig({
 
   image: {
     responsiveStyles: true,
-    layout: 'constrained'
   },
 
   integrations: [sitemap()]
