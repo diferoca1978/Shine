@@ -6,13 +6,14 @@ gsap.registerPlugin(ScrollTrigger);
 export const servicesAnimation = () => {
   const servicesSection = document.querySelector("#services");
   const bodyElement = document.querySelector("body");
+  const titleElement = document.querySelector("#services h2");
   
   if (!servicesSection || !bodyElement) return;
 
   // Set initial background color
   gsap.set(bodyElement, { backgroundColor: "oklch(0.98 0.0157 106.42)" });
 
-  // Background color animation for entire services section 
+  // Background color animation and title hide for entire services section 
   gsap.timeline({
     scrollTrigger: {
       trigger: servicesSection,
@@ -25,7 +26,13 @@ export const servicesAnimation = () => {
     backgroundColor: "oklch(0.761 0.0408 138.18)",
     duration: 0.8,
     ease: "power2.out"
-  });
+  })
+  .to(titleElement, {
+    opacity: 0,
+    y: -50,
+    duration: 0.6,
+    ease: "power2.out"
+  }, 0.2);
 
   // Services scroll animation
   initServicesScrollAnimation();

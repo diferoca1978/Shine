@@ -1,0 +1,26 @@
+---
+
+---
+
+<div class="flex flex-col items-center justify-center gap-2">
+  <div
+    class="mouse relative border border-smokyBlack h-[50px] w-[30px] rounded-full bg-transparent"
+  >
+    <div
+      class="mouse_weel absolute top-2 left-[12px] h-[15px] w-[5px] rounded-2xl bg-smokyBlack"
+    >
+    </div>
+  </div>
+  <p
+    class="text-smokyBlack font-openSans text-[min(5vw,18px)] hover:underline hover:underline-offset-2 cursor-pointer"
+  >
+    ¡Hay más! Desliza hacia abajo
+  </p>
+</div>
+
+<style>
+  .mouse:hover .mouse_weel {
+    transform: translateY(5px);
+    transition: transform 0.3s ease-in-out;
+  }
+</style>
