@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'playfair';
   font-display: swap;
-  font-weight: 700;
-  src: url("/fonts/PlayfairDisplay-VariableFont_wdth,wght.ttf") format("woff2");
+  font-weight: 100 800;
+  src: url("/fonts/PlayfairDisplay-VariableFont_wght.woff2") format("woff2");
 }
 
 @font-face {

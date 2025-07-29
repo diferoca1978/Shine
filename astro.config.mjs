@@ -12,5 +12,10 @@ export default defineConfig({
   },
   site: 'https://shineagencia.netlify.app/',
 
+  image: {
+    responsiveStyles: true,
+    layout: 'constrained'
+  },
+
   integrations: [sitemap()]
 });

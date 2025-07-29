@@ -1,38 +1,157 @@
 ---
 import WebDesing from "@/assets/images/diseñoweb.webp";
+import ReDesing from "@/assets/images/rediseñoweb.webp";
+import Auditoria from "@/assets/images/auditoria.webp";
+import SocialContent from "@/assets/images/contenidoredes.webp";
+import Optimizacion from "@/assets/images/optimizacioncanales.webp";
 import { Image } from "astro:assets";
 ---
 
-<section id="services" class="w-full mx-auto">
-  <div
-    id="main-container"
-    class="flex flex-col items-center justify-center max-w-6xl mx-auto px-8 py-5"
-  >
+<section id="services" class="w-full mx-auto relative">
+  <div>
     <h1
       class="text-smokyBlack font-montserrat font-extrabold text-center text-[min(10vw,62px)] max-w-prose"
     >
       nuestros servicios
     </h1>
-    <div
-      id="service"
-      class="flex flex-col items-center justify-center md:flex-row md:gap-10"
-    >
+  </div>
+  <!-- Main container -->
+  <div
+    id="main-container"
+    class="flex flex-col items-center justify-center max-w-6xl mx-auto px-8 py-5"
+  >
+    <!-- Diseño web estratégico -->
+    <div id="service" class="flex flex-col items-center md:flex-row md:gap-10">
       <Image
         src={WebDesing}
         alt="diseño web estratégico"
         width={500}
         height={500}
       />
-      <h2
-        class="text-smokyBlack font-openSans text-[min(5vw,24px)] max-w-prose px-8"
-      >
-        Transformamos tu presencia digital en una plataforma de crecimiento
-        medible, diseñada para atraer, cautivar y convertir a tu cliente ideal.
-      </h2>
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h1
+          class="text-smokyBlack font-montserrat font-extrabold text-center text-[min(10vw,62px)] max-w-prose leading-tight tracking-tight"
+        >
+          Diseño web estratégico
+        </h1>
+        <p
+          class="text-smokyBlack font-openSans text-[min(5vw,24px)] max-w-prose px-8"
+        >
+          Creamos sitios web estratégicos centrados en el usuario, con flujos
+          claros y optimizados para buscadores y conversiones.
+        </p>
+      </div>
     </div>
-    <div id="service" class=""></div>
-    <div id="service" class=""></div>
-    <div id="service" class=""></div>
-    <div id="service" class=""></div>
+    <!-- Rediseño web -->
+    <div
+      id="service"
+      class="flex flex-col items-center justify-center md:flex-row md:gap-2"
+    >
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h1
+          class="text-smokyBlack font-playfair font-extrabold text-center text-[min(10vw,62px)] max-w-prose leading-tight tracking-tight"
+        >
+          Rediseño web
+        </h1>
+        <p
+          class="text-smokyBlack font-openSans text-[min(5vw,24px)] max-w-prose px-8"
+        >
+          Rediseñamos y optimizamos tu web para ofrecer una experiencia de
+          navegación actual, profesional y efectiva.
+        </p>
+      </div>
+      <Image
+        src={ReDesing}
+        alt="diseño web estratégico"
+        width={500}
+        height={500}
+      />
+    </div>
+    <!-- Auditoria marketing digital -->
+    <div
+      id="service"
+      class="flex flex-col items-center justify-center md:flex-row md:gap-2"
+    >
+      <Image
+        src={Auditoria}
+        alt="diseño web estratégico"
+        width={500}
+        height={500}
+      />
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h1
+          class="text-smokyBlack font-playfair font-extrabold text-center text-[min(10vw,62px)] max-w-prose leading-tight tracking-tight"
+        >
+          Auditoria marketing digital
+        </h1>
+        <p
+          class="text-smokyBlack font-openSans text-[min(5vw,24px)] max-w-prose px-8"
+        >
+          Analizamos tus canales digitales y entregamos un plan de acción claro
+          para optimizar resultados.
+        </p>
+      </div>
+    </div>
+    <!-- Contenido para redes -->
+    <div
+      id="service"
+      class="flex flex-col items-center justify-center md:flex-row md:gap-2"
+    >
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h1
+          class="text-smokyBlack font-playfair font-extrabold text-center text-[min(10vw,62px)] max-w-prose leading-tight tracking-tight"
+        >
+          Estrategia de contenidos para redes sociales
+        </h1>
+        <p
+          class="text-smokyBlack font-openSans text-[min(5vw,24px)] max-w-prose px-8"
+        >
+          Diseñamos un plan estratégico adaptado a tu voz, para generar
+          autoridad sin sacrificar tu esencia.
+        </p>
+      </div>
+      <Image
+        src={SocialContent}
+        alt="diseño web estratégico"
+        width={500}
+        height={500}
+      />
+    </div>
+    <!-- Optimización de canales -->
+    <div
+      id="service"
+      class="flex flex-col items-center justify-center md:flex-row md:gap-2"
+    >
+      <Image
+        src={Optimizacion}
+        alt="diseño web estratégico"
+        width={500}
+        height={500}
+      />
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h1
+          class="text-smokyBlack font-playfair font-extrabold text-center text-[min(10vw,62px)] max-w-prose leading-tight tracking-tight"
+        >
+          Optimización de canales digitales
+        </h1>
+        <p
+          class="text-smokyBlack font-openSans text-[min(5vw,24px)] max-w-prose px-8"
+        >
+          Optimizamos perfiles en Google Mi Negocio, WhatsApp y más, para
+          fortalecer tu reputación online y facilitar la conversión.
+        </p>
+      </div>
+    </div>
+
+    <div
+      id="indicators"
+      class="absolute top- left-10 right-10 flex flex-col justify-between gap-20"
+    >
+      <div class="w-4 h-36 bg-smokyBlack/10"></div>
+      <div class="w-4 h-36 bg-smokyBlack/10"></div>
+      <div class="w-4 h-36 bg-smokyBlack/10"></div>
+      <div class="w-4 h-36 bg-smokyBlack/10"></div>
+      <div class="w-4 h-36 bg-smokyBlack/10"></div>
+    </div>
   </div>
 </section>
