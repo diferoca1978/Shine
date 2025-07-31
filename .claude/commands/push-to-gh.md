@@ -52,5 +52,5 @@ git commit -m "Your descriptive commit message"
 
 ## Important Notes
 - **Never commit directly to `main`** - always use dev branch or feature branches if exists
-- **Never make the push**
+- **Never execute the git push command or git push origin `branch name`**
 - Consider merging `main` into your feature branch if it's behind
