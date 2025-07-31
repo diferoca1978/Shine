@@ -11,6 +11,14 @@ Cuando ejecutes este workflow, sigue estos pasos en orden:
 2. Si la rama es "main", ejecuta `git checkout dev` automáticamente
 3. Si no existe la rama dev, pregunta si se debe crear o cambiar a una feature branch
 
+## Validación SSH
+1. Ejecuta `git remote -v` para verificar las URLs remotas
+2. Si cualquier URL remota usa protocolo SSH (comienza con `git@`):
+   - Ejecuta `ssh -T git@github.com` (o el host correspondiente) para verificar conectividad SSH
+   - Si la validación SSH falla, detén el proceso y informa sobre la configuración SSH requerida
+   - Si SSH es requerido, continúa solo con el workflow de commit (sin push ni PR)
+3. Si todas las URLs remotas usan HTTPS, continúa con el workflow completo (commit + push + PR)
+
 ## Proceso de Staging
 1. Ejecuta `git status` para mostrar el estado actual
 2. Ejecuta `git add .` para agregar todos los cambios
@@ -29,25 +37,51 @@ Cuando ejecutes este workflow, sigue estos pasos en orden:
 3. Si no cumple el formato, sugiere correcciones automáticamente
 4. Ejecuta el commit con el mensaje validado
 
+## Workflow Condicional Post-Commit
+### Si SSH es requerido:
+1. **DETENER AQUÍ** - Solo realizar commit local
+2. Informar al usuario que el proceso se completó con commit local únicamente
+3. Mencionar que el push y PR deben realizarse manualmente por configuración SSH
+
+### Si SSH NO es requerido (HTTPS):
+1. Ejecutar `git push origin [rama-actual]` para subir los cambios
+2. Si el push es exitoso, crear Pull Request automáticamente:
+   - Ejecutar `gh pr create --title "[título-basado-en-commit]" --body "Descripción automática basada en cambios"`
+   - Verificar que el PR se creó correctamente
+3. Proporcionar enlaces al PR creado
+
 ## Manejo de Errores
 - Si cualquier comando Git falla, detén el proceso y explica el error
 - Si hay conflictos de merge, proporciona instrucciones para resolverlos
 - Proporciona diagnósticos claros para cualquier problema de git
 
-## Restricciones Absolutas
+## Restricciones Condicionales
+### Cuando SSH es requerido:
 - **PROHIBIDO TOTALMENTE**: Cualquier comando `git push` en cualquier forma
 - **PROHIBIDO TOTALMENTE**: Comandos `git pull` que puedan modificar el repositorio remoto
-- **PROHIBIDO TOTALMENTE**: Usar `git push --force`, `git push --force-with-lease`, o cualquier variante de force push
+- **SOLO PERMITIDO**: Workflow de commit local
+
+### Cuando SSH NO es requerido (HTTPS):
+- **PERMITIDO**: `git push` para subir cambios al repositorio remoto
+- **PERMITIDO**: Creación de Pull Request usando `gh pr create`
+- **PROHIBIDO**: Usar `git push --force`, `git push --force-with-lease`, o cualquier variante de force push
+
+### Restricciones Absolutas (Siempre aplicables):
 - **PROHIBIDO TOTALMENTE**: Ejecutar `git remote add`, `git remote set-url`, o modificar configuraciones remotas
-- **PROHIBIDO TOTALMENTE**: Comandos que interactúen con repositorios remotos sin confirmación explícita
 - **NUNCA** permitas commits sin mensaje descriptivo
 - **NUNCA** modifiques la rama main o master directamente
 - **NUNCA** ejecutes comandos destructivos como `git reset --hard` sin confirmación explícita
 - **NUNCA** modifiques el historial de commits con `git rebase -i` o `git filter-branch`
 - **NUNCA** elimines ramas sin confirmación explícita del usuario
 
-## Operaciones Permitidas Únicamente
-- Comandos de consulta: `git status`, `git log`, `git diff`, `git branch`
+## Operaciones Permitidas
+### Siempre permitidas:
+- Comandos de consulta: `git status`, `git log`, `git diff`, `git branch`, `git remote -v`
 - Operaciones locales: `git add`, `git commit`, `git checkout`, `git stash`
 - Creación de ramas locales: `git branch`, `git checkout -b`
 - Visualización de información: `git show`, `git blame`, `git config --list`
+- Validación SSH: `ssh -T git@github.com` (o host correspondiente)
+
+### Permitidas condicionalmente (solo con HTTPS):
+- Operaciones remotas: `git push origin [rama]`
+- Creación de PR: `gh pr create` con parámetros apropiados
