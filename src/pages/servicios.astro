@@ -1,0 +1,25 @@
+---
+import MainLayout from "@/layout/MainLayout.astro";
+import Services from "@/components/section/perPage/Services.astro";
+import HeroServices from "@/components/section/perPage/HeroServices.astro";
+import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
+
+const breadcrumbs = [
+  { name: "Inicio", url: "/" },
+  { name: "Servicios", url: "/servicios" },
+];
+
+const serviciosSEO = generatePageSEO({
+  title: "Servicios de Marketing Digital y Diseño Web Estratégico",
+  description:
+    "Descubre nuestros servicios especializados: diseño web estratégico, rediseño web, auditoría digital, estrategia de contenido y optimización de canales digitales para profesionales auténticos.",
+  path: "/servicios",
+});
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+---
+
+<MainLayout seoProps={serviciosSEO} aditionalSchemas={[breadcrumbSchema]}>
+  <HeroServices />
+  <Services />
+</MainLayout>
