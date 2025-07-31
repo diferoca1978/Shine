@@ -1,56 +1,24 @@
-# Git Workflow Instructions
+# Ejecutar workflow completo de Git
+claude-code "Implementa el siguiente workflow de Git: $ARGUMENTS
 
-## Main Workflow
+1. Verifica que no estoy en la rama main, si estoy en main cámbiame a dev
+2. Verifica el estado del repositorio con git status
+3. Agrega todos los cambios al staging area
+4. Haz un mensaje de commit descriptivo siguiendo el siguente formato:
+   - Tipos de Commit Recomendados:
+      feat: Nueva funcionalidad
+      fix: Corrección de bug
+      docs: Cambios en documentación
+      style: Cambios de formato (espacios, comas, etc.)
+      refactor: Refactorización de código
+      test: Agregar o modificar tests
+      chore: Mantenimiento general
+5. Haz el commit con el mensaje generado
+6. Verifica si el repositorio requiere SSH:
+   - Si la URL remota es git@, verifica la conexión SSH
+   - Usa la llave dada como argumento para continuar con el proceso
+7. Valida que la rama actual sea permitida (dev, development, staging, o features/*)
+8. Si todo está correcto, haz push a la rama actual
+9. Confirma que el push fue exitoso
 
-### Step 1: Check Current Branch
-```bash
-git branch
-```
-*Verify you're not on the `main` branch. If you are, switch to a dev branch first or create it.*
-
-### Additional Prerequisites
-- Ensure you're working on a feature branch (not `main`)
-- Your changes are ready to be committed
-
-## Step 2: Create Feature Branch (if needed)
-```bash
-#Create and switch to dev branch
-git checkout -b dev
-
-# Or switch to existing dev branch
-git checkout your-branch-name
-```
-
-## Step 3: Stage Your Changes
-```bash
-# Stage all changes
-git add .
-```
-
-## Step 4: Check Staged Changes
-```bash
-git status
-```
-
-## Step 5: Commit Your Changes
-```bash
-git commit -m "Your descriptive commit message"
-```
-
-### Commit Message Best Practices:
-- Avoid to use any reference to claude code or any other tool¡
-- Use present tense ("Add feature" not "Added feature")
-- Keep it concise but descriptive
-- Start with a capital letter
-- Don't end with a period
-
-## Commonly used branches:
-- `main` - Production branch
-- `dev` - Development branch
-- `feature/your-feature-name` - Feature branch
-
-
-## Important Notes
-- **Never commit directly to `main`** - always use dev branch or feature branches if exists
-- **Never execute the git push command or git push origin `branch name`**
-- Consider merging `main` into your feature branch if it's behind
+No permitas push a la rama main bajo ninguna circunstancia."
