@@ -1,6 +1,10 @@
-# Instrucciones para Claude Code: Workflow Git
+# Instrucciones para Claude Code: Workflow Git Local
 
 Cuando ejecutes este workflow, sigue estos pasos en orden:
+
+## Ramas permitidas: 
+- dev
+- features/*
 
 ## Pre-validaciones
 1. Ejecuta `git branch --show-current` para verificar la rama actual
@@ -25,32 +29,25 @@ Cuando ejecutes este workflow, sigue estos pasos en orden:
 3. Si no cumple el formato, sugiere correcciones automáticamente
 4. Ejecuta el commit con el mensaje validado
 
-## Validación SSH
-1. Ejecuta `git remote get-url origin` para obtener la URL del repositorio
-2. Si la URL comienza con "git@", es SSH y debe verificar:
-   - Ejecuta `ssh -T git@github.com` (o el host correspondiente)
-   - Si falla, detén el proceso y proporciona instrucciones para configurar SSH
-3. Si la URL comienza con "https://", continúa sin validación SSH
-
-## Push Seguro
-1. Obtén la rama actual nuevamente con `git branch --show-current`
-2. Valida que la rama esté en la lista permitida:
-   - Ramas permitidas: `dev`, `development`, `staging`
-   - Ramas que comiencen con: `feature/`, `features/`, `hotfix/`, `bugfix/`
-3. **PROHIBIDO**: Nunca hacer push a `main` o `master`
-4. Si la rama es válida, ejecuta `git push origin [rama-actual]`
-5. Si es el primer push de la rama, usa `git push -u origin [rama-actual]`
-6. Confirma que el push fue exitoso
-
 ## Manejo de Errores
 - Si cualquier comando Git falla, detén el proceso y explica el error
 - Si hay conflictos de merge, proporciona instrucciones para resolverlos
-- Si el push falla por problemas de permisos, ayuda a diagnosticar el problema
-- Si el push es rechazado, sugiere hacer `git pull --rebase` primero
+- Proporciona diagnósticos claros para cualquier problema de git
 
 ## Restricciones Absolutas
-- **NUNCA** ejecutes `git push origin main` o `git push origin master`
-- **NUNCA** uses `git push --force` sin confirmación explícita del usuario
+- **PROHIBIDO TOTALMENTE**: Cualquier comando `git push` en cualquier forma
+- **PROHIBIDO TOTALMENTE**: Comandos `git pull` que puedan modificar el repositorio remoto
+- **PROHIBIDO TOTALMENTE**: Usar `git push --force`, `git push --force-with-lease`, o cualquier variante de force push
+- **PROHIBIDO TOTALMENTE**: Ejecutar `git remote add`, `git remote set-url`, o modificar configuraciones remotas
+- **PROHIBIDO TOTALMENTE**: Comandos que interactúen con repositorios remotos sin confirmación explícita
 - **NUNCA** permitas commits sin mensaje descriptivo
-- **NUNCA** continúes si la validación SSH falla (cuando es requerida)
-- **NUNCA** hagas push a ramas que no estén en la lista permitida
+- **NUNCA** modifiques la rama main o master directamente
+- **NUNCA** ejecutes comandos destructivos como `git reset --hard` sin confirmación explícita
+- **NUNCA** modifiques el historial de commits con `git rebase -i` o `git filter-branch`
+- **NUNCA** elimines ramas sin confirmación explícita del usuario
+
+## Operaciones Permitidas Únicamente
+- Comandos de consulta: `git status`, `git log`, `git diff`, `git branch`
+- Operaciones locales: `git add`, `git commit`, `git checkout`, `git stash`
+- Creación de ramas locales: `git branch`, `git checkout -b`
+- Visualización de información: `git show`, `git blame`, `git config --list`
