@@ -1,6 +1,6 @@
 # Git Workflow Instructions
 
-## Prerequisites Check
+<!-- ## Prerequisites Check
 
 ### Step 0: Verify SSH Configuration (if needed)
 
@@ -35,7 +35,7 @@ ssh -T git@github.com
 - Paste the key above and give it a name
 - Click "Add SSH key"
 
----
+--- -->
 
 ## Main Workflow
 
@@ -80,6 +80,7 @@ git commit -m "Your descriptive commit message"
 - Keep it concise but descriptive
 - Start with a capital letter
 - Don't end with a period
+- Avoid any reference to claude code or any other tool
 
 ## Step 6: Push to Remote Repository
 ```bash
