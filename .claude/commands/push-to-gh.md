@@ -11,14 +11,13 @@ git branch
 ### Additional Prerequisites
 - Ensure you're working on a feature branch (not `main`)
 - Your changes are ready to be committed
-- SSH authentication is working (if using SSH URLs)
 
 ## Step 2: Create Feature Branch (if needed)
 ```bash
-# Create and switch to a new feature branch
-git checkout -b feature/your-feature-name
+#Create and switch to dev branch
+git checkout -b dev
 
-# Or switch to existing feature branch
+# Or switch to existing dev branch
 git checkout your-branch-name
 ```
 
@@ -39,11 +38,11 @@ git commit -m "Your descriptive commit message"
 ```
 
 ### Commit Message Best Practices:
+- Avoid to use any reference to claude code or any other tool¡
 - Use present tense ("Add feature" not "Added feature")
 - Keep it concise but descriptive
 - Start with a capital letter
 - Don't end with a period
-- Avoid any reference to claude code or any other tool¡
 
 ## Commonly used branches:
 - `main` - Production branch
@@ -52,5 +51,6 @@ git commit -m "Your descriptive commit message"
 
 
 ## Important Notes
-- **Never commit directly to `main`** - always use feature branches
+- **Never commit directly to `main`** - always use dev branch or feature branches if exists
+- **Never make the push**
 - Consider merging `main` into your feature branch if it's behind
