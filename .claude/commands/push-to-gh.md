@@ -1,6 +1,6 @@
 # Git Workflow Instructions
 
-<!-- ## Prerequisites Check
+## Prerequisites Check
 
 ### Step 0: Verify SSH Configuration (if needed)
 
@@ -27,7 +27,7 @@ ssh -T git@github.com
 
 **Paste your SSH public key here:**
 ```
-[PASTE YOUR SSH PUBLIC KEY HERE]
+[remote]
 ```
 
 **To add your key:**
@@ -35,7 +35,6 @@ ssh -T git@github.com
 - Paste the key above and give it a name
 - Click "Add SSH key"
 
---- -->
 
 ## Main Workflow
 
@@ -96,7 +95,7 @@ If the system asks for your SSH key during push, simply provide it here:
 
 **Enter your SSH key when prompted:**
 ```
-[INPUT YOUR SSH KEY HERE]
+[remote]
 ```
 
 *This is a normal part of the authentication process - not an error.*
