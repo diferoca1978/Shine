@@ -24,7 +24,7 @@ pnpm-debug.log*
 .idea/
 
 #Claude code
-.claude/
+.claude
 CLAUDE.md
 todo.md
 
