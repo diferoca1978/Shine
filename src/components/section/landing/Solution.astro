@@ -1,40 +1,47 @@
-<div id="solution" class="relative">
-  <div class="solution-way">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350">
-      <path
-        id="path"
-        style="fill: none; stroke-width: 5px; stroke-linecap: round; stroke: oklch(0.31 0 0);"
-        d="M 39.586 55.574 C 33.543 88.176 70.908 124.38 106.113 121.395 C 136.042 118.857 139.005 89.528 127.227 76.198 C 115.912 63.393 102.29 60.966 86.915 68.919 C 74.099 75.549 67.9 94.749 84.766 116.233 C 100 135.638 137.218 142.734 176.181 138.886"
-      ></path>
-      <path
-        id="star"
-        style="stroke: oklch(0.9 0.12 87.5); paint-order: stroke; fill: oklch(0.9 0.12 87.5); stroke-linejoin: round;"
-        d="M 39.994 36.859 L 37.065 44.607 L 29.378 44.851 L 35.479 49.183 L 32.733 57.481 L 39.567 52.356 L 46.034 57.664 L 43.715 49.305 L 50 44.729 L 42.373 44.607 C 42.559 44.607 39.994 36.859 39.994 36.859 Z"
-      ></path>
-    </svg>
+<section id="solution" class="relative px-4 py-12">
+  <div class="max-w-6xl mx-auto flex flex-col items-center gap-4">
+    <div class="solution-content text-center max-w-4xl">
+      <p
+        class="text-[min(10vw,42px)] font-playfair font-medium bg-slate leading-tight tracking-tight mb-6"
+        style="color: oklch(96.8% 0.007 247.896);"
+      >
+        En Shine creemos que brillar es <span class="italic font-bold"
+          >servir,
+        </span>transformar y <span class="italic font-bold">mostrar</span> lo mejor
+        de ti sin perder tu esencia. Por eso te <span class="italic font-bold"
+          >accompañamos</span
+        > en cada paso del camino
+        <span class="italic font-bold">digital</span>, creando experiencias
+        auténticas que <span class="italic font-bold">conectan</span> con tu audiencia
+        y potencian tu <span class="italic font-bold">crecimiento</span>.
+      </p>
+    </div>
+    <!-- SVG decorativo -->
+    <div class="solution-way w-full max-w-md">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="80 80 200 150"
+        class="w-full h-auto"
+      >
+        <path
+          id="path"
+          style="stroke: oklch(0.3052 0 0); fill: none; stroke-linejoin: round; stroke-linecap: round; stroke-width: 5px;"
+          d="M 110.09 100 C 105.045 147.684 130.181 179.941 157.065 174.993 C 158.514 174.726 185.082 169.144 186.617 139.066 C 187.791 116.066 161.328 122.529 154.126 126.462 C 120.237 144.966 133.787 186.364 173.417 183.386 C 196.278 181.668 225.341 176.49 223.051 210.722"
+        ></path>
+
+        <path
+          id="arrow"
+          class="opacity-0"
+          style="stroke-linejoin: round; stroke-linecap: round; stroke-width: 5px; stroke: oklch(0.31 0 0); fill: oklch(1 0 0)"
+          d="M 219.276 208.376 L 231.338 216.122 L 218.539 223.788 L 219.276 208.376 Z"
+        ></path>
+      </svg>
+    </div>
   </div>
-  <div class="solution-content">
-    <h2>
-      ¿Tu talento merece llegar más lejos, pero el mundo digital te abruma?
-    </h2>
-    <p></p>
-  </div>
-</div>
+</section>
 
 <script>
-  import { gsap } from "gsap";
-  import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-
-  gsap.registerPlugin(MotionPathPlugin);
-
-  gsap.to("#star", {
-    duration: 2,
-    ease: "none",
-    motionPath: {
-      path: "#path",
-      align: "#path",
-      alignOrigin: [0.5, 0.5],
-      autoRotate: -10,
-    },
-  });
+  import { solutionsAnimation } from "@/utils/scripts/solutionsAnimation.js";
+  document.removeEventListener("DOMContentLoaded", solutionsAnimation);
+  document.addEventListener("DOMContentLoaded", solutionsAnimation);
 </script>
