@@ -1,51 +1,30 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export const navbarAnimation = () => {
   const logoContainer = document.querySelector("#logo-container");
   
-  if (!logoContainer) return;
-
-  let lastScrollY = 0;
-  let ticking = false;
-
-  function isMobile() {
-    return window.innerWidth < 1024; // lg breakpoint
-  }
-
-  function updateLogo() {
-    // Only apply animation on mobile devices
-    if (!isMobile()) {
-      logoContainer.style.opacity = "1";
-      return;
+  // Create the scroll-triggered animation
+  ScrollTrigger.create({
+    trigger: "body",
+    start: "80px top",
+    onEnter: () => {
+      // Hide logo when scrolled past 80px
+      gsap.to(logoContainer, { 
+        opacity: 0, 
+        duration: 0.3, 
+        ease: "power2.out" 
+      });
+    },
+    onLeaveBack: () => {
+      // Show logo when scrolling back to top
+      gsap.to(logoContainer, { 
+        opacity: 1, 
+        duration: 0.3, 
+        ease: "power2.out" 
+      });
     }
-
-    const scrollY = window.scrollY;
-    
-    if (scrollY === 0) {
-      // At the top - show logo
-      logoContainer.style.opacity = "1";
-    } else if (scrollY > 100) {
-      // Past 100px - hide logo (regardless of scroll direction)
-      logoContainer.style.opacity = "0";
-    }
-    
-    lastScrollY = scrollY;
-    ticking = false;
-  }
-
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(updateLogo);
-      ticking = true;
-    }
-  }
-
-  function onResize() {
-    // Reset logo visibility when resizing
-    if (!isMobile()) {
-      logoContainer.style.opacity = "1";
-    }
-  }
-
-  // Add event listeners
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onResize, { passive: true });
+  });
 };
