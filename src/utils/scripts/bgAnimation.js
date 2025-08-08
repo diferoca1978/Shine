@@ -14,6 +14,6 @@ export function backgroundAnimation() {
             immediateRender: false,
         },
         ease: "none",
-        backgroundColor: "#c3bceb", // softLavender
+        backgroundColor: "oklch(0.98 0.0157 106.42)", // softLavender
     });
 }

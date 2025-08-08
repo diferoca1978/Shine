@@ -1,0 +1,81 @@
+---
+import WebDesing from "@/assets/images/diseñoyrediseñoweb.webp";
+import ReDesing from "@/assets/images/Rediseñopaginaweb.webp";
+import Auditoria from "@/assets/images/auditoriadigital.webp";
+import SocialContent from "@/assets/images/redessociales.webp";
+import Optimizacion from "@/assets/images/optimizaciondecanales.webp";
+import { Image } from "astro:assets";
+import DownIcon from "@/assets/icons/down.svg";
+
+const services = [
+  {
+    title: "Diseño Web Estratégico",
+    image: WebDesing,
+    alt: "diseño web estratégico",
+  },
+  {
+    title: "Rediseño y Optimización Web",
+    image: ReDesing,
+    alt: "rediseño web",
+  },
+  {
+    title: "Auditoría de Marketing Digital",
+    image: Auditoria,
+    alt: "auditoria marketing digital",
+  },
+  {
+    title: "Estrategia de Contenido para Redes Sociales",
+    image: SocialContent,
+    alt: "contenido para redes sociales",
+  },
+  {
+    title: "Optimización de Canales Digitales",
+    image: Optimizacion,
+    alt: "optimización de canales digitales",
+  },
+];
+---
+
+<div class="services-container overflow-hidden min-h-screen bg-smokyBlack">
+  <div class="services flex flex-nowrap">
+    <div
+      class="info flex flex-col items-center justify-center w-screen flex-shrink-0 m-0 min-h-screen py-16"
+    >
+      <div class="flex flex-col items-center justify-center">
+        <h1
+          class="text-[min(10vw,72px)] text-center font-playfair font-medium text-softWhite mb-6"
+        >
+          Nuestros Servicios
+        </h1>
+        <h3
+          class="text-softWhite font-playfair font-medium text-[min(6vw,36px)] text-center italic md:text-[min(5vw,42px)] max-w-2xl mx-auto"
+        >
+          Servicios diseñados para que tu luz brille con autenticidad
+        </h3>
+      </div>
+    </div>
+    {
+      services.map((service) => (
+        <div class="flex flex-col items-center justify-center w-full px-16 lg:w-[60vw] flex-shrink-0 min-h-screen py-16">
+          <div class="mb-8 flex flex-col items-center justify-center">
+            <h1 class="text-[min(10vw,42px)] text-center font-playfair font-medium text-softWhite">
+              {service.title}
+            </h1>
+
+            <Image
+              src={service.image}
+              alt={service.alt}
+              class="w-full h-full max-w-[500px] object-cover image"
+            />
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <script>
+    import { servicesLandingAnimation } from "@/utils/scripts/servicesLandingAnimation.js";
+
+    servicesLandingAnimation();
+  </script>
+</div>

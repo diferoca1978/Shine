@@ -92,5 +92,20 @@ export const solutionsAnimation = () => {
 
   // Immediate refresh without delay to prevent flicker
   ScrollTrigger.refresh();
+
+  // Soft transition to next section
+  gsap.to(".to-softLavender-section", {
+    scrollTrigger: {
+      trigger: ".solution-section",
+      start: "bottom bottom",
+      end: "bottom 70%",
+      scrub: 0.5,
+      markers: false,
+      immediateRender: false,
+    },
+    ease: "none",
+    backgroundColor: "#2f2f2f",
+    text: "#fefefe", // softLavender
+  })
   
 };
