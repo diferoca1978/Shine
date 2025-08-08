@@ -17,9 +17,9 @@ export const servicesAnimation = () => {
   gsap.timeline({
     scrollTrigger: {
       trigger: servicesSection,
-      start: "top 50%",
-      end: "bottom 50%",
-      toggleActions: "play none reverse reverse"
+      start: "top 60%",
+      end: "bottom 60%",
+      toggleActions: "play none play reverse"
     }
   })
   .to(bodyElement, {

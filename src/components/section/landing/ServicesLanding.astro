@@ -1,0 +1,68 @@
+---
+import WebDesing from "@/assets/images/diseñoyrediseñoweb.webp";
+import ReDesing from "@/assets/images/Rediseñopaginaweb.webp";
+import Auditoria from "@/assets/images/auditoriadigital.webp";
+import SocialContent from "@/assets/images/redessociales.webp";
+import Optimizacion from "@/assets/images/optimizaciondecanales.webp";
+import { Image } from "astro:assets";
+import DownIcon from "@/assets/icons/down.svg";
+
+const services = [
+  {
+    title: "Diseño Web Estratégico",
+    image: WebDesing,
+    alt: "diseño web estratégico",
+  },
+  {
+    title: "Rediseño y Optimización Web",
+    image: ReDesing,
+    alt: "rediseño web",
+  },
+  {
+    title: "Auditoría de Marketing Digital",
+    image: Auditoria,
+    alt: "auditoria marketing digital",
+  },
+  {
+    title: "Estrategia de Contenido para Redes Sociales",
+    image: SocialContent,
+    alt: "contenido para redes sociales",
+  },
+  {
+    title: "Optimización de Canales Digitales",
+    image: Optimizacion,
+    alt: "optimización de canales digitales",
+  },
+];
+---
+
+<section class="services-container">
+  <div class="services">
+    <div class="description panel flex flex-col items-center justify-between">
+      <div class="flex flex-col items-center justify-center mb-6">
+        <h1
+          class="text-[min(5vw,72px)] font-playfair font-medium text-smokyBlack mb-6"
+        >
+          Nuestros Servicios
+        </h1>
+        <h3
+          class="text-deepplum font-playfair font-medium text-[min(5vw,36px)] text-center italic md:text-[min(5vw,42px)] max-w-2xl mx-auto"
+        >
+          Servicios diseñados para que tu luz brille con autenticidad
+        </h3>
+      </div>
+      <DownIcon width="48" height="48" />
+    </div>
+
+    {
+      services.map(({ title, image, alt }) => (
+        <div class="panel flex flex-col items-center justify-center bg-smokyBlack">
+          <h1 class="text-[min(5vw,42px)] font-playfair font-medium text-softWhite">
+            {title}
+          </h1>
+          <Image src={image} alt={alt} class="w-full h-auto max-w-[500px]" />
+        </div>
+      ))
+    }
+  </div>
+</section>
