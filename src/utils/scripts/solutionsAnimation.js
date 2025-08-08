@@ -80,7 +80,7 @@ export const solutionsAnimation = () => {
   // Create ScrollTrigger for quote animation - defined AFTER timeline
   const st = ScrollTrigger.create({
     trigger: ".solution-content",
-    start: "top 80%",
+    start: "top 70%",
     end: "bottom 80%",
     scrub: true,
     animation: tl,
