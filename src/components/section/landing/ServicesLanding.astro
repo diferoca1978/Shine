@@ -36,33 +36,46 @@ const services = [
 ];
 ---
 
-<section class="services-container">
-  <div class="services">
-    <div class="description panel flex flex-col items-center justify-between">
-      <div class="flex flex-col items-center justify-center mb-6">
+<div class="services-container overflow-hidden min-h-screen bg-smokyBlack">
+  <div class="services flex flex-nowrap">
+    <div
+      class="info flex flex-col items-center justify-center w-screen flex-shrink-0 m-0 min-h-screen py-16"
+    >
+      <div class="flex flex-col items-center justify-center">
         <h1
-          class="text-[min(5vw,72px)] font-playfair font-medium text-smokyBlack mb-6"
+          class="text-[min(10vw,72px)] text-center font-playfair font-medium text-softWhite mb-6"
         >
           Nuestros Servicios
         </h1>
         <h3
-          class="text-deepplum font-playfair font-medium text-[min(5vw,36px)] text-center italic md:text-[min(5vw,42px)] max-w-2xl mx-auto"
+          class="text-softWhite font-playfair font-medium text-[min(6vw,36px)] text-center italic md:text-[min(5vw,42px)] max-w-2xl mx-auto"
         >
           Servicios diseñados para que tu luz brille con autenticidad
         </h3>
       </div>
-      <DownIcon width="48" height="48" />
     </div>
-
     {
-      services.map(({ title, image, alt }) => (
-        <div class="panel flex flex-col items-center justify-center bg-smokyBlack">
-          <h1 class="text-[min(5vw,42px)] font-playfair font-medium text-softWhite">
-            {title}
-          </h1>
-          <Image src={image} alt={alt} class="w-full h-auto max-w-[500px]" />
+      services.map((service) => (
+        <div class="flex flex-col items-center justify-center w-full px-16 lg:w-[60vw] flex-shrink-0 min-h-screen py-16">
+          <div class="mb-8 flex flex-col items-center justify-center">
+            <h1 class="text-[min(10vw,42px)] text-center font-playfair font-medium text-softWhite">
+              {service.title}
+            </h1>
+
+            <Image
+              src={service.image}
+              alt={service.alt}
+              class="w-full h-full max-w-[500px] object-cover image"
+            />
+          </div>
         </div>
       ))
     }
   </div>
-</section>
+
+  <script>
+    import { servicesLandingAnimation } from "@/utils/scripts/servicesLandingAnimation.js";
+
+    servicesLandingAnimation();
+  </script>
+</div>

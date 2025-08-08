@@ -1,8 +1,4 @@
-<div
-    id="cursor-follower"
-    data-xdata="{ isTouchDevice: 'ontouchstart' in window }"
-    data-xshow="!isTouchDevice"
->
+<div id="cursor-follower">
     <div id="blob" class="blob"></div>
 </div>
 
@@ -33,10 +29,8 @@
         }
 
         function mouseMove(e: MouseEvent) {
-            var scrollTop =
-                window.scrollY || document.documentElement.scrollTop;
-            mouse.x = e.pageX;
-            mouse.y = e.pageY - scrollTop;
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
         }
 
         gsap.ticker.add(updatePosition);
@@ -50,10 +44,8 @@
                 movement: number,
             ) {
                 var boundingRect = target.getBoundingClientRect();
-                var relX = e.pageX - boundingRect.left;
-                var relY = e.pageY - boundingRect.top;
-                var scrollTop =
-                    window.scrollY || document.documentElement.scrollTop;
+                var relX = e.clientX - boundingRect.left;
+                var relY = e.clientY - boundingRect.top;
 
                 gsap.to(target, {
                     duration: 0.3,
@@ -61,18 +53,18 @@
                         ((relX - boundingRect.width / 2) / boundingRect.width) *
                         movement,
                     y:
-                        ((relY - boundingRect.height / 2 - scrollTop) /
+                        ((relY - boundingRect.height / 2) /
                             boundingRect.height) *
                         movement,
                     ease: Power2.easeOut,
                 });
             }
 
-            wrap.addEventListener("mouseenter", function (e) {
+            wrap.addEventListener("mouseenter", function () {
                 gsap.to(blob, { duration: 0.5, opacity: 0.5 });
             });
 
-            wrap.addEventListener("mouseleave", function (e) {
+            wrap.addEventListener("mouseleave", function () {
                 gsap.to(blob, { duration: 0.5, opacity: 0.2 });
 
                 if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
@@ -90,17 +82,20 @@
         magicCursor?.classList.add("active");
     }
 
-    document.removeEventListener("DOMContentLoaded", init); // astro:page-load
-    document.addEventListener("DOMContentLoaded", init); // astro:page-load
+    document.addEventListener("astro:page-load", init);
+    init();
 </script>
 
 <style>
     #cursor-follower {
-        position: absolute;
+        position: fixed;
+        top: 0;
+        left: 0;
         opacity: 0;
         pointer-events: none;
-        height: 100%;
-        width: 100%;
+        height: 100vh;
+        width: 100vw;
+        z-index: 9999;
         -webkit-transition: opacity 0.2s ease-in-out 1s;
         transition: opacity 0.2s ease-in-out 1s;
     }
