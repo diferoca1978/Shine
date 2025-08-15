@@ -94,7 +94,7 @@ export const solutionsAnimation = () => {
   ScrollTrigger.refresh();
 
   // Soft transition to next section
-  gsap.to(".to-softLavender-section", {
+  gsap.to(".to-smokyBlack-section", {
     scrollTrigger: {
       trigger: ".solution-section",
       start: "bottom bottom",

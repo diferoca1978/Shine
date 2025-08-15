@@ -23,7 +23,7 @@ export const servicesAnimation = () => {
     }
   })
   .to(bodyElement, {
-    backgroundColor: "oklch(0.761 0.0408 138.18)",
+    backgroundColor: "oklch(0.3052 0 0)",
     duration: 0.8,
     ease: "power2.out"
   })

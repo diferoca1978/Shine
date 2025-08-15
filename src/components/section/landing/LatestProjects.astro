@@ -1,0 +1,92 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "@/components/ui/ProjectCard.astro";
+
+const allworks = await getCollection("works");
+
+const { class: className } = Astro.props;
+---
+
+<section
+  id="projects"
+  class:list={[
+    "section latest-projects-section home-dark-section py-24",
+    className,
+  ]}
+>
+  <div class="col-span-12 col-start-1 mx-auto max-w-7xl">
+    <h2
+      class="text-[min(10vw,72px)] text-center font-playfair font-medium text-smokyBlack mb-20"
+    >
+      Nuestros Proyectos
+    </h2>
+    <ol class="grid grid-cols-1 gap-24 md:grid-cols-2 lg:gap-44">
+      {
+        allworks.map((work, index) => {
+          const col = index % 2 ? 2 : 1;
+          const row = Math.floor(index / 2) * 2 + (index % 2 ? 2 : 1);
+          return (
+            <ProjectCard
+              project={work}
+              className="md:row-span-2"
+              style={`grid-column-start:${col}; grid-row-start:${row}; grid-row-end: span 2;`}
+            />
+          );
+        })
+      }
+    </ol>
+  </div>
+</section>
+
+<style is:global>
+  .latest-projects-section ol li img {
+    --clip: 0%;
+    clip-path: inset(var(--clip) round 0.5rem);
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  function init() {
+    const projects = gsap.utils.toArray(
+      ".latest-projects-section ol li",
+    ) as gsap.DOMTarget[];
+    const previews = gsap.utils.toArray(
+      ".latest-projects-section ol li img",
+    ) as gsap.DOMTarget[];
+    previews.forEach((preview) => {
+      gsap.from(preview, {
+        scrollTrigger: {
+          trigger: preview,
+          start: "top bottom",
+          end: "center center",
+          scrub: 1,
+          markers: false,
+        },
+        ease: "power3.out",
+        "--clip": "30%",
+      });
+    });
+
+    if (window.innerWidth >= 768) {
+      projects.forEach((project) => {
+        gsap.to(project, {
+          scrollTrigger: {
+            trigger: ".latest-projects-section ol",
+            start: "top bottom",
+            end: "bottom center",
+            scrub: 1,
+            markers: false,
+          },
+          ease: "none",
+          y: `-200px`,
+        });
+      });
+    }
+  }
+  document.removeEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", init);
+</script>
