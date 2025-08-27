@@ -13,6 +13,7 @@ import type { SEOProps } from "astro-seo";
 import BgTexture from "@/components/global/BgTexture.astro";
 import CursorFollower from "@/components/global/CursorFollower.astro";
 import NavBar from "@/components/global/NavBar.astro";
+import Footer from "@/components/global/Footer.astro";
 
 interface Props {
 	title?: string;
@@ -84,5 +85,6 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 		<main class="w-full mx-auto">
 			<slot />
 		</main>
+		<Footer />
 	</body>
 </html>
