@@ -4,27 +4,31 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export const navbarAnimation = () => {
-  const logoContainer = document.querySelector("#logo-container");
+  const navbar = document.querySelector(".mainNavBar");
   
-  // Create the scroll-triggered animation
+  if (!navbar) {
+    console.warn("Navbar not found");
+    return;
+  }
+  
+  // Ensure navbar is visible initially
+  gsap.set(navbar, { yPercent: 0, opacity: 1 });
+  
+  // Create the hide animation - starts visible, can animate to hidden
+  const hideAnim = gsap.to(navbar, {
+    yPercent: -100,
+    paused: true,
+    duration: 0.3,
+    ease: "power2.out"
+  });
+  
+  // Create scroll trigger that responds to scroll direction
   ScrollTrigger.create({
-    trigger: "body",
     start: "80px top",
-    onEnter: () => {
-      // Hide logo when scrolled past 80px
-      gsap.to(logoContainer, { 
-        opacity: 0, 
-        duration: 0.3, 
-        ease: "power2.out" 
-      });
-    },
-    onLeaveBack: () => {
-      // Show logo when scrolling back to top
-      gsap.to(logoContainer, { 
-        opacity: 1, 
-        duration: 0.3, 
-        ease: "power2.out" 
-      });
+    end: "max",
+    onUpdate: (self) => {
+      // Hide navbar when scrolling down, show when scrolling up
+      self.direction === 1 ? hideAnim.play() : hideAnim.reverse();
     }
   });
 };

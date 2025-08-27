@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"works">;
+  className?: string;
+  style?: string;
+}
+
+const { project, className = "", style } = Astro.props;
+const { data } = project;
+const { image, link, stack, title } = data;
+
+// Debug the image
+console.log("Image value:", image);
+console.log("Image type:", typeof image);
+---
+
+<li class:list={["flex flex-col", className]} style={style}>
+  <a href={link} target="_blank" aria-label={`Project ${title}`}>
+    <Image
+      class="h-[25rem] rounded-md object-cover lg:rounded-lg"
+      src={image}
+      alt={title}
+    />
+  </a>
+  <div class="px-2 py-8">
+    <a
+      href={link}
+      class="flex items-center justify-between text-base font-medium lg:gap-x-8"
+    >
+      <h3
+        class="font-playfair text-lg font-medium capitalize tracking-wide md:mt-0 lg:text-xl mb-2"
+      >
+        {title}
+      </h3>
+      <span class="text-right text-base hover:text-primary-700">
+        <span class="hidden lg:inline-block">Ver Proyecto</span>
+        <span class="sr-only">{title}</span> &nbsp; &rarr;
+      </span>
+    </a>
+    {
+      stack && (
+        <div class="tech-stack flex flex-wrap gap-2 mb-4">
+          {stack.map((tech: string) => (
+            <span
+              class={`inline-flex items-center px-2.5 py-1 bg-softBeige text-smokyBlack rounded-md text-xs font-poppins`}
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</li>
