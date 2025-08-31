@@ -18,7 +18,7 @@ export const servicesAnimation = () => {
     scrollTrigger: {
       trigger: servicesSection,
       start: "top 60%",
-      end: "bottom 60%",
+      end: "bottom 40%",
       toggleActions: "play none play reverse"
     }
   })

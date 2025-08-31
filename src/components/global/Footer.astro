@@ -1,15 +1,15 @@
 ---
-import Logo from "@/assets/images/LogoShineWhite(240x110px).svg";
+import Logo from "@/assets/images/logoshinewhitecharacters.svg";
 import { navBarLinksConst } from "@/utils/navigation";
 import { COMPANY_INFO } from "@/config/seo";
 import InstagramIcon from "@/assets/icons/instagram.svg";
 import LinkedInIcon from "@/assets/icons/linkedin.svg";
 import TikTokIcon from "@/assets/icons/tiktok.svg";
+import ArrowUpIcon from "@/assets/icons/arrowUp.svg";
+import Button from "@/components/ui/button.astro";
 ---
 
-<footer
-  class="w-full bg-softWhite/95 backdrop-blur-sm relative border-t border-smokyBlack/10 mt-20"
->
+<footer class="w-full border-t border-softBeige/5 bg-smokyBlack relative mt-20">
   <!-- Main Footer Content -->
   <div class="max-w-7xl mx-auto px-4 py-4 lg:py-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
@@ -20,11 +20,11 @@ import TikTokIcon from "@/assets/icons/tiktok.svg";
             <Logo class="h-16 w-auto object-contain" />
           </a>
         </div>
-        <h3 class="text-lg font-playfair font-medium text-smokyBlack mb-3">
+        <h3 class="text-lg font-playfair font-medium text-softWhite mb-3">
           Haz que tu luz brille y atraiga a quienes necesitan tu talento
         </h3>
         <p
-          class="prose text-smokyBlack/80 font-openSans leading-relaxed mb-6 max-w-md"
+          class="prose text-softWhite/80 font-openSans leading-relaxed mb-6 max-w-md"
         >
           Transformamos tu presencia digital con estrategia, propósito y
           autenticidad. Diseño web, marketing digital y contenido que refleja tu
@@ -65,7 +65,7 @@ import TikTokIcon from "@/assets/icons/tiktok.svg";
 
       <!-- Navigation Links -->
       <div>
-        <h4 class="text-lg font-playfair font-medium text-smokyBlack mb-3">
+        <h4 class="text-lg font-playfair font-medium text-softWhite mb-3">
           Navegación
         </h4>
         <ul class="space-y-3">
@@ -74,7 +74,7 @@ import TikTokIcon from "@/assets/icons/tiktok.svg";
               <li>
                 <a
                   href={item.path}
-                  class="text-smokyBlack/70 hover:text-accentGold font-openSans transition-colors duration-300"
+                  class="text-softWhite hover:text-accentGold font-openSans transition-colors duration-300"
                 >
                   {item.name}
                 </a>
@@ -86,21 +86,21 @@ import TikTokIcon from "@/assets/icons/tiktok.svg";
     </div>
 
     <!-- Contact Information -->
-    <div class="mt-6 pt-4 border-t border-smokyBlack/10">
+    <div class="mt-6 pt-4 border-t border-softBeige">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <h5 class="font-playfair font-medium text-smokyBlack mb-2">
+          <h5 class="font-playfair font-medium text-softWhite mb-2">
             Ubicación
           </h5>
-          <p class="text-smokyBlack/70 font-openSans text-sm">
+          <p class="text-softWhite/70 font-openSans text-sm">
             {COMPANY_INFO.address.city}, {COMPANY_INFO.address.country}
           </p>
         </div>
         <div>
-          <h5 class="font-playfair font-medium text-smokyBlack mb-2">
+          <h5 class="font-playfair font-medium text-softWhite mb-2">
             Contacto
           </h5>
-          <p class="text-smokyBlack/70 font-openSans text-sm">
+          <p class="text-softWhite/70 font-openSans text-sm">
             <a
               href={`mailto:${COMPANY_INFO.email}`}
               class="hover:text-accentGold transition-colors duration-300"
@@ -108,7 +108,7 @@ import TikTokIcon from "@/assets/icons/tiktok.svg";
               {COMPANY_INFO.email}
             </a>
           </p>
-          <p class="text-smokyBlack/70 font-openSans text-sm">
+          <p class="text-softWhite/70 font-openSans text-sm">
             <a
               href={`tel:${COMPANY_INFO.phone}`}
               class="hover:text-accentGold transition-colors duration-300"
@@ -117,39 +117,30 @@ import TikTokIcon from "@/assets/icons/tiktok.svg";
             </a>
           </p>
         </div>
-        <div class="md:text-right">
-          <button
+        <div class="md:text-right md:w-fit">
+          <Button
+            href="#"
+            type="button"
+            variant="primary"
+            className="font-poppins flex items-center gap-2"
             id="back-to-top"
-            class="inline-flex items-center px-4 py-2 text-sm font-openSans font-medium text-smokyBlack bg-softBeige border border-salviaGreen rounded-xl hover:bg-salviaGreen hover:text-softWhite transition-all duration-300 hover:scale-105"
-            aria-label="Volver arriba"
           >
-            <svg
-              class="w-4 h-4 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-            </svg>
-            Volver arriba
-          </button>
+            <ArrowUpIcon />
+            Volver al inicio
+          </Button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Bottom Bar -->
-  <div class="border-t border-smokyBlack/10 bg-smokyBlack/5">
+  <div class="bg-softBeige/5">
     <div class="max-w-7xl mx-auto px-4 py-1">
       <div
         class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
       >
         <div
-          class="text-smokyBlack/60 font-openSans text-sm text-center md:text-left"
+          class="text-softWhite/40 font-openSans text-sm text-center md:text-left"
         >
           © {new Date().getFullYear()}
           {COMPANY_INFO.name}. Todos los derechos reservados.
@@ -157,13 +148,13 @@ import TikTokIcon from "@/assets/icons/tiktok.svg";
         <div class="flex space-x-6 text-sm font-openSans">
           <a
             href="/politica-privacidad"
-            class="text-smokyBlack/60 hover:text-accentGold transition-colors duration-300"
+            class="text-softWhite/40 hover:text-accentGold transition-colors duration-300"
           >
             Política de Privacidad
           </a>
           <a
             href="/terminos-condiciones"
-            class="text-smokyBlack/60 hover:text-accentGold transition-colors duration-300"
+            class="text-softWhite/40 hover:text-accentGold transition-colors duration-300"
           >
             Términos y Condiciones
           </a>

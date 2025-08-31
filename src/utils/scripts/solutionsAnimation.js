@@ -94,18 +94,18 @@ export const solutionsAnimation = () => {
   ScrollTrigger.refresh();
 
   // Soft transition to next section
-  gsap.to(".to-smokyBlack-section", {
-    scrollTrigger: {
-      trigger: ".solution-section",
-      start: "bottom bottom",
-      end: "bottom 70%",
-      scrub: 0.5,
-      markers: false,
-      immediateRender: false,
-    },
-    ease: "none",
-    backgroundColor: "#2f2f2f",
-    text: "#fefefe", // softLavender
-  })
+  // gsap.to(".to-smokyBlack-section", {
+  //   scrollTrigger: {
+  //     trigger: ".solution-section",
+  //     start: "bottom bottom",
+  //     end: "bottom 70%",
+  //     scrub: 0.5,
+  //     markers: false,
+  //     immediateRender: false,
+  //   },
+  //   ease: "none",
+  //   backgroundColor: "#2f2f2f",
+  //   text: "#fefefe", // softLavender
+  // })
   
 };

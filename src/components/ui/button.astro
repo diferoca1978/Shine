@@ -7,7 +7,7 @@ export interface Props {
   href?: string;
   rel?: string;
   target?: "_self" | "_blank" | "_parent" | "_top";
-  variant?: "primary" | "secondary" | "tertiary";
+  variant?: "primary" | "secondary" | "tertiary" | "optional";
   className?: string;
   id?: string;
 }
@@ -26,6 +26,8 @@ const variants = {
     "flex items-center text-deepplum font-semibold bg-softWhite border-2 border-salviaGreen hover:shadow-md hover:shadow-accentGreen/60 hover:scale-105 hover:bg-accentGold hover:text-deepplum transform transition-all ease-in-out duration-500",
   tertiary:
     "flex items-center font-open-sans text-deepplum font-semibold bg-softWhite border-2 border-deepplum hover:shadow-md hover:shadow-deepplum/60 hover:scale-105 hover:bg-sandRose hover:text-softWhite hover:border-softWhite transform transition-all ease-in-out duration-500",
+  optional:
+    "flex items-center border border-smokyBlack/10 text-smokyBlack font-playfair font-medium text-lg ",
 };
 ---
 

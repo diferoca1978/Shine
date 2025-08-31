@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"works">;
+  className?: string;
+  style?: string;
+}
+
+const { project, className = "", style } = Astro.props;
+const { data } = project;
+const { image, title } = data;
+---
+
+<div
+  class:list={["flex flex-col items-center justify-center", className]}
+  style={style}
+>
+  <div class="w-full max-w-md mx-auto mb-4">
+    <Image src={image} alt={title} class="w-full h-auto" />
+  </div>
+</div>

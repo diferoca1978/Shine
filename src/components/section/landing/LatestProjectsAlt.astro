@@ -1,0 +1,115 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCardAlt from "@/components/ui/ProjectCardAlt.astro";
+import DiagonalArrow from "@/assets/icons/diagonalArrow.svg";
+import Star from "@/assets/icons/star40x40black.svg";
+
+const allworks = await getCollection("works");
+const sortedWorks = allworks.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+---
+
+<section
+  class="projects-section relative section w-full bg-softWhite px-4 py-16 md:px-0"
+>
+  <!-- Title - Mobile only -->
+  <div class="flex flex-col items-center justify-center text-center gap-4 mb-8">
+    <div
+      class="btn flex items-center gap-1 pl-4 pr-2 rounded-4xl border border-smokyBlack/10"
+    >
+      <h2 class="text-smokyBlack font-playfair font-medium text-lg">
+        Clientes
+      </h2>
+      <Star class="star w-9 h-9" />
+    </div>
+    <h1 class="text-smokyBlack font-playfair font-medium text-3xl md:hidden">
+      Proyectos recientes
+    </h1>
+  </div>
+
+  <!-- Mobile Cards -->
+  <div class="md:hidden">
+    {
+      sortedWorks.map((project) => (
+        <div class="mb-8">
+          <div class="bg-softWhite rounded-lg overflow-hidden shadow-lg h-[500px] flex flex-col">
+            <div class="flex-1 p-6 flex items-center justify-center bg-gray-50">
+              <div class="w-full max-w-xs">
+                <ProjectCardAlt project={project} className="w-full" />
+              </div>
+            </div>
+            <div class="p-6 bg-softWhite">
+              <div class="flex justify-between items-baseline mb-4">
+                <h2 class="text-smokyBlack font-playfair font-medium text-lg">
+                  {project.data.title}
+                </h2>
+                <span class="text-smokyBlack font-playfair font-bold text-2xl">
+                  {project.data.pubDate.getFullYear()}
+                </span>
+              </div>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.data.stack.map((tech) => (
+                  <span class="tags rounded-2xl bg-accentGold px-2 text-sm">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div class="h-2 flex mb-4">
+                <div class="bg-salviaGreen w-1/2 h-full" />
+                <div class="bg-gray-200 w-1/2 h-full" />
+              </div>
+              <a
+                href={project.data.link}
+                target="_blank"
+                class="inline-flex items-center gap-2 bg-gray-200 hover:bg-salviaGreen hover:text-softWhite px-4 py-1 rounded transition-colors duration-200 font-openSans text-sm"
+              >
+                Ver Proyecto
+                <DiagonalArrow />
+              </a>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Desktop Horizontal Scroll -->
+  <div
+    class="projects-wrapper hidden md:block bg-smokyBlack w-full h-[calc(100vh-12rem)] p-8"
+  >
+    <div
+      class="hidden md:flex absolute top-50 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center mb-8"
+    >
+      <h1 class="text-smokyBlack font-playfair font-bold text-4xl">
+        Proyectos recientes
+      </h1>
+    </div>
+    <div
+      class="projects-container flex border border-smokyBlack/10 w-[80vw] mx-auto bg-softBeige h-full items-center overflow-hidden"
+    >
+      <div class="projects-inner flex mt-12">
+        {
+          sortedWorks.map((project) => (
+            <div class="project-card w-[80vw] flex-shrink-0 flex items-center justify-center">
+              <ProjectCardAlt project={project} className="flex-shrink-0" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Project Info Overlay -->
+
+  <!-- Color bars -->
+
+  <!-- Fixed View Project Button -->
+</section>
+
+<script>
+  import { latestProjectsAltAnimation } from "@/utils/scripts/latestProjectsAltAnimation.js";
+
+  document.removeEventListener("DOMContentLoaded", latestProjectsAltAnimation);
+  document.addEventListener("DOMContentLoaded", latestProjectsAltAnimation);
+</script>
