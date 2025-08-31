@@ -12,9 +12,6 @@ const { project, className = "", style } = Astro.props;
 const { data } = project;
 const { image, link, stack, title } = data;
 
-// Debug the image
-console.log("Image value:", image);
-console.log("Image type:", typeof image);
 ---
 
 <li class:list={["flex flex-col", className]} style={style}>

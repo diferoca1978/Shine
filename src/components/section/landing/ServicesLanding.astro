@@ -4,78 +4,97 @@ import ReDesing from "@/assets/images/Rediseñopaginaweb.webp";
 import Auditoria from "@/assets/images/auditoriadigital.webp";
 import SocialContent from "@/assets/images/redessociales.webp";
 import Optimizacion from "@/assets/images/optimizaciondecanales.webp";
+import Star from "@/assets/icons/star40x40black.svg";
+import ServiceCard from "@/components/ui/ServiceCard.astro";
 import { Image } from "astro:assets";
-import DownIcon from "@/assets/icons/down.svg";
+import Button from "@/components/ui/button.astro";
 
 const services = [
   {
     title: "Diseño Web Estratégico",
+    tags: ["UX", "UI", "SEO", "Contenido Estratégico"],
     image: WebDesing,
     alt: "diseño web estratégico",
+    description: "Convierte tu web en una herramienta que trabaja por ti",
   },
-  {
-    title: "Rediseño y Optimización Web",
-    image: ReDesing,
-    alt: "rediseño web",
-  },
+  // {
+  //   title: "Rediseño y Optimización Web",
+  //   tags: ["ux", "ui", "seo"],
+  //   image: ReDesing,
+  //   alt: "rediseño web",
+  //   description: "Renueva tu presencia digital y multiplica tus resultados",
+  // },
   {
     title: "Auditoría de Marketing Digital",
+    tags: ["Optimizacion", "Análisis", "Diagnóstico"],
     image: Auditoria,
     alt: "auditoria marketing digital",
+    description: "Descubre dónde mejorar desde el primer mes",
   },
   {
     title: "Estrategia de Contenido para Redes Sociales",
+    tags: ["Contenido", "Redes Sociales", "LinkedIn", "Instagram", "TikTok"],
     image: SocialContent,
     alt: "contenido para redes sociales",
+    description: "Contenido auténtico que conecta con tu audiencia",
   },
   {
     title: "Optimización de Canales Digitales",
+    tags: ["WhatsApp For Business", "Google My Business"],
     image: Optimizacion,
     alt: "optimización de canales digitales",
+    description: "Maximiza el potencial de tus plataformas clave",
   },
 ];
 ---
 
-<div class="services-container overflow-hidden min-h-screen bg-smokyBlack">
-  <div class="services flex flex-nowrap">
-    <div
-      class="info flex flex-col items-center justify-center w-screen flex-shrink-0 m-0 min-h-screen py-16"
-    >
-      <div class="flex flex-col items-center justify-center">
-        <h1
-          class="text-[min(10vw,72px)] text-center font-playfair font-medium text-softWhite mb-6"
+<section class="services-wrapper w-full mx-auto">
+  <div class="services-container max-w-7xl mx-auto px-4 py-8 md:py-12 lg:py-20">
+    <div class="flex flex-col items-center justify-center">
+      <!-- Title -->
+      <div class="flex flex-col items-center justify-center gap-4 mb-16">
+        <div
+          class="btn flex items-center gap-1 pl-4 pr-2 rounded-4xl border border-smokyBlack/10"
         >
-          Nuestros Servicios
-        </h1>
-        <h3
-          class="text-softWhite font-playfair font-medium text-[min(6vw,36px)] text-center italic md:text-[min(5vw,42px)] max-w-2xl mx-auto"
-        >
-          Servicios diseñados para que tu luz brille con autenticidad
-        </h3>
-      </div>
-    </div>
-    {
-      services.map((service) => (
-        <div class="flex flex-col items-center justify-center w-full px-16 lg:w-[60vw] flex-shrink-0 min-h-screen py-16">
-          <div class="mb-8 flex flex-col items-center justify-center">
-            <h1 class="text-[min(10vw,42px)] text-center font-playfair font-medium text-softWhite">
-              {service.title}
-            </h1>
-
-            <Image
-              src={service.image}
-              alt={service.alt}
-              class="w-full h-full max-w-[500px] object-cover image"
-            />
-          </div>
+          <h2 class="text-smokyBlack font-playfair font-medium text-lg">
+            Servicios
+          </h2>
+          <Star class="star w-9 h-9" />
         </div>
-      ))
-    }
+        <h1
+          class="main-title text-smokyBlack font-playfair font-medium text-4xl md:text-5xl lg:text-6xl"
+        >
+          ¿Cómo te ayudamos a crecer?
+        </h1>
+      </div>
+      <!-- End Title -->
+
+      <!-- Services -->
+
+      <div class="services-grid grid grid-cols-1 gap-4 md:grid-cols-4 mb-16">
+        {
+          services.map((service) => (
+            <ServiceCard
+              image={service.image}
+              alt={service.alt}
+              title={service.title}
+              description={service.description}
+              tags={service.tags}
+            />
+          ))
+        }
+      </div>
+      <!-- End Services -->
+      <Button href="/servicios" variant="primary" className="btn">
+        Ver todos los servicios <Star class="star w-9 h-9 ml-2" />
+      </Button>
+    </div>
   </div>
+</section>
 
-  <script>
-    import { servicesLandingAnimation } from "@/utils/scripts/servicesLandingAnimation.js";
+<script>
+  import { servicesAltAnimation } from "@/utils/scripts/servicesAltAnimation.js";
 
-    servicesLandingAnimation();
-  </script>
-</div>
+  document.removeEventListener("DOMContentLoaded", servicesAltAnimation);
+  document.addEventListener("DOMContentLoaded", servicesAltAnimation);
+</script>
