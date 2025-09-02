@@ -40,9 +40,9 @@ export const servicesAnimation = () => {
 
 function initServicesScrollAnimation() {
   var points = gsap.utils.toArray(".point");
-  var indicators = gsap.utils.toArray(".indicator");
+  var star = document.querySelector(".indicator-star");
 
-  if (points.length === 0 || indicators.length === 0) return;
+  if (points.length === 0 || !star) return;
 
   var height = 100 * points.length; // 500% for 5 services
 
@@ -59,6 +59,19 @@ function initServicesScrollAnimation() {
       scrub: 0.5,
       markers: false,
       id: "points",
+      immediateRender: false,
+    },
+  });
+
+  // Star movement timeline
+  var starTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#services",
+      start: "top center",
+      end: "+=" + height + "%",
+      scrub: 0.5,
+      markers: false,
+      id: "star-movement",
       immediateRender: false,
     },
   });
@@ -85,15 +98,27 @@ function initServicesScrollAnimation() {
     },
   });
 
+  // Calculate star positions for each service
+  var starPositions = [];
+  for (let i = 0; i < points.length; i++) {
+    // Star moves from 5% to 95% of the indicator line height to stay within bounds
+    var progress = i / (points.length - 1);
+    starPositions.push(5 + (progress * 90));
+  }
+
+  // Animate star movement
+  starPositions.forEach(function (position, i) {
+    starTl.to(star, {
+      top: position + "%",
+      rotate: i * 72,
+      duration: 1,
+      ease: "power2.inOut"
+    }, i);
+  });
+
   // Set up each point
   points.forEach(function (elem, i) {
     gsap.set(elem, { position: "absolute", top: 0 });
-
-    // Activate indicator
-    tl.to(indicators[i], { 
-      backgroundColor: "oklch(0.8987 0.119 87.54)", 
-      duration: 0.25 
-    }, i);
     
     // Show image
     tl.from(elem.querySelector("div"), { 
@@ -108,13 +133,8 @@ function initServicesScrollAnimation() {
       duration: 0.25 
     }, i);
 
-    // Deactivate for next service (except last one)
+    // Hide content for next service (except last one)
     if (i != points.length - 1) {
-      tl.to(indicators[i], { 
-        backgroundColor: "oklch(0.4 0.02 138.18)", 
-        duration: 0.25 
-      }, i + 0.75);
-      
       tl.to(elem.querySelector("article"), { 
         autoAlpha: 0, 
         translateY: -100,

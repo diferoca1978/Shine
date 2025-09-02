@@ -4,6 +4,7 @@ import ReDesing from "@/assets/images/Rediseñopaginaweb.webp";
 import Auditoria from "@/assets/images/auditoriadigital.webp";
 import SocialContent from "@/assets/images/redessociales.webp";
 import Optimizacion from "@/assets/images/optimizaciondecanales.webp";
+import Star from "@/assets/icons/star40x40.svg";
 import { Image } from "astro:assets";
 
 const services = [
@@ -74,15 +75,20 @@ const services = [
       Nuestros Servicios
     </h2>
 
-    <!-- Indicadores laterales -->
-    <div
-      class="indicators absolute left-8 top-0 mt-[10vh] hidden h-[80vh] w-1 flex-col justify-between gap-2"
-    >
-      {
-        services.map(() => (
-          <div class="indicator w-full grow bg-smokyBlack/30" />
-        ))
-      }
+    <!-- Indicador de línea con estrella -->
+    <div class="indicators absolute left-8 top-0 mt-[10vh] h-[80vh] w-1">
+      <!-- Línea de fondo -->
+      <div
+        class="indicator-line w-full h-full bg-softBeige rounded-full relative"
+      >
+        <!-- Estrella móvil -->
+        <div
+          class="indicator-star absolute left-1/2 -translate-x-1/2 text-accentGold text-lg z-10"
+          style="top: 0%;"
+        >
+          <Star class="w-16 h-16" />
+        </div>
+      </div>
     </div>
 
     <!-- Servicios -->
@@ -100,7 +106,7 @@ const services = [
               />
             </div>
             <article class="flex flex-col gap-6 max-w-2xl">
-              <h3 class="text-softWhite font-playfair text-center md:text-left text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight">
+              <h3 class="text-softBeige font-playfair text-center md:text-left text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight">
                 {title}
               </h3>
               {subtitle && (
@@ -113,13 +119,13 @@ const services = [
                   {problem}
                 </p>
               )}
-              <p class="text-softBeige/80 font-openSans text-lg md:text-xl leading-relaxed">
+              <p class="text-softBeige font-openSans text-lg md:text-xl leading-relaxed">
                 {content}
               </p>
               {benefits && (
                 <ul class="flex flex-col gap-2">
                   {benefits.map((benefit) => (
-                    <li class="text-softBeige/70 font-medium font-openSans text-base flex items-center gap-3">
+                    <li class="text-softBeige font-medium font-openSans text-base flex items-center gap-3">
                       <span class="w-2 h-2 bg-accentGold rounded-full flex-shrink-0" />
                       {benefit}
                     </li>
@@ -128,7 +134,7 @@ const services = [
               )}
             </article>
           </div>
-        )
+        ),
       )
     }
   </div>
