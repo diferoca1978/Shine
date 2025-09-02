@@ -4,6 +4,7 @@ import Hero from "@/components/section/landing/Hero.astro";
 import Solution from "@/components/section/landing/Solution.astro";
 import ServicesLanding from "@/components/section/landing/ServicesLanding.astro";
 import LatestProjectsAlt from "@/components/section/landing/LatestProjectsAlt.astro";
+import CTABanner from "@/components/ui/CTABanner.astro";
 ---
 
 <MainLayout>
@@ -11,4 +12,12 @@ import LatestProjectsAlt from "@/components/section/landing/LatestProjectsAlt.as
     <Solution />
     <ServicesLanding />
     <LatestProjectsAlt />
+    <CTABanner
+        title="¡Transforma tu Negocio Digital!"
+        description="Descubre cómo podemos ayudarte a alcanzar tus objetivos digitales."
+        buttonText="Contactar Ahora"
+        buttonHref="/contacto"
+        variant="default"
+        className="max-w-6xl mx-auto"
+    />
 </MainLayout>

@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function backgroundAnimation() {
     gsap.to("body", {
         scrollTrigger: {
-            trigger: ".hero-section",
+            trigger: ".hero-services",
             start: "bottom bottom",
             end: "bottom 70%",
             scrub: 0.5,

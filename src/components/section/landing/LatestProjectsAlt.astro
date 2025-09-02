@@ -76,35 +76,78 @@ const sortedWorks = allworks.sort(
 
   <!-- Desktop Horizontal Scroll -->
   <div
-    class="projects-wrapper hidden md:block bg-smokyBlack w-full h-[calc(100vh-12rem)] p-8"
+    class="projects-wrapper hidden md:block bg-smokyBlack w-full h-[calc(100vh-8rem)] p-8 relative"
   >
     <div
-      class="hidden md:flex absolute top-50 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center mb-8"
+      class="desktop-title hidden md:flex absolute top-25 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 items-center justify-center mb-8"
     >
-      <h1 class="text-smokyBlack font-playfair font-bold text-4xl">
+      <h1 class="text-smokyBlack font-playfair font-bold text-6xl">
         Proyectos recientes
       </h1>
     </div>
     <div
-      class="projects-container flex border border-smokyBlack/10 w-[80vw] mx-auto bg-softBeige h-full items-center overflow-hidden"
+      class="projects-container flex rounded-lg w-[80vw] mx-auto bg-softBeige h-full items-center overflow-hidden relative"
     >
       <div class="projects-inner flex mt-12">
         {
-          sortedWorks.map((project) => (
-            <div class="project-card w-[80vw] flex-shrink-0 flex items-center justify-center">
+          sortedWorks.map((project, index) => (
+            <div
+              class="project-card w-[80vw] flex-shrink-0 flex flex-col items-center justify-center"
+              data-project-title={project.data.title}
+              data-project-year={project.data.pubDate.getFullYear()}
+              data-project-link={project.data.link}
+              data-project-index={index}
+            >
               <ProjectCardAlt project={project} className="flex-shrink-0" />
+              <div class="flex gap-4 mb-4">
+                {project.data.stack.map((tech) => (
+                  <span class="tags rounded-2xl bg-accentGold/70 px-2 py-1 text-sm text-center">
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
           ))
         }
       </div>
+
+      <!-- Project Info Overlay -->
+      <div
+        class="project-info-overlay flex flex-col gap-8 absolute bottom-0 right-0 bg-smokyBlack/80 z-50 transition-opacity duration-300 overflow-hidden"
+        style="width: 0%; opacity: 1;"
+      >
+        <div class="flex items-center justify-between p-2">
+          <h2
+            class="text-softWhite font-playfair font-semibold text-xl mb-2"
+            id="overlay-title"
+          >
+            {sortedWorks[0]?.data.title}
+          </h2>
+          <span
+            class="text-softWhite font-playfair font-bold text-5xl"
+            id="overlay-year"
+          >
+            {sortedWorks[0]?.data.pubDate.getFullYear()}
+          </span>
+        </div>
+        <div>
+          <div class="h-4 flex">
+            <div class="bg-salviaGreen w-1/2 h-full"></div>
+            <div class="bg-gray-200 w-1/2 h-full"></div>
+          </div>
+          <a
+            href={sortedWorks[0]?.data.link}
+            target="_blank"
+            id="overlay-link"
+            class="flex items-center text-smokyBlack text-semibold font-openSans justify-end gap-2 bg-softBeige px-4 py-2 hover:font-bold transition-all duration-200"
+          >
+            Ver Proyecto
+            <DiagonalArrow />
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- Fixed Project Info Overlay -->
-
-  <!-- Color bars -->
-
-  <!-- Fixed View Project Button -->
 </section>
 
 <script>
