@@ -1,18 +1,26 @@
 ---
 import MainLayout from "@/layout/MainLayout.astro";
-import { generateBreadcrumbSchema } from "@/config/seo";
+import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
+import ContactForm from "@/components/ui/ContactForm.astro";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Contacto", url: "/contacto" },
 ]);
+
+const contactoSEO = generatePageSEO({
+    title: "Contacto - Shine Agencia Digital",
+    description:
+        "Contáctanos para discutir cómo podemos ayudarte a transformar tu presencia digital con autenticidad y propósito. Respuesta garantizada en 24 horas.",
+    path: "/contacto",
+});
 ---
 
-<MainLayout
-    title="Contacto"
-    description="Contáctanos para discutir cómo podemos ayudarte a transformar tu presencia digital con autenticidad y propósito."
-    path="/contacto"
-    aditionalSchemas={[breadcrumbSchema]}
->
-    <h1>Contacto</h1>
+<MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema]}>
+    <section class="contact-section w-full mx-auto">
+        <h1 class="text-4xl font-playfair mb-8">Contacto</h1>
+        <div class="max-w-2xl mx-auto">
+            <ContactForm />
+        </div>
+    </section>
 </MainLayout>
