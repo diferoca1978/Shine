@@ -1,0 +1,174 @@
+---
+import { actions } from "astro:actions";
+import Button from "./button.astro";
+---
+
+<div>
+  <form
+    action={actions.getContact}
+    class="space-y-6 contact-form"
+    method="POST"
+  >
+    <div class="relative">
+      <input
+        type="text"
+        placeholder="Nombre"
+        id="fullName"
+        name="fullName"
+        required
+        aria-describedby="fullName-error"
+        class="peer font-playfair h-15 w-full border-b-2 border-smokyBlack/30 text-smokyBlack bg-transparent placeholder-transparent focus:outline-salviaGreen"
+      />
+      <p id="error_fullName" class="text-red-600"></p>
+
+      <label
+        for="fullName"
+        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base"
+      >
+        Nombre
+      </label>
+    </div>
+
+    <div class="relative">
+      <input
+        transition:persist
+        type="email"
+        placeholder="email@ejemplo.com"
+        id="email"
+        name="email"
+        required
+        aria-describedby="email-error"
+        class="peer font-playfair h-15 w-full border-b-2 border-smokyBlack/30 text-smokyBlack bg-transparent placeholder-transparent focus:outline-salviaGreen"
+      />
+      <p id="error_email" class="text-red-500"></p>
+
+      <label
+        for="email"
+        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base"
+      >
+        E-mail
+      </label>
+    </div>
+
+    <div class="relative">
+      <input
+        transition:persist
+        type="tel"
+        placeholder="+57 xxx-xxx-xxxx"
+        id="telefono"
+        name="telefono"
+        required
+        aria-describedby="telefono-error"
+        class="peer font-playfair h-15 w-full border-b-2 border-smokyBlack/30 text-smokyBlack bg-transparent placeholder-transparent focus:outline-salviaGreen"
+      />
+
+      <label
+        for="telefono"
+        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base"
+      >
+        Telefono
+      </label>
+    </div>
+
+    <div class="relative">
+      <textarea
+        transition:persist
+        cols="30"
+        rows="5"
+        placeholder="Mensaje"
+        id="inquietudes"
+        name="inquietudes"
+        required
+        aria-describedby="inquietudes-error"
+        class="peer field-sizing-content font-playfair h-15 w-full border-b-2 border-smokyBlack/30 text-smokyBlack bg-transparent placeholder-transparent focus:outline-salviaGreen"
+      ></textarea>
+      <p id="error_inquietudes" class="text-red-500"></p>
+      <label
+        for="inquietudes"
+        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base"
+      >
+        Mensaje
+      </label>
+    </div>
+
+    <div class="relative">
+      <label for="terms">
+        <input
+          type="checkbox"
+          id="terms"
+          name="terms"
+          value="true"
+          aria-describedby="terms-error"
+          class="accent-salviaGreen rounded-md h-4 w-4"
+        />
+        Aceptar terminos y condiciones
+      </label>
+      <p id="error_terms" class="text-red-500"></p>
+    </div>
+
+    <Button type="submit" variant="primary" className="btn-submit"
+      >Enviar</Button
+    >
+    <div
+      id="form-success"
+      class="hidden bg-gradient-to-tl from-salviaGreen to-softBeige p-4 rounded-2xl"
+    >
+      <p class="font-openSans text-softWhite font-semibold text-center text-xl">
+        ¡Mensaje enviado con éxito!.
+      </p>
+    </div>
+  </form>
+</div>
+
+<script>
+  import { actions } from "astro:actions";
+  import { isInputError } from "astro:actions";
+
+  const form = document.querySelector(".contact-form") as HTMLFormElement;
+  const formSuccess = document.getElementById("form-success") as HTMLDivElement;
+  const btnSubmit = document.querySelector(".btn-submit") as HTMLButtonElement;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Clear all error messages first
+    const errorElements = document.querySelectorAll('[id^="error_"]');
+    errorElements.forEach((el) => {
+      if (el instanceof HTMLElement) {
+        el.textContent = "";
+      }
+    });
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    btnSubmit.setAttribute("disabled", "disabled");
+
+    const { error } = await actions.getContact(formData);
+    console.log(error);
+    try {
+      if (error && isInputError(error)) {
+        console.log(error.fields);
+        Object.entries(error.fields).forEach(([label, messages]) => {
+          (
+            document.querySelector(`#error_${label}`) as HTMLParagraphElement
+          ).textContent = messages[0];
+        });
+        btnSubmit.removeAttribute("disabled");
+        btnSubmit.textContent = "Enviar";
+      } else {
+        // Success! Clear the form and show success message
+        form.reset();
+        formSuccess.classList.remove("hidden");
+        setTimeout(() => {
+          formSuccess.classList.add("hidden");
+        }, 5000);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      btnSubmit.removeAttribute("disabled");
+      btnSubmit.textContent = "Enviar";
+    }
+  });
+</script>
