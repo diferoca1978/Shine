@@ -2,7 +2,7 @@
 import MainLayout from "@/layout/MainLayout.astro";
 import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
 import ContactForm from "@/components/ui/ContactForm.astro";
-import StartsBackground from "@/components/ui/StartsBackground.astro";
+import PencilStarsBackground from "@/components/ui/Pencilstartsbg.astro";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Inicio", url: "/" },
@@ -19,9 +19,12 @@ const contactoSEO = generatePageSEO({
 
 <MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema]}>
     <section class="contact-section w-full mx-auto">
-        <StartsBackground />
-        <div class="text-center mx-auto py-10">
-            <h1 class="text-6xl font-playfair font-extrabold mb-8">Contacto</h1>
+        <div class="text-center mx-auto py-10 lg:py-20">
+            <h1
+                class="text-6xl font-playfair font-extrabold text-smokyBlack mb-8"
+            >
+                Contacto
+            </h1>
         </div>
         <div
             class="flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto gap-8"

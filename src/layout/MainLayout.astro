@@ -12,7 +12,7 @@ import {
 import type { SEOProps } from "astro-seo";
 import BgTexture from "@/components/global/BgTexture.astro";
 import CursorFollower from "@/components/global/CursorFollower.astro";
-import NavBar from "@/components/global/NavBar.astro";
+import NavBarAlt from "@/components/global/NavbarAlt.astro";
 import Footer from "@/components/global/Footer.astro";
 
 interface Props {
@@ -53,7 +53,7 @@ const baseSchemas: JSONLDSchema[] = [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA];
 const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 ---
 
-<html lang="es_CO">
+<html lang="es_CO" class="scrollbar-hide">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -86,10 +86,21 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 	<body class="w-full p-0 m-0 overflow-x-hidden">
 		<BgTexture />
 		<CursorFollower />
-		<NavBar />
-		<main class="w-full mx-auto">
+		<NavBarAlt />
+		<main class="w-full mx-auto pt-20 md:pt-16">
 			<slot />
 		</main>
 		<Footer />
+		<style>
+			/* CSS rules for the page scrollbar */
+			.scrollbar-hide::-webkit-scrollbar {
+				display: none;
+			}
+
+			.scrollbar-hide {
+				-ms-overflow-style: none;
+				scrollbar-width: none;
+			}
+		</style>
 	</body>
 </html>

@@ -1,0 +1,118 @@
+---
+import { Image } from "astro:assets";
+import Star from "@/assets/icons/star40x40.svg";
+import Logo from "@/assets/images/LogoShineWhite(240x110px).svg";
+import WhiteLogo from "@/assets/images/logoshinewhitecharacters.svg";
+import MenuIcon from "@/assets/icons/menuIcon.svg";
+import CloseIcon from "@/assets/icons/closeIcon.svg";
+import Rocket from "@/assets/images/rocket.webp";
+
+import { navBarLinksConst } from "@/utils/navigation";
+const currentPath = Astro.url.pathname;
+---
+
+<header class="nav-container fixed top-0 z-50 mx-auto w-full">
+  <nav
+    class="nav-content relative flex max-w-6xl mx-auto items-center justify-between py-2"
+  >
+    <!-- Logo -->
+    <div id="logo-container" class="flex items-center">
+      <a href="/" aria-label="Home">
+        <Logo class="h-14 w-auto object-contain md:h-20 md:w-64" />
+      </a>
+    </div>
+    <!-- Menu Button -->
+    <div class="absolute right-6 items-center flex">
+      <button
+        type="button"
+        id="btn-open-close"
+        class="cursor-pointer focus:outline-none opacity-0"
+      >
+        <MenuIcon id="icon-open" class="h-10 w-10" stroke-width="2" />
+      </button>
+    </div>
+    <!--Standar Desktop menu -->
+    <div
+      id="visible-menu"
+      class="hidden items-center justify-center space-x-5 lg:flex"
+    >
+      {
+        navBarLinksConst.map((item) => (
+          <div>
+            <a
+              href={item.path}
+              class={`text-smokyBlack text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${item.path === currentPath ? "bg-salviaGreen text-softWhite" : ""}`}
+              aria-current={item.path === currentPath ? "page" : undefined}
+            >
+              {item.name}
+            </a>
+          </div>
+        ))
+      }
+    </div>
+    <!-- Overlay menu -->
+    <div class="overlay-menu fixed inset-0 z-[9999] bg-deepplum">
+      <div class="overlay-content relative w-full h-full">
+        <!-- Header -->
+        <div class="overlay-header flex items-center justify-between p-8">
+          <WhiteLogo class="h-14 w-auto object-contain md:h-20 md:w-64" />
+          <button
+            type="button"
+            id="btn-close"
+            class="cursor-pointer focus:outline-none"
+          >
+            <CloseIcon id="icon-close" class="h-10 w-10" stroke-width="2" />
+          </button>
+        </div>
+        <!-- Content -->
+        <div class="flex items-center justify-between">
+          <div
+            class="relative items-center justify-center w-1/2 hidden lg:flex"
+          >
+            <!-- Random positioned stars -->
+            <Star class="absolute top-16 left-20 animate-pulse" />
+            <Star class="absolute top-32 right-16 animate-pulse delay-300" />
+            <Star class="absolute bottom-24 left-12 animate-pulse delay-700" />
+            <Star class="absolute bottom-16 right-24 animate-pulse delay-500" />
+            <Star class="absolute bottom-32 right-12 animate-pulse delay-400" />
+
+            <!-- Rocket -->
+            <Image
+              src={Rocket}
+              alt="Rocket"
+              height={350}
+              width={350}
+              class="relative z-10"
+            />
+          </div>
+          <div
+            class="flex flex-col items-start w-1/2 list-none space-y-10 pl-12"
+          >
+            {
+              navBarLinksConst.map((item) => (
+                <li>
+                  <a
+                    href={item.path}
+                    class={`text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200 ${item.path === currentPath ? "underline underline-offset-3" : ""}`}
+                    aria-current={
+                      item.path === currentPath ? "page" : undefined
+                    }
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  import { nabBarAltAnimation } from "@/utils/scripts/nabBarAltAnimation.js";
+
+  document.removeEventListener("DOMContentLoaded", nabBarAltAnimation);
+  document.addEventListener("DOMContentLoaded", nabBarAltAnimation);
+</script>

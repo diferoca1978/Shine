@@ -3,12 +3,11 @@ import Logo from "@/assets/images/LogoShineWhite(240x110px).svg";
 import { navBarLinksConst } from "@/utils/navigation";
 import MenuIcon from "@/assets/icons/menu.svg";
 import CloseIcon from "@/assets/icons/close.svg";
-
 const currentPath = Astro.url.pathname;
 ---
 
 <header
-  class="mainNavBar fixed top-1 z-50 mx-auto flex w-full flex-wrap rounded-2xl"
+  class="mainNavBar fixed top-1 z-50 mx-auto flex w-full flex-wrap rounded-2xl bg-softWhite"
 >
   <nav
     class="relative mx-2 flex w-full max-w-6xl basis-full flex-wrap items-center justify-between px-4 py-2 md:flex-nowrap lg:mx-auto"
@@ -28,7 +27,7 @@ const currentPath = Astro.url.pathname;
       >
         <MenuIcon
           id="open-icon"
-          class="h-9 w-9 bg-smokyBlack px-0.5 py-0.5 rounded-md"
+          class="bg-smokyBlack px-0.5 py-0.5 rounded-md"
         />
         <CloseIcon
           id="close-icon"

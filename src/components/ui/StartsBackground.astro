@@ -2,53 +2,61 @@
 
 ---
 
-<canvas id="particle-canvas" class="fixed inset-0 w-full h-full -z-10"></canvas>
+<canvas id="particle-canvas" class="fixed inset-0 w-full h-full -z-10" style="background-color: #2f2f2f;"></canvas>
 
 <script>
   import * as THREE from "three";
   import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-  function initStarField() {
-    const canvas = document.getElementById(
-      "particle-canvas",
-    ) as HTMLCanvasElement;
-    if (!canvas) return;
+  class ParticleNetwork {
+    private canvas: HTMLCanvasElement;
+    private scene!: THREE.Scene;
+    private camera!: THREE.PerspectiveCamera;
+    private renderer!: THREE.WebGLRenderer;
+    private starField!: THREE.Group;
+    private controls: any;
+    private animationId: number | null = null;
 
-    const scene = new THREE.Scene();
+    constructor(canvas: HTMLCanvasElement) {
+      this.canvas = canvas;
+      this.init();
+      this.createStars();
+      this.animate();
+    }
 
-    // Set background to softBeige
-    const softBeigeColor = new THREE.Color(0xf6f4f1); // softBeige: oklch(0.9643 0.007 88.64)
-    scene.fog = new THREE.Fog(softBeigeColor, 50, 200);
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000,
-    );
-    camera.position.z = 5;
+    private init() {
+      this.scene = new THREE.Scene();
 
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xf6f4f1, 1); // softBeige background
+      // Set background to dark gray
+      const darkGrayColor = new THREE.Color(0x2f2f2f);
+      this.scene.fog = new THREE.Fog(darkGrayColor, 50, 200);
+      
+      this.camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000,
+      );
+      this.camera.position.z = 5;
 
-    window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+      this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setClearColor(0x2f2f2f, 1);
 
-    // Design system colors (converted from OKLCH to approximate hex)
-    const colors = {
-      softWhite: 0xfefefe, // oklch(0.997 0 0)
-      accentGold: 0xf4d03f, // oklch(0.8987 0.119 87.54)
-      softLavender: 0xb19cd9, // oklch(0.8166 0.0659 291.7)
-      salviaGreen: 0xa8c98a, // oklch(0.761 0.0408 138.18)
-      accentGreen: 0x4a9b8e, // oklch(0.5366 0.081 179.54)
-      sandRose: 0xd4a574, // oklch(0.7638 0.0655 28.26)
-    };
+      window.addEventListener("resize", this.handleResize.bind(this));
 
-    // Create 2D star texture
-    function createStarTexture() {
+      // Controls
+      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      this.controls.enableZoom = false;
+    }
+
+    private handleResize() {
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    private createStarTexture(): THREE.CanvasTexture {
       const canvas = document.createElement("canvas");
       const size = 64;
       canvas.width = size;
@@ -56,10 +64,7 @@
       const ctx = canvas.getContext("2d");
       if (!ctx) return new THREE.CanvasTexture(canvas);
 
-      // Clear canvas with transparent background
       ctx.clearRect(0, 0, size, size);
-
-      // Draw 4-pointed star in white (will be tinted by material color)
       ctx.fillStyle = "white";
       ctx.beginPath();
 
@@ -93,85 +98,70 @@
       return new THREE.CanvasTexture(canvas);
     }
 
-    const starTexture = createStarTexture();
+    private createStars() {
+      const starTexture = this.createStarTexture();
+      const starCount = 300;
+      const accentGold = 0xf4d03f;
 
-    // Create instanced stars with varied colors and positions
-    const starCount = 300;
+      this.starField = new THREE.Group();
 
-    const starField = new THREE.Group();
+      for (let i = 0; i < starCount; i++) {
+        const color = new THREE.Color(accentGold);
 
-    for (let i = 0; i < starCount; i++) {
-      // Use accentGold color for all stars
-      const color = new THREE.Color(colors.accentGold);
+        const starMaterial = new THREE.SpriteMaterial({
+          map: starTexture,
+          color: color,
+          transparent: true,
+          opacity: Math.random() * 0.8 + 0.2,
+        });
 
-      const starMaterial = new THREE.SpriteMaterial({
-        map: starTexture,
-        color: color,
-        transparent: true,
-        opacity: Math.random() * 0.8 + 0.2,
-      });
+        const star = new THREE.Sprite(starMaterial);
 
-      const star = new THREE.Sprite(starMaterial);
+        star.position.set(
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200,
+        );
 
-      // Random position
-      star.position.set(
-        (Math.random() - 0.5) * 200,
-        (Math.random() - 0.5) * 200,
-        (Math.random() - 0.5) * 200,
-      );
+        const scale = Math.random() * 1.5 + 0.5;
+        star.scale.setScalar(scale);
 
-      // Random size - made stars bigger
-      const scale = Math.random() * 1.5 + 0.5; // Increased from 0.8+0.2 to 2.5+1.0
-      star.scale.setScalar(scale);
+        star.userData = {
+          baseScale: scale,
+          pingPhase: Math.random() * Math.PI * 2,
+          pingSpeed: 0.5 + Math.random() * 1.5,
+          pingIntensity: 0.3 + Math.random() * 0.4,
+          lastPing: Math.random() * 10000,
+        };
 
-      // Store animation data
-      star.userData = {
-        baseScale: scale,
-        pingPhase: Math.random() * Math.PI * 2, // Random starting phase
-        pingSpeed: 0.5 + Math.random() * 1.5, // Random ping speed
-        pingIntensity: 0.3 + Math.random() * 0.4, // Random ping strength
-        lastPing: Math.random() * 10000, // Random initial ping timing
-      };
+        this.starField.add(star);
+      }
 
-      starField.add(star);
+      this.scene.add(this.starField);
     }
 
-    scene.add(starField);
-
-    // Controls (optional, for exploring the scene)
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableZoom = false;
-
-    // Animation loop with enhanced effects
-    function animate() {
-      requestAnimationFrame(animate);
+    private animate() {
+      this.animationId = requestAnimationFrame(this.animate.bind(this));
 
       const time = Date.now() * 0.001;
 
-      // Rotate the entire star field
-      starField.rotation.y += 0.0003;
-      starField.rotation.x += 0.0001;
+      this.starField.rotation.y += 0.0003;
+      this.starField.rotation.x += 0.0001;
 
-      // Individual star animations
-      starField.children.forEach((star) => {
+      this.starField.children.forEach((star: THREE.Object3D) => {
         const sprite = star as THREE.Sprite;
         const userData = sprite.userData;
         if (!userData) return;
 
-        // Ping animation effect
         const timeSinceLastPing = time - userData.lastPing;
 
-        // Trigger ping every 3-8 seconds randomly
         if (timeSinceLastPing > 3 + Math.random() * 5) {
           userData.lastPing = time;
         }
 
-        // Calculate ping effect (sharp rise, gradual fall)
         let pingFactor = 1;
         if (timeSinceLastPing < 1) {
-          // Ping lasts 1 second
           const pingProgress = timeSinceLastPing;
-          // Create a sharp ping effect that fades out
           pingFactor =
             1 +
             userData.pingIntensity *
@@ -179,15 +169,12 @@
               Math.cos(pingProgress * 8);
         }
 
-        // Subtle continuous pulsing
         const basePulseFactor =
           Math.sin(time * userData.pingSpeed + userData.pingPhase) * 0.05 + 1;
 
-        // Combine ping and pulse effects
         const finalScale = userData.baseScale * pingFactor * basePulseFactor;
         sprite.scale.setScalar(finalScale);
 
-        // Ping opacity effect
         const opacityPing =
           timeSinceLastPing < 1 ? Math.exp(-timeSinceLastPing * 3) * 0.3 : 0;
         sprite.material.opacity = Math.min(
@@ -196,16 +183,39 @@
         );
       });
 
-      // Subtle camera movement
-      camera.position.x = Math.sin(time * 0.1) * 0.5;
-      camera.position.y = Math.cos(time * 0.15) * 0.3;
+      this.camera.position.x = Math.sin(time * 0.1) * 0.5;
+      this.camera.position.y = Math.cos(time * 0.15) * 0.3;
 
-      controls.update();
-      renderer.render(scene, camera);
+      this.controls.update();
+      this.renderer.render(this.scene, this.camera);
     }
 
-    animate();
+    destroy() {
+      if (this.animationId) {
+        cancelAnimationFrame(this.animationId);
+      }
+      window.removeEventListener("resize", this.handleResize.bind(this));
+      this.renderer.dispose();
+    }
   }
 
-  initStarField();
+  // Initialize immediately without waiting for DOM
+  function initializeBackground() {
+    const canvas = document.getElementById("particle-canvas") as HTMLCanvasElement;
+    if (canvas) {
+      const particleNetwork = new ParticleNetwork(canvas);
+
+      // Cleanup on page unload
+      window.addEventListener("beforeunload", () => {
+        particleNetwork.destroy();
+      });
+    }
+  }
+
+  // Initialize as soon as the script runs
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeBackground);
+  } else {
+    initializeBackground();
+  }
 </script>
