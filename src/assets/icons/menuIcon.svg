@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <line style="fill: rgb(216, 216, 216); stroke-linecap: round; stroke: rgb(47, 47, 47);" x1="4.698" y1="29.244" x2="35.765" y2="29.244"></line>
+  <line style="fill: rgb(216, 216, 216); stroke-linecap: round; stroke: rgb(47, 47, 47);" x1="4.902" y1="20.073" x2="35.969" y2="20.073"></line>
+  <line style="fill: rgb(216, 216, 216); stroke-linecap: round; stroke: rgb(47, 47, 47);" x1="4.902" y1="11.009" x2="35.969" y2="11.009"></line>
+  <line style="fill: rgb(216, 216, 216); stroke-linecap: round; paint-order: stroke; stroke: rgb(254, 254, 254);" x1="4.698" y1="34.337" x2="35.765" y2="34.337"></line>
+  <line style="fill: rgb(216, 216, 216); stroke-linecap: round; paint-order: stroke; stroke: rgb(254, 254, 254);" x1="4.902" y1="25.166" x2="35.969" y2="25.166"></line>
+  <line style="fill: rgb(216, 216, 216); stroke-linecap: round; paint-order: stroke; stroke: rgb(254, 254, 254);" x1="4.902" y1="16.102" x2="35.969" y2="16.102"></line>
+</svg>

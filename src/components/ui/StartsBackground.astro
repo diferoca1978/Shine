@@ -1,0 +1,221 @@
+---
+
+---
+
+<canvas id="particle-canvas" class="fixed inset-0 w-full h-full -z-10" style="background-color: #2f2f2f;"></canvas>
+
+<script>
+  import * as THREE from "three";
+  import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
+  class ParticleNetwork {
+    private canvas: HTMLCanvasElement;
+    private scene!: THREE.Scene;
+    private camera!: THREE.PerspectiveCamera;
+    private renderer!: THREE.WebGLRenderer;
+    private starField!: THREE.Group;
+    private controls: any;
+    private animationId: number | null = null;
+
+    constructor(canvas: HTMLCanvasElement) {
+      this.canvas = canvas;
+      this.init();
+      this.createStars();
+      this.animate();
+    }
+
+    private init() {
+      this.scene = new THREE.Scene();
+
+      // Set background to dark gray
+      const darkGrayColor = new THREE.Color(0x2f2f2f);
+      this.scene.fog = new THREE.Fog(darkGrayColor, 50, 200);
+      
+      this.camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000,
+      );
+      this.camera.position.z = 5;
+
+      this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true });
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setClearColor(0x2f2f2f, 1);
+
+      window.addEventListener("resize", this.handleResize.bind(this));
+
+      // Controls
+      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      this.controls.enableZoom = false;
+    }
+
+    private handleResize() {
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    private createStarTexture(): THREE.CanvasTexture {
+      const canvas = document.createElement("canvas");
+      const size = 64;
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return new THREE.CanvasTexture(canvas);
+
+      ctx.clearRect(0, 0, size, size);
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+
+      const centerX = size / 2;
+      const centerY = size / 2;
+      const outerRadius = size * 0.4;
+      const innerRadius = size * 0.15;
+      const spikes = 4;
+
+      let angle = (Math.PI / 2) * 3;
+      const step = Math.PI / spikes;
+
+      ctx.moveTo(centerX, centerY - outerRadius);
+
+      for (let i = 0; i < spikes; i++) {
+        ctx.lineTo(
+          centerX + Math.cos(angle) * outerRadius,
+          centerY + Math.sin(angle) * outerRadius,
+        );
+        angle += step;
+        ctx.lineTo(
+          centerX + Math.cos(angle) * innerRadius,
+          centerY + Math.sin(angle) * innerRadius,
+        );
+        angle += step;
+      }
+
+      ctx.closePath();
+      ctx.fill();
+
+      return new THREE.CanvasTexture(canvas);
+    }
+
+    private createStars() {
+      const starTexture = this.createStarTexture();
+      const starCount = 300;
+      const accentGold = 0xf4d03f;
+
+      this.starField = new THREE.Group();
+
+      for (let i = 0; i < starCount; i++) {
+        const color = new THREE.Color(accentGold);
+
+        const starMaterial = new THREE.SpriteMaterial({
+          map: starTexture,
+          color: color,
+          transparent: true,
+          opacity: Math.random() * 0.8 + 0.2,
+        });
+
+        const star = new THREE.Sprite(starMaterial);
+
+        star.position.set(
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200,
+        );
+
+        const scale = Math.random() * 1.5 + 0.5;
+        star.scale.setScalar(scale);
+
+        star.userData = {
+          baseScale: scale,
+          pingPhase: Math.random() * Math.PI * 2,
+          pingSpeed: 0.5 + Math.random() * 1.5,
+          pingIntensity: 0.3 + Math.random() * 0.4,
+          lastPing: Math.random() * 10000,
+        };
+
+        this.starField.add(star);
+      }
+
+      this.scene.add(this.starField);
+    }
+
+    private animate() {
+      this.animationId = requestAnimationFrame(this.animate.bind(this));
+
+      const time = Date.now() * 0.001;
+
+      this.starField.rotation.y += 0.0003;
+      this.starField.rotation.x += 0.0001;
+
+      this.starField.children.forEach((star: THREE.Object3D) => {
+        const sprite = star as THREE.Sprite;
+        const userData = sprite.userData;
+        if (!userData) return;
+
+        const timeSinceLastPing = time - userData.lastPing;
+
+        if (timeSinceLastPing > 3 + Math.random() * 5) {
+          userData.lastPing = time;
+        }
+
+        let pingFactor = 1;
+        if (timeSinceLastPing < 1) {
+          const pingProgress = timeSinceLastPing;
+          pingFactor =
+            1 +
+            userData.pingIntensity *
+              Math.exp(-pingProgress * 4) *
+              Math.cos(pingProgress * 8);
+        }
+
+        const basePulseFactor =
+          Math.sin(time * userData.pingSpeed + userData.pingPhase) * 0.05 + 1;
+
+        const finalScale = userData.baseScale * pingFactor * basePulseFactor;
+        sprite.scale.setScalar(finalScale);
+
+        const opacityPing =
+          timeSinceLastPing < 1 ? Math.exp(-timeSinceLastPing * 3) * 0.3 : 0;
+        sprite.material.opacity = Math.min(
+          1,
+          sprite.material.opacity + opacityPing,
+        );
+      });
+
+      this.camera.position.x = Math.sin(time * 0.1) * 0.5;
+      this.camera.position.y = Math.cos(time * 0.15) * 0.3;
+
+      this.controls.update();
+      this.renderer.render(this.scene, this.camera);
+    }
+
+    destroy() {
+      if (this.animationId) {
+        cancelAnimationFrame(this.animationId);
+      }
+      window.removeEventListener("resize", this.handleResize.bind(this));
+      this.renderer.dispose();
+    }
+  }
+
+  // Initialize immediately without waiting for DOM
+  function initializeBackground() {
+    const canvas = document.getElementById("particle-canvas") as HTMLCanvasElement;
+    if (canvas) {
+      const particleNetwork = new ParticleNetwork(canvas);
+
+      // Cleanup on page unload
+      window.addEventListener("beforeunload", () => {
+        particleNetwork.destroy();
+      });
+    }
+  }
+
+  // Initialize as soon as the script runs
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeBackground);
+  } else {
+    initializeBackground();
+  }
+</script>

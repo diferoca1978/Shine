@@ -1,0 +1,126 @@
+---
+// RandomStarsBackground.astro
+---
+
+<div class="absolute inset-0 z-0">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Small stars pattern -->
+      <pattern
+        id="small-stars"
+        x="0"
+        y="0"
+        width="120"
+        height="120"
+        patternUnits="userSpaceOnUse"
+      >
+        <!-- Small stars scattered randomly within the 120x120 pattern -->
+        <g fill="#e2e8f0" opacity="0.6">
+          <polygon
+            points="15,8 17,14 23,14 18,18 20,24 15,20 10,24 12,18 7,14 13,14"
+          ></polygon>
+          <polygon
+            points="45,35 46.5,38.5 50,38.5 47.25,40.75 48.5,44.5 45,42 41.5,44.5 42.75,40.75 40,38.5 43.5,38.5"
+          ></polygon>
+          <polygon
+            points="85,15 86.5,18.5 90,18.5 87.25,20.75 88.5,24.5 85,22 81.5,24.5 82.75,20.75 80,18.5 83.5,18.5"
+          ></polygon>
+          <polygon
+            points="25,65 26.5,68.5 30,68.5 27.25,70.75 28.5,74.5 25,72 21.5,74.5 22.75,70.75 20,68.5 23.5,68.5"
+          ></polygon>
+          <polygon
+            points="70,75 71.5,78.5 75,78.5 72.25,80.75 73.5,84.5 70,82 66.5,84.5 67.75,80.75 65,78.5 68.5,78.5"
+          ></polygon>
+          <polygon
+            points="105,45 106.5,48.5 110,48.5 107.25,50.75 108.5,54.5 105,52 101.5,54.5 102.75,50.75 100,48.5 103.5,48.5"
+          ></polygon>
+          <polygon
+            points="55,95 56.5,98.5 60,98.5 57.25,100.75 58.5,104.5 55,102 51.5,104.5 52.75,100.75 50,98.5 53.5,98.5"
+          ></polygon>
+          <polygon
+            points="95,85 96.5,88.5 100,88.5 97.25,90.75 98.5,94.5 95,92 91.5,94.5 92.75,90.75 90,88.5 93.5,88.5"
+          ></polygon>
+        </g>
+      </pattern>
+
+      <!-- Medium stars pattern -->
+      <pattern
+        id="medium-stars"
+        x="0"
+        y="0"
+        width="200"
+        height="200"
+        patternUnits="userSpaceOnUse"
+      >
+        <g fill="#cbd5e1" opacity="0.4">
+          <polygon
+            points="35,25 38,35 48,35 40,42 43,52 35,47 27,52 30,42 22,35 32,35"
+          ></polygon>
+          <polygon
+            points="125,85 128,95 138,95 130,102 133,112 125,107 117,112 120,102 112,95 122,95"
+          ></polygon>
+          <polygon
+            points="165,35 168,45 178,45 170,52 173,62 165,57 157,62 160,52 152,45 162,45"
+          ></polygon>
+          <polygon
+            points="75,155 78,165 88,165 80,172 83,182 75,177 67,182 70,172 62,165 72,165"
+          ></polygon>
+          <polygon
+            points="185,165 188,175 198,175 190,182 193,192 185,187 177,192 180,182 172,175 182,175"
+          ></polygon>
+        </g>
+      </pattern>
+
+      <!-- Large stars pattern -->
+      <pattern
+        id="large-stars"
+        x="0"
+        y="0"
+        width="300"
+        height="300"
+        patternUnits="userSpaceOnUse"
+      >
+        <g fill="#f1f5f9" opacity="0.3">
+          <polygon
+            points="80,60 85,75 100,75 88,85 93,100 80,92 67,100 72,85 60,75 75,75"
+          ></polygon>
+          <polygon
+            points="220,140 225,155 240,155 228,165 233,180 220,172 207,180 212,165 200,155 215,155"
+          ></polygon>
+          <polygon
+            points="150,250 155,265 170,265 158,275 163,290 150,282 137,290 142,275 130,265 145,265"
+          ></polygon>
+        </g>
+      </pattern>
+
+      <!-- Tiny twinkling stars -->
+      <pattern
+        id="tiny-stars"
+        x="0"
+        y="0"
+        width="80"
+        height="80"
+        patternUnits="userSpaceOnUse"
+      >
+        <g fill="#f8fafc" opacity="0.8">
+          <circle cx="12" cy="15" r="1"></circle>
+          <circle cx="35" cy="8" r="0.5"></circle>
+          <circle cx="65" cy="25" r="1"></circle>
+          <circle cx="25" cy="45" r="0.5"></circle>
+          <circle cx="55" cy="55" r="1"></circle>
+          <circle cx="8" cy="65" r="0.5"></circle>
+          <circle cx="45" cy="72" r="1"></circle>
+          <circle cx="72" cy="68" r="0.5"></circle>
+          <circle cx="18" cy="38" r="0.5"></circle>
+          <circle cx="62" cy="42" r="1"></circle>
+        </g>
+      </pattern>
+    </defs>
+
+    <!-- Layer all the star patterns -->
+    <rect width="100%" height="100%" fill="url(#large-stars)"></rect>
+    <rect width="100%" height="100%" fill="url(#medium-stars)"></rect>
+    <rect width="100%" height="100%" fill="url(#small-stars)"></rect>
+    <rect width="100%" height="100%" fill="url(#tiny-stars)"></rect>
+  </svg>
+</div>
