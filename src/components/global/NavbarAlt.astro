@@ -68,15 +68,24 @@ const currentPath = Astro.url.pathname;
             <Star class="absolute bottom-24 left-12 animate-pulse delay-700" />
             <Star class="absolute bottom-16 right-24 animate-pulse delay-500" />
             <Star class="absolute bottom-32 right-12 animate-pulse delay-400" />
+            <Star class="absolute bottom-42 left-24 animate-pulse delay-400" />
 
             <!-- Rocket -->
             <Image
+              id="rocket"
               src={Rocket}
               alt="Rocket"
               height={350}
               width={350}
               class="relative z-10"
             />
+            <div id="rocket-path">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+                <path
+                  style="fill: none;"
+                  d="M 0 500 C 59.433 500 268.622 44.037 500 0"></path>
+              </svg>
+            </div>
           </div>
           <div
             class="flex flex-col items-start w-1/2 list-none space-y-10 pl-12"
