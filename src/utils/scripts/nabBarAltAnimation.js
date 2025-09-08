@@ -107,6 +107,87 @@ export const nabBarAltAnimation = () => {
     }, "-=0.2");
   };
 
+  const overlayRocketAnimation = () => {
+  const rocket = document.querySelector("#rocket");
+
+  if (!rocket) {
+    console.warn("Rocket not found");
+    return;
+  }
+
+  // Create a master timeline that repeats
+  const masterTl = gsap.timeline({ repeat: -1 });
+
+  // Flying path animation - move rocket in a figure-8 or curved pattern
+  const flyingTl = gsap.timeline();
+  
+  // Start from center, fly up and right
+  flyingTl.to(rocket, {
+    x: 100,
+    y: -80,
+    rotation: 15,
+    duration: 1.5,
+    ease: "power2.out"
+  })
+  // Curve down and right
+  .to(rocket, {
+    x: 150,
+    y: 20,
+    rotation: -10,
+    duration: 1.2,
+    ease: "power2.inOut"
+  })
+  // Fly left and down
+  .to(rocket, {
+    x: -50,
+    y: 60,
+    rotation: -25,
+    duration: 1.8,
+    ease: "power2.inOut"
+  })
+  // Return to start position
+  .to(rocket, {
+    x: 0,
+    y: 0,
+    rotation: 0,
+    duration: 1.5,
+    ease: "power2.inOut"
+  });
+
+  // Add the flying timeline to master
+  masterTl.add(flyingTl);
+
+  // Add continuous floating motion (independent of main flight path)
+  gsap.to(rocket, {
+    y: "+=10",
+    duration: 0.8,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true
+  });
+
+  // Add subtle scaling for breathing effect
+  gsap.to(rocket, {
+    scale: 1.05,
+    duration: 1.5,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true
+  });
+
+  // Add slight horizontal wobble
+  gsap.to(rocket, {
+    x: "+=5",
+    duration: 0.6,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true,
+    delay: 0.3
+  });
+};
+
+overlayRocketAnimation();
+
   // Add click event listeners
   btnOpenClose.addEventListener("click", (e) => {
     e.preventDefault();
