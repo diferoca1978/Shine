@@ -1,10 +1,7 @@
 ---
 import MainLayout from "@/layout/MainLayout.astro";
 import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
-import ContactForm from "@/components/ui/ContactForm.astro";
-import Star from "@/assets/icons/star40x40.svg";
-import Rocket from "@/assets/images/rocket.webp";
-import { Image } from "astro:assets";
+import HerocontactForm from "@/components/section/perPage/HerocontactForm.astro";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Inicio", url: "/" },
@@ -20,55 +17,5 @@ const contactoSEO = generatePageSEO({
 ---
 
 <MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema]}>
-    <section class="contact-section w-full mx-auto">
-        <div class="text-center mx-auto py-10 lg:py-20">
-            <h1 class="text-6xl font-playfair font-bold text-smokyBlack mb-8">
-                Contacto
-            </h1>
-        </div>
-        <div
-            class="flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto gap-8"
-        >
-            <div class="md:w-1/2">
-                <div
-                    class="relative items-center justify-center hidden lg:flex"
-                >
-                    <!-- Random positioned stars -->
-                    <Star class="absolute top-16 left-20 animate-pulse" />
-                    <Star
-                        class="absolute top-32 right-16 animate-pulse delay-300"
-                    />
-                    <Star
-                        class="absolute bottom-24 left-12 animate-pulse delay-700"
-                    />
-                    <Star
-                        class="absolute bottom-16 right-24 animate-pulse delay-500"
-                    />
-                    <Star
-                        class="absolute bottom-32 right-12 animate-pulse delay-400"
-                    />
-
-                    <!-- Rocket -->
-                    <Image
-                        id="rocket"
-                        src={Rocket}
-                        alt="Rocket"
-                        height={350}
-                        width={350}
-                        class="relative z-10"
-                    />
-                </div>
-            </div>
-            <div class="md:w-1/2">
-                <ContactForm />
-            </div>
-        </div>
-    </section>
+    <HerocontactForm />
 </MainLayout>
-
-<!-- <script>
-    import { overlayRocketAnimation } from "@/utils/scripts/overlayRocketAnimation.js";
-
-    document.removeEventListener("DOMContentLoaded", overlayRocketAnimation);
-    document.addEventListener("DOMContentLoaded", overlayRocketAnimation);
-</script> -->
