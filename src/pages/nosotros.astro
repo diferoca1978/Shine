@@ -1,5 +1,7 @@
 ---
 import MainLayout from "@/layout/MainLayout.astro";
+import HeroAbout from "@/components/section/perPage/HeroAbout.astro";
+import AboutFoundations from "@/components/section/perPage/aboutFoundations.astro";
 import { generateBreadcrumbSchema } from "@/config/seo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
@@ -14,5 +16,6 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     path="/nosotros"
     aditionalSchemas={[breadcrumbSchema]}
 >
-    <h1>Nosotros</h1>
+    <HeroAbout />
+    <AboutFoundations />
 </MainLayout>

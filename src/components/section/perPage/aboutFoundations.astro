@@ -1,0 +1,71 @@
+---
+
+---
+
+<section id="foundations" class="w-full mx-auto">
+  <div class="max-w-6xl mx-auto py-10 lg:py-20">
+    <div class="hero-foundations flex flex-col items-center justify-center">
+      <h1
+        class="text-[min(10vw,72px)] opacity-0 font-playfair font-bold text-smokyBlack tracking-tight mb-4"
+      >
+        Nuestros Principios
+      </h1>
+      <span class="text-rotator">
+        <span
+          class="text-smokyBlack font-playfair font-bold text-[min(7vw,42px)]"
+          >Autenticidad</span
+        >
+        <span
+          class="text-smokyBlack font-playfair font-bold text-[min(7vw,42px)]"
+          >Propósito</span
+        >
+        <span
+          class="text-smokyBlack font-playfair font-bold text-[min(7vw,42px)]"
+          >Servicio con valor</span
+        >
+        <span
+          class="text-smokyBlack font-playfair font-bold text-[min(7vw,42px)]"
+          >Crecimiento en unidad</span
+        >
+        <span
+          class="text-smokyBlack font-playfair font-bold text-[min(7vw,42px)]"
+          >Generosidad estratégica</span
+        >
+      </span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .text-rotator {
+    position: relative;
+    display: inline-block;
+    line-height: 1.1;
+    height: 6rem;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+  }
+
+  .text-rotator > span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    height: 6rem;
+    width: max-content;
+    visibility: hidden;
+  }
+
+  .text-rotator.loaded > span {
+    visibility: visible;
+  }
+</style>
+
+<script>
+  import { foundationsRotatorAnimation } from "@/utils/scripts/aboutFoundationsAnimation";
+
+  document.removeEventListener("DOMContentLoaded", foundationsRotatorAnimation);
+  document.addEventListener("DOMContentLoaded", foundationsRotatorAnimation);
+</script>
