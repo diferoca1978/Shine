@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import DiegoRocioBlack from "@/assets/images/diegoyrochiblack.webp";
+import DiegoRocio from "@/assets/images/diegoyrochi.webp";
+---
+
+<section id="about" class="w-full mx-auto">
+  <div id="wrapper-about" class="max-w-6xl mx-auto py-10 lg:py-20">
+    <!-- Title -->
+    <div id="about-title" class="flex items-center justify-center">
+      <h1 class="text-[min(10vw,72px)] font-playfair font-bold text-smokyBlack">
+        Conócenos
+      </h1>
+    </div>
+    <div class="about-content-wrapper mx-auto">
+      <!-- <h2
+        class="text-[min(7vw,40px)] font-playfair italic text-smokyBlack mb-6 text-center"
+      >
+        Nuestra historia de propósito
+      </h2> -->
+      <!-- our Image -->
+      <div
+        class="about-hero flex flex-col md:flex-row items-center justify-between mb-8"
+      >
+        <div class="hero-image md:w-1/2 relative">
+          <Image
+            id="diegorochiblack"
+            src={DiegoRocioBlack}
+            alt="Somos Rocío y Diego"
+            class="w-full h-auto object-cover backdrop-opacity-100"
+          />
+          <Image
+            id="diegorochi"
+            src={DiegoRocio}
+            alt="Somos Rocío y Diego"
+            class="w-full h-auto object-cover absolute top-0 left-0 opacity-0 pointer-events-none"
+          />
+        </div>
+        <div
+          class="flex flex-col items-center justify-center text-center md:w-1/2"
+        >
+          <h1
+            class="split-title opacity-0 text-[min(10vw,42px)] font-playfair text-smokyBlack mb-8 leading-tight tracking-tight"
+          >
+            Somos Rocío
+            <span class="block">y Diego</span>
+          </h1>
+          <div class="about-content w-full">
+            <p
+              class="split-text opacity-0 text-smokyBlack font-openSans text-center text-[min(7vw,24px)]"
+            >
+              Un matrimonio que une más de 10 años de experiencia en marketing
+              digital y desarrollo web. Somos cristianos, creemos que
+              <span class="font-bold text-deepplum italic"
+                >'Ustedes son la luz del mundo' (Mateo 5:14)</span
+              >, y dedicamos nuestro trabajo a ayudarte a mostrar tu luz con
+              claridad, estrategia y propósito.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { aboutHeroAnimation } from "@/utils/scripts/aboutHeroAnimation";
+
+  document.removeEventListener("DOMContentLoaded", aboutHeroAnimation);
+  document.addEventListener("DOMContentLoaded", aboutHeroAnimation);
+</script>
