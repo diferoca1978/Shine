@@ -1,0 +1,303 @@
+---
+import MainLayout from "@/layout/MainLayout.astro";
+import { generateBreadcrumbSchema } from "@/config/seo";
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Inicio", url: "/" },
+  { name: "Términos y Condiciones", url: "/terminos-y-condiciones" },
+]);
+---
+
+<MainLayout
+  title="Términos y Condiciones"
+  description="Conoce los términos y condiciones de uso de los servicios de Shine. Transparencia y claridad en nuestras políticas de servicio."
+  path="/terminos-y-condiciones"
+  aditionalSchemas={[breadcrumbSchema]}
+>
+  <section class="min-h-screen py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Términos y Condiciones
+        </h1>
+        <p class="text-lg text-gray-600">
+          <strong
+            >Última actualización: {new Date().toLocaleDateString()}</strong
+          >
+        </p>
+      </header>
+
+      <!-- Main Content -->
+      <div class="prose prose-lg max-w-none">
+        <!-- Introduction -->
+        <div class="mb-8 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+          <p class="text-gray-700 leading-relaxed">
+            Bienvenido a <strong>Shine</strong> (en adelante "nosotros", "nuestra
+            agencia", "la empresa" o "Shine"). Estos Términos y Condiciones (en adelante
+            "Términos") rigen el uso de nuestro sitio web y los servicios que ofrecemos.
+            Al acceder y utilizar nuestro sitio web, usted acepta estos Términos
+            en su totalidad. Si no está de acuerdo con alguna parte de estos términos,
+            no debe usar nuestros servicios.
+          </p>
+        </div>
+
+        <!-- Section 1: Información de la Empresa -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            1. Información de la Empresa
+          </h2>
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              Shine - Agencia de Marketing Digital
+            </h3>
+            <ul class="space-y-2">
+              <li><strong>Ubicación:</strong> Bogotá, Colombia</li>
+              <li>
+                <strong>Fundadores:</strong> Rocío Parra y Diego Rodríguez
+              </li>
+              <li>
+                <strong>Actividad:</strong> Servicios de marketing digital y diseño
+                web
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 2: Servicios Ofrecidos -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            2. Servicios Ofrecidos
+          </h2>
+          <p class="mb-4">
+            Shine ofrece los siguientes servicios profesionales:
+          </p>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              2.1 Servicios Principales
+            </h3>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>
+                <strong>Diseño Web Estratégico</strong> con tecnología de punta
+              </li>
+              <li><strong>Rediseño y Optimización Web</strong></li>
+              <li><strong>Auditoría de Marketing Digital</strong></li>
+              <li>
+                <strong>Estrategia de Contenido para Redes Sociales</strong>
+              </li>
+              <li><strong>Optimización de Canales Digitales</strong></li>
+              <li><strong>Consultoría en Marketing Digital</strong></li>
+            </ul>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              2.2 Enfoque de Servicio
+            </h3>
+            <p>
+              Nuestros servicios están diseñados para profesionales y
+              emprendedores que buscan construir una presencia digital
+              auténtica, estratégica y con propósito.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 3: Uso del Sitio Web -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            3. Uso del Sitio Web
+          </h2>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              3.1 Uso Permitido
+            </h3>
+            <p class="mb-3">Usted puede usar nuestro sitio web para:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Obtener información sobre nuestros servicios</li>
+              <li>Contactarnos a través del formulario de contacto</li>
+              <li>Acceder a contenido educativo y recursos gratuitos</li>
+            </ul>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              3.2 Uso Prohibido
+            </h3>
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+              <p class="font-semibold text-red-800 mb-2">
+                Está prohibido usar nuestro sitio web para:
+              </p>
+            </div>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Actividades ilegales o fraudulentas</li>
+              <li>Transmitir virus, malware o código malicioso</li>
+              <li>Intentar acceder a áreas restringidas</li>
+              <li>
+                Copiar, reproducir o distribuir nuestro contenido sin
+                autorización
+              </li>
+              <li>Hacer uso comercial no autorizado de nuestros materiales</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 4: Formulario de Contacto -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            4. Formulario de Contacto
+          </h2>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              4.1 Información Requerida
+            </h3>
+            <p class="mb-3">Nuestro formulario de contacto solicita:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Nombre completo</li>
+              <li>Dirección de correo electrónico</li>
+              <li>Número de teléfono</li>
+              <li>Mensaje o consulta</li>
+            </ul>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              4.2 Finalidad
+            </h3>
+            <p class="mb-3">
+              La información proporcionada será utilizada exclusivamente para:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Responder a sus consultas</li>
+              <li>Agendar reuniones o consultas</li>
+              <li>Proporcionar información sobre nuestros servicios</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 5: Propiedad Intelectual -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            5. Propiedad Intelectual
+          </h2>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              5.1 Contenido de Shine
+            </h3>
+            <p class="mb-3">
+              Todo el contenido presente en nuestro sitio web, incluyendo:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Textos, imágenes, gráficos y videos</li>
+              <li>Diseño y estructura del sitio</li>
+              <li>Logotipos y marcas</li>
+              <li>Metodologías y procesos</li>
+            </ul>
+            <p class="mt-3 font-semibold">
+              Es propiedad exclusiva de Shine y está protegido por las leyes de
+              propiedad intelectual de Colombia.
+            </p>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              5.2 Uso del Contenido
+            </h3>
+            <p>
+              El contenido puede ser visualizado para uso personal y no
+              comercial. Cualquier otro uso requiere autorización previa por
+              escrito.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 6: Política de Privacidad -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            6. Política de Privacidad
+          </h2>
+          <div class="bg-green-50 border-l-4 border-green-500 p-4">
+            <p>
+              El tratamiento de sus datos personales se rige por nuestra <a
+                href="/politicadeprivacidad"
+                class="font-semibold text-green-700 hover:text-green-800 underline"
+                >Política de Privacidad</a
+              >, que forma parte integral de estos Términos y cumple con la Ley
+              1581 de 2012 de Colombia.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 7: Servicios Profesionales -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            7. Servicios Profesionales
+          </h2>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              7.1 Contratación de Servicios
+            </h3>
+            <p class="mb-3">
+              Los servicios profesionales de Shine se formalizarán mediante:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Propuesta comercial específica</li>
+              <li>Contrato de prestación de servicios</li>
+              <li>Términos y condiciones particulares para cada proyecto</li>
+            </ul>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              7.2 No Garantías Implícitas
+            </h3>
+            <p>El sitio web se proporciona "tal como está".</p>
+          </div>
+        </section>
+
+        <!-- Mission Statement -->
+        <div
+          class="mt-12 p-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200"
+        >
+          <div class="text-center">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">
+              Misión de Shine
+            </h3>
+            <p class="text-lg text-gray-700 italic">
+              "Acompañamos a profesionales brillantes a transformar su presencia
+              digital sin sacrificar su esencia, guiados por principios eternos
+              de servicio y excelencia."
+            </p>
+          </div>
+        </div>
+
+        <!-- Legal compliance note -->
+        <div class="mt-12 p-6 bg-gray-100 rounded-lg">
+          <p class="text-sm text-gray-700 italic text-center">
+            Estos términos cumplen con la legislación colombiana aplicable y
+            reflejan nuestro compromiso con la transparencia y el servicio de
+            calidad.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
