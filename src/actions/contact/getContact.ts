@@ -30,59 +30,59 @@ export const getContact = defineAction({
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
-        <body style="margin: 0; padding: 0; font-family: 'Montserrat', Arial, sans-serif; background-color: oklch(0.9643 0.007 88.64);">
-          <div style="max-width: 600px; margin: 0 auto; background-color: oklch(0.997 0 0); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px oklch(0.3052 0 0 / 0.1);">
+        <body style="margin: 0; padding: 0; font-family: 'Montserrat', Arial, sans-serif; background-color: #F7F5F3;">
+          <div style="max-width: 600px; margin: 0 auto; background-color: #FEFEFE; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(77, 77, 77, 0.1);">
             
             <!-- Header -->
-            <div style="background: linear-gradient(135deg, oklch(0.8166 0.0659 291.7) 0%, oklch(0.3911 0.0534 7.52) 100%); padding: 32px 24px; text-align: center;">
-              <h1 style="margin: 0; color: oklch(0.997 0 0); font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
+            <div style="background: linear-gradient(135deg, #C5A8D8 0%, #665756 100%); padding: 32px 24px; text-align: center;">
+              <h1 style="margin: 0; color: #FEFEFE; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
                 ✨ Shine
               </h1>
-              <p style="margin: 8px 0 0 0; color: oklch(0.997 0 0 / 0.9); font-size: 16px; opacity: 0.9;">
+              <p style="margin: 8px 0 0 0; color: rgba(254, 254, 254, 0.9); font-size: 16px; opacity: 0.9;">
                 Nuevo mensaje de contacto
               </p>
             </div>
 
             <!-- Content -->
             <div style="padding: 32px 24px;">
-              <div style="background-color: oklch(0.9643 0.007 88.64); border-radius: 8px; padding: 24px; margin-bottom: 24px;">
-                <h2 style="margin: 0 0 16px 0; color: oklch(0.3052 0 0); font-size: 18px; font-weight: 600;">
+              <div style="background-color: #F7F5F3; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+                <h2 style="margin: 0 0 16px 0; color: #f2f2f2; font-size: 18px; font-weight: 600;">
                   📩 Detalles del contacto
                 </h2>
                 
                 <div style="margin-bottom: 16px;">
-                  <div style="display: inline-block; background-color: oklch(0.8166 0.0659 291.7); color: oklch(0.997 0 0); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
+                  <div style="display: inline-block; background-color: #C5A8D8; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
                     NOMBRE
                   </div>
-                  <p style="margin: 0; color: oklch(0.3052 0 0); font-size: 16px; font-weight: 500;">
+                  <p style="margin: 0; color: #f2f2f2; font-size: 16px; font-weight: 500;">
                     ${fullName}
                   </p>
                 </div>
 
                 <div style="margin-bottom: 16px;">
-                  <div style="display: inline-block; background-color: oklch(0.761 0.0408 138.18); color: oklch(0.997 0 0); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
+                  <div style="display: inline-block; background-color: #B4C4A7; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
                     EMAIL
                   </div>
-                  <p style="margin: 0; color: oklch(0.3052 0 0); font-size: 16px;">
-                    <a href="mailto:${email}" style="color: oklch(0.8166 0.0659 291.7); text-decoration: none;">${email}</a>
+                  <p style="margin: 0; color: #f2f2f2; font-size: 16px;">
+                    <a href="mailto:${email}" style="color: #C5A8D8; text-decoration: none;">${email}</a>
                   </p>
                 </div>
 
                 <div style="margin-bottom: 16px;">
-                  <div style="display: inline-block; background-color: oklch(0.8987 0.119 87.54); color: oklch(0.3052 0 0); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
+                  <div style="display: inline-block; background-color: #E6C975; color: #f2f2f2; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
                     TELÉFONO
                   </div>
-                  <p style="margin: 0; color: oklch(0.3052 0 0); font-size: 16px;">
-                    <a href="tel:${telefono}" style="color: oklch(0.8166 0.0659 291.7); text-decoration: none;">${telefono}</a>
+                  <p style="margin: 0; color: #f2f2f2; font-size: 16px;">
+                    <a href="tel:${telefono}" style="color: #C5A8D8; text-decoration: none;">${telefono}</a>
                   </p>
                 </div>
 
                 <div>
-                  <div style="display: inline-block; background-color: oklch(0.7638 0.0655 28.26); color: oklch(0.997 0 0); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 8px;">
+                  <div style="display: inline-block; background-color: #CFB5A3; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 8px;">
                     MENSAJE
                   </div>
-                  <div style="background-color: oklch(0.997 0 0); border: 2px solid oklch(0.8987 0.119 87.54); border-radius: 6px; padding: 16px;">
-                    <p style="margin: 0; color: oklch(0.3052 0 0); font-size: 15px; line-height: 1.6; white-space: pre-wrap;">
+                  <div style="background-color: #FEFEFE; border: 2px solid #E6C975; border-radius: 6px; padding: 16px;">
+                    <p style="margin: 0; color: #f2f2f2; font-size: 15px; line-height: 1.6; white-space: pre-wrap;">
                       ${inquietudes}
                     </p>
                   </div>
@@ -91,17 +91,17 @@ export const getContact = defineAction({
 
               <!-- CTA Button -->
               <div style="text-align: center; margin-bottom: 24px;">
-                <a href="mailto:${email}" style="display: inline-block; background: linear-gradient(135deg, oklch(0.8166 0.0659 291.7) 0%, oklch(0.3911 0.0534 7.52) 100%); color: oklch(0.997 0 0); padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 2px 4px oklch(0.8166 0.0659 291.7 / 0.3);">
+                <a href="mailto:${email}" style="display: inline-block; background: linear-gradient(135deg, #C5A8D8 0%, #665756 100%); color: #FEFEFE; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 2px 4px rgba(197, 168, 216, 0.3);">
                   Responder al cliente
                 </a>
               </div>
 
               <!-- Footer info -->
-              <div style="border-top: 2px solid oklch(0.8987 0.119 87.54); padding-top: 16px; text-align: center;">
-                <p style="margin: 0; color: oklch(0.5366 0.081 179.54); font-size: 13px;">
+              <div style="border-top: 2px solid #E6C975; padding-top: 16px; text-align: center;">
+                <p style="margin: 0; color: #5F7A7A; font-size: 13px;">
                   Este mensaje fue enviado desde el formulario de contacto de <strong>shineagencia.com</strong>
                 </p>
-                <p style="margin: 8px 0 0 0; color: oklch(0.5366 0.081 179.54 / 0.7); font-size: 12px;">
+                <p style="margin: 8px 0 0 0; color: rgba(95, 122, 122, 0.7); font-size: 12px;">
                   ${new Date().toLocaleDateString('es-CO', { 
                     year: 'numeric', 
                     month: 'long', 
