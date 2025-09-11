@@ -34,55 +34,55 @@ export const getContact = defineAction({
           <div style="max-width: 600px; margin: 0 auto; background-color: #FEFEFE; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(77, 77, 77, 0.1);">
             
             <!-- Header -->
-            <div style="background: linear-gradient(135deg, #C5A8D8 0%, #665756 100%); padding: 32px 24px; text-align: center;">
+            <div style="background: #a5b89f; padding: 32px 24px; text-align: center;">
               <h1 style="margin: 0; color: #FEFEFE; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
                 ✨ Shine
               </h1>
-              <p style="margin: 8px 0 0 0; color: rgba(254, 254, 254, 0.9); font-size: 16px; opacity: 0.9;">
+              <p style="margin: 8px 0 0 0; color: #FEFEFE; font-size: 16px; opacity: 0.9;">
                 Nuevo mensaje de contacto
               </p>
             </div>
 
             <!-- Content -->
             <div style="padding: 32px 24px;">
-              <div style="background-color: #F7F5F3; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
-                <h2 style="margin: 0 0 16px 0; color: #f2f2f2; font-size: 18px; font-weight: 600;">
+              <div style="background-color: #F2F2F2; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+                <h2 style="margin: 0 0 16px 0; color: #000; font-size: 18px; font-weight: 600;">
                   📩 Detalles del contacto
                 </h2>
                 
                 <div style="margin-bottom: 16px;">
-                  <div style="display: inline-block; background-color: #C5A8D8; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
+                  <div style="display: inline-block; background-color: #a5b89f; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
                     NOMBRE
                   </div>
-                  <p style="margin: 0; color: #f2f2f2; font-size: 16px; font-weight: 500;">
+                  <p style="margin: 0; color: #000; font-size: 16px; font-weight: 500;">
                     ${fullName}
                   </p>
                 </div>
 
                 <div style="margin-bottom: 16px;">
-                  <div style="display: inline-block; background-color: #B4C4A7; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
+                  <div style="display: inline-block; background-color: #a5b89f; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
                     EMAIL
                   </div>
-                  <p style="margin: 0; color: #f2f2f2; font-size: 16px;">
-                    <a href="mailto:${email}" style="color: #C5A8D8; text-decoration: none;">${email}</a>
+                  <p style="margin: 0; color: #000; font-size: 16px;">
+                    <a href="mailto:${email}" style="color: #000; text-decoration: none;">${email}</a>
                   </p>
                 </div>
 
                 <div style="margin-bottom: 16px;">
-                  <div style="display: inline-block; background-color: #E6C975; color: #f2f2f2; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
+                  <div style="display: inline-block; background-color: #a5b89f; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 4px;">
                     TELÉFONO
                   </div>
-                  <p style="margin: 0; color: #f2f2f2; font-size: 16px;">
-                    <a href="tel:${telefono}" style="color: #C5A8D8; text-decoration: none;">${telefono}</a>
+                  <p style="margin: 0; color: #000; font-size: 16px;">
+                    <a href="tel:${telefono}" style="color: #000; text-decoration: none;">${telefono}</a>
                   </p>
                 </div>
 
                 <div>
-                  <div style="display: inline-block; background-color: #CFB5A3; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 8px;">
+                  <div style="display: inline-block; background-color: #a5b89f; color: #FEFEFE; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 8px;">
                     MENSAJE
                   </div>
                   <div style="background-color: #FEFEFE; border: 2px solid #E6C975; border-radius: 6px; padding: 16px;">
-                    <p style="margin: 0; color: #f2f2f2; font-size: 15px; line-height: 1.6; white-space: pre-wrap;">
+                    <p style="margin: 0; color: #000; font-size: 15px; line-height: 1.6; white-space: pre-wrap;">
                       ${inquietudes}
                     </p>
                   </div>
@@ -91,7 +91,7 @@ export const getContact = defineAction({
 
               <!-- CTA Button -->
               <div style="text-align: center; margin-bottom: 24px;">
-                <a href="mailto:${email}" style="display: inline-block; background: linear-gradient(135deg, #C5A8D8 0%, #665756 100%); color: #FEFEFE; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 2px 4px rgba(197, 168, 216, 0.3);">
+                <a href="mailto:${email}" style="display: inline-block; background: linear-gradient(135deg, #a5b89f 0%, #2F 100%); color: #FEFEFE; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 2px 4px rgba(197, 168, 216, 0.3);">
                   Responder al cliente
                 </a>
               </div>

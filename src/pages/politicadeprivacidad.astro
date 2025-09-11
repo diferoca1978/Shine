@@ -1,0 +1,332 @@
+---
+import MainLayout from "@/layout/MainLayout.astro";
+import { generateBreadcrumbSchema } from "@/config/seo";
+import { COMPANY_INFO } from "@/config/seo";
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Inicio", url: "/" },
+  { name: "Política de Privacidad", url: "/politica-de-privacidad" },
+]);
+---
+
+<MainLayout
+  title="Política de Privacidad"
+  description="Conoce cómo Shine protege y maneja tu información personal. Transparencia total sobre el uso de datos y tus derechos de privacidad."
+  path="/politica-de-privacidad"
+  aditionalSchemas={[breadcrumbSchema]}
+>
+  <section class="min-h-screen py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          Política de Privacidad
+        </h1>
+        <p class="text-lg text-gray-600">
+          <strong
+            >Última actualización: {new Date().toLocaleDateString()}</strong
+          >
+        </p>
+      </header>
+
+      <!-- Main Content -->
+      <div class="prose prose-lg max-w-none">
+        <!-- Introduction -->
+        <div class="mb-8 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+          <p class="text-gray-700 leading-relaxed">
+            En <strong>Shine</strong> (en adelante "nosotros", "nuestra agencia"
+            o "la empresa"), respetamos su privacidad y nos comprometemos a proteger
+            la información personal que usted comparte con nosotros. Esta Política
+            de Privacidad describe cómo recopilamos, utilizamos, almacenamos y protegemos
+            su información personal cuando visita nuestro sitio web y utiliza nuestros
+            servicios.
+          </p>
+        </div>
+
+        <!-- Section 1: Información que Recopilamos -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            1. Información que Recopilamos
+          </h2>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              1.1 Información Personal
+            </h3>
+            <p class="mb-3">
+              Recopilamos únicamente la información que usted nos proporciona
+              voluntariamente a través de nuestro formulario de contacto:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li><strong>Nombre completo</strong></li>
+              <li><strong>Dirección de correo electrónico</strong></li>
+              <li><strong>Número de teléfono</strong></li>
+              <li><strong>Mensaje o consulta</strong></li>
+            </ul>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              1.2 Información Técnica
+            </h3>
+            <p class="mb-3">
+              Automáticamente recopilamos cierta información técnica cuando
+              visita nuestro sitio web:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Dirección IP</li>
+              <li>Tipo de navegador</li>
+              <li>Páginas visitadas</li>
+              <li>Fecha y hora de acceso</li>
+              <li>Información del dispositivo</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 2: Finalidad del Tratamiento -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            2. Finalidad del Tratamiento de Datos
+          </h2>
+          <p class="mb-3">
+            Utilizamos su información personal para los siguientes propósitos:
+          </p>
+          <ul class="list-disc list-inside space-y-2 ml-4">
+            <li>
+              <strong>Responder a sus consultas</strong> y solicitudes de información
+              sobre nuestros servicios
+            </li>
+            <li>
+              <strong>Contactarlo</strong> para agendar reuniones o consultas
+            </li>
+            <li>
+              <strong>Enviar información</strong> sobre nuestros servicios de marketing
+              digital y diseño web
+            </li>
+            <li>
+              <strong>Mejorar nuestros servicios</strong> y experiencia del usuario
+            </li>
+            <li>
+              <strong>Cumplir con obligaciones legales</strong> y regulatorias
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 3: Base Legal -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            3. Base Legal para el Tratamiento
+          </h2>
+          <p class="mb-3">El tratamiento de sus datos personales se basa en:</p>
+          <ul class="list-disc list-inside space-y-2 ml-4">
+            <li>
+              <strong>Consentimiento expreso:</strong> Al completar y enviar nuestro
+              formulario de contacto
+            </li>
+            <li>
+              <strong>Interés legítimo:</strong> Para responder a sus consultas y
+              ofrecer nuestros servicios
+            </li>
+            <li>
+              <strong>Ejecución contractual:</strong> Para la prestación de servicios
+              solicitados
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 4: Compartir Información -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            4. Compartir Información
+          </h2>
+          <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+            <p class="font-semibold text-red-800">
+              <strong>No vendemos, alquilamos ni compartimos</strong> su información
+              personal con terceros, excepto en las siguientes circunstancias:
+            </p>
+          </div>
+          <ul class="list-disc list-inside space-y-2 ml-4">
+            <li>Con su <strong>consentimiento expreso</strong></li>
+            <li>
+              Para <strong>cumplir con la ley</strong> o responder a procesos legales
+            </li>
+            <li>
+              Para <strong>proteger nuestros derechos</strong> o seguridad
+            </li>
+            <li>
+              Con <strong>proveedores de servicios</strong> que nos ayudan a operar
+              nuestro negocio (bajo estrictos acuerdos de confidencialidad)
+            </li>
+          </ul>
+        </section>
+
+        <!-- Section 5: Almacenamiento y Seguridad -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            5. Almacenamiento y Seguridad
+          </h2>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              5.1 Almacenamiento
+            </h3>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>
+                Sus datos se almacenan en servidores seguros ubicados en
+                Colombia
+              </li>
+              <li>
+                Mantenemos su información solo durante el tiempo necesario para
+                cumplir con los propósitos descritos
+              </li>
+            </ul>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+              5.2 Medidas de Seguridad
+            </h3>
+            <p class="mb-3">
+              Implementamos medidas técnicas y organizativas apropiadas para
+              proteger su información:
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+              <li>Cifrado de datos</li>
+              <li>Acceso restringido</li>
+              <li>Monitoreo de seguridad</li>
+              <li>Actualizaciones regulares de sistemas</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 6: Sus Derechos -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            6. Sus Derechos
+          </h2>
+          <p class="mb-3">
+            De acuerdo con la Ley 1581 de 2012 (Habeas Data) y el Decreto 1377
+            de 2013, usted tiene derecho a:
+          </p>
+          <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+            <li><strong>Acceder</strong> a su información personal</li>
+            <li><strong>Rectificar</strong> datos inexactos o incompletos</li>
+            <li>
+              <strong>Suprimir</strong> su información (derecho al olvido)
+            </li>
+            <li><strong>Revocar</strong> el consentimiento otorgado</li>
+            <li>
+              <strong>Presentar quejas</strong> ante la Superintendencia de Industria
+              y Comercio
+            </li>
+          </ul>
+
+          <div class="bg-green-50 border-l-4 border-green-500 p-4">
+            <p class="mb-2">
+              <strong
+                >Para ejercer estos derechos, puede contactarnos a través de:</strong
+              >
+            </p>
+            <ul class="list-disc list-inside space-y-1 ml-4">
+              <li>
+                <strong>Email: {COMPANY_INFO.email} </strong>
+                <!-- TODO(human) -->
+              </li>
+              <li>
+                <strong>Teléfono: {COMPANY_INFO.phone}</strong>
+                <!-- TODO(human) -->
+              </li>
+              <li><strong>Dirección:</strong> Bogotá, Colombia</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Additional sections continue with the same pattern... -->
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            7. Cookies y Tecnologías Similares
+          </h2>
+          <p>
+            Nuestro sitio web puede utilizar cookies para mejorar su experiencia
+            de navegación. Puede configurar su navegador para rechazar cookies,
+            aunque esto puede afectar la funcionalidad del sitio.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            8. Enlaces a Terceros
+          </h2>
+          <p>
+            Nuestro sitio web puede contener enlaces a sitios de terceros. No
+            somos responsables de las prácticas de privacidad de estos sitios
+            externos.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            9. Menores de Edad
+          </h2>
+          <p>
+            No recopilamos intencionalmente información personal de menores de
+            18 años. Si descubrimos que hemos recopilado información de un
+            menor, la eliminaremos inmediatamente.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            10. Transferencias Internacionales
+          </h2>
+          <p>
+            En caso de transferir datos fuera de Colombia, nos aseguraremos de
+            que existan garantías adecuadas de protección según la normativa
+            aplicable.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+          >
+            11. Cambios a esta Política
+          </h2>
+          <p>
+            Podemos actualizar esta Política de Privacidad ocasionalmente. Los
+            cambios serán publicados en esta página con una nueva fecha de
+            "última actualización".
+          </p>
+        </section>
+
+        <!-- Legal compliance note -->
+        <div class="mt-12 p-6 bg-gray-100 rounded-lg">
+          <p class="text-sm text-gray-700 italic text-center">
+            Esta política cumple with la Ley 1581 de 2012 (Ley de Protección de
+            Datos Personales de Colombia) y sus decretos reglamentarios.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
