@@ -7,8 +7,8 @@ export const COMPANY_INFO = {
   name: 'Shine',
   description: 'Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.',
   url: 'https://shine-web.com', // Replace with your actual domain
-  phone: '+57-XXX-XXX-XXXX', // Replace with actual phone
-  email: 'hola@shine-web.com', // Replace with actual email
+  phone: '+57-3162560670', // Replace with actual phone
+  email: 'rocio.shineagencia@gmail.com', // Replace with actual email
   address: {
     street: 'Bogotá, Colombia', // Replace with actual address
     city: 'Bogotá',
@@ -23,7 +23,8 @@ export const COMPANY_INFO = {
   socialMedia: {
     instagram: 'https://www.instagram.com/rochi.diego',
     linkedin: 'https://www.linkedin.com/company/shine-brilla-con-propósito',
-    tiktok: 'https://www.tiktok.com/@rochi..diego'
+    tiktok: 'https://www.tiktok.com/@rochi..diego',
+    whatsapp: 'https://api.whatsapp.com/send?phone=573162560670&text=Hola%20buen%20d%C3%ADa%2C%0AEstoy%20interesado%2Fa%20en%20sus%20servicios'
   }
 };
 
