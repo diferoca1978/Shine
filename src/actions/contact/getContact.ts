@@ -20,7 +20,7 @@ export const getContact = defineAction({
       console.log('Attempting to send email with Resend...');
       
       const { data, error } = await resend.emails.send({
-        from: 'Shine <shine@resend.dev>',
+        from: 'Shine <noreply@shineagencia.com>',
         to: ['diego.shineagencia@gmail.com'],
         subject: 'Nuevo contacto desde la web',
         html: `
