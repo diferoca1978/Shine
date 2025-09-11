@@ -6,6 +6,7 @@ import InstagramIcon from "@/assets/icons/instagram.svg";
 import LinkedInIcon from "@/assets/icons/linkedin.svg";
 import TikTokIcon from "@/assets/icons/tiktok.svg";
 import ArrowUpIcon from "@/assets/icons/arrowUp.svg";
+import WhatsAppIcon from "@/assets/icons/whatsapp.svg";
 import Button from "@/components/ui/button.astro";
 ---
 
@@ -21,7 +22,7 @@ import Button from "@/components/ui/button.astro";
           </a>
         </div>
         <h3 class="text-lg font-playfair font-medium text-softWhite mb-3">
-          Haz que tu luz brille y atraiga a quienes necesitan tu talento
+          Brilla con propósito
         </h3>
         <p
           class="prose text-softWhite/80 font-openSans leading-relaxed mb-6 max-w-md"
@@ -37,7 +38,7 @@ import Button from "@/components/ui/button.astro";
             href={COMPANY_INFO.socialMedia.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-smokyBlack/70 hover:text-accentGold transition-colors duration-300"
+            class="text-softWhite hover:text-accentGold transition-colors duration-300"
             aria-label="Instagram"
           >
             <InstagramIcon fill="currentColor" />
@@ -46,7 +47,7 @@ import Button from "@/components/ui/button.astro";
             href={COMPANY_INFO.socialMedia.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-smokyBlack/70 hover:text-accentGold transition-colors duration-300"
+            class="text-softWhite hover:text-accentGold transition-colors duration-300"
             aria-label="LinkedIn"
           >
             <LinkedInIcon />
@@ -55,10 +56,19 @@ import Button from "@/components/ui/button.astro";
             href={COMPANY_INFO.socialMedia.tiktok}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-smokyBlack/70 hover:text-accentGold transition-colors duration-300"
+            class="text-softWhite hover:text-accentGold transition-colors duration-300"
             aria-label="TikTok"
           >
             <TikTokIcon />
+          </a>
+          <a
+            href={COMPANY_INFO.socialMedia.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-softWhite hover:text-accentGold transition-colors duration-300"
+            aria-label="WhatsApp"
+          >
+            <WhatsAppIcon width="26" height="26" fill="currentColor" />
           </a>
         </div>
       </div>

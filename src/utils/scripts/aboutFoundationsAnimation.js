@@ -15,9 +15,10 @@ export const foundationsRotatorAnimation = () => {
   // Title animation with ScrollTrigger
   const titleTimeline = gsap.timeline({
     scrollTrigger: {
-      trigger: ".hero-foundations",
+      trigger: "#foundations",
       start: "top 80%",
       end: "bottom 20%",
+      markers: false,
       toggleActions: "play none none reverse",
     },
   });

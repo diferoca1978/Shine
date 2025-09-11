@@ -1,0 +1,65 @@
+---
+import Rocket from "@/assets/images/rocket.webp";
+import Star from "@/assets/icons/star40x40.svg";
+import { Image } from "astro:assets";
+---
+
+<section class="mission-section w-full mx-auto">
+  <div class="max-w-6xl mx-auto py-10 lg:py-20">
+    <h1
+      class="mission-title text-[min(10vw,72px)] opacity-0 text-center lg:text-left font-playfair font-bold text-smokyBlack tracking-tight"
+    >
+      Nuestra Misión
+    </h1>
+    <div
+      class="mission-container flex flex-col items-center justify-center lg:flex-row"
+    >
+      <div class="mission-text px-4 opacity-0">
+        <p
+          class="text-[min(7vw,24px)] text-center lg:text-left prose font-openSans text-smokyBlack mb-8 max-w-2xl mx-auto"
+        >
+          Acompañamos a profesionales brillantes a transformar su presencia
+          digital sin sacrificar su esencia, <span
+            class="font-bold italic text-deepplum"
+            >guiados por principios eternos</span
+          > de servicio y excelencia.
+        </p>
+      </div>
+      <div
+        class="mission-image relative items-center justify-center w-1/2 hidden lg:flex opacity-0"
+      >
+        <!-- Random positioned stars -->
+        <Star class="absolute top-16 left-20 animate-pulse" />
+        <Star class="absolute top-32 right-16 animate-pulse delay-300" />
+        <Star class="absolute bottom-24 left-12 animate-pulse delay-700" />
+        <Star class="absolute bottom-16 right-24 animate-pulse delay-500" />
+        <Star class="absolute bottom-32 right-12 animate-pulse delay-400" />
+        <Star class="absolute bottom-42 left-24 animate-pulse delay-400" />
+
+        <!-- Rocket -->
+        <Image
+          id="rocket"
+          src={Rocket}
+          alt="Rocket"
+          height={350}
+          width={350}
+          class="relative z-10"
+        />
+        <div id="rocket-path">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+            <path
+              style="fill: none;"
+              d="M 0 500 C 59.433 500 268.622 44.037 500 0"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { aboutMissionAnimation } from "@/utils/scripts/aboutMissionAnimation";
+
+  document.removeEventListener("DOMContentLoaded", aboutMissionAnimation);
+  document.addEventListener("DOMContentLoaded", aboutMissionAnimation);
+</script>
