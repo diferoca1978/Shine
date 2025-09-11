@@ -91,7 +91,7 @@ export const getContact = defineAction({
 
               <!-- CTA Button -->
               <div style="text-align: center; margin-bottom: 24px;">
-                <a href="mailto:${email}" style="display: inline-block; background: linear-gradient(135deg, #a5b89f 0%, #2F 100%); color: #FEFEFE; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 2px 4px rgba(197, 168, 216, 0.3);">
+                <a href="mailto:${email}" style="display: inline-block; background: #a5b89f; color: #FEFEFE; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 2px 4px rgba(197, 168, 216, 0.3);">
                   Responder al cliente
                 </a>
               </div>
@@ -125,7 +125,7 @@ export const getContact = defineAction({
         });
       }
       
-      console.log('Email sent successfully:', data);
+      
       return { ok: true, data }
       
     } catch (err) {
