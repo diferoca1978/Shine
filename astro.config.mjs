@@ -13,7 +13,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  site: 'https://shineagencia.netlify.app/',
+  site: 'https://shineagencia.com',
 
   image: {
     responsiveStyles: true,
