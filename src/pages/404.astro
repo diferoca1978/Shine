@@ -1,6 +1,8 @@
 ---
 import Button from "@/components/ui/button.astro";
 import MainLayout from "@/layout/MainLayout.astro";
+import { Image } from "astro:assets";
+import Logo from "@/assets/images/logoshinewhitecharacters.svg";
 ---
 
 <MainLayout>
@@ -1034,7 +1036,24 @@ import MainLayout from "@/layout/MainLayout.astro";
           </defs>
         </svg>
       </div>
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center space-y-6">
+        <Image
+          src={Logo}
+          alt="Shine Logo"
+          width={380}
+          height={140}
+          class="mb-4"
+        />
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center font-poppins"
+        >
+          Oops, página no encontrada
+        </h1>
+        <p
+          class="text-lg md:text-xl text-gray-300 text-center max-w-md font-poppins"
+        >
+          La página que buscas no existe o ha sido movida.
+        </p>
         <Button href="/" variant="secondary" className="font-poppins"
           >Volver al inicio</Button
         >
@@ -1048,7 +1067,6 @@ import MainLayout from "@/layout/MainLayout.astro";
     background-color: #2f1829;
     background: radial-gradient(at 50% -20%, #908392, #0d060e) fixed;
   }
-
 
   /* Shared animation styles */
   #handboy,
@@ -1095,7 +1113,6 @@ import MainLayout from "@/layout/MainLayout.astro";
       transform: rotate(-6deg);
     }
   }
-
 
   @keyframes zeroAnimation {
     0% {
