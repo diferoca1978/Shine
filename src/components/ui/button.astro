@@ -1,6 +1,5 @@
 ---
 import { twMerge } from "tailwind-merge";
-const { type, href, rel, target, variant, className, id } = Astro.props;
 
 export interface Props {
   type?: "button" | "submit" | "reset";
@@ -10,8 +9,11 @@ export interface Props {
   variant?: "primary" | "secondary" | "tertiary" | "optional";
   className?: string;
   id?: string;
+  animation?: boolean;
 }
 
+const { type, href, rel, target, variant, className, id, animation } =
+  Astro.props;
 /**
  * Variants: Defines predefined styling options for the 'variant' prop.
  * - primary: Gradient button from deepplum to lavender with white text and hover effects.
@@ -27,7 +29,7 @@ const variants = {
   tertiary:
     "flex items-center font-open-sans text-deepplum font-semibold font-poppins bg-softWhite border-2 border-deepplum hover:shadow-md hover:shadow-deepplum/60 hover:scale-105 hover:bg-sandRose hover:text-softWhite hover:border-softWhite transform transition-all ease-in-out duration-500",
   optional:
-    "flex items-center border border-smokyBlack/10 text-smokyBlack font-playfair font-medium font-poppins text-lg ",
+    "flex items-center border border-smokyBlack/20 text-smokyBlack font-poppins",
 };
 ---
 
@@ -51,7 +53,7 @@ Both types of elements share a similar structure and styling logic, with customi
       rel={rel ? rel : undefined}
       target={target ? target : undefined}
       class={twMerge(
-        `rounded-xl px-6 py-2.5 text-center focus:outline-hidden ${variants[variant ?? "primary"]} ${className || ""}`,
+        `rounded-xl px-6 py-2.5 text-center focus:outline-hidden ${variants[variant ?? "primary"]} ${animation ? "star-animate" : ""} ${className || ""}`,
       )}
     >
       <slot />
@@ -61,10 +63,55 @@ Both types of elements share a similar structure and styling logic, with customi
       id={id}
       type={type || "button"}
       class={twMerge(
-        `rounded-xl px-6 py-2.5 text-center focus:outline-hidden ${variants[variant ?? "primary"]} ${className || ""}`,
+        `rounded-xl px-6 py-2.5 text-center focus:outline-hidden ${variants[variant ?? "primary"]} ${animation ? "star-animate" : ""} ${className || ""}`,
       )}
     >
       <slot />
     </button>
   )
 }
+
+{animation && (
+  <script>
+    import { gsap } from "gsap";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const animatedButtons = document.querySelectorAll(".star-animate");
+
+      animatedButtons.forEach((button) => {
+        const stars = button.querySelectorAll(".star, svg, img");
+
+        if (stars.length > 0) {
+          button.addEventListener("mouseenter", () => {
+            gsap.to(stars, {
+              rotation: 360,
+              scale: 1.1,
+              duration: 0.6,
+              ease: "power2.out",
+              transformOrigin: "center center"
+            });
+          });
+
+          button.addEventListener("mouseleave", () => {
+            gsap.to(stars, {
+              rotation: 0,
+              scale: 1,
+              duration: 0.3,
+              ease: "power2.out",
+              transformOrigin: "center center"
+            });
+          });
+        }
+      });
+    });
+  </script>
+)}
+
+<style>
+  /* Ensure star elements are properly displayed for animation */
+  .star-animate .star,
+  .star-animate svg,
+  .star-animate img {
+    display: inline-block;
+  }
+</style>

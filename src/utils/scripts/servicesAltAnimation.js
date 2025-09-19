@@ -5,8 +5,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const servicesAltAnimation = () => {
   const services = gsap.utils.toArray(".service-card");
-  const stars = document.querySelectorAll(".star");
-  const btns = document.querySelectorAll(".btn");
   const mainTitle = document.querySelector(".main-title");
 
   // Set initial states
@@ -38,23 +36,4 @@ export const servicesAltAnimation = () => {
     ease: "power2.out"
   }, "-=0.3");
 
-  const tween = gsap.fromTo(stars, {
-    rotate: 0,
-    duration: 1,
-    ease: "power2.out",
-  }, {
-    rotate: 360,
-    duration: 1,
-    ease: "power2.out",
-    paused: true,
-  });
-
-  btns.forEach((btn) => {
-    btn.addEventListener("mouseenter", () => {
-      stars.forEach((star) => {
-        tween.restart();
-      });
-    });
-  });
-  
 };

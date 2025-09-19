@@ -54,13 +54,16 @@ const services = [
     <div class="flex flex-col items-center justify-center">
       <!-- Title -->
       <div class="flex flex-col items-center justify-center gap-4 mb-16">
-        <div
-          class="btn flex items-center gap-1 pl-4 pr-2 rounded-4xl border border-smokyBlack/10"
-        >
-          <h2 class="text-smokyBlack font-playfair font-medium text-lg">
+        <div class="btn flex items-center">
+          <Button
+            variant="optional"
+            href="/servicios"
+            className="py-1 px-4 rounded-4xl"
+            animation={true}
+          >
             Servicios
-          </h2>
-          <Star class="star w-9 h-9" />
+            <Star class="star w-9 h-9" />
+          </Button>
         </div>
         <h1
           class="main-title text-smokyBlack font-playfair font-medium text-4xl md:text-5xl lg:text-6xl"
@@ -88,7 +91,7 @@ const services = [
         }
       </div>
       <!-- End Services -->
-      <Button href="/servicios" variant="primary" className="btn py-2">
+      <Button href="/servicios" variant="primary" animation={true} className="btn py-2">
         Conoce nuestros servicios <StarIcon class="star w-8 h-8" />
       </Button>
     </div>

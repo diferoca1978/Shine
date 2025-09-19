@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import ProjectCardAlt from "@/components/ui/ProjectCardAlt.astro";
 import DiagonalArrow from "@/assets/icons/diagonalArrow.svg";
 import Star from "@/assets/icons/star40x40black.svg";
+import Button from "@/components/ui/button.astro";
 
 const allworks = await getCollection("works");
 const sortedWorks = allworks.sort(
@@ -15,13 +16,15 @@ const sortedWorks = allworks.sort(
 >
   <!-- Title - Mobile only -->
   <div class="flex flex-col items-center justify-center text-center gap-4 mb-8">
-    <div
-      class="btn flex items-center gap-1 pl-4 pr-2 rounded-4xl border border-smokyBlack/10"
-    >
-      <h2 class="text-smokyBlack font-playfair font-medium text-lg">
+    <div class="flex items-center">
+      <Button
+        variant="optional"
+        animation={true}
+        className="py-1 px-4 rounded-4xl"
+      >
         Clientes
-      </h2>
-      <Star class="star w-9 h-9" />
+        <Star class="star w-9 h-9" />
+      </Button>
     </div>
     <h1 class="text-smokyBlack font-playfair font-medium text-3xl md:hidden">
       Proyectos recientes

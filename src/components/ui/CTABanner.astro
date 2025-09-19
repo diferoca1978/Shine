@@ -78,6 +78,7 @@ const textColorVariants = {
         href={buttonHref}
         target={buttonTarget}
         variant={buttonVariant}
+        animation={true}
         className="inline-flex items-center gap-2 px-8 py-2 font-poppins"
       >
         {buttonText}
@@ -96,9 +97,7 @@ const textColorVariants = {
 
     document.addEventListener("DOMContentLoaded", () => {
       const ctaBanner = document.querySelector(".cta-banner[data-animated='true']");
-      const button = document.querySelector(".cta-button");
-      const star = document.querySelector(".star");
-      
+
       if (ctaBanner) {
         // Set initial states
         gsap.set(".cta-title", { y: 30, opacity: 0 });
@@ -133,8 +132,7 @@ const textColorVariants = {
           opacity: 1,
           duration: 0.8,
           ease: "power2.out"
-        }, "-=0.4")
-        
+        }, "-=0.4");
 
         // Add hover effect for the entire banner
         ctaBanner.addEventListener("mouseenter", () => {
@@ -152,24 +150,6 @@ const textColorVariants = {
             ease: "power2.out"
           });
         });
-
-        if (button) {
-          button.addEventListener("mouseenter", () => {
-            gsap.to(".star", {
-              rotate: 360,
-              duration: 0.8,
-              ease: "power2.out"
-            });
-          });
-
-          button.addEventListener("mouseleave", () => {
-            gsap.to(".star", {
-              rotate: 0,
-              duration: 0.8,
-              ease: "power2.out"
-            });
-          });
-        }
       }
     });
   </script>
@@ -185,8 +165,4 @@ const textColorVariants = {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
-  /* Button group hover effect */
-  .cta-button:hover svg {
-    transform: translateX(4px);
-  }
 </style>
