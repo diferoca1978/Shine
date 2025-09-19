@@ -7,6 +7,7 @@ import Optimizacion from "@/assets/images/optimizaciondecanales.webp";
 import Star from "@/assets/icons/star40x40black.svg";
 import ServiceCard from "@/components/ui/ServiceCard.astro";
 import { Image } from "astro:assets";
+import StarIcon from "@/assets/icons/star40x40.svg";
 import Button from "@/components/ui/button.astro";
 
 const services = [
@@ -26,7 +27,7 @@ const services = [
   // },
   {
     title: "Auditoría de Marketing Digital",
-    tags: ["Optimizacion", "Análisis", "Diagnóstico"],
+    tags: ["Optimización", "Análisis", "Diagnóstico"],
     image: Auditoria,
     alt: "auditoria marketing digital",
     description: "Descubre dónde mejorar desde el primer mes",
@@ -88,7 +89,7 @@ const services = [
       </div>
       <!-- End Services -->
       <Button href="/servicios" variant="primary" className="btn py-2">
-        Ver todos los servicios <Star class="star w-9 h-9 ml-2" />
+        Conoce nuestros servicios <StarIcon class="star w-8 h-8" />
       </Button>
     </div>
   </div>
