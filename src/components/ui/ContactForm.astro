@@ -1,6 +1,7 @@
 ---
 import { actions } from "astro:actions";
 import Button from "./button.astro";
+import Modal from "./Modal.astro";
 ---
 
 <div>
@@ -9,14 +10,6 @@ import Button from "./button.astro";
     class="space-y-10 contact-form"
     method="POST"
   >
-    <div
-      id="form-success"
-      class="hidden bg-salviaGreen border-2 border-accentGold p-4 rounded-2xl"
-    >
-      <p class="font-openSans text-softWhite font-semibold text-center text-xl">
-        ¡Hemos recibido tu mensaje, y muy pronto nos pondremos en contacto!
-      </p>
-    </div>
     <div class="relative">
       <input
         type="text"
@@ -120,16 +113,144 @@ import Button from "./button.astro";
       >
     </div>
   </form>
+
+  <!-- Success Modal -->
+  <Modal id="success-modal" />
 </div>
 
 <script>
   import { actions } from "astro:actions";
   import { isInputError } from "astro:actions";
+  import { gsap } from "gsap";
 
   const form = document.querySelector(".contact-form") as HTMLFormElement;
-  const formSuccess = document.getElementById("form-success") as HTMLDivElement;
   const btnSubmit = document.querySelector(".btn-submit") as HTMLButtonElement;
+  const modal = document.getElementById("success-modal") as HTMLElement;
+  const modalContent = modal?.querySelector(".modal-content") as HTMLElement;
+  const modalIcon = modal?.querySelector(".modal-icon") as HTMLElement;
 
+  let isModalOpen = false;
+  let previousFocusedElement: HTMLElement | null = null;
+  let autoCloseTimer: number | null = null;
+
+  // Modal Functions
+  function openModal() {
+    if (!modal || isModalOpen) return;
+
+    isModalOpen = true;
+    previousFocusedElement = document.activeElement as HTMLElement;
+
+    // Prevent body scroll
+    document.body.style.overflow = "hidden";
+
+    // Set initial state
+    gsap.set(modal, { display: "flex", opacity: 0 });
+    gsap.set(modalContent, { scale: 0.8, y: 30 });
+    gsap.set(modalIcon, { scale: 0, rotation: -180 });
+
+    // Animate modal entrance
+    const timeline = gsap.timeline();
+
+    timeline
+      .to(modal, {
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out",
+      })
+      .to(
+        modalContent,
+        {
+          scale: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "back.out(1.7)",
+        },
+        "-=0.2"
+      )
+      .to(
+        modalIcon,
+        {
+          scale: 1,
+          rotation: 0,
+          duration: 0.6,
+          ease: "elastic.out(1, 0.5)",
+        },
+        "-=0.3"
+      );
+
+    // Auto-close after 5 seconds
+    autoCloseTimer = window.setTimeout(() => {
+      closeModal();
+    }, 5000);
+  }
+
+  function closeModal() {
+    if (!modal || !isModalOpen) return;
+
+    // Clear auto-close timer if it exists
+    if (autoCloseTimer) {
+      clearTimeout(autoCloseTimer);
+      autoCloseTimer = null;
+    }
+
+    const timeline = gsap.timeline({
+      onComplete: () => {
+        isModalOpen = false;
+        document.body.style.overflow = "";
+        gsap.set(modal, { display: "none" });
+
+        // Return focus to previously focused element
+        if (previousFocusedElement) {
+          previousFocusedElement.focus();
+        }
+      },
+    });
+
+    timeline
+      .to(modalIcon, {
+        scale: 0,
+        rotation: 180,
+        duration: 0.3,
+        ease: "power2.in",
+      })
+      .to(
+        modalContent,
+        {
+          scale: 0.8,
+          y: 30,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        "-=0.2"
+      )
+      .to(
+        modal,
+        {
+          opacity: 0,
+          duration: 0.2,
+          ease: "power2.in",
+        },
+        "-=0.1"
+      );
+  }
+
+  // Modal Event Listeners
+  // Close on overlay click (click outside)
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isModalOpen) {
+      closeModal();
+    }
+  });
+
+
+  // Form Submission
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -142,12 +263,11 @@ import Button from "./button.astro";
     });
 
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
 
     btnSubmit.setAttribute("disabled", "disabled");
 
     const { error } = await actions.getContact(formData);
-    console.log(error);
+
     try {
       if (error && isInputError(error)) {
         console.log(error.fields);
@@ -159,16 +279,14 @@ import Button from "./button.astro";
         btnSubmit.removeAttribute("disabled");
         btnSubmit.textContent = "Enviar";
       } else {
-        // Success! Clear the form and show success message
+        // Success! Clear the form and show success modal
         form.reset();
-        formSuccess.classList.remove("hidden");
 
         // Dispatch custom event for rocket launch
         document.dispatchEvent(new CustomEvent("formSuccess"));
 
-        setTimeout(() => {
-          formSuccess.classList.add("hidden");
-        }, 4000);
+        // Open success modal
+        openModal();
       }
     } catch (error) {
       console.error(error);
