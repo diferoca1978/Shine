@@ -1,0 +1,60 @@
+---
+export interface Props {
+  id: string;
+  className?: string;
+}
+
+const { id, className } = Astro.props;
+---
+
+<div
+  id={id}
+  class="modal-overlay fixed inset-0 z-50 hidden items-center justify-center bg-smokyBlack/70 backdrop-blur-sm px-4 rounded-4xl"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby={`${id}-title`}
+  aria-describedby={`${id}-description`}
+>
+  <div
+    class={`modal-content relative w-full max-w-md bg-softWhite rounded-2xl shadow-2xl border-2 border-salviaGreen p-8 ${className || ""}`}
+    role="document"
+  >
+    <!-- Modal Icon -->
+    <div class="text-center mb-6">
+      <div
+        class="modal-icon mx-auto mb-4 flex items-center justify-center w-16 h-16 rounded-full bg-salviaGreen/20"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-8 w-8 text-salviaGreen"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <h2
+        id={`${id}-title`}
+        class="modal-title font-playfairBold text-3xl text-smokyBlack mb-2"
+      >
+        Mensaje Enviado
+      </h2>
+    </div>
+
+    <!-- Modal Body -->
+    <p
+      id={`${id}-description`}
+      class="modal-description font-openSans text-lg text-smokyBlack/80 text-center mb-6 leading-relaxed"
+    >
+      Hemos recibido tu mensaje y muy pronto nos pondremos en contacto contigo.
+    </p>
+
+    <!-- Slot for additional content -->
+    <slot />
+  </div>
+</div>
