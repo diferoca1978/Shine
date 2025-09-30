@@ -1,20 +1,22 @@
 ---
 import MainLayout from "@/layout/MainLayout.astro";
-import { generateBreadcrumbSchema } from "@/config/seo";
+import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
 import { COMPANY_INFO } from "@/config/seo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Inicio", url: "/" },
   { name: "Política de Privacidad", url: "/politica-de-privacidad" },
 ]);
+
+const privacySEO = generatePageSEO({
+  title: "Política de Privacidad - Shine",
+  description:
+    "Conoce cómo Shine protege y maneja tu información personal. Transparencia total sobre el uso de datos y tus derechos de privacidad.",
+  path: "/politica-de-privacidad",
+});
 ---
 
-<MainLayout
-  title="Política de Privacidad"
-  description="Conoce cómo Shine protege y maneja tu información personal. Transparencia total sobre el uso de datos y tus derechos de privacidad."
-  path="/politica-de-privacidad"
-  aditionalSchemas={[breadcrumbSchema]}
->
+<MainLayout seoProps={privacySEO} aditionalSchemas={[breadcrumbSchema]}>
   <section class="min-h-screen py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <!-- Header -->
