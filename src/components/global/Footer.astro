@@ -152,21 +152,23 @@ import Button from "@/components/ui/button.astro";
         <div
           class="text-softWhite/40 font-openSans text-sm text-center md:text-left"
         >
-          © {new Date().getFullYear()}
-          {COMPANY_INFO.name}. Todos los derechos reservados.
+          <small
+            >&copy; {new Date().getFullYear()}
+            {COMPANY_INFO.name}. Todos los derechos reservados.</small
+          >
         </div>
         <div class="flex space-x-6 text-sm font-openSans">
           <a
             href="/politicadeprivacidad"
             class="text-softWhite/40 hover:text-accentGold transition-colors duration-300"
           >
-            Política de Privacidad
+            <small>Política de Privacidad </small>
           </a>
           <a
             href="/terminosycondiciones"
             class="text-softWhite/40 hover:text-accentGold transition-colors duration-300"
           >
-            Términos y Condiciones
+            <small>Términos y Condiciones</small>
           </a>
         </div>
       </div>
