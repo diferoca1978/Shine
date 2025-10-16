@@ -1,9 +1,8 @@
 ---
-import MainLayout from "@/layout/MainLayout.astro";
+import MainLayout from "@/layouts/MainLayout.astro";
 import Services from "@/components/section/perPage/Services.astro";
 import HeroServices from "@/components/section/perPage/HeroServices.astro";
 import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
-import CTABanner from "@/components/ui/CTABanner.astro";
 
 const breadcrumbs = [
   { name: "Inicio", url: "/" },
@@ -23,12 +22,4 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 <MainLayout seoProps={serviciosSEO} aditionalSchemas={[breadcrumbSchema]}>
   <HeroServices />
   <Services />
-  <CTABanner
-    title="¡Transforma tu Negocio Digital!"
-    description="Comienza hoy a diseñar la estrategia digital que tu negocio merece."
-    buttonText="Contáctanos ahora"
-    buttonHref="/contacto"
-    variant="default"
-    className="max-w-6xl mx-auto"
-  />
 </MainLayout>

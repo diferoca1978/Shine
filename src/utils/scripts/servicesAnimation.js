@@ -118,32 +118,36 @@ function initServicesScrollAnimation() {
 
   // Set up each point
   points.forEach(function (elem, i) {
-    gsap.set(elem, { position: "absolute", top: 0 });
-    
+    gsap.set(elem, { position: "absolute", top: 0, pointerEvents: "none" });
+
     // Show image
-    tl.from(elem.querySelector("div"), { 
-      autoAlpha: 0,
-      duration: 0.25 
+    tl.from(elem.querySelector("div"), {
+      opacity: 0,
+      duration: 0.25
     }, i);
-    
-    // Show article content
-    tl.from(elem.querySelector("article"), { 
-      autoAlpha: 0, 
+
+    // Show article content and enable pointer events
+    tl.from(elem.querySelector("article"), {
+      opacity: 0,
       translateY: 100,
-      duration: 0.25 
+      duration: 0.25
     }, i);
+
+    tl.set(elem, { pointerEvents: "auto" }, i + 0.25);
 
     // Hide content for next service (except last one)
     if (i != points.length - 1) {
-      tl.to(elem.querySelector("article"), { 
-        autoAlpha: 0, 
+      tl.set(elem, { pointerEvents: "none" }, i + 0.75);
+
+      tl.to(elem.querySelector("article"), {
+        opacity: 0,
         translateY: -100,
-        duration: 0.25 
+        duration: 0.25
       }, i + 0.75);
-      
-      tl.to(elem.querySelector("div"), { 
-        autoAlpha: 0,
-        duration: 0.25 
+
+      tl.to(elem.querySelector("div"), {
+        opacity: 0,
+        duration: 0.25
       }, i + 0.75);
     }
   });

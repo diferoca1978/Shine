@@ -6,7 +6,7 @@ export interface Props {
   href?: string;
   rel?: string;
   target?: "_self" | "_blank" | "_parent" | "_top";
-  variant?: "primary" | "secondary" | "tertiary" | "optional";
+  variant?: "primary" | "secondary" | "tertiary" | "optional1" | "optional2";
   className?: string;
   id?: string;
   animation?: boolean;
@@ -28,8 +28,10 @@ const variants = {
     "flex items-center text-deepplum font-semibold font-poppins bg-softWhite border-2 border-salviaGreen hover:shadow-md hover:shadow-accentGreen/60 hover:scale-105 hover:bg-accentGold hover:text-deepplum transform transition-all ease-in-out duration-500",
   tertiary:
     "flex items-center font-open-sans text-deepplum font-semibold font-poppins bg-softWhite border-2 border-deepplum hover:shadow-md hover:shadow-deepplum/60 hover:scale-105 hover:bg-sandRose hover:text-softWhite hover:border-softWhite transform transition-all ease-in-out duration-500",
-  optional:
-    "flex items-center border border-smokyBlack/20 text-smokyBlack font-poppins",
+  optional1:
+    "flex items-center gap-2 px-6 py-3 bg-accentGold text-smokyBlack font-poppins font-semibold rounded-full hover:bg-accentGold/90 transition-all duration-300 hover:gap-3",
+  optional2: 
+    "flex items-center text-smokyBlack font-medium font-poppins bg-softWhite border border-smokyBlack"
 };
 ---
 
