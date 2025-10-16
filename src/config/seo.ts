@@ -1,4 +1,6 @@
 import type { SEOProps } from 'astro-seo';
+import type { Service } from './services';
+import { services } from './services';
 
 export type JSONLDSchema = Record<string, any>;
 
@@ -130,75 +132,20 @@ export const ORGANIZATION_SCHEMA = {
     '@type': 'OfferCatalog',
     name: 'Servicios de Transformación Digital Auténtica',
     description: 'Servicios especializados en diseño web estratégico y marketing digital para profesionales y empresas que buscan crecer con autenticidad',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Diseño Web Estratégico',
-          description: 'Creamos sitios web estratégicos centrados en el usuario, con flujos claros y optimizados para buscadores y conversiones',
-          serviceType: 'Web Design Service',
-          category: 'Diseño y Desarrollo Web',
-          serviceOutput: 'Sitio web profesional optimizado para conversiones',
-          benefits: [
-            'Experiencia de usuario intuitiva',
-            'Arquitectura de información clara',
-            'SEO técnico avanzado',
-            'Diseño profesional y coherente',
-            'Tecnología Astro Framework'
-          ]
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Rediseño y Optimización Web',
-          description: 'Rediseñamos y optimizamos tu web para ofrecer una experiencia de navegación actual, profesional y efectiva',
-          serviceType: 'Web Redesign Service',
-          category: 'Diseño y Desarrollo Web',
-          serviceOutput: 'Sitio web renovado con mejor rendimiento y conversiones'
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Auditoría de Marketing Digital',
-          description: 'Analizamos tus canales digitales y entregamos un plan de acción claro para optimizar resultados inmediatos',
-          serviceType: 'Digital Marketing Audit',
-          category: 'Marketing Digital',
-          serviceOutput: 'Informe detallado con plan de acción específico'
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Estrategia de Contenido para Redes Sociales',
-          description: 'Diseñamos un plan estratégico adaptado a tu voz, para generar autoridad sin sacrificar tu esencia',
-          serviceType: 'Social Media Strategy',
-          category: 'Marketing Digital',
-          serviceOutput: 'Plan estratégico de contenido personalizado',
-          benefits: [
-            'Calendario editorial adaptado',
-            'Mensajes alineados a tus valores',
-            'Mayor conexión emocional'
-          ]
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Optimización de Canales Digitales',
-          description: 'Optimizamos perfiles en Google Mi Negocio, WhatsApp y más, para fortalecer tu reputación online y facilitar la conversión',
-          serviceType: 'Digital Channel Optimization',
-          category: 'Marketing Digital',
-          serviceOutput: 'Perfiles digitales optimizados para conversión'
-        }
-      }
-    ]
+    itemListElement: services.map( service => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#servicio`,
+        name: service.title,
+        description: service.content,
+        serviceType: service.title,
+        category: service.tags?.[0] || 'Marketing Digital y Diseño Web',
+        url:`${COMPANY_INFO.url}/servicios/${service.slug}`,
+        keywords: service.seoKeywords.join(', '),
+        ...(service.benefits && service.benefits.length > 0 && {benefits: service.benefits.join(', ')}),             
+      } 
+    }))
   },
   slogan: 'No necesitas gritar para ser escuchado',
   brand: {
@@ -358,6 +305,97 @@ export function generatePageSEO(options: {
       title: fullTitle,
       description: options.description,
       image: COMPANY_INFO.url + (options.image || COMPANY_INFO.image)
+    }
+  };
+}
+
+export function generateServiceSEO(service: Service): SEOProps {
+  const serviceUrl = `${COMPANY_INFO.url}/servicios/${service.slug}`;
+
+  const pageTitle = `${service.focusKeyword} | ${service.title} | ${COMPANY_INFO.name}`;
+
+  const keywordsString = service.keywords.join(', ');
+
+  return {
+    title: pageTitle,
+    description: service.seoDescription,
+    canonical: serviceUrl,
+    noindex: false,
+    openGraph: {
+      basic: {
+        title: pageTitle,
+        type: 'website',
+        image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image),
+        url: serviceUrl
+      },
+      optional: {
+        description: service.seoDescription,
+        siteName: COMPANY_INFO.name,
+        locale: 'es_CO'
+      }
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@shine_web',
+      creator: '@shine_web',
+      title: pageTitle,
+      description: service.seoDescription,
+      image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image)
+    },
+
+    extend: {
+      meta: [
+        { name: 'keywords', content: keywordsString },
+        { name: 'author', content: COMPANY_INFO.name },
+        { name: 'robots', content: 'index, follow' },
+        { httpEquiv: 'Content-Language', content: 'es-CO' }
+      ]
+    }
+
+  }
+}
+
+export function generateServiceSchema(service: Service): JSONLDSchema {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+    name: service.title,
+    description: service.content,
+    serviceType: service.title,
+    provider: {
+      '@id': COMPANY_INFO.url + '#organizacion'
+    },
+
+    areaServed: {
+      '@type': 'Country',
+      name: 'Colombia'
+    },
+
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      serviceUrl: `${COMPANY_INFO.url}/servicios/${service.slug}`,
+      servicePhone: COMPANY_INFO.phone,
+      serviceLocation: {
+        '@type': 'Place',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: COMPANY_INFO.address.city,
+          addressCountry: 'CO'
+        }
+      }
+    },
+
+    keywords: service.keywords.join(', '),
+
+    ...(service.benefits && {
+      serviceOutput: service.benefits.join(', ')
+    }),
+
+    isPartOf: {
+      '@type': 'WebPage',
+      '@id': COMPANY_INFO.url + '/servicios',
+      name: 'Servicios'
     }
   };
 }
