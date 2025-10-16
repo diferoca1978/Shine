@@ -20,10 +20,10 @@ import { Image } from "astro:assets";
     </h2>
   </div>
   <div
-    class="flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto gap-8"
+    class="flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto gap-4 md:gap-8"
   >
     <div class="md:w-1/2">
-      <div class="relative items-center justify-center hidden lg:flex">
+      <div class="relative items-center justify-center hidden md:flex">
         <!-- Random positioned stars -->
         <Star class="absolute top-18 left-20 animate-pulse" />
         <Star class="absolute top-32 right-16 animate-pulse delay-300" />
@@ -43,7 +43,7 @@ import { Image } from "astro:assets";
         />
       </div>
     </div>
-    <div id="contact-form" class="md:w-1/2 opacity-0">
+    <div id="contact-form" class="md:w-1/2 opacity-0 p-4 lg:p-0">
       <ContactForm />
     </div>
   </div>

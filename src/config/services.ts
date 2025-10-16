@@ -49,13 +49,13 @@ export const services: Service[] = [
     content: "Tu página web como tu mejor vendedor. Construimos activos digitales con tecnología Astro, hasta un 40% más rápidos, seguros y eficientes. Ten una página web que hable por tu marca 24/7.",
     benefits: [
       "Páginas hasta 40% más rápidas que la competencia",
-      "Tecnología moderna con Astro para máxima eficiencia",
+      "Tecnología moderna con Astro framework para máxima eficiencia",
       "Diseño que convierte visitantes en clientes",
       "Sitio web que trabaja por tu marca las 24 horas"
     ],
     image: WebDesign,
     alt: "Diseño y Optimización Web Estratégica con Astro - Shine Agencia",
-    seoDescription: "Construimos páginas web con Astro, hasta 40% más rápidas, seguras y eficientes. Tu sitio web como el mejor vendedor de tu marca 24/7.",
+    seoDescription: "Construimos páginas web con Astro framework, hasta 40% más rápidas, seguras y eficientes. Tu sitio web como el mejor vendedor de tu marca 24/7.",
     seoKeywords: ["diseño web", "desarrollo web astro", "optimización web", "páginas web rápidas", "diseño web colombia"],
     focusKeyword: "diseño web"
   },
@@ -65,7 +65,7 @@ export const services: Service[] = [
     subtitle: "Claridad antes de la acción",
     tags: ["Auditoría Digital", "ROI", "Análisis", "Estrategia"],
     problem: "Inviertes en marketing digital pero no ves resultados claros. No sabes qué está fallando ni por dónde empezar a optimizar.",
-    content: "¿No sabes por qué tu marketing no funciona? Realizamos un análisis profundo de tu presencia digital actual para identificar las fugas, oportunidades clave y la hoja de ruta precisa para maximizar tu impacto y el ROI. Claridad antes de la acción.",
+    content: "¿No sabes por qué tu marketing no funciona? Realizamos un análisis profundo de tu presencia digital actual para identificar las fugas, oportunidades clave y la hoja de ruta precisa para maximizar tu impacto y el ROI (Return on Investment.). Claridad antes de la acción.",
     benefits: [
       "Identificación precisa de fugas y oportunidades perdidas",
       "Diagnóstico completo de tu presencia digital actual",
