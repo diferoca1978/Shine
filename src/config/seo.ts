@@ -314,7 +314,7 @@ export function generateServiceSEO(service: Service): SEOProps {
 
   const pageTitle = `${service.focusKeyword} | ${service.title} | ${COMPANY_INFO.name}`;
 
-  const keywordsString = service.keywords.join(', ');
+  const keywordsString = service.seoKeywords.join(', ');
 
   return {
     title: pageTitle,
@@ -386,7 +386,7 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
       }
     },
 
-    keywords: service.keywords.join(', '),
+    keywords: service.seoKeywords.join(', '),
 
     ...(service.benefits && {
       serviceOutput: service.benefits.join(', ')

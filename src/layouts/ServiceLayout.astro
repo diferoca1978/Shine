@@ -78,8 +78,8 @@ const schemas = [breadcrumbSchema, schema];
             alt={service.alt}
             width={600}
             height={600}
-            class="w-full h-auto rounded-lg shadow-2xl"
-            loading="eager"
+            class="w-full h-auto"
+            priority
           />
         </div>
 
@@ -89,7 +89,7 @@ const schemas = [breadcrumbSchema, schema];
           {
             service.problem && (
               <div class="mb-6">
-                <p class="text-softLavender font-openSans font-medium text-xl italic">
+                <p class="text-deepplum font-openSans font-medium text-xl italic">
                   {service.problem}
                 </p>
               </div>
@@ -130,14 +130,4 @@ const schemas = [breadcrumbSchema, schema];
 
   <!-- Custom Content Slot - Allows page-specific sections -->
   <slot />
-
-  <!-- Call-to-Action Banner -->
-  <CTABanner
-    title="¿Listo para transformar tu presencia digital?"
-    description={`Agenda una consulta y descubre cómo ${service.title.toLowerCase()} puede impulsar tu negocio.`}
-    buttonText="Agenda tu consulta"
-    buttonHref="/contacto"
-    variant="default"
-    className="max-w-6xl mx-auto"
-  />
 </MainLayout>
