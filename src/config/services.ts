@@ -14,39 +14,59 @@ export interface Service {
     benefits: string[];
     image: ImageMetadata;
     alt: string;
-    // SEO fileds
+    // SEO fields
     seoDescription: string;
-    seoKeywords: string[];
+    seoKeywords: string[]; // Primary keywords for meta tags
+    secondaryKeywords?: string[]; // Secondary/long-tail keywords for content optimization
     focusKeyword: string;
 }
 
 export const services: Service[] = [
   {
     slug: "marca-personal",
-    title: "Estrategia de Marca Personal",
-    subtitle: "Lidera tu sector con autoridad digital",
-    tags: ["Marca Personal", "Contenidos", "Autoridad Digital"],
-    problem: "Muchos profesionales tienen experiencia valiosa pero luchan por destacar en el ruido digital y atraer clientes de alto valor.",
-    content: "Convertimos tu experiencia y tu historia en autoridad digital. Diseñamos la estrategia de contenidos y marca personal para que lideres tu sector, atrayendo clientes de alto valor que realmente conecten con tu propósito",
+    title: "Estrategia de Marca Personal y Contenidos",
+    subtitle: "Transforme su experiencia en autoridad y visibilidad.",
+    tags: ["Marca Personal", "Contenidos B2B", "LinkedIn", "Leads Cualificados"],
+    problem: "La frustración de un líder brillante, pero invisible.",
+    content: "Para líderes que tienen un valor inmenso, pero luchan por comunicarlo. Desarrollamos su propósito, posicionamiento y un plan de contenidos estratégico para que atraiga clientes ideales y se establezca como el referente de su industria.",
     benefits: [
-      "Posicionamiento como líder de opinión en tu sector",
-      "Atracción de clientes de alto valor que conectan con tu propósito",
-      "Estrategia de contenidos personalizada y sostenible",
-      "Mayor visibilidad y reconocimiento profesional"
+      "Propósito y Posicionamiento Único: Descubre tu voz inigualable.",
+      "Plan de Contenidos Estratégico: Atrae, nutre y convierte en redes y blog.",
+      "Narrativa (Storytelling) Potente: Genera conexión y confianza.",
+      "Audiencia en Clientes: Diseñamos CTAs irresistibles para leads cualificados."
     ],
     image: SocialContent,
-    alt: "Estrategia de Marca Personal - Shine Agencia",
-    seoDescription: "Diseñamos estrategias de marca personal y contenidos para que lideres tu sector y atraigas clientes de alto valor que conecten con tu propósito.",
-    seoKeywords: ["marca personal", "estrategia de contenidos", "autoridad digital", "personal branding", "liderazgo digital"],
-    focusKeyword: "marca personal"
+    alt: "Estrategia de Marca Personal y contenidos - Shine Agencia",
+    seoDescription: "Descubre cómo construir una marca personal que atrae clientes ideales. Estrategias de contenido para fundadores y emprendedores",
+    seoKeywords: [
+      "estrategia de marca personal",
+      "estrategia de contenidos B2B",
+      "consultoría de marketing en Bogotá",
+      "consultoría de marca personal",
+      "posicionamiento de autoridad",
+      "generación de leads con contenido",
+      "marca personal para fundadores"
+    ],
+    secondaryKeywords: [
+      "cómo crear una marca personal",
+      "servicios de estrategia de contenidos",
+      "posicionamiento en LinkedIn para empresas",
+      "aumentar visibilidad online",
+      "marketing de contenidos para emprendedores",
+      "convertirse en referente del sector",
+      "agencia de marca personal Colombia",
+      "atraer clientes de alto valor",
+      "crear contenido que vende"
+    ],
+    focusKeyword: "estrategia de marca personal y contenidos"
   },
   {
     slug: "diseno-web-estrategico",
-    title: "Diseño y Optimización Web Estratégica",
-    subtitle: "Tu página web como tu mejor vendedor",
-    tags: ["Diseño Web", "Astro", "Performance", "Optimización"],
+    title: "Diseño Web de Alto Rendimiento",
+    subtitle: "Construya su activo digital desde cero.",
+    tags: ["Astro Framework", "Alto Rendimiento", "Web Profesional", "SEO"],
     problem: "La mayoría de las páginas web son lentas, difíciles de mantener y no convierten visitantes en clientes de manera efectiva.",
-    content: "Tu página web como tu mejor vendedor. Construimos activos digitales con tecnología Astro, hasta un 40% más rápidos, seguros y eficientes. Ten una página web que hable por tu marca 24/7.",
+    content: "Para quienes buscan una presencia digital impecable desde el primer día. Creamos sitios web ultrarrápidos, seguros y diseñados para convertir con la tecnología Astro, asegurando una base sólida para su crecimiento online.",
     benefits: [
       "Páginas hasta 40% más rápidas que la competencia",
       "Tecnología moderna con Astro framework para máxima eficiencia",
@@ -54,29 +74,64 @@ export const services: Service[] = [
       "Sitio web que trabaja por tu marca las 24 horas"
     ],
     image: WebDesign,
-    alt: "Diseño y Optimización Web Estratégica con Astro - Shine Agencia",
-    seoDescription: "Construimos páginas web con Astro framework, hasta 40% más rápidas, seguras y eficientes. Tu sitio web como el mejor vendedor de tu marca 24/7.",
-    seoKeywords: ["diseño web", "desarrollo web astro", "optimización web", "páginas web rápidas", "diseño web colombia"],
-    focusKeyword: "diseño web"
+    alt: "Diseño y Optimización Web Estratégica con Astro framework - Shine Agencia",
+    seoDescription: "Creamos sitios web ultrarrápidos, seguros y optimizados con Astro framework para líderes que necesitan una presencia digital sólida desde cero.",
+    seoKeywords: [
+      "diseño web con Astro framework Colombia",
+      "desarrollo web de alto rendimiento",
+      "agencia de diseño web Bogotá",
+      "crear página web profesional desde cero",
+      "páginas web rápidas para empresas",
+      "desarrollo web seguro para negocios"
+    ],
+    secondaryKeywords: [
+      "alternativas a WordPress en Colombia",
+      "cuánto cuesta una página web en Astro",
+      "beneficios de Astro para SEO",
+      "sitios web estáticos para empresas",
+      "mejorar velocidad de carga de mi nueva web",
+      "diseño web para startups en Colombia"
+    ],
+    focusKeyword: "desarrollo web de alto rendimiento"
   },
   {
     slug: "auditoria-marketing-digital",
-    title: "Auditoría de Marketing Digital Estratégica",
-    subtitle: "Claridad antes de la acción",
-    tags: ["Auditoría Digital", "ROI", "Análisis", "Estrategia"],
+    title: "Optimización y Rediseño Estratégico",
+    subtitle: "Active el potencial oculto de su sitio web actual",
+    tags: ["Rediseño Web", "Optimización UX", "Web que No Vende", "Conversiones"],
     problem: "Inviertes en marketing digital pero no ves resultados claros. No sabes qué está fallando ni por dónde empezar a optimizar.",
-    content: "¿No sabes por qué tu marketing no funciona? Realizamos un análisis profundo de tu presencia digital actual para identificar las fugas, oportunidades clave y la hoja de ruta precisa para maximizar tu impacto y el ROI (Return on Investment.). Claridad antes de la acción.",
+    content: "Si ya tiene una web, pero no genera los resultados esperados, nosotros la transformamos. Optimizamos su diseño, velocidad, SEO y conversión para que su inversión digital finalmente trabaje para su negocio.",
     benefits: [
-      "Identificación precisa de fugas y oportunidades perdidas",
-      "Diagnóstico completo de tu presencia digital actual",
-      "Hoja de ruta clara para maximizar ROI",
-      "Decisiones basadas en datos, no en suposiciones"
+      "Auditoría Profunda: Identificamos puntos débiles y oportunidades.",
+      "Estrategia de Rediseño: Planificamos la mejora de UX, UI y contenido.",
+      "Implementación Técnica: Optimizamos código, velocidad y seguridad (usando Astro/stack si aplica).",
+      "Optimización SEO y Contenidos: Ajustamos para mayor visibilidad y relevancia.",
+      "Pruebas y Lanzamiento: Aseguramos un rendimiento impecable y medimos los resultados."
     ],
     image: Audit,
-    alt: "Auditoría de Marketing Digital Estratégica - Shine Agencia",
-    seoDescription: "Análisis profundo de tu presencia digital para identificar fugas, oportunidades clave y la hoja de ruta precisa para maximizar tu impacto y ROI.",
-    seoKeywords: ["auditoría digital", "análisis marketing digital", "auditoría seo", "consultoría digital", "diagnóstico digital"],
-    focusKeyword: "auditoría digital"
+    alt: "Optimización y Rediseño Estratégico Web - Shine Agencia",
+    seoDescription: "Análisis profundo para mejora, optimización, rediseño y activación de sitios web existentes",
+    seoKeywords: [
+      "optimización web estratégica",
+      "rediseño web estratégico",
+      "auditoría web estratégica",
+      "mejorar rendimiento web",
+      "web que no vende",
+      "transformar web existente"
+    ],
+    secondaryKeywords: [
+      "cómo optimizar mi página web",
+      "servicio de rediseño web para empresas",
+      "aumentar conversiones web",
+      "consultoría SEO web existente",
+      "hacer mi web más rápida",
+      "web lenta solución",
+      "web corporativa sin resultados",
+      "actualizar diseño web",
+      "agencia de optimización web",
+      "optimización de la experiencia de usuario (UX)"
+    ],
+    focusKeyword: "optimización web estratégica"
   }
 ]
 
