@@ -1,0 +1,22 @@
+---
+import ServiceLayout from "@/layouts/ServiceLayout.astro";
+import { getServiceBySlug } from "@/config/services";
+import CTABanner from "@/components/ui/CTABanner.astro";
+
+const service = getServiceBySlug("marca-personal");
+
+if (!service) {
+  return Astro.redirect("/404", "301");
+}
+---
+
+<ServiceLayout service={service}>
+  <CTABanner
+    title="¿Listo para transformar tu presencia digital?"
+    description={`Agenda una consulta y descubre cómo una buena ${service.title.toLowerCase()} puede impulsar tu negocio.`}
+    buttonText="Agenda tu consulta"
+    buttonHref="/contacto"
+    variant="default"
+    className="max-w-6xl mx-auto"
+  />
+</ServiceLayout>
