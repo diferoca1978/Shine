@@ -1,14 +1,26 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import Hero from "@/components/section/landing/Hero.astro";
+import GlobalHero from "@/components/global/GlobalHero.astro";
 import Solution from "@/components/section/landing/Solution.astro";
 import ServicesLanding from "@/components/section/landing/ServicesLanding.astro";
 import LatestProjectsAlt from "@/components/section/landing/LatestProjectsAlt.astro";
 import CTABanner from "@/components/ui/CTABanner.astro";
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
 ---
 
 <MainLayout>
-    <Hero />
+    <GlobalHero
+        titleLine1=" Haz que tu luz brille"
+        subtitleBefore="Atrae a quienes necesitan tu"
+        subtitleHighlight="talento"
+        descriptionLine1="Construimos tu presencia digital con estrategia y"
+        descriptionLine2="propósito"
+    >
+        <Button slot="cta" href="/servicios" variant="primary" animation={true}>
+            Conoce nuestros servicios <StarIcon />
+        </Button>
+    </GlobalHero>
     <Solution />
     <ServicesLanding />
     <LatestProjectsAlt />

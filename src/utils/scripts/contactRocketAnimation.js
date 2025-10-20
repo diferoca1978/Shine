@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export const contactRocketAnimation = () => {
   const rocket = document.querySelector("#contact-rocket");
@@ -12,7 +13,15 @@ export const contactRocketAnimation = () => {
   gsap.set(rocket, {x: -100, opacity: 0 });
   gsap.set(contactForm, {x: 100, opacity: 0 });
 
-  const tl = gsap.timeline();
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".contact-section",
+      start: "top 50%",
+      end: "bottom 50%",
+      toggleActions: "play none none reverse",
+      markers: false,
+    },
+  });
 
   tl.to(rocket, {
     x: 0,

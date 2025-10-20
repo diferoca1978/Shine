@@ -1,8 +1,10 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import Services from "@/components/section/perPage/Services.astro";
-import HeroServices from "@/components/section/perPage/HeroServices.astro";
+import GlobalHero from "@/components/global/GlobalHero.astro";
 import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
 
 const breadcrumbs = [
   { name: "Inicio", url: "/" },
@@ -20,6 +22,13 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 ---
 
 <MainLayout seoProps={serviciosSEO} aditionalSchemas={[breadcrumbSchema]}>
-  <HeroServices />
+  <GlobalHero
+    titleLine1="Su visión,"
+    titleLine2="Nuestra estrategia."
+    subtitleBefore="Convertimos sus desafíos de"
+    subtitleHighlight="marketing y tecnología"
+    subtitleAfter="en oportunidades de crecimiento."
+  />
+
   <Services />
 </MainLayout>
