@@ -1,7 +1,8 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
-import HerocontactForm from "@/components/section/perPage/HerocontactForm.astro";
+import ContactForm from "@/components/section/perPage/ContactForm.astro";
+import GlobalHero from "@/components/global/GlobalHero.astro";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Inicio", url: "/" },
@@ -17,5 +18,10 @@ const contactoSEO = generatePageSEO({
 ---
 
 <MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema]}>
-    <HerocontactForm />
+    <GlobalHero
+        titleLine1="Contacto"
+        subtitleBefore="Cuéntanos tu idea, solicita tu sesión de diagnóstico y da el primer paso"
+        subtitleHighlight="hacia tu visibilidad digital."
+    />
+    <ContactForm />
 </MainLayout>

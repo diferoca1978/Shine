@@ -2,6 +2,7 @@
 import ServiceLayout from "@/layouts/ServiceLayout.astro";
 import { getServiceBySlug } from "@/config/services";
 import CTABanner from "@/components/ui/CTABanner.astro";
+import GlobalHero from "@/components/global/GlobalHero.astro";
 
 const service = getServiceBySlug("marca-personal");
 
@@ -11,6 +12,14 @@ if (!service) {
 ---
 
 <ServiceLayout service={service}>
+  <GlobalHero
+    titleLine1="Deja de ser el secreto mejor guardado de tu industria"
+    titleLine2="es hora de brillar"
+    subtitleBefore="Convierte tu experiencia en"
+    subtitleHighlight="autoridad digital"
+    subtitleAfter="que atrae a tus clientes ideales"
+    description="Si tu valor no se comunica o te cuesta atraer clientes, te damos la hoja de ruta para que tu marca personal y tu contenido trabajen para ti."
+  />
   <CTABanner
     title="¿Listo para transformar tu presencia digital?"
     description={`Agenda una consulta y descubre cómo una buena ${service.title.toLowerCase()} puede impulsar tu negocio.`}
