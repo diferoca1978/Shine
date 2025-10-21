@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
 import SocialContent from '@/assets/images/redessociales.webp';
+import SocialContentStruggled from '@/assets/images/socialContentStruggled.webp';
 import WebDesign from '@/assets/images/diseñoyrediseñoweb.webp';
 import Audit from '@/assets/images/auditoriadigital.webp';
 
@@ -12,6 +13,7 @@ export interface Service {
     problem?: string;
     content: string;
     benefits: string[];
+    hurts: string[];
     image: ImageMetadata;
     alt: string;
     // SEO fields
@@ -34,6 +36,12 @@ export const services: Service[] = [
       "Plan de Contenidos Estratégico: Atrae, nutre y convierte en redes y blog.",
       "Narrativa (Storytelling) Potente: Genera conexión y confianza.",
       "Audiencia en Clientes: Diseñamos CTAs irresistibles para leads cualificados."
+    ],
+    hurts: [
+      "Contenido sin impacto ni leads.",
+      "Dependencia de referidos, limitando el crecimiento.",
+      "Dificultad para diferenciarte en el ruido digital.",
+      "Tiempo invertido en marketing sin resultados."
     ],
     image: SocialContent,
     alt: "Estrategia de Marca Personal y contenidos - Shine Agencia",
