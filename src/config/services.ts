@@ -14,6 +14,7 @@ export interface Service {
     content: string;
     benefits: string[];
     hurts: string[];
+    checkMarks: string[];
     image: ImageMetadata;
     alt: string;
     // SEO fields
@@ -29,19 +30,26 @@ export const services: Service[] = [
     title: "Estrategia de Marca Personal y Contenidos",
     subtitle: "Transforme su experiencia en autoridad y visibilidad.",
     tags: ["Marca Personal", "Contenidos B2B", "LinkedIn", "Leads Cualificados"],
-    problem: "La frustración de un líder brillante, pero invisible.",
+    problem: "¿Eres brillante pero digitalmente invisible?",
     content: "Para líderes que tienen un valor inmenso, pero luchan por comunicarlo. Desarrollamos su propósito, posicionamiento y un plan de contenidos estratégico para que atraiga clientes ideales y se establezca como el referente de su industria.",
     benefits: [
-      "Propósito y Posicionamiento Único: Descubre tu voz inigualable.",
-      "Plan de Contenidos Estratégico: Atrae, nutre y convierte en redes y blog.",
-      "Narrativa (Storytelling) Potente: Genera conexión y confianza.",
-      "Audiencia en Clientes: Diseñamos CTAs irresistibles para leads cualificados."
+      "Propósito y Posicionamiento Único: Descubre tu voz.",
+      "Plan de Contenidos Estratégico: Atrae, nutre y convierte.",
+      "Narrativa (Storytelling) Potente.",
+      "Convertir tu audiencia en clientes."
     ],
     hurts: [
       "Contenido sin impacto ni leads.",
       "Dependencia de referidos, limitando el crecimiento.",
       "Dificultad para diferenciarte en el ruido digital.",
       "Tiempo invertido en marketing sin resultados."
+    ],
+    checkMarks: [
+      "Tienes gran valor, pero te falta estrategia para comunicarlo.",
+      "Listo para dejar de depender de referidos.",
+      "Buscas posicionarte como líder y referente.",
+      "Valoras un marketing auténtico y ético a largo plazo.",
+      "Dispuesto a invertir en una marca personal sólida."
     ],
     image: SocialContent,
     alt: "Estrategia de Marca Personal y contenidos - Shine Agencia",

@@ -5,6 +5,9 @@ import CTABanner from "@/components/ui/CTABanner.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 import SocialContentStruggled from "@/assets/images/socialContentStruggled.webp";
 import { Image } from "astro:assets";
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
+import CheckIcon from "@/assets/icons/check.svg";
 
 const service = getServiceBySlug("marca-personal");
 
@@ -16,6 +19,7 @@ const safeService = service as Service;
 ---
 
 <ServiceLayout service={service}>
+  <!-- Hero -->
   <GlobalHero
     titleLine1="Deja de ser el secreto mejor guardado de tu industria"
     titleLine2="es hora de brillar"
@@ -23,19 +27,25 @@ const safeService = service as Service;
     subtitleHighlight="autoridad digital"
     subtitleAfter="que atrae a tus clientes ideales"
     descriptionLine1="Si tu valor no se comunica o te cuesta atraer clientes, te damos la hoja de ruta para que tu marca personal y tu contenido trabajen para ti."
-  />
-  <section class="max-w-6xl mx-auto py-10 lg:py-20">
+  >
+    <Button slot="cta" href="/servicios" variant="primary" animation={true} className="w-fit mx-auto">
+      Agenda tu Diagnóstico Estratégico <StarIcon />
+    </Button>
+  </GlobalHero>
+  <!-- Problem -->
+  <section class="max-w-6xl mx-auto py-10">
     <h2 class="text-center font-bold text-[min(10vw,42px)] mb-4 font-playfair">
       {service.problem}
     </h2>
     <div class="flex flex-col items-center justify-center md:flex-row">
-      <div class="w-full md:w-1/2">
+      <div class="w-full md:w-1/2"> 
         <Image
           src={SocialContentStruggled}
           alt={safeService.alt}
           priority={true}
-          class="w-full h-auto"
-          
+          class="w-full"
+          width={500}
+          height={500}
         />
       </div>
       <div class="w-full items-center md:w-1/2">
@@ -45,7 +55,7 @@ const safeService = service as Service;
           </h4>
           <ul class="flex flex-col gap-2">
             {service.hurts.map((hurt) => (
-              <li class="hurts text-smokyBlack font-medium font-openSans text-lg flex items-center gap-2">
+              <li class="hurts font-openSans text-lg flex items-center gap-2 px-2">
                 <span class="w-3 h-3 bg-accentGold rounded-full flex-shrink-0" />
                 {hurt}
               </li>
@@ -55,12 +65,69 @@ const safeService = service as Service;
       </div>
     </div>
   </section>
-  <CTABanner
-    title="¿Listo para transformar tu presencia digital?"
-    description={`Agenda una consulta y descubre cómo una buena ${service.title.toLowerCase()} puede impulsar tu negocio.`}
-    buttonText="Agenda tu consulta"
-    buttonHref="/contacto"
-    variant="default"
-    className="max-w-6xl mx-auto"
-  />
+  <!-- Solution -->
+  <section class="max-w-6xl mx-auto py-10 lg:py-20">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div class="flex flex-col space-y-4 px-6">
+        <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-4 font-playfair">
+          Tu estrategia para transformar tu experiencia en autoridad digital.
+        </h2>
+        {service.benefits && (
+          <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold">
+            En Shine, trabajamos contigo para:
+          </h4>
+          <ul class="flex flex-col gap-2">
+            {service.benefits.map((benefit) => (
+              <li class="font-openSans text-lg flex items-center gap-2 px-2">
+                <span class="w-3 h-3 bg-accentGold rounded-full flex-shrink-0" />
+                {benefit}
+              </li>
+            ))}
+          </ul>
+        )}
+        <Button href="/contacto" variant="primary" animation={true} className="w-fit mx-auto mt-8">
+          Quiero que mi marca personal brille <StarIcon />
+        </Button>
+      </div>
+      <div class="flex flex-col px-4 space-y-4">
+        <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-8 md:mb-12 font-playfair">
+          ¿Para quién es este servicio?
+        </h2>
+        {service.checkMarks && (
+          <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold">
+            Este servicio es para ti si...
+          </h4>
+          <ul class="flex flex-col gap-2">
+            {service.checkMarks.map((checkMark) => (
+              <li class="font-openSans text-lg flex items-center gap-2 px-2">
+                <CheckIcon />
+                {checkMark}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  </section>
+  <!-- Our process -->
+  <section class="max-w-6xl mx-auto py-10 lg:py-20">
+    <h2 class="text-center font-bold text-[min(10vw,42px)] mb-4 font-playfair">
+      Así creamos tu camino hacia la autoridad y el impacto.
+    </h2>
+    <div class="flex flex-col gap-4 md:flex-row">
+      
+     
+    </div>
+    
+  </section>
+  <div class="px-2">
+    <CTABanner
+      title="Es hora de que tu luz no sea un secreto."
+      description={`No pospongas más el impacto que puedes tener.`}
+      buttonText="Agenda tu diagnóstico estratégico"
+      buttonHref="/contacto"
+      variant="default"
+      className="max-w-6xl mx-auto"
+    />
+  </div>
 </ServiceLayout>
