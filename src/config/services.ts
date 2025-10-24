@@ -14,7 +14,6 @@ export interface Service {
     content: string;
     benefits: string[];
     hurts: string[];
-    process: string[];
     checkMarks: string[];
     image: ImageMetadata;
     alt: string;
@@ -51,12 +50,6 @@ export const services: Service[] = [
       "Buscas posicionarte como líder y referente.",
       "Valoras un marketing auténtico y ético a largo plazo.",
       "Dispuesto a invertir en una marca personal sólida."
-    ],
-    process: [
-      "Diagnóstico Inicial: Entendemos tu visión, tus desafíos y tus objetivos. Articulamos tu porqué, tu voz y el arquetipo de tu cliente ideal.",
-      "Arquitectura de Contenidos: Desarrollamos los pilares, temas y formatos que resonarán con tu audiencia.",
-      "Estrategia Multicanal: Adaptamos tu mensaje para LinkedIn, Instagram, TikTok y tu blog, maximizando tu alcance.",
-      "Plan de Acción y Medición: Te entregamos una hoja de ruta clara y métricas para seguir tu evolución."
     ],
     image: SocialContent,
     alt: "Estrategia de Marca Personal y contenidos - Shine Agencia",
