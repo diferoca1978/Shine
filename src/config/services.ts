@@ -15,7 +15,12 @@ export interface Service {
     benefits: string[];
     hurts: string[];
     checkMarks: string[];
+    process: {
+      title: string;
+      description: string;
+    }[];
     image: ImageMetadata;
+    secondaryImage: ImageMetadata;
     alt: string;
     // SEO fields
     seoDescription: string;
@@ -51,7 +56,26 @@ export const services: Service[] = [
       "Valoras un marketing auténtico y ético a largo plazo.",
       "Dispuesto a invertir en una marca personal sólida."
     ],
+    process: [
+      {
+        title:'Diagnóstico Inicial',
+        description: 'Entendemos tu visión, tus desafíos y tus objetivos. Articulamos tu porqué, tu voz y el arquetipo de tu cliente ideal.'
+      },
+      {
+        title:'Arquitectura de Contenidos',
+        description: 'Desarrollamos los pilares, temas y formatos que resonarán con tu audiencia.'
+      },
+      {
+        title:'Estrategia Multicanal',
+        description: 'Adaptamos tu mensaje para LinkedIn, Instagram, TikTok y tu blog, maximizando tu alcance.'
+      },
+      {
+        title:'Plan de Acción y Medición',
+        description: 'Te entregamos una hoja de ruta clara y métricas para seguir tu evolución.'
+      }
+    ],
     image: SocialContent,
+    secondaryImage: SocialContentStruggled,
     alt: "Estrategia de Marca Personal y contenidos - Shine Agencia",
     seoDescription: "Descubre cómo construir una marca personal que atrae clientes ideales. Estrategias de contenido para fundadores y emprendedores",
     seoKeywords: [
@@ -111,7 +135,7 @@ export const services: Service[] = [
     focusKeyword: "desarrollo web de alto rendimiento"
   },
   {
-    slug: "auditoria-marketing-digital",
+    slug: "rediseño-web-estrategico",
     title: "Optimización y Rediseño Estratégico",
     subtitle: "Active el potencial oculto de su sitio web actual",
     tags: ["Rediseño Web", "Optimización UX", "Web que No Vende", "Conversiones"],

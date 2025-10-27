@@ -8,6 +8,7 @@ import { Image } from "astro:assets";
 import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
 import CheckIcon from "@/assets/icons/check.svg";
+import ServicesStepsProcess from "@/components/section/perPage/ServicesStepsProcess.astro";
 
 const service = getServiceBySlug("marca-personal");
 
@@ -18,7 +19,7 @@ if (!service) {
 const safeService = service as Service;
 ---
 
-<ServiceLayout service={service}>
+<ServiceLayout service={safeService}>
   <!-- Hero -->
   <GlobalHero
     titleLine1="Deja de ser el secreto mejor guardado de tu industria"
@@ -28,17 +29,23 @@ const safeService = service as Service;
     subtitleAfter="que atrae a tus clientes ideales"
     descriptionLine1="Si tu valor no se comunica o te cuesta atraer clientes, te damos la hoja de ruta para que tu marca personal y tu contenido trabajen para ti."
   >
-    <Button slot="cta" href="/servicios" variant="primary" animation={true} className="w-fit mx-auto">
+    <Button
+      slot="cta"
+      href="/servicios"
+      variant="primary"
+      animation={true}
+      className="w-fit mx-auto"
+    >
       Agenda tu Diagnóstico Estratégico <StarIcon />
     </Button>
   </GlobalHero>
   <!-- Problem -->
   <section class="max-w-6xl mx-auto py-10">
     <h2 class="text-center font-bold text-[min(10vw,42px)] mb-4 font-playfair">
-      {service.problem}
+      {safeService.problem}
     </h2>
     <div class="flex flex-col items-center justify-center md:flex-row">
-      <div class="w-full md:w-1/2"> 
+      <div class="w-full md:w-1/2">
         <Image
           src={SocialContentStruggled}
           alt={safeService.alt}
@@ -49,12 +56,12 @@ const safeService = service as Service;
         />
       </div>
       <div class="w-full items-center md:w-1/2">
-        {service.hurts && (
+        {safeService.hurts && (
           <h4 class="text-smokyBlack font-poppins mb-4 text-center md:text-left text-xl md:text-2xl font-semibold leading-tight">
             Entendemos que te preocupa:
           </h4>
           <ul class="flex flex-col gap-2">
-            {service.hurts.map((hurt) => (
+            {safeService.hurts.map((hurt) => (
               <li class="hurts font-openSans text-lg flex items-center gap-2 px-2">
                 <span class="w-3 h-3 bg-accentGold rounded-full flex-shrink-0" />
                 {hurt}
@@ -72,12 +79,12 @@ const safeService = service as Service;
         <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-4 font-playfair">
           Tu estrategia para transformar tu experiencia en autoridad digital.
         </h2>
-        {service.benefits && (
+        {safeService.benefits && (
           <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold">
             En Shine, trabajamos contigo para:
           </h4>
           <ul class="flex flex-col gap-2">
-            {service.benefits.map((benefit) => (
+            {safeService.benefits.map((benefit) => (
               <li class="font-openSans text-lg flex items-center gap-2 px-2">
                 <span class="w-3 h-3 bg-accentGold rounded-full flex-shrink-0" />
                 {benefit}
@@ -93,12 +100,12 @@ const safeService = service as Service;
         <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-8 md:mb-12 font-playfair">
           ¿Para quién es este servicio?
         </h2>
-        {service.checkMarks && (
+        {safeService.checkMarks && (
           <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold">
             Este servicio es para ti si...
           </h4>
           <ul class="flex flex-col gap-2">
-            {service.checkMarks.map((checkMark) => (
+            {safeService.checkMarks.map((checkMark) => (
               <li class="font-openSans text-lg flex items-center gap-2 px-2">
                 <CheckIcon />
                 {checkMark}
@@ -110,16 +117,12 @@ const safeService = service as Service;
     </div>
   </section>
   <!-- Our process -->
-  <section class="max-w-6xl mx-auto py-10 lg:py-20">
-    <h2 class="text-center font-bold text-[min(10vw,42px)] mb-4 font-playfair">
-      Así creamos tu camino hacia la autoridad y el impacto.
-    </h2>
-    <div class="flex flex-col gap-4 md:flex-row">
-      
-     
-    </div>
-    
-  </section>
+  <ServicesStepsProcess
+    titleLine1="Así creamos tu camino hacia"
+    titleLine2="la autoridad y el impacto."
+    service={safeService}
+  />
+  <!-- CTA -->
   <div class="px-2">
     <CTABanner
       title="Es hora de que tu luz no sea un secreto."

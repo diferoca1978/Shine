@@ -1,0 +1,88 @@
+---
+import type { Service } from "@/config/services";
+
+interface Props {
+  titleLine1: string;
+  titleLine2?: string;
+  service: Service;
+}
+
+const { titleLine1, titleLine2, service } = Astro.props;
+---
+
+<section id="process" class="max-w-6xl mx-auto py-10 lg:py-20">
+  <h2
+    class="text-center font-bold text-[min(10vw,42px)] mb-4 font-playfair title opacity-0"
+  >
+    <span class="block">{titleLine1}</span>
+    <span class="block">{titleLine2}</span>
+  </h2>
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200">
+      <path
+        id="path-full"
+        style="stroke: oklch(0.761 0.0408 138.18); stroke-width: 25; stroke-linecap: round; fill: none;"
+        d="M 100 100 L 100 100"></path>
+      <path
+        id="path-highlight"
+        style="stroke: oklch(0.8987 0.119 87.54); stroke-width: 25; stroke-linecap: round; fill: none;"
+        d="M 100 100 L 100 100"></path>
+      <g id="button">
+        <rect
+          x="100"
+          y="131.204"
+          width="250"
+          height="30"
+          style="stroke: none; fill: none;"></rect>
+        <rect
+          x="350"
+          y="131.204"
+          width="250"
+          height="30"
+          style="stroke: none; fill: none"></rect>
+        <rect
+          x="600"
+          y="131.204"
+          width="250"
+          height="30"
+          style="stroke: none; fill: none"></rect>
+        <rect
+          x="850"
+          y="131.204"
+          width="250"
+          height="30"
+          style="stroke: none; fill: none"></rect>
+      </g>
+    </svg>
+  </div>
+  <div
+    class="stages flex flex-col md:flex-row gap-8 justify-center items-center"
+  >
+    {
+      service.process.map((step) => (
+        <div class="stage flex flex-col h-60 w-52 px-2">
+          <div class="heading h-16 overflow-hidden">
+            <div class="headings">
+              <span class="text-smokyBlack font-playfair text-2xl block leading-tight">
+                {step.title}
+              </span>
+              <span class="text-deepplum font-playfair font-bold text-2xl">
+                {step.title}
+              </span>
+            </div>
+          </div>
+          <p class="text-smokyBlack font-openSans text-lg mt-4 opacity-0">
+            {step.description}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import { gsapProcessStepsAnimation } from "@/utils/scripts/servicesStepsProccesAnimation";
+  document.addEventListener("DOMContentLoaded", () => {
+    gsapProcessStepsAnimation();
+  });
+</script>
