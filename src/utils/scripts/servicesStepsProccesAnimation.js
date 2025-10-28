@@ -7,6 +7,7 @@ gsap.registerPlugin(DrawSVGPlugin, GSDevTools, ScrollTrigger);
 
 export const gsapProcessStepsAnimation = () => {
   gsap.set("#path-highlight", {drawSVG:"0% 25%"})
+  gsap.set("#number text", {opacity:0})
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -33,11 +34,13 @@ export const gsapProcessStepsAnimation = () => {
   .to("#path-highlight", {drawSVG:"0% 20%", duration:1.5}, "+=0.5")
 
   const positions = ["0% 24%", "26% 48%", "52% 73%", "75% 100%"];
-  const buttons = gsap.utils.toArray("#button rect");
+  const numbers = gsap.utils.toArray("#number text");
 
-  buttons.forEach((btn, i) => {
-    btn.addEventListener("mouseenter", () => {
+  numbers.forEach((number, i) => {
+    number.addEventListener("mouseenter", () => {
       gsap.to("#path-highlight", {drawSVG:positions[i], duration:1, ease:"power2.out"});
+      gsap.to("#number text", {opacity:0})
+      gsap.to(numbers[i], {opacity:1})
     });
   });
 
@@ -52,14 +55,19 @@ export const gsapProcessStepsAnimation = () => {
   .to(stage.querySelector(".headings"), {yPercent:-50})
   .from(stage.querySelector("p"), {y:10, opacity: 0}, 0)
 
-  
+
     stage.addEventListener("mouseenter", () => {
       tl.play()
       gsap.to("#path-highlight", {drawSVG:positions[i], duration:1, ease:"power2.out"});
+      // Show only the current number
+      gsap.to("#number text", {opacity:0, duration:0.3})
+      gsap.to(numbers[i], {opacity:1, duration:0.3})
     })
 
     stage.addEventListener("mouseleave", () => {
       tl.reverse();
+      // Hide the number
+      gsap.to(numbers[i], {opacity:0, duration:0.3})
     });
   })
 
