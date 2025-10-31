@@ -9,6 +9,7 @@ export interface Service {
     slug: string;
     title: string;
     subtitle?: string;
+    introText?: string;
     tags?: string[];
     problem?: string;
     content: string;
@@ -34,6 +35,7 @@ export const services: Service[] = [
     slug: "marca-personal",
     title: "Estrategia de Marca Personal y Contenidos",
     subtitle: "Transforme su experiencia en autoridad y visibilidad.",
+    introText: "Entendemos que te preocupa:",
     tags: ["Marca Personal", "Contenidos B2B", "LinkedIn", "Leads Cualificados"],
     problem: "¿Eres brillante pero digitalmente invisible?",
     content: "Para líderes que tienen un valor inmenso, pero luchan por comunicarlo. Desarrollamos su propósito, posicionamiento y un plan de contenidos estratégico para que atraiga clientes ideales y se establezca como el referente de su industria.",

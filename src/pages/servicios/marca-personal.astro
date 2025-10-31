@@ -4,22 +4,20 @@ import { getServiceBySlug, type Service } from "@/config/services";
 import CTABanner from "@/components/ui/CTABanner.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 import SocialContentStruggled from "@/assets/images/socialContentStruggled.webp";
-import { Image } from "astro:assets";
 import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
 import CheckIcon from "@/assets/icons/check.svg";
-import ServicesStepsProcess from "@/components/section/perPage/ServicesStepsProcess.astro";
+import ServicesStepsProcess from "@/components/section/services/ServicesStepsProcess.astro";
+import ServiceProblemSection from "@/components/section/services/ServiceProblemSection.astro";
 
 const service = getServiceBySlug("marca-personal");
 
 if (!service) {
   return Astro.redirect("/404");
 }
-
-const safeService = service as Service;
 ---
 
-<ServiceLayout service={safeService}>
+<ServiceLayout service={service}>
   <!-- Hero -->
   <GlobalHero
     titleLine1="Deja de ser el secreto mejor guardado de tu industria"
@@ -40,38 +38,14 @@ const safeService = service as Service;
     </Button>
   </GlobalHero>
   <!-- Problem -->
-  <section class="max-w-6xl mx-auto py-10">
-    <h2 class="text-center text-[min(10vw,42px)] mb-4 font-playfair">
-      {safeService.problem}
-    </h2>
-    <div class="flex flex-col items-center justify-center md:flex-row">
-      <div class="w-full md:w-1/2">
-        <Image
-          src={SocialContentStruggled}
-          alt={safeService.alt}
-          priority={true}
-          class="w-full"
-          width={500}
-          height={500}
-        />
-      </div>
-      <div class="w-full items-center md:w-1/2">
-        {safeService.hurts && (
-          <h4 class="text-smokyBlack font-poppins mb-4 text-center md:text-left text-xl md:text-2xl font-semibold leading-tight">
-            Entendemos que te preocupa:
-          </h4>
-          <ul class="flex flex-col gap-2">
-            {safeService.hurts.map((hurt) => (
-              <li class="hurts font-openSans text-lg flex items-center gap-2 px-2">
-                <span class="w-3 h-3 bg-accentGold rounded-full flex-shrink-0" />
-                {hurt}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
-  </section>
+  <ServiceProblemSection
+    title={service.problem!}
+    image={service.secondaryImage}
+    imageAlt={service.alt}
+    introText={service.introText!}
+    problems={service.hurts!}
+    imagePosition="left"
+  />
   <!-- Solution -->
   <section class="max-w-6xl mx-auto py-10 lg:py-20">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -79,12 +53,12 @@ const safeService = service as Service;
         <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-4 font-playfair">
           Tu estrategia para transformar tu experiencia en autoridad digital.
         </h2>
-        {safeService.benefits && (
+        {service.benefits && (
           <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold">
             En Shine, trabajamos contigo para:
           </h4>
           <ul class="flex flex-col gap-2">
-            {safeService.benefits.map((benefit) => (
+            {service.benefits.map((benefit) => (
               <li class="font-openSans text-lg flex items-center gap-2 px-2">
                 <span class="w-3 h-3 bg-accentGold rounded-full flex-shrink-0" />
                 {benefit}
@@ -100,12 +74,12 @@ const safeService = service as Service;
         <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-8 md:mb-12 font-playfair">
           ¿Para quién es este servicio?
         </h2>
-        {safeService.checkMarks && (
+        {service.checkMarks && (
           <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold">
             Este servicio es para ti si...
           </h4>
           <ul class="flex flex-col gap-2">
-            {safeService.checkMarks.map((checkMark) => (
+            {service.checkMarks.map((checkMark) => (
               <li class="font-openSans text-lg flex items-center gap-2 px-2">
                 <CheckIcon />
                 {checkMark}
@@ -120,7 +94,7 @@ const safeService = service as Service;
   <ServicesStepsProcess
     titleLine1="Así creamos tu camino hacia"
     titleLine2="la autoridad y el impacto"
-    service={safeService}
+    service={service}
   />
   <!-- CTA -->
   <div class="px-2">

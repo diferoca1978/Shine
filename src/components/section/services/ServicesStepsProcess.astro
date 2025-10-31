@@ -1,0 +1,142 @@
+---
+import type { Service } from "@/config/services";
+
+interface Props {
+  titleLine1: string;
+  titleLine2?: string;
+  service: Service;
+}
+
+const { titleLine1, titleLine2, service } = Astro.props;
+---
+
+<section id="process" class="max-w-6xl mx-auto py-10 lg:py-20 px-4">
+  <h2 class="title text-center text-[min(10vw,42px)] font-playfair opacity-0 mb-0">
+    <span class="block">{titleLine1}</span>
+    <span class="">{titleLine2}</span>
+  </h2>
+
+  <!-- SVG Progress Bar - Hidden on mobile -->
+  <div class="hidden lg:block -mt-8">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 150">
+      <path
+        id="path-full"
+        style="stroke: oklch(0.761 0.0408 138.18); stroke-width: 25; stroke-linecap: round; fill: none;"
+        d="M 100 100 L 100 100"></path>
+      <path
+        id="path-highlight"
+        style="stroke: oklch(0.8987 0.119 87.54); stroke-width: 25; stroke-linecap: round; fill: none;"
+        d="M 100 100 L 100 100"></path>
+    </svg>
+  </div>
+
+  <!-- Desktop: Horizontal cards | Mobile: Single card with carousel -->
+  <div class="stages-wrapper">
+    <!-- Desktop view - all cards visible -->
+    <div
+      class="hidden lg:flex flex-row gap-8 justify-center items-center stages"
+    >
+      {
+        service.process.map((step, index) => (
+          <div class="stage flex flex-col h-80 w-50 px-2">
+            <span class="numbers text-3xl font-bold text-deepplum font-openSans mb-3 md:mb-4 opacity-0">
+              {String(index + 1).padStart(3, "0")}
+            </span>
+            <div class="heading h-16 overflow-hidden">
+              <div class="headings">
+                <span class="text-smokyBlack font-playfair text-2xl block leading-tight">
+                  {step.title}
+                </span>
+                <span class="text-deepplum font-playfair font-bold text-2xl">
+                  {step.title}
+                </span>
+              </div>
+            </div>
+            <p class="text-smokyBlack font-openSans text-lg mt-4 opacity-0">
+              {step.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Mobile/Tablet view - carousel with single card -->
+    <div class="lg:hidden">
+      <div
+        class="mobile-stages-container relative min-h-[280px] md:min-h-[340px] px-4"
+      >
+        {
+          service.process.map((step, index) => (
+            <div
+              class="mobile-stage absolute inset-0 opacity-0 pointer-events-none flex flex-col items-center text-center transition-opacity duration-500"
+              data-step={index}
+            >
+              {/* Step Number */}
+              <span class="text-5xl md:text-6xl font-bold text-deepplum/10 font-mono mb-3 md:mb-4">
+                {String(index + 1).padStart(3, "0")}
+              </span>
+
+              {/* Step Title */}
+              <h3 class="text-deepplum font-playfair font-bold text-2xl md:text-3xl mb-3 md:mb-4">
+                {step.title}
+              </h3>
+
+              {/* Step Description */}
+              <p class="text-smokyBlack font-openSans text-base md:text-lg leading-relaxed max-w-2xl">
+                {step.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+
+      {/* Mobile Navigation */}
+      <div class="flex justify-center items-center gap-8 mt-4">
+        <button
+          id="prev-step"
+          class="text-deepplum active:scale-90 transition-all duration-200 disabled:opacity-20 disabled:pointer-events-none"
+          aria-label="Previous step"
+        >
+          <svg
+            class="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+
+        <button
+          id="next-step"
+          class="text-deepplum active:scale-90 transition-all duration-200 disabled:opacity-20 disabled:pointer-events-none"
+          aria-label="Next step"
+        >
+          <svg
+            class="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsapProcessStepsAnimation } from "@/utils/scripts/servicesStepsProccesAnimation";
+  document.addEventListener("DOMContentLoaded", () => {
+    gsapProcessStepsAnimation();
+  });
+</script>
