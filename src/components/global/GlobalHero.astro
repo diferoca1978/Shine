@@ -26,24 +26,29 @@ const {
       class="flex flex-col items-center justify-center min-h-[60vh] md:min-h-[70vh] text-center"
     >
       <div class="max-w-4xl">
-        <h1
-          class="text-[min(10vw,72px)] font-playfair font-medium text-smokyBlack leading-tight tracking-tight mb-4"
-        >
-          {titleLine1}
-          <span class="block"> {titleLine2}</span>
-        </h1>
-        <h2 class="text-[min(7vw,42px)] font-playfair italic mb-6">
-          {subtitleBefore}
-          <span class="font-bold text-deepplum">{subtitleHighlight}</span>
-          {subtitleAfter}
-        </h2>
-
-        <p
-          class="text-[min(5vw,24px)] font-openSans text-smokyBlack mb-8 max-w-2xl mx-auto"
-        >
-          {descriptionLine1}
-          <span class="block"> {descriptionLine2}</span>
-        </p>
+        <div class="title-wrapper">
+          <h1
+            class="text-[min(10vw,72px)] font-playfair font-medium text-smokyBlack leading-tight tracking-tight mb-4"
+          >
+            {titleLine1}
+            <span class="block"> {titleLine2}</span>
+          </h1>
+        </div>
+        <div class="subtitle-wrapper opacity-0">
+          <h2 class="text-[min(7vw,42px)] font-playfair italic mb-6">
+            {subtitleBefore}
+            <span class="font-bold text-deepplum">{subtitleHighlight}</span>
+            {subtitleAfter}
+          </h2>
+        </div>
+        <div class="description-wrapper opacity-0">
+          <p
+            class="text-[min(5vw,24px)] font-openSans text-smokyBlack mb-8 max-w-2xl mx-auto"
+          >
+            {descriptionLine1}
+            <span class="block"> {descriptionLine2}</span>
+          </p>
+        </div>
         <div class="flex justify-center mb-4">
           <slot name="cta" />
         </div>
@@ -51,3 +56,11 @@ const {
     </div>
   </div>
 </section>
+
+<script>
+  import { globalHeroAnimation } from "@/utils/scripts/globalAnimations/globalHeroAnimation.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    globalHeroAnimation();
+  });
+</script>

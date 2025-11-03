@@ -13,21 +13,24 @@ interface Props {
 const { title, image, imageAlt, introText, problems, imagePosition } = Astro.props;
 ---
 
-<section class="max-w-6xl mx-auto py-10 lg:py-20">
-    <h2 class="text-center text-[min(10vw,42px)] mb-4 font-playfair">
+<section id="problem-section" class="max-w-6xl mx-auto py-10 lg:py-20">
+    <div class="problem-heading mb-8">
+      <h2 class="text-center text-[min(10vw,42px)] font-playfair">
       {title}
     </h2>
-    <div class="flex flex-col items-center justify-center md:flex-row">
-      <div class="w-full md:w-1/2">
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center">
+      <div class="w-full flex items-center justify-center">
         <Image
+          id="problem-image"
           src={image}
           alt={imageAlt}
           priority={true}
-          class="w-full h-full object-cover"
-          
+          class="object-cover w-full max-w-sm"
+
         />
       </div>
-      <div class="w-full items-center md:w-1/2">
+      <div id="problem-hurts" class="w-full flex flex-col justify-center">
         {introText && (
           <h4 class="text-smokyBlack font-poppins mb-4 text-center md:text-left text-xl md:text-2xl font-semibold leading-tight">
             {introText}
