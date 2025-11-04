@@ -5,9 +5,9 @@ import CTABanner from "@/components/ui/CTABanner.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
-import CheckIcon from "@/assets/icons/check.svg";
 import ServicesStepsProcess from "@/components/section/services/ServicesStepsProcess.astro";
 import ServiceProblemSection from "@/components/section/services/ServiceProblemSection.astro";
+import ServiceSolutionSection from "@/components/section/services/ServiceSolutionSection.astro";
 
 const service = getServiceBySlug("marca-personal");
 
@@ -46,49 +46,25 @@ if (!service) {
     imagePosition="left"
   />
   <!-- Solution -->
-  <section class="max-w-6xl mx-auto py-10 lg:py-20">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-      <div class="flex flex-col space-y-4 px-6">
-        <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-4 font-playfair">
-          Tu estrategia para transformar tu experiencia en autoridad digital.
-        </h2>
-        {service.benefits && (
-          <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold">
-            En Shine, trabajamos contigo para:
-          </h4>
-          <ul class="flex flex-col gap-2">
-            {service.benefits.map((benefit) => (
-              <li class="font-openSans text-lg flex items-center gap-2 px-2">
-                <span class="w-3 h-3 bg-accentGold rounded-full flex-shrink-0" />
-                {benefit}
-              </li>
-            ))}
-          </ul>
-        )}
-        <Button href="/contacto" variant="primary" animation={true} className="w-fit mx-auto mt-8">
-          Quiero que mi marca personal brille <StarIcon />
-        </Button>
-      </div>
-      <div class="flex flex-col px-4 space-y-4">
-        <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-8 md:mb-12 font-playfair">
-          ¿Para quién es este servicio?
-        </h2>
-        {service.checkMarks && (
-          <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold">
-            Este servicio es para ti si...
-          </h4>
-          <ul class="flex flex-col gap-2">
-            {service.checkMarks.map((checkMark) => (
-              <li class="font-openSans text-lg flex items-center gap-2 px-2">
-                <CheckIcon />
-                {checkMark}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
-  </section>
+  <ServiceSolutionSection
+    benefitsTitle={service.benefitsTitle!}
+    benefitsIntro={service.benefitsIntro!}
+    benefits={service.benefits!}
+    audienceTitle={service.audienceTitle!}
+    audienceIntro={service.audienceIntro!}
+    checkmarks={service.checkMarks!}
+  >
+    <Button
+      slot="cta"
+      href="/contacto"
+      variant="primary"
+      animation={true}
+      className="w-fit mx-auto"
+    >
+      Agenda tu Diagnóstico Estratégico <StarIcon />
+    </Button>
+  </ServiceSolutionSection>
+
   <!-- Our process -->
   <ServicesStepsProcess
     titleLine1="Así creamos tu camino hacia"

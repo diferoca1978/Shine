@@ -34,7 +34,7 @@ export const gsapProcessStepsAnimation = () => {
     })
 
     // STEP 1: Fade in and slide up the title
-    .to(".process-heading", {opacity:1, yPercent:-80})
+    .to(".process-heading", {opacity:1, yPercent:-20})
 
     // STEP 2: Draw the SVG path from a point to a horizontal line
     // This creates the visual effect of the progress bar "growing" across the screen

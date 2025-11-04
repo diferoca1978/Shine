@@ -2,8 +2,8 @@ import type { ImageMetadata } from 'astro';
 
 import SocialContent from '@/assets/images/redessociales.webp';
 import SocialContentStruggled from '@/assets/images/socialContentStruggled.webp';
-import WebDesign from '@/assets/images/diseñoyrediseñoweb.webp';
-import Audit from '@/assets/images/auditoriadigital.webp';
+import WebDesign from '@/assets/images/diseñoWebAltoRen.webp';
+import Audit from '@/assets/images/diseñoyrediseñoweb.webp';
 
 export interface Service {
     slug: string;
@@ -13,9 +13,13 @@ export interface Service {
     tags?: string[];
     problem?: string;
     content: string;
+    benefitsTitle?: string;
+    benefitsIntro?: string;
+    audienceTitle?: string;
+    audienceIntro?: string;
     benefits: string[];
-    hurts: string[];
     checkMarks: string[];
+    hurts: string[];
     process: {
       title: string;
       description: string;
@@ -39,17 +43,15 @@ export const services: Service[] = [
     tags: ["Marca Personal", "Contenidos B2B", "LinkedIn", "Leads Cualificados"],
     problem: "¿Eres brillante pero digitalmente invisible?",
     content: "Para líderes que tienen un valor inmenso, pero luchan por comunicarlo. Desarrollamos su propósito, posicionamiento y un plan de contenidos estratégico para que atraiga clientes ideales y se establezca como el referente de su industria.",
+    benefitsTitle: "Tu estrategia para transformar tu experiencia en autoridad digital.",
+    benefitsIntro: "En Shine, trabajamos contigo para:",
+    audienceTitle: "¿Para quién es este servicio?",
+    audienceIntro: "Este servicio es para ti si...",
     benefits: [
       "Propósito y Posicionamiento Único: Descubre tu voz.",
       "Plan de Contenidos Estratégico: Atrae, nutre y convierte.",
       "Narrativa (Storytelling) Potente.",
       "Convertir tu audiencia en clientes."
-    ],
-    hurts: [
-      "Contenido sin impacto ni leads.",
-      "Dependencia de referidos, limitando el crecimiento.",
-      "Dificultad para diferenciarte en el ruido digital.",
-      "Tiempo invertido en marketing sin resultados."
     ],
     checkMarks: [
       "Tienes gran valor, pero te falta estrategia para comunicarlo.",
@@ -57,6 +59,12 @@ export const services: Service[] = [
       "Buscas posicionarte como líder y referente.",
       "Valoras un marketing auténtico y ético a largo plazo.",
       "Dispuesto a invertir en una marca personal sólida."
+    ],
+    hurts: [
+      "Contenido sin impacto ni leads.",
+      "Dependencia de referidos, limitando el crecimiento.",
+      "Dificultad para diferenciarte en el ruido digital.",
+      "Tiempo invertido en marketing sin resultados."
     ],
     process: [
       {

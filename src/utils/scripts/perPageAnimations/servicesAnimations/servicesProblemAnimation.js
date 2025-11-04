@@ -13,7 +13,7 @@ export function gsapProblemAnimation() {
       trigger: "#problem-section",
       start: "top 80%",
       once: true,
-      markers: true,
+      markers: false, // Set to true for debugging
     },
   })
 
