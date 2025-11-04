@@ -1,7 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
 import SocialContent from '@/assets/images/redessociales.webp';
-import SocialContentStruggled from '@/assets/images/socialContentStruggled.webp';
+import InvisibilityProblem from '@/assets/images/invisibility.webp';
 import WebDesign from '@/assets/images/diseñoWebAltoRen.webp';
 import Audit from '@/assets/images/diseñoyrediseñoweb.webp';
 
@@ -85,7 +85,7 @@ export const services: Service[] = [
       }
     ],
     image: SocialContent,
-    secondaryImage: SocialContentStruggled,
+    secondaryImage: InvisibilityProblem,
     alt: "Estrategia de Marca Personal y contenidos - Shine Agencia",
     seoDescription: "Descubre cómo construir una marca personal que atrae clientes ideales. Estrategias de contenido para fundadores y emprendedores",
     seoKeywords: [
@@ -112,22 +112,58 @@ export const services: Service[] = [
   },
   {
     slug: "diseno-web-estrategico",
-    title: "Diseño Web de Alto Rendimiento",
-    subtitle: "Construya su activo digital desde cero.",
+    title: "Diseño Web de Alto Rendimiento (Astro)",
+    subtitle: "Diseñamos y construimos tu activo digital desde cero con Astro Framework, ultrarrápido, seguro y eficiente, tu punto de partida para brillar.",
+    introText: "Sin presencia digital, te enfrentas a desafíos que frenan tu crecimiento:",
     tags: ["Astro Framework", "Alto Rendimiento", "Web Profesional", "SEO"],
-    problem: "La mayoría de las páginas web son lentas, difíciles de mantener y no convierten visitantes en clientes de manera efectiva.",
-    content: "Para quienes buscan una presencia digital impecable desde el primer día. Creamos sitios web ultrarrápidos, seguros y diseñados para convertir con la tecnología Astro, asegurando una base sólida para su crecimiento online.",
+    problem: "¿Estás dejando pasar oportunidades por no tener la base digital adecuada?",
+    content: "Creamos sitios web ultrarrápidos, seguros y optimizados con Astro Framework para empresas/emprendedores que necesitan una presencia digital sólida desde cero.",
+    benefitsTitle: "Tu base digital para un crecimiento sin límites",
+    benefitsIntro: "Construimos tu futuro digital con herramientas de vanguardia.",
+    audienceTitle: "¿Para quién es este servicio?",
+    audienceIntro: "Este servicio es para ti si:",
     benefits: [
-      "Páginas hasta 40% más rápidas que la competencia",
-      "Tecnología moderna con Astro framework para máxima eficiencia",
-      "Diseño que convierte visitantes en clientes",
-      "Sitio web que trabaja por tu marca las 24 horas"
+      "Astro (El Corazón del Rendimiento): Un framework web innovador que genera sitios estáticos ultrarrápidos. Ideal para SEO y una experiencia de usuario fluida.",
+      "Tailwind CSS (El Estilo a Medida): Diseños elegantes y 100% personalizados con eficiencia sin precedentes.",
+      "Cloudflare / Netlify: Velocidad asombrosa a nivel mundial y una capa de seguridad extra contra ataques.",
+      "Sitios hasta 40% más rápidos que soluciones tradicionales para mejor SEO y experiencia de usuario."
+    ],
+    checkMarks: [
+      "No tienes web profesional o estás empezando de cero.",
+      "Buscas una inversión estratégica en una nueva web.",
+      "Quieres una web que sea una herramienta de ventas activa.",
+      "Valoras velocidad, seguridad y eficiencia al máximo.",
+      "Deseas posicionar tu marca como innovadora."
+    ],
+    hurts: [
+      "Invisibilidad y Oportunidades Perdidas: Tu talento y tus soluciones no llegan a quienes las necesitan.",
+      "Credibilidad Comprometida: Una primera impresión digital deficiente erosiona la confianza.",
+      "Frenos al Crecimiento: Soluciones rápidas o de baja calidad te condenan a problemas técnicos constantes y altos costos ocultos."
+    ],
+    process: [
+      {
+        title: 'Estrategia y Arquitectura',
+        description: 'Definimos los objetivos, estructura de contenidos y experiencia de usuario ideal para tu negocio.'
+      },
+      {
+        title: 'Desarrollo Ágil Con Astro',
+        description: 'Construimos tu sitio con tecnología de vanguardia para máxima velocidad y rendimiento.'
+      },
+      {
+        title: 'Diseño UX/UI Conversión',
+        description: 'Creamos interfaces atractivas y funcionales diseñadas para convertir visitantes en clientes.'
+      },
+      {
+        title: 'SEO, Pruebas y Lanzamiento',
+        description: 'Optimización SEO para buscadores, Test de funcionalidad en diferentes dispositivos, Publicamos tu sitio.'
+      }
     ],
     image: WebDesign,
-    alt: "Diseño y Optimización Web Estratégica con Astro framework - Shine Agencia",
-    seoDescription: "Creamos sitios web ultrarrápidos, seguros y optimizados con Astro framework para líderes que necesitan una presencia digital sólida desde cero.",
+    secondaryImage: InvisibilityProblem,
+    alt: "Diseño Web de Alto Rendimiento con Astro framework - Shine Agencia",
+    seoDescription: "Creamos sitios web ultrarrápidos, seguros y optimizados con Astro Framework para líderes que necesitan una presencia digital sólida desde cero. ¡Agenda tu diagnóstico gratuito!",
     seoKeywords: [
-      "diseño web con Astro framework Colombia",
+      "diseño web con Astro Framework Colombia",
       "desarrollo web de alto rendimiento",
       "agencia de diseño web Bogotá",
       "crear página web profesional desde cero",
@@ -142,25 +178,67 @@ export const services: Service[] = [
       "mejorar velocidad de carga de mi nueva web",
       "diseño web para startups en Colombia"
     ],
-    focusKeyword: "desarrollo web de alto rendimiento"
+    focusKeyword: "diseño web con Astro Framework"
   },
   {
     slug: "rediseño-web-estrategico",
     title: "Optimización y Rediseño Estratégico",
-    subtitle: "Active el potencial oculto de su sitio web actual",
+    subtitle: "Transformamos tu sitio web actual en una máquina de leads y ventas, sin empezar de cero.",
+    introText: "¿Invertiste en una web pero no ves resultados? No necesitas una nueva, necesitas una estrategia.",
     tags: ["Rediseño Web", "Optimización UX", "Web que No Vende", "Conversiones"],
-    problem: "Inviertes en marketing digital pero no ves resultados claros. No sabes qué está fallando ni por dónde empezar a optimizar.",
+    problem: "¿Tu web actual es un gasto, no una inversión?",
     content: "Si ya tiene una web, pero no genera los resultados esperados, nosotros la transformamos. Optimizamos su diseño, velocidad, SEO y conversión para que su inversión digital finalmente trabaje para su negocio.",
+    benefitsTitle: "Transforma tu web de un gasto a tu mejor vendedor 24/7",
+    benefitsIntro: "En Shine, te ayudamos a:",
+    audienceTitle: "Este servicio es ideal para líderes que...",
+    audienceIntro: "",
     benefits: [
-      "Auditoría Profunda: Identificamos puntos débiles y oportunidades.",
-      "Estrategia de Rediseño: Planificamos la mejora de UX, UI y contenido.",
-      "Implementación Técnica: Optimizamos código, velocidad y seguridad (usando Astro/stack si aplica).",
-      "Optimización SEO y Contenidos: Ajustamos para mayor visibilidad y relevancia.",
-      "Pruebas y Lanzamiento: Aseguramos un rendimiento impecable y medimos los resultados."
+      "Conversión Optimizada: Convertimos más visitantes en leads y clientes.",
+      "Diseño Moderno y Funcional: Actualiza tu imagen y mejora la experiencia del usuario.",
+      "Velocidad y Seguridad Mejoradas: Impulsa tu SEO y la confianza de tus visitantes.",
+      "Estrategia de Contenidos y SEO: Atrae tráfico cualificado y relevante.",
+      "Paz Mental: Deja los problemas técnicos en manos expertas y enfócate en tu negocio."
+    ],
+    checkMarks: [
+      "Ya tienen una web, pero no les está generando el ROI esperado.",
+      "Sienten que el diseño o la funcionalidad de su sitio están desactualizados.",
+      "Experimentan problemas de velocidad, seguridad o rendimiento técnico.",
+      "Buscan maximizar su inversión existente en lugar de empezar de cero.",
+      "Quieren una estrategia clara para atraer y convertir clientes a través de su web."
+    ],
+    hurts: [
+      "Bajo Rendimiento: Visitas sin conversiones, objetivos no alcanzados.",
+      "Diseño Obsoleto: No proyecta profesionalismo ni confianza.",
+      "Lentitud y Problemas Técnicos: Mal SEO, usuarios frustrados, mantenimiento constante.",
+      "Falta de Estrategia: Contenido sin impacto, llamadas a la acción ineficaces.",
+      "Pérdida de Inversión: Sientes que tu dinero en la web no ha valido la pena."
+    ],
+    process: [
+      {
+        title: 'Auditoría Profunda',
+        description: 'Identificamos puntos débiles y oportunidades en tu sitio actual.'
+      },
+      {
+        title: 'Estrategia de Rediseño',
+        description: 'Planificamos la mejora de UX, UI y contenido basándonos en los hallazgos.'
+      },
+      {
+        title: 'Implementación Técnica',
+        description: 'Optimizamos código, velocidad y seguridad (usando Astro/stack si aplica).'
+      },
+      {
+        title: 'Optimización SEO y Contenidos',
+        description: 'Ajustamos para mayor visibilidad y relevancia en buscadores.'
+      },
+      {
+        title: 'Pruebas y Lanzamiento',
+        description: 'Aseguramos un rendimiento impecable y medimos los resultados.'
+      }
     ],
     image: Audit,
+    secondaryImage: InvisibilityProblem,
     alt: "Optimización y Rediseño Estratégico Web - Shine Agencia",
-    seoDescription: "Análisis profundo para mejora, optimización, rediseño y activación de sitios web existentes",
+    seoDescription: "¿Tu web no genera resultados? En Shine, optimizamos y rediseñamos tu plataforma actual para mejorar conversiones, velocidad y SEO. ¡Agenda tu auditoría gratuita!",
     seoKeywords: [
       "optimización web estratégica",
       "rediseño web estratégico",

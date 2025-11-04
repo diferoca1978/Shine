@@ -8,8 +8,9 @@ import StarIcon from "@/assets/icons/star40x40.svg";
 import ServicesStepsProcess from "@/components/section/services/ServicesStepsProcess.astro";
 import ServiceProblemSection from "@/components/section/services/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/services/ServiceSolutionSection.astro";
+import ServiceTechStack from "@/components/section/services/serviceTechStack.astro";
 
-const service = getServiceBySlug("marca-personal");
+const service = getServiceBySlug("diseno-web-estrategico");
 
 if (!service) {
   return Astro.redirect("/404");
@@ -19,21 +20,21 @@ if (!service) {
 <ServiceLayout service={service}>
   <!-- Hero -->
   <GlobalHero
-    titleLine1="Deja de ser el secreto mejor guardado de tu industria"
-    titleLine2=""
-    subtitleBefore="Convierte tu experiencia en"
-    subtitleHighlight="autoridad digital"
-    subtitleAfter="que atrae a tus clientes ideales"
-    descriptionLine1="Si tu valor no se comunica o te cuesta atraer clientes, te damos la hoja de ruta para que tu marca personal y tu contenido trabajen para ti."
+    titleLine1="Es el momento de crear"
+    titleLine2="la web que tu visión de negocio merece"
+    subtitleBefore="Diseñamos y construimos tu activo digital desde cero"
+    subtitleHighlight="con Astro Framework"
+    subtitleAfter="ultrarrápido, seguro y eficiente"
+    descriptionLine1="Creamos sitios web ultrarrápidos, seguros y optimizados para empresas/emprendedores que necesitan una presencia digital sólida desde cero."
   >
     <Button
       slot="cta"
-      href="/servicios"
+      href="/contacto"
       variant="primary"
       animation={true}
       className="w-fit mx-auto"
     >
-      Agenda tu Diagnóstico Estratégico <StarIcon />
+      Agenda tu Diagnóstico Web Gratuito <StarIcon />
     </Button>
   </GlobalHero>
   <!-- Problem -->
@@ -43,7 +44,7 @@ if (!service) {
     imageAlt={service.alt}
     introText={service.introText!}
     problems={service.hurts!}
-    imagePosition="left"
+    imagePosition="right"
   />
   <!-- Solution -->
   <ServiceSolutionSection
@@ -61,22 +62,24 @@ if (!service) {
       animation={true}
       className="w-fit mx-auto"
     >
-      Quiero que mi marca personal brille <StarIcon />
+      Descubre la diferencia Astro <StarIcon />
     </Button>
   </ServiceSolutionSection>
 
+  <ServiceTechStack />
+
   <!-- Our process -->
   <ServicesStepsProcess
-    titleLine1="Así creamos tu camino hacia"
-    titleLine2="la autoridad y el impacto"
+    titleLine1="De la visión al lanzamiento:"
+    titleLine2="Así creamos tu activo digital desde cero"
     service={service}
   />
   <!-- CTA -->
   <div class="px-2">
     <CTABanner
-      title="Es hora de que tu luz no sea un secreto."
-      description={`No pospongas más el impacto que puedes tener.`}
-      buttonText="Empecemos a trazar tu estrategia"
+      title="No te conformes con menos. Tu negocio merece una web extraordinaria."
+      description={`Tu primera gran impresión digital es crucial.`}
+      buttonText="Empecemos a construir tu futuro digital"
       buttonHref="/contacto"
       variant="default"
       className="max-w-6xl mx-auto"

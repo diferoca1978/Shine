@@ -26,7 +26,7 @@ export function gsapProblemAnimation() {
 
   .to("#problem-image", {
     opacity: 1,
-    rotate: 360,
+    yPercent: 5,
     duration: 1,
     ease: "back",
   },"+=0.5")
