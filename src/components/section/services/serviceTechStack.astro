@@ -3,34 +3,96 @@ import AstroIcon from "@/assets/icons/astro.svg";
 import NetlifyIcon from "@/assets/icons/netlify.svg";
 import TailwindIcon from "@/assets/icons/tailwindcss.svg";
 import CloudflareIcon from "@/assets/icons/cloudflare.svg";
+
+const techStack = [
+  {
+    icon: AstroIcon,
+    href: "https://astro.build/",
+  },
+  {
+    icon: TailwindIcon,
+    href: "https://tailwindcss.com/",
+  },
+  {
+    icon: NetlifyIcon,
+    href: "https://netlify.com/",
+  },
+  {
+    icon: CloudflareIcon,
+    href: "https://cloudflare.com/",
+  },
+];
 ---
 
-<section class="techStack-section">
-  <!-- Slider main container -->
-  <div class="swiper">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-      <!-- Slides -->
-      <div class="swiper-slide">
-        <a href="https://astro.build/">
-          <AstroIcon />
-        </a>
-      </div>
-      <div class="swiper-slide">
-        <a href="https://tailwindcss.com/">
-          <TailwindIcon />
-        </a>
-      </div>
-      <div class="swiper-slide">
-        <a href="https://netlify.com/">
-          <NetlifyIcon />
-        </a>
-      </div>
-      <div class="swiper-slide">
-        <a href="https://cloudflare.com/">
-          <CloudflareIcon />
-        </a>
+<section class="techStack-section max-w-6xl mx-auto py-10 lg:py-20">
+  <!-- container -->
+  <div class="stack-container">
+    <!-- Hero -->
+    <div class="stack-hero opacity-0">
+      <div class="flex flex-col items-center justify-center mb-10">
+        <h2 class="text-[min(10vw,42px)] font-playfair text-center">
+          Detrás de tu web de alto rendimiento:
+          <span class="block">Nuestro Stack Tecnológico</span>
+        </h2>
       </div>
     </div>
+    <!-- Logoswrapper -->
+    <div class="stack-wrapper flex flex-col items-center justify-center mb-10">
+      <!-- tech -->
+      <span class="tech-rotator lg:py-4">
+        {
+          techStack.map((tech) => (
+            <a href={tech.href} target="_blank" rel="noopener noreferrer">
+              <tech.icon class="w-48 lg:w-auto" />
+            </a>
+          ))
+        }
+      </span>
+    </div>
+    <!-- Paragraph -->
+    <div class="stack-paragraph max-w-2xl mx-auto">
+      <p class="text-center font-openSans text-lg">
+        Construimos tu futuro digital con herramientas de vanguardia,
+        seleccionadas por su velocidad, seguridad y eficiencia. Olvídate de los
+        sistemas pesados y vulnerables; bienvenido a la potencia de la web
+        moderna
+      </p>
+    </div>
+    <!-- Stack-->
+    <div></div>
   </div>
 </section>
+
+<style>
+  .tech-rotator {
+    position: relative;
+    display: inline-block;
+    line-height: 1.1;
+    height: 6rem;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+  }
+
+  .tech-rotator > a {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    height: 6rem;
+    width: max-content;
+    visibility: hidden;
+  }
+
+  .tech-rotator.loaded > a {
+    visibility: visible;
+  }
+</style>
+
+<script>
+  import { servicesTechStackAnimation } from "@/utils/scripts/perPageAnimations/servicesAnimations/servicesTechStackAnimation";
+
+  document.removeEventListener("DOMContentLoaded", servicesTechStackAnimation);
+  document.addEventListener("DOMContentLoaded", servicesTechStackAnimation);
+</script>

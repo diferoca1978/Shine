@@ -118,15 +118,17 @@ export const services: Service[] = [
     tags: ["Astro Framework", "Alto Rendimiento", "Web Profesional", "SEO"],
     problem: "¿Estás dejando pasar oportunidades por no tener la base digital adecuada?",
     content: "Creamos sitios web ultrarrápidos, seguros y optimizados con Astro Framework para empresas/emprendedores que necesitan una presencia digital sólida desde cero.",
-    benefitsTitle: "Tu base digital para un crecimiento sin límites",
-    benefitsIntro: "Construimos tu futuro digital con herramientas de vanguardia.",
+    benefitsTitle: "Tu web, tu mejor vendedor 24/7",
+    benefitsIntro: "En shine te ayudamos a construir una web que:",
     audienceTitle: "¿Para quién es este servicio?",
     audienceIntro: "Este servicio es para ti si:",
     benefits: [
-      "Astro (El Corazón del Rendimiento): Un framework web innovador que genera sitios estáticos ultrarrápidos. Ideal para SEO y una experiencia de usuario fluida.",
-      "Tailwind CSS (El Estilo a Medida): Diseños elegantes y 100% personalizados con eficiencia sin precedentes.",
-      "Cloudflare / Netlify: Velocidad asombrosa a nivel mundial y una capa de seguridad extra contra ataques.",
-      "Sitios hasta 40% más rápidos que soluciones tradicionales para mejor SEO y experiencia de usuario."
+      "Sea una herramienta de ventas activa.",
+      "Tenga un rendimiento excepcional, la velocidad y la experiencia fluida se traducen directamente en más conversiones.",
+      "Tenga SEO potenciado para que los motores de búsqueda puedan rastrear e indexar tu contenido instantáneamente.",
+      "Tenga un diseño 100% personalizado.",
+      "Sea segura y confiable.",
+      "Sea facilmente mantenible en el tiempo sin costos ocultos."
     ],
     checkMarks: [
       "No tienes web profesional o estás empezando de cero.",
@@ -197,7 +199,7 @@ export const services: Service[] = [
       "Diseño Moderno y Funcional: Actualiza tu imagen y mejora la experiencia del usuario.",
       "Velocidad y Seguridad Mejoradas: Impulsa tu SEO y la confianza de tus visitantes.",
       "Estrategia de Contenidos y SEO: Atrae tráfico cualificado y relevante.",
-      "Paz Mental: Deja los problemas técnicos en manos expertas y enfócate en tu negocio."
+      "Deja los problemas técnicos en manos expertas y enfócate en tu negocio."
     ],
     checkMarks: [
       "Ya tienen una web, pero no les está generando el ROI esperado.",
