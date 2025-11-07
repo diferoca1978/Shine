@@ -226,12 +226,8 @@ export const services: Service[] = [
         description: 'Optimizamos código, velocidad y seguridad (usando Astro/stack si aplica).'
       },
       {
-        title: 'Optimización SEO y Contenidos',
-        description: 'Ajustamos para mayor visibilidad y relevancia en buscadores.'
-      },
-      {
-        title: 'Pruebas y Lanzamiento',
-        description: 'Aseguramos un rendimiento impecable y medimos los resultados.'
+        title: 'SEO, Pruebas y Lanzamiento',
+        description: 'Ajustamos SEO y contenidos para buscadores, aseguramos rendimiento impecable, publicamos tu sitio y medimos resultados.'
       }
     ],
     image: Audit,
