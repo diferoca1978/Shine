@@ -330,8 +330,8 @@ export function generatePageSEO(options: {
     },
     twitter: {
       card: 'summary_large_image',
-      site: '@shine_web',
-      creator: '@shine_web',
+      site: '@shine_agencia',
+      creator: '@shine_agencia',
       title: fullTitle,
       description: options.description,
       image: COMPANY_INFO.url + (options.image || COMPANY_INFO.image)
@@ -383,8 +383,8 @@ export function generateServiceSEO(service: Service): SEOProps {
     },
     twitter: {
       card: 'summary_large_image',
-      site: '@shine_web',
-      creator: '@shine_web',
+      site: '@shine_agencia',
+      creator: '@shine_agencia',
       title: pageTitle,
       description: service.seoDescription,
       image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image)
@@ -477,79 +477,6 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
   };
 }
 
-// Universal Reviews Schema Generator
-export function generateReviewsSchema(reviews: Array<{
-  author: string;
-  text: string;
-  rating: number;
-  date?: Date | string | number; // Flexible date handling
-  position?: string;
-  company?: string;
-  image?: string;
-  platform?: string; // e.g., 'Google', 'Facebook', 'LinkedIn', 'Website'
-  verified?: boolean;
-}>): JSONLDSchema {
-  // Calculate aggregate rating
-  const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-  const averageRating = reviews.length > 0 ? (totalRating / reviews.length) : 0;
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': COMPANY_INFO.url + '#organizacion',
-    aggregateRating: reviews.length > 0 ? {
-      '@type': 'AggregateRating',
-      ratingValue: averageRating.toFixed(1),
-      reviewCount: reviews.length,
-      bestRating: 5,
-      worstRating: 1
-    } : undefined,
-    review: reviews.map(review => {
-      // Handle different date formats
-      let publishedDate: string | undefined;
-      if (review.date) {
-        if (review.date instanceof Date) {
-          publishedDate = review.date.toISOString();
-        } else if (typeof review.date === 'string') {
-          publishedDate = new Date(review.date).toISOString();
-        } else if (typeof review.date === 'number') {
-          // Assume Unix timestamp
-          publishedDate = new Date(review.date * 1000).toISOString();
-        }
-      }
-
-      return {
-        '@type': 'Review',
-        author: {
-          '@type': 'Person',
-          name: review.author,
-          image: review.image,
-          jobTitle: review.position,
-          worksFor: review.company ? {
-            '@type': 'Organization',
-            name: review.company
-          } : undefined
-        },
-        reviewBody: review.text,
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: review.rating,
-          bestRating: 5,
-          worstRating: 1
-        },
-        datePublished: publishedDate,
-        publisher: review.platform ? {
-          '@type': 'Organization',
-          name: review.platform
-        } : {
-          '@type': 'Organization',
-          name: COMPANY_INFO.name
-        }
-      };
-    })
-  };
-}
-
 // Specific generators for different platforms
 export function generateGoogleReviewsSchema(reviews: Array<{
   author_name: string;
@@ -571,48 +498,3 @@ export function generateGoogleReviewsSchema(reviews: Array<{
   return generateReviewsSchema(formattedReviews);
 }
 
-export function generateLinkedInRecommendationsSchema(recommendations: Array<{
-  recommender: string;
-  text: string;
-  position?: string;
-  company?: string;
-  date?: string;
-}>) {
-  const formattedReviews = recommendations.map(rec => ({  
-    author: rec.recommender,
-    text: rec.text,
-    rating: 5, // LinkedIn recommendations don't have ratings, assume 5 stars
-    date: rec.date,
-    position: rec.position,
-    company: rec.company,
-    platform: 'LinkedIn'
-  }));
-  
-  return generateReviewsSchema(formattedReviews);
-}
-
-// For manual/website testimonials
-export function generateTestimonialsSchema(testimonials: Array<{
-  author: string;
-  text: string;
-  rating?: number;
-  date?: Date;
-  position?: string;
-  company?: string;
-  image?: string;
-  verified?: boolean;
-}>): JSONLDSchema {
-  const formattedReviews = testimonials.map(testimonial => ({
-    author: testimonial.author,
-    text: testimonial.text,
-    rating: testimonial.rating || 5, // Default to 5 if no rating provided
-    date: testimonial.date,
-    position: testimonial.position,
-    company: testimonial.company,
-    image: testimonial.image,
-    platform: 'Website',
-    verified: testimonial.verified
-  }));
-  
-  return generateReviewsSchema(formattedReviews);
-}
