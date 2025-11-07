@@ -8,19 +8,19 @@ export type JSONLDSchema = Record<string, any>;
 export const COMPANY_INFO = {
   name: 'Shine',
   description: 'Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.',
-  url: 'https://shineagencia.com', // Replace with your actual domain
-  phone: '+57-3162560670', // Replace with actual phone
-  email: 'rocio.shineagencia@gmail.com', // Replace with actual email
+  url: 'https://shineagencia.com', // Replace with current domain
+  phone: '+57-3162560670', // Replace with current phone
+  email: 'rocio.shineagencia@gmail.com', // Replace with current email
   address: {
-    street: 'Bogotá, Colombia', // Replace with actual address
+    street: 'Bogotá, Colombia', // Replace with current address
     city: 'Bogotá',
     region: 'Cundinamarca',
-    postalCode: '110111', // Replace with actual postal code
+    postalCode: '110111', // Replace with current postal code
     country: 'Colombia'
   },
-  logo: '/images/shine-logo.svg', // Replace with actual logo path
-  image: '/images/shine-og-image.png', // Replace with actual OG image path
-  foundingDate: '2025', // Replace with actual founding date
+  logo: '/images/shine-logo.svg', // Replace with current logo path
+  image: '/images/shine-og-image.png', // Replace with current OG image path
+  foundingDate: '2025', // Replace with current founding date
   founders: ['Rocío', 'Diego'],
   socialMedia: {
     instagram: 'https://www.instagram.com/rochi.diego',
