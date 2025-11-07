@@ -38,8 +38,9 @@ const {
 
 // Generate seo props if not provided
 
-const finalSeoProps =
-	seoProps || (title && description)
+const finalSeoProps = seoProps
+	? seoProps
+	: title && description
 		? generatePageSEO({
 				title: title || "",
 				description: description || "",
