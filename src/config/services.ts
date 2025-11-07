@@ -181,7 +181,7 @@ export const services: Service[] = [
   },
   {
     slug: "rediseño-web-estrategico",
-    title: "Optimización y Rediseño Estratégico",
+    title: "Optimización y Rediseño web Estratégico",
     subtitle: "Transformamos tu sitio web actual en una máquina de leads y ventas, sin empezar de cero.",
     introText: "¿Invertiste en una web pero no ves resultados? No necesitas una nueva, necesitas una estrategia.",
     tags: ["Rediseño Web", "Optimización UX", "Web que No Vende", "Conversiones"],

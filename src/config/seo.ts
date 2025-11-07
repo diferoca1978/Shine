@@ -4,6 +4,29 @@ import { services } from './services';
 
 export type JSONLDSchema = Record<string, any>;
 
+// Centralized keyword configuration - Main SEO keywords for Shine
+export const MAIN_KEYWORDS = {
+  primary: [
+    'shine agencia digital',
+    'diseño web astro colombia',
+    'marketing digital auténtico bogotá'
+  ],
+  secondary: [
+    'agencia diseño web bogotá',
+    'rediseño web estratégico',
+    'estrategia marca personal',
+    'contenidos redes sociales',
+    'optimización web colombia'
+  ],
+  tertiary: [
+    'diseño web profesional',
+    'marketing digital introvertidos',
+    'transformación digital',
+    'sitios web alto rendimiento',
+    'agencia marketing auténtico'
+  ]
+};
+
 // Company base information
 export const COMPANY_INFO = {
   name: 'Shine',
@@ -58,10 +81,17 @@ export const DEFAULT_SEO: SEOProps = {
   },
   extend: {
     meta: [
-      
+
       { name: 'robots', content: 'index, follow' },
       { name: 'author', content: COMPANY_INFO.name },
-      { name: 'keywords', content: 'diseño web estratégico, marketing digital auténtico, rediseño web, optimización web, estrategia contenido redes sociales, auditoría marketing digital, presencia digital, branding auténtico, desarrollo web Bogotá, marketing digital introvertidos, transformación digital, sitios web profesionales, SEO, conversión web' },
+      {
+        name: 'keywords',
+        content: [
+          ...MAIN_KEYWORDS.primary,
+          ...MAIN_KEYWORDS.secondary,
+          ...MAIN_KEYWORDS.tertiary
+        ].join(', ')
+      },
       { name: 'theme-color', content: '#FFD97D' }, // Dorado acento
       { name: 'msapplication-TileColor', content: '#FFD97D' },
       { httpEquiv: 'Content-Language', content: 'es-CO' }
@@ -305,16 +335,33 @@ export function generatePageSEO(options: {
       title: fullTitle,
       description: options.description,
       image: COMPANY_INFO.url + (options.image || COMPANY_INFO.image)
+    },
+    extend: {
+      meta: [
+        {
+          name: 'keywords',
+          content: [
+            ...MAIN_KEYWORDS.primary,
+            ...MAIN_KEYWORDS.secondary
+          ].join(', ')
+        }
+      ]
     }
   };
 }
 
 export function generateServiceSEO(service: Service): SEOProps {
   const serviceUrl = `${COMPANY_INFO.url}/servicios/${service.slug}`;
-  
+
   const pageTitle = `${service.title} | ${COMPANY_INFO.name}`;
 
-  const keywordsString = service.seoKeywords.join(', ');
+  // Combine service-specific keywords with main brand keywords for consistency
+  const allKeywords = [
+    ...service.seoKeywords,
+    ...MAIN_KEYWORDS.primary
+  ];
+
+  const keywordsString = allKeywords.join(', ');
 
   return {
     title: pageTitle,
