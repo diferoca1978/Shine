@@ -6,7 +6,7 @@ export type JSONLDSchema = Record<string, any>;
 export const COMPANY_INFO = {
   name: 'Shine',
   description: 'Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.',
-  url: 'https://shine-web.com', // Replace with your actual domain
+  url: 'https://shineagencia.com', // Replace with your current domain
   phone: '+57-3162560670', // Replace with actual phone
   email: 'rocio.shineagencia@gmail.com', // Replace with actual email
   address: {
@@ -48,8 +48,8 @@ export const DEFAULT_SEO: SEOProps = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@shine_web',
-    creator: '@shine_web',
+    site: '@shine_agencia',
+    creator: '@shine_agencia',
     title: 'Shine | Transformamos tu presencia digital con propósito',
     description: COMPANY_INFO.description,
     image: COMPANY_INFO.url + COMPANY_INFO.image
@@ -73,7 +73,7 @@ export const ORGANIZATION_SCHEMA = {
   '@type': 'Organization',
   '@id': COMPANY_INFO.url + '#organizacion',
   name: COMPANY_INFO.name,
-  alternateName: 'Shine Web',
+  alternateName: 'Shine Agencia | Transformamos tu presencia digital con propósito',
   description: COMPANY_INFO.description,
   url: COMPANY_INFO.url,
   logo: COMPANY_INFO.url + COMPANY_INFO.logo,
@@ -97,7 +97,7 @@ export const ORGANIZATION_SCHEMA = {
   sameAs: [
     COMPANY_INFO.socialMedia.instagram,
     COMPANY_INFO.socialMedia.linkedin,
-    COMPANY_INFO.socialMedia.facebook
+    COMPANY_INFO.socialMedia.tiktok
   ],
   serviceType: 'Servicios de Marketing Digital y Diseño Web',
   areaServed: {
@@ -118,7 +118,7 @@ export const ORGANIZATION_SCHEMA = {
     'Experiencia de Usuario',
     'Conversión Web'
   ],
-  mission: 'Acompañamos a profesionales brillantes a transformar su presencia digital sin sacrificar su esencia, guiados por principios eternos de servicio y excelencia.',
+  mission: 'Acompañamos a Empresas, empresarios, profesionales y emprendedores a transformar su presencia digital sin sacrificar su esencia, guiados por principios eternos de servicio y excelencia.',
   values: [
     'Autenticidad',
     'Propósito',
@@ -204,12 +204,12 @@ export const ORGANIZATION_SCHEMA = {
   brand: {
     '@type': 'Brand',
     name: 'Shine',
-    description: 'Marca de transformación digital que ayuda a profesionales a brillar con autenticidad',
+    description: 'Marca de transformación digital que ayuda a Empresas, empresarios, profesionales y emprendedores a brillar con autenticidad',
     logo: COMPANY_INFO.url + COMPANY_INFO.logo
   },
   targetAudience: {
     '@type': 'Audience',
-    audienceType: 'Profesionales y emprendedores introvertidos',
+    audienceType: 'Empresas, empresarios, profesionales y emprendedores introvertidos',
     description: 'Profesionales brillantes que buscan crecer digitalmente sin perder su esencia auténtica'
   }
 };
@@ -220,7 +220,7 @@ export const WEBSITE_SCHEMA = {
   '@type': 'WebSite',
   '@id': COMPANY_INFO.url + '#website',
   name: COMPANY_INFO.name,
-  alternateName: 'Shine Web',
+  alternateName: 'Shine Agencia | Transformamos tu presencia digital con propósito',
   description: COMPANY_INFO.description,
   url: COMPANY_INFO.url,
   inLanguage: 'es-CO',
