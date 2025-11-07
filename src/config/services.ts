@@ -31,7 +31,6 @@ export interface Service {
     seoDescription: string;
     seoKeywords: string[]; // Primary keywords for meta tags
     secondaryKeywords?: string[]; // Secondary/long-tail keywords for content optimization
-    focusKeyword: string;
 }
 
 export const services: Service[] = [
@@ -108,7 +107,6 @@ export const services: Service[] = [
       "atraer clientes de alto valor",
       "crear contenido que vende"
     ],
-    focusKeyword: "estrategia de marca personal y contenidos"
   },
   {
     slug: "diseno-web-estrategico",
@@ -180,7 +178,6 @@ export const services: Service[] = [
       "mejorar velocidad de carga de mi nueva web",
       "diseño web para startups en Colombia"
     ],
-    focusKeyword: "diseño web con Astro Framework"
   },
   {
     slug: "rediseño-web-estrategico",
@@ -261,7 +258,6 @@ export const services: Service[] = [
       "agencia de optimización web",
       "optimización de la experiencia de usuario (UX)"
     ],
-    focusKeyword: "optimización web estratégica"
   }
 ]
 
