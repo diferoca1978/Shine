@@ -65,7 +65,7 @@ export const foundationsRotatorAnimation = () => {
     const rotatorTimeline = gsap.timeline({
       repeat: -1,
       defaults: { duration: 1, ease: "power2.out" }
-    }).timeScale(0.6); // Adjust global speed (1.0 normal, 0.6 slower)
+    }).timeScale(0.5); // Adjust global speed (1.0 normal, 0.6 slower)
 
     // 5) For each step: next enters and current exits with overlap
     for (let i = 0; i < items.length - 1; i++) {

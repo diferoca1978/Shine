@@ -8,7 +8,7 @@ export type JSONLDSchema = Record<string, any>;
 export const COMPANY_INFO = {
   name: 'Shine',
   description: 'Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.',
-  url: 'https://shine-web.com', // Replace with your actual domain
+  url: 'https://shineagencia.com', // Replace with your actual domain
   phone: '+57-3162560670', // Replace with actual phone
   email: 'rocio.shineagencia@gmail.com', // Replace with actual email
   address: {
@@ -99,7 +99,7 @@ export const ORGANIZATION_SCHEMA = {
   sameAs: [
     COMPANY_INFO.socialMedia.instagram,
     COMPANY_INFO.socialMedia.linkedin,
-    COMPANY_INFO.socialMedia.facebook
+    COMPANY_INFO.socialMedia.tiktok
   ],
   serviceType: 'Servicios de Marketing Digital y Diseño Web',
   areaServed: {
@@ -311,8 +311,8 @@ export function generatePageSEO(options: {
 
 export function generateServiceSEO(service: Service): SEOProps {
   const serviceUrl = `${COMPANY_INFO.url}/servicios/${service.slug}`;
-
-  const pageTitle = `${service.focusKeyword} | ${service.title} | ${COMPANY_INFO.name}`;
+  
+  const pageTitle = `${service.title} | ${COMPANY_INFO.name}`;
 
   const keywordsString = service.seoKeywords.join(', ');
 
