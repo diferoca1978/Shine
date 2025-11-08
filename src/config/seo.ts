@@ -477,12 +477,60 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
   };
 }
 
+// Base Reviews Schema generator
+export function generateReviewsSchema(reviews: Array<{
+  author: string;
+  text: string;
+  rating: number;
+  datePublished: number;
+  image?: string;
+  platform: string;
+}>): JSONLDSchema {
+  // Calculate aggregate rating
+  const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+  const averageRating = reviews.length > 0 ? totalRating / reviews.length : 0;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': COMPANY_INFO.url + '#organizacion-reviews',
+    name: COMPANY_INFO.name,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: averageRating.toFixed(1),
+      reviewCount: reviews.length,
+      bestRating: '5',
+      worstRating: '1'
+    },
+    review: reviews.map(review => ({
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: review.author,
+        ...(review.image && { image: review.image })
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: review.rating,
+        bestRating: '5',
+        worstRating: '1'
+      },
+      reviewBody: review.text,
+      datePublished: new Date(review.datePublished * 1000).toISOString(),
+      publisher: {
+        '@type': 'Organization',
+        name: review.platform
+      }
+    }))
+  };
+}
+
 // Specific generators for different platforms
 export function generateGoogleReviewsSchema(reviews: Array<{
   author_name: string;
   text: string;
   rating: number;
-  time: number;
+  datePublished: number;
   author_url?: string;
   profile_photo_url?: string;
 }>): JSONLDSchema {
@@ -490,11 +538,11 @@ export function generateGoogleReviewsSchema(reviews: Array<{
     author: review.author_name,
     text: review.text,
     rating: review.rating,
-    date: review.time,
+    datePublished: review.datePublished,
     image: review.profile_photo_url,
     platform: 'Google'
   }));
-  
+
   return generateReviewsSchema(formattedReviews);
 }
 
