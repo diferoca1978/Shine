@@ -1,0 +1,67 @@
+---
+import { mockGoogleReviews } from "../../data/mockGoogleReviews";
+import { generateGoogleReviewsSchema } from "../../config/seo";
+import GoogleLogo from "@/assets/icons/googleLogo.svg";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const reviews = mockGoogleReviews;
+
+const schema = generateGoogleReviewsSchema(reviews);
+
+const satisfactionCount = reviews.filter((review) => review.rating >= 4).length;
+
+const averageRating =
+  reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
+
+const formatDate = (timetamp: number) => {
+  return new Date(timetamp * 1000).toLocaleDateString("es-CO", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<section class="social-proof max-w-6xl mx-auto pb-10 lg:pb-20">
+  <div class="reviews-wrapper flex flex-col items-center">
+    <h2
+      class="section-title text-[min(10vw,42px)] font-playfair text-smokyBlack leading-tight tracking-tight mb-8"
+    >
+      {title}
+    </h2>
+    <div
+      class="average-rating grid grid-cols-1 md:grid-cols-2 border-t border-smokyBlack/70 p-6"
+    >
+      <div
+        class="rating flex flex-col justify-center items-center px-8 gap-2 border-b md:border-b-0 md:border-r border-smokyBlack/40 pb-4 md:pb-0"
+      >
+        <span
+          class="rating-value flex items-center text-5xl text-smokyBlack/80 font-bold font-openSans"
+          >{averageRating}</span
+        >
+        <span class="rating-text text-smokyBlack/80 font-openSans"
+          >Promedio calificaciones <GoogleLogo
+            class="inline-block w-12 h-12"
+          /></span
+        >
+      </div>
+      <div
+        class="satisfaction-count flex flex-col justify-center items-center gap-2 mt-4 md:mt-0"
+      >
+        <span class="count text-5xl text-smokyBlack/80 font-bold font-openSans"
+          >{satisfactionCount}+</span
+        >
+        <span class="text-smokyBlack/80 font-openSans"
+          >Clientes satisfechos</span
+        >
+      </div>
+    </div>
+  </div>
+</section>
