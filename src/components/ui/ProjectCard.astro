@@ -11,13 +11,12 @@ interface Props {
 const { project, className = "", style } = Astro.props;
 const { data } = project;
 const { image, link, stack, title } = data;
-
 ---
 
 <li class:list={["flex flex-col", className]} style={style}>
   <a href={link} target="_blank" aria-label={`Project ${title}`}>
     <Image
-      class="h-[25rem] rounded-md object-cover lg:rounded-lg"
+      class="h-100 rounded-md object-cover lg:rounded-lg"
       src={image}
       alt={title}
     />

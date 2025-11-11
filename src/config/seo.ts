@@ -1,4 +1,5 @@
 import type { SEOProps } from 'astro-seo';
+import type { ImageMetadata } from 'astro';
 import type { Service } from './services';
 import { services } from './services';
 
@@ -532,14 +533,14 @@ export function generateGoogleReviewsSchema(reviews: Array<{
   rating: number;
   datePublished: number;
   author_url?: string;
-  profile_photo_url?: string;
+  profile_photo_url: ImageMetadata;
 }>): JSONLDSchema {
   const formattedReviews = reviews.map(review => ({
     author: review.author_name,
     text: review.text,
     rating: review.rating,
     datePublished: review.datePublished,
-    image: review.profile_photo_url,
+    image: review.profile_photo_url.src,
     platform: 'Google'
   }));
 
