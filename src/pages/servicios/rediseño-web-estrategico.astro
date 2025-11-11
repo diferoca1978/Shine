@@ -8,6 +8,7 @@ import StarIcon from "@/assets/icons/star40x40.svg";
 import ServicesStepsProcess from "@/components/section/services/ServicesStepsProcess.astro";
 import ServiceProblemSection from "@/components/section/services/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/services/ServiceSolutionSection.astro";
+import SocialProof from "@/components/global/SocialProof.astro";
 
 const service = getServiceBySlug("rediseño-web-estrategico");
 
@@ -70,6 +71,12 @@ if (!service) {
     titleLine1="Nuestro enfoque para"
     titleLine2="revitalizar tu plataforma digital"
     service={service}
+  />
+  <!-- Social proof -->
+  <SocialProof
+    titleLine1="Líderes que transformaron su web en una"
+    titleLine2="herramienta de éxito"
+    filterTag="rediseño web"
   />
   <!-- CTA -->
   <div class="px-2">

@@ -9,6 +9,7 @@ import ServicesStepsProcess from "@/components/section/services/ServicesStepsPro
 import ServiceProblemSection from "@/components/section/services/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/services/ServiceSolutionSection.astro";
 import ServiceTechStack from "@/components/section/services/serviceTechStack.astro";
+import SocialProof from "@/components/global/SocialProof.astro";
 
 const service = getServiceBySlug("diseno-web-estrategico");
 
@@ -63,6 +64,12 @@ if (!service) {
     titleLine1="De la visión al lanzamiento:"
     titleLine2="Así creamos tu activo digital desde cero"
     service={service}
+  />
+  <!-- Social proof -->
+  <SocialProof
+    titleLine1="La voz de líderes que confiaron en Shine"
+    titleLine2="para su base digital"
+    filterTag="diseño web"
   />
   <!-- CTA -->
   <div class="px-2">

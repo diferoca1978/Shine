@@ -2,14 +2,26 @@
 import { mockGoogleReviews } from "../../data/mockGoogleReviews";
 import { generateGoogleReviewsSchema } from "../../config/seo";
 import GoogleLogo from "@/assets/icons/googleLogo.svg";
+import LogoAguilar from "@/assets/images/logoaguilar.svg";
+import LogoZenith from "@/assets/images/logozenith.svg";
+import ReviewCard from "../ui/ReviewCard.astro";
 
 interface Props {
-  title: string;
+  titleLine1: string;
+  titleLine2?: string;
+  filterTag?: string;
+  limit?: number; // Maximum number of reviews to display
 }
 
-const { title } = Astro.props;
+const { titleLine1, titleLine2, filterTag, limit = 3 } = Astro.props;
 
-const reviews = mockGoogleReviews;
+const reviews = mockGoogleReviews.slice(0, limit);
+
+const filteredReviews = filterTag
+  ? mockGoogleReviews
+      .filter((review) => review.tag.includes(filterTag))
+      .slice(0, limit)
+  : reviews;
 
 const schema = generateGoogleReviewsSchema(reviews);
 
@@ -18,8 +30,8 @@ const satisfactionCount = reviews.filter((review) => review.rating >= 4).length;
 const averageRating =
   reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
 
-const formatDate = (timetamp: number) => {
-  return new Date(timetamp * 1000).toLocaleDateString("es-CO", {
+const formatDate = (timestamp: number) => {
+  return new Date(timestamp * 1000).toLocaleDateString("es-CO", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -30,26 +42,45 @@ const formatDate = (timetamp: number) => {
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 <section class="social-proof max-w-6xl mx-auto pb-10 lg:pb-20">
-  <div class="reviews-wrapper flex flex-col items-center">
+  <div class="reviews-wrapper flex flex-col items-center p-4">
     <h2
-      class="section-title text-[min(10vw,42px)] font-playfair text-smokyBlack leading-tight tracking-tight mb-8"
+      class="section-title text-[min(10vw,42px)] text-center font-playfair text-smokyBlack leading-tight tracking-tight mb-16"
     >
-      {title}
+      {titleLine1}
+      {titleLine2 && <span class="block">{titleLine2}</span>}
     </h2>
+    <!-- Reviews -->
+    <div class="reviews mb-8">
+      <div
+        class="review-wrapper flex flex-col lg:flex-row justify-between items-center gap-6 shrink-0"
+      >
+        {
+          filteredReviews.map((review) => (
+            <ReviewCard
+              reviewerLogo={review.profile_photo_url}
+              reviewerName={review.author_name}
+              review={review.text}
+              rating={review.rating}
+              tag={review.tag}
+            />
+          ))
+        }
+      </div>
+    </div>
+    <!-- Average rating -->
     <div
       class="average-rating grid grid-cols-1 md:grid-cols-2 border-t border-smokyBlack/70 p-6"
     >
       <div
-        class="rating flex flex-col justify-center items-center px-8 gap-2 border-b md:border-b-0 md:border-r border-smokyBlack/40 pb-4 md:pb-0"
+        class="rating flex flex-col justify-center items-center px-8 gap-1 border-b md:border-b-0 md:border-r border-smokyBlack/40 md:pb-0"
       >
         <span
           class="rating-value flex items-center text-5xl text-smokyBlack/80 font-bold font-openSans"
           >{averageRating}</span
         >
-        <span class="rating-text text-smokyBlack/80 font-openSans"
-          >Promedio calificaciones <GoogleLogo
-            class="inline-block w-12 h-12"
-          /></span
+        <span
+          class="rating-text flex items-center justify-center gap-2 text-smokyBlack/80 font-openSans"
+          >Promedio calificaciones <GoogleLogo class="w-10 h-10" /></span
         >
       </div>
       <div
