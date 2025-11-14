@@ -161,28 +161,9 @@ export const ORGANIZATION_SCHEMA = {
     itemListElement: services.map( service => ({
       '@type': 'Offer',
       itemOffered: {
-        '@type': 'Service',
-        '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#servicio`,
-        name: service.title,
-        description: service.content,
-        serviceType: service.title,
-        category: service.tags?.[0] || 'Marketing Digital y Diseño Web',
-        url:`${COMPANY_INFO.url}/servicios/${service.slug}`,
-        keywords: service.seoKeywords.join(', '),
-        ...(service.benefits && service.benefits.length > 0 && {benefits: service.benefits.join(', ')}),             
-      } 
+        '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`
+      }
     }))
-  },
-  brand: {
-    '@type': 'Brand',
-    name: 'Shine',
-    description: 'Marca de transformación digital que ayuda a Empresas, empresarios, profesionales y emprendedores a brillar con autenticidad',
-    logo: COMPANY_INFO.url + COMPANY_INFO.logo
-  },
-  targetAudience: {
-    '@type': 'Audience',
-    audienceType: 'Empresas, empresarios, profesionales y emprendedores introvertidos',
-    description: 'Profesionales brillantes que buscan crecer digitalmente sin perder su esencia auténtica'
   }
 };
 
