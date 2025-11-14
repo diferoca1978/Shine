@@ -1,6 +1,6 @@
 ---
 import Logo from "@/assets/images/logoshinewhitecharacters.svg";
-import { navBarLinksConst } from "@/utils/navigation";
+import { navBarLinksConst, servicesLinksConst } from "@/utils/navigation";
 import { COMPANY_INFO } from "@/config/seo";
 import InstagramIcon from "@/assets/icons/instagram.svg";
 import LinkedInIcon from "@/assets/icons/linkedin.svg";
@@ -8,6 +8,12 @@ import TikTokIcon from "@/assets/icons/tiktok.svg";
 import ArrowUpIcon from "@/assets/icons/arrowUp.svg";
 import WhatsAppIcon from "@/assets/icons/whatsapp.svg";
 import Button from "@/components/ui/button.astro";
+import DropdownIcon from "@/assets/icons/dropdown.svg";
+const currentPathRaw = decodeURIComponent(Astro.url.pathname);
+const currentPath =
+  currentPathRaw !== "/" && currentPathRaw.endsWith("/")
+    ? currentPathRaw.slice(0, -1)
+    : currentPathRaw;
 ---
 
 <footer class="w-full border-t border-softBeige/5 bg-smokyBlack relative mt-20">
@@ -80,17 +86,57 @@ import Button from "@/components/ui/button.astro";
         </h4>
         <ul class="space-y-3">
           {
-            navBarLinksConst.map((item) => (
-              <li>
-                <a
-                  href={item.path}
-                  class="text-softWhite hover:text-accentGold font-openSans transition-colors duration-300"
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))
+            navBarLinksConst
+              .filter((item) => item.path !== "/contacto")
+              .map((item) => (
+                <li>
+                  <a
+                    href={item.path}
+                    class="text-softWhite hover:text-accentGold font-openSans transition-colors duration-300"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))
           }
+          <div class="flex flex-col">
+            <a
+              href="#"
+              id="footer-services"
+              class="flex items-center space-x-2 text-softWhite font-openSans hover:text-accentGold transition-colors duration-200"
+              class:list={{
+                "underline underline-offset-3": currentPath === "/servicios",
+              }}
+              aria-current={currentPath === "/servicios" ? "page" : undefined}
+            >
+              <span> Servicios </span>
+              <DropdownIcon class="w-2 h-2" />
+            </a>
+            <div id="footer-services-dropdown" class="hidden mt-0.5">
+              <ul class="list-none space-y-1">
+                {
+                  servicesLinksConst.map((link) => (
+                    <li>
+                      <a
+                        href={link.path}
+                        class={`text-softWhite font-openSans ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
+                        aria-current={
+                          link.path === currentPath ? "page" : undefined
+                        }
+                      >
+                        {link.name}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+          <a
+            href="/contacto"
+            class="text-softWhite hover:text-accentGold font-openSans transition-colors duration-300"
+            >Contacto</a
+          >
         </ul>
       </div>
     </div>
@@ -152,21 +198,23 @@ import Button from "@/components/ui/button.astro";
         <div
           class="text-softWhite/40 font-openSans text-sm text-center md:text-left"
         >
-          © {new Date().getFullYear()}
-          {COMPANY_INFO.name}. Todos los derechos reservados.
+          <small
+            >&copy; {new Date().getFullYear()}
+            {COMPANY_INFO.name}. Todos los derechos reservados.</small
+          >
         </div>
         <div class="flex space-x-6 text-sm font-openSans">
           <a
             href="/politicadeprivacidad"
             class="text-softWhite/40 hover:text-accentGold transition-colors duration-300"
           >
-            Política de Privacidad
+            <small>Política de Privacidad </small>
           </a>
           <a
             href="/terminosycondiciones"
             class="text-softWhite/40 hover:text-accentGold transition-colors duration-300"
           >
-            Términos y Condiciones
+            <small>Términos y Condiciones</small>
           </a>
         </div>
       </div>
@@ -175,6 +223,8 @@ import Button from "@/components/ui/button.astro";
 </footer>
 
 <script>
+  import { footerServicesDropdownAnimation } from "@/utils/scripts/globalAnimations/servicesDropdownAnimation";
+  footerServicesDropdownAnimation();
   // Back to top functionality
   const backToTopButton = document.getElementById("back-to-top");
 

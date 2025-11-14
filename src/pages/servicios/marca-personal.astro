@@ -1,0 +1,91 @@
+---
+import ServiceLayout from "@/layouts/ServiceLayout.astro";
+import { getServiceBySlug, type Service } from "@/config/services";
+import CTABanner from "@/components/ui/CTABanner.astro";
+import GlobalHero from "@/components/global/GlobalHero.astro";
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
+import ServicesStepsProcess from "@/components/section/services/ServicesStepsProcess.astro";
+import ServiceProblemSection from "@/components/section/services/ServiceProblemSection.astro";
+import ServiceSolutionSection from "@/components/section/services/ServiceSolutionSection.astro";
+import SocialProof from "@/components/global/SocialProof.astro";
+
+const service = getServiceBySlug("marca-personal");
+
+if (!service) {
+  return Astro.redirect("/404");
+}
+---
+
+<ServiceLayout service={service}>
+  <!-- Hero -->
+  <GlobalHero
+    titleLine1="Deja de ser el secreto mejor guardado de tu industria"
+    titleLine2=""
+    subtitleBefore="Convierte tu experiencia en"
+    subtitleHighlight="autoridad digital"
+    subtitleAfter="que atrae a tus clientes ideales"
+    descriptionLine1="Si tu valor no se comunica o te cuesta atraer clientes, te damos la hoja de ruta para que tu marca personal y tu contenido trabajen para ti."
+  >
+    <Button
+      slot="cta"
+      href="/servicios"
+      variant="primary"
+      animation={true}
+      className="w-fit mx-auto"
+    >
+      Agenda tu Diagnóstico Estratégico <StarIcon />
+    </Button>
+  </GlobalHero>
+  <!-- Problem -->
+  <ServiceProblemSection
+    title={service.problem!}
+    image={service.secondaryImage}
+    imageAlt={service.alt}
+    introText={service.introText!}
+    problems={service.hurts!}
+    imagePosition="left"
+  />
+  <!-- Solution -->
+  <ServiceSolutionSection
+    benefitsTitle={service.benefitsTitle!}
+    benefitsIntro={service.benefitsIntro!}
+    benefits={service.benefits!}
+    audienceTitle={service.audienceTitle!}
+    audienceIntro={service.audienceIntro!}
+    checkmarks={service.checkMarks!}
+  >
+    <Button
+      slot="cta"
+      href="/contacto"
+      variant="primary"
+      animation={true}
+      className="w-fit mx-auto"
+    >
+      Quiero que mi marca personal brille <StarIcon />
+    </Button>
+  </ServiceSolutionSection>
+
+  <!-- Our process -->
+  <ServicesStepsProcess
+    titleLine1="Así creamos tu camino hacia"
+    titleLine2="la autoridad y el impacto"
+    service={service}
+  />
+  <!-- Social proof -->
+  <SocialProof
+    titleLine1="La voz de quienes ya brillan con propósito"
+    filterTag="marca personal"
+  />
+  <!-- CTA -->
+  <div class="px-2">
+    <CTABanner
+      title="Es hora de que tu luz no sea un secreto"
+      description={`No pospongas más el impacto que puedes tener.`}
+      buttonText="Empecemos a trazar tu estrategia"
+      buttonHref="/contacto"
+      variant="default"
+      className="max-w-6xl mx-auto"
+    />
+  </div>
+</ServiceLayout>

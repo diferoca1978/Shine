@@ -1,29 +1,16 @@
 ---
-import ContactForm from "@/components/ui/ContactForm.astro";
+import Form from "@/components/ui/ContactForm.astro";
 import Star from "@/assets/icons/star40x40.svg";
 import Rocket from "@/assets/images/rocket.webp";
 import { Image } from "astro:assets";
 ---
 
 <section class="contact-section w-full mx-auto">
-  <div class="text-center mx-auto py-10 lg:py-20">
-    <h1
-      class="text-[min(10vw,72px)] font-playfair font-bold text-smokyBlack mb-8"
-    >
-      Contacto
-    </h1>
-    <h2
-      class="text-[min(7vw,32px)] max-w-4xl mx-auto font-openSans italic text-smokyBlack"
-    >
-      Cuéntanos tu idea, solicita tu sesión de diagnóstico y da el primer paso
-      hacia tu visibilidad digital
-    </h2>
-  </div>
   <div
-    class="flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto gap-8"
+    class="flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto gap-4 md:gap-8"
   >
     <div class="md:w-1/2">
-      <div class="relative items-center justify-center hidden lg:flex">
+      <div class="relative items-center justify-center hidden md:flex">
         <!-- Random positioned stars -->
         <Star class="absolute top-18 left-20 animate-pulse" />
         <Star class="absolute top-32 right-16 animate-pulse delay-300" />
@@ -43,8 +30,8 @@ import { Image } from "astro:assets";
         />
       </div>
     </div>
-    <div id="contact-form" class="md:w-1/2 opacity-0">
-      <ContactForm />
+    <div id="contact-form" class="md:w-1/2 opacity-0 p-4 lg:p-0">
+      <Form />
     </div>
   </div>
 </section>
@@ -53,7 +40,7 @@ import { Image } from "astro:assets";
   import {
     contactRocketAnimation,
     launchRocket,
-  } from "@/utils/scripts/contactRocketAnimation.js";
+  } from "@/utils/scripts/perPageAnimations/contact/contactRocketAnimation";
 
   document.removeEventListener("DOMContentLoaded", contactRocketAnimation);
   document.addEventListener("DOMContentLoaded", contactRocketAnimation);

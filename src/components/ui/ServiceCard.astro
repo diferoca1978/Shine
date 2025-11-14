@@ -1,7 +1,9 @@
 ---
 import { Image } from "astro:assets";
+import Button from "./button.astro";
 
 interface Props {
+  slug: string;
   image: any;
   alt: string;
   title: string;
@@ -9,26 +11,25 @@ interface Props {
   tags: string[];
 }
 
-const { image, alt, title, description, tags } = Astro.props;
+const { slug, image, alt, title, description, tags } = Astro.props;
 ---
 
 <div
   class="service-card border border-smokyBlack/20 rounded-2xl p-1 h-full transition-all duration-300"
 >
-  <a
-    href="/servicios"
-    class="content-card bg-softBeige rounded-2xl p-2 h-full flex flex-col grayscale hover:-translate-y-2 hover:-translate-x-2 hover:shadow-smokyBlack/30 hover:shadow-2xl transition-all duration-300"
+  <div
+    class="content-card bg-softBeige rounded-2xl p-4 h-full flex flex-col grayscale hover:-translate-y-2 hover:-translate-x-2 hover:shadow-smokyBlack/30 hover:shadow-2xl transition-all duration-300"
   >
-    <div class="flex-shrink-0">
+    <div class="shrink-0">
       <Image
         src={image}
         alt={alt}
-        class="img w-full h-[20rem] rounded-md object-cover lg:rounded-lg hover:scale-105 transition-all duration-300"
+        class="img w-full h-80 rounded-md object-cover lg:rounded-lg hover:scale-105 transition-all duration-300"
       />
     </div>
     <div class="flex-1 flex flex-col justify-between p-4 min-h-0">
       <div class="space-y-3">
-        <div class="flex gap-2 flex-wrap min-h-[2rem] items-center">
+        <div class="flex gap-4 flex-wrap min-h-8 items-center">
           {
             tags.map((tag) => (
               <span class="tags rounded-2xl bg-accentGold px-2 text-sm">
@@ -44,8 +45,15 @@ const { image, alt, title, description, tags } = Astro.props;
       >
         {description}
       </p>
+      <Button
+        href={`/servicios/${slug}`}
+        className="mt-4 text-sm"
+        variant="optional1"
+      >
+        Ver más
+      </Button>
     </div>
-  </a>
+  </div>
 </div>
 
 <script>

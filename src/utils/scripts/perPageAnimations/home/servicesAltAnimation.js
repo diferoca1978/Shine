@@ -15,8 +15,8 @@ export const servicesAltAnimation = () => {
     scrollTrigger: {
       trigger: ".services-container",
       start: "top 30%",
+      once: true,
       markers: false,
-      toggleActions: "play none none reverse",
     },
   });
 

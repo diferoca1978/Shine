@@ -1,0 +1,85 @@
+---
+import ServiceLayout from "@/layouts/ServiceLayout.astro";
+import { getServiceBySlug, type Service } from "@/config/services";
+import CTABanner from "@/components/ui/CTABanner.astro";
+import GlobalHero from "@/components/global/GlobalHero.astro";
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
+import ServicesStepsProcess from "@/components/section/services/ServicesStepsProcess.astro";
+import ServiceProblemSection from "@/components/section/services/ServiceProblemSection.astro";
+import ServiceSolutionSection from "@/components/section/services/ServiceSolutionSection.astro";
+import ServiceTechStack from "@/components/section/services/serviceTechStack.astro";
+import SocialProof from "@/components/global/SocialProof.astro";
+
+const service = getServiceBySlug("diseno-web-estrategico");
+
+if (!service) {
+  return Astro.redirect("/404");
+}
+---
+
+<ServiceLayout service={service}>
+  <!-- Hero -->
+  <GlobalHero
+    titleLine1="Es el momento de crear"
+    titleLine2="la web que tu visión de negocio merece"
+    subtitleBefore="Diseñamos y construimos tu activo digital desde cero"
+    subtitleHighlight="con Astro Framework"
+    subtitleAfter="ultrarrápido, seguro y eficiente"
+    descriptionLine1="Creamos sitios web ultrarrápidos, seguros y optimizados para empresas/emprendedores que necesitan una presencia digital sólida desde cero."
+  >
+    <Button
+      slot="cta"
+      href="/contacto"
+      variant="primary"
+      animation={true}
+      className="w-fit mx-auto"
+    >
+      Agenda tu Diagnóstico Web Gratuito <StarIcon />
+    </Button>
+  </GlobalHero>
+  <!-- Problem -->
+  <ServiceProblemSection
+    title={service.problem!}
+    image={service.secondaryImage}
+    imageAlt={service.alt}
+    introText={service.introText!}
+    problems={service.hurts!}
+    imagePosition="right"
+  />
+  <!-- Solution -->
+  <ServiceSolutionSection
+    benefitsTitle={service.benefitsTitle!}
+    benefitsIntro={service.benefitsIntro!}
+    benefits={service.benefits!}
+    audienceTitle={service.audienceTitle!}
+    audienceIntro={service.audienceIntro!}
+    checkmarks={service.checkMarks!}
+  />
+
+  <ServiceTechStack />
+
+  <!-- Our process -->
+  <ServicesStepsProcess
+    titleLine1="De la visión al lanzamiento:"
+    titleLine2="Así creamos tu activo digital desde cero"
+    service={service}
+  />
+  <!-- Social proof -->
+  <SocialProof
+    titleLine1="La voz de líderes que confiaron en Shine"
+    titleLine2="para su base digital"
+    filterTag="diseño web"
+  />
+  <!-- CTA -->
+  <div class="px-2">
+    <CTABanner
+      title="No te conformes con menos. Tu negocio merece una web extraordinaria."
+      description={`Tu primera gran impresión digital es crucial.`}
+      buttonText="Empecemos a construir tu futuro digital"
+      buttonHref="/contacto"
+      variant="default"
+      className="max-w-6xl mx-auto"
+    />
+  </div>
+</ServiceLayout>

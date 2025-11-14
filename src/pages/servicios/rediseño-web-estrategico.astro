@@ -1,0 +1,92 @@
+---
+import ServiceLayout from "@/layouts/ServiceLayout.astro";
+import { getServiceBySlug, type Service } from "@/config/services";
+import CTABanner from "@/components/ui/CTABanner.astro";
+import GlobalHero from "@/components/global/GlobalHero.astro";
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
+import ServicesStepsProcess from "@/components/section/services/ServicesStepsProcess.astro";
+import ServiceProblemSection from "@/components/section/services/ServiceProblemSection.astro";
+import ServiceSolutionSection from "@/components/section/services/ServiceSolutionSection.astro";
+import SocialProof from "@/components/global/SocialProof.astro";
+
+const service = getServiceBySlug("rediseño-web-estrategico");
+
+if (!service) {
+  return Astro.redirect("/404");
+}
+---
+
+<ServiceLayout service={service}>
+  <!-- Hero -->
+  <GlobalHero
+    titleLine1="Tu web ya existe."
+    titleLine2="Ahora, haz que realmente funcione para tu negocio"
+    subtitleBefore="Transformamos tu sitio web actual en una"
+    subtitleHighlight="máquina de leads y ventas"
+    subtitleAfter="sin empezar de cero"
+    descriptionLine1="¿Invertiste en una web pero no ves resultados? No necesitas una nueva, necesitas una estrategia. Optimiza tu plataforma para convertir, mejorar tu SEO y proyectar la autoridad que tu marca merece."
+  >
+    <Button
+      slot="cta"
+      href="/contacto"
+      variant="primary"
+      animation={true}
+      className="w-fit mx-auto"
+    >
+      Agenda tu Auditoría Web Gratuita <StarIcon />
+    </Button>
+  </GlobalHero>
+  <!-- Problem -->
+  <ServiceProblemSection
+    title={service.problem!}
+    image={service.secondaryImage}
+    imageAlt={service.alt}
+    introText={service.introText!}
+    problems={service.hurts!}
+    imagePosition="left"
+  />
+  <!-- Solution -->
+  <ServiceSolutionSection
+    benefitsTitle={service.benefitsTitle!}
+    benefitsIntro={service.benefitsIntro!}
+    benefits={service.benefits!}
+    audienceTitle={service.audienceTitle!}
+    audienceIntro={service.audienceIntro!}
+    checkmarks={service.checkMarks!}
+  >
+    <Button
+      slot="cta"
+      href="/contacto"
+      variant="primary"
+      animation={true}
+      className="w-fit mx-auto"
+    >
+      Quiero optimizar mi web para resultados <StarIcon />
+    </Button>
+  </ServiceSolutionSection>
+
+  <!-- Our process -->
+  <ServicesStepsProcess
+    titleLine1="Nuestro enfoque para"
+    titleLine2="revitalizar tu plataforma digital"
+    service={service}
+  />
+  <!-- Social proof -->
+  <SocialProof
+    titleLine1="Líderes que transformaron su web en una"
+    titleLine2="herramienta de éxito"
+    filterTag="rediseño web"
+  />
+  <!-- CTA -->
+  <div class="px-2">
+    <CTABanner
+      title="No dejes que tu web sea un potencial desaprovechado."
+      description={`Es hora de que tu activo digital trabaje tan duro como tú. Descubre cómo podemos desbloquear su verdadero potencial.`}
+      buttonText="Revitaliza tu presencia online"
+      buttonHref="/contacto"
+      variant="default"
+      className="max-w-6xl mx-auto"
+    />
+  </div>
+</ServiceLayout>

@@ -18,7 +18,7 @@ const sortedWorks = allworks.sort(
   <div class="flex flex-col items-center justify-center text-center gap-4 mb-8">
     <div class="flex items-center">
       <Button
-        variant="optional"
+        variant="optional2"
         animation={true}
         className="py-1 px-4 rounded-4xl"
       >
@@ -154,7 +154,7 @@ const sortedWorks = allworks.sort(
 </section>
 
 <script>
-  import { latestProjectsAltAnimation } from "@/utils/scripts/latestProjectsAltAnimation.js";
+  import { latestProjectsAltAnimation } from "@/utils/scripts/perPageAnimations/home/latestProjectsAltAnimation.js";
 
   document.removeEventListener("DOMContentLoaded", latestProjectsAltAnimation);
   document.addEventListener("DOMContentLoaded", latestProjectsAltAnimation);

@@ -1,6 +1,32 @@
 import type { SEOProps } from 'astro-seo';
+import type { ImageMetadata } from 'astro';
+import type { Service } from './services';
+import { services } from './services';
 
 export type JSONLDSchema = Record<string, any>;
+
+// Centralized keyword configuration - Main SEO keywords for Shine
+export const MAIN_KEYWORDS = {
+  primary: [
+    'shine agencia digital',
+    'diseño web astro colombia',
+    'marketing digital auténtico bogotá'
+  ],
+  secondary: [
+    'agencia diseño web bogotá',
+    'rediseño web estratégico',
+    'estrategia marca personal',
+    'contenidos redes sociales',
+    'optimización web colombia'
+  ],
+  tertiary: [
+    'diseño web profesional',
+    'marketing digital introvertidos',
+    'transformación digital',
+    'sitios web alto rendimiento',
+    'agencia marketing auténtico'
+  ]
+};
 
 // Company base information
 export const COMPANY_INFO = {
@@ -10,15 +36,15 @@ export const COMPANY_INFO = {
   phone: '+57-3162560670', // Replace with actual phone
   email: 'rocio.shineagencia@gmail.com', // Replace with actual email
   address: {
-    street: 'Bogotá, Colombia', // Replace with actual address
+    street: 'Bogotá, Colombia', // Replace with current address
     city: 'Bogotá',
     region: 'Cundinamarca',
-    postalCode: '110111', // Replace with actual postal code
+    postalCode: '110111', // Replace with current postal code
     country: 'Colombia'
   },
-  logo: '/images/shine-logo.svg', // Replace with actual logo path
-  image: '/images/shine-og-image.png', // Replace with actual OG image path
-  foundingDate: '2025', // Replace with actual founding date
+  logo: '/images/shine-logo.svg', // Replace with current logo path
+  image: '/images/shine-og-image.png', // Replace with current OG image path
+  foundingDate: '2025', // Replace with current founding date
   founders: ['Rocío', 'Diego'],
   socialMedia: {
     instagram: 'https://www.instagram.com/rochi.diego',
@@ -56,10 +82,17 @@ export const DEFAULT_SEO: SEOProps = {
   },
   extend: {
     meta: [
-      
+
       { name: 'robots', content: 'index, follow' },
       { name: 'author', content: COMPANY_INFO.name },
-      { name: 'keywords', content: 'diseño web estratégico, marketing digital auténtico, rediseño web, optimización web, estrategia contenido redes sociales, auditoría marketing digital, presencia digital, branding auténtico, desarrollo web Bogotá, marketing digital introvertidos, transformación digital, sitios web profesionales, SEO, conversión web' },
+      {
+        name: 'keywords',
+        content: [
+          ...MAIN_KEYWORDS.primary,
+          ...MAIN_KEYWORDS.secondary,
+          ...MAIN_KEYWORDS.tertiary
+        ].join(', ')
+      },
       { name: 'theme-color', content: '#FFD97D' }, // Dorado acento
       { name: 'msapplication-TileColor', content: '#FFD97D' },
       { httpEquiv: 'Content-Language', content: 'es-CO' }
@@ -87,8 +120,10 @@ export const ORGANIZATION_SCHEMA = {
     addressLocality: COMPANY_INFO.address.city,
     addressRegion: COMPANY_INFO.address.region,
     postalCode: COMPANY_INFO.address.postalCode,
-    addressCountry: 'CO',
-    addressCountryName: 'Colombia'
+    addressCountry: {
+      '@type': 'Country',
+      name: 'Colombia'
+    }
   },
   founders: COMPANY_INFO.founders.map(founder => ({
     '@type': 'Person',
@@ -118,99 +153,17 @@ export const ORGANIZATION_SCHEMA = {
     'Experiencia de Usuario',
     'Conversión Web'
   ],
-  mission: 'Acompañamos a Empresas, empresarios, profesionales y emprendedores a transformar su presencia digital sin sacrificar su esencia, guiados por principios eternos de servicio y excelencia.',
-  values: [
-    'Autenticidad',
-    'Propósito',
-    'Servicio con valor',
-    'Crecimiento en unidad',
-    'Generosidad estratégica'
-  ],
+  slogan: 'No necesitas gritar para ser escuchado',
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Servicios de Transformación Digital Auténtica',
     description: 'Servicios especializados en diseño web estratégico y marketing digital para profesionales y empresas que buscan crecer con autenticidad',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Diseño Web Estratégico',
-          description: 'Creamos sitios web estratégicos centrados en el usuario, con flujos claros y optimizados para buscadores y conversiones',
-          serviceType: 'Web Design Service',
-          category: 'Diseño y Desarrollo Web',
-          serviceOutput: 'Sitio web profesional optimizado para conversiones',
-          benefits: [
-            'Experiencia de usuario intuitiva',
-            'Arquitectura de información clara',
-            'SEO técnico avanzado',
-            'Diseño profesional y coherente',
-            'Tecnología Astro Framework'
-          ]
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Rediseño y Optimización Web',
-          description: 'Rediseñamos y optimizamos tu web para ofrecer una experiencia de navegación actual, profesional y efectiva',
-          serviceType: 'Web Redesign Service',
-          category: 'Diseño y Desarrollo Web',
-          serviceOutput: 'Sitio web renovado con mejor rendimiento y conversiones'
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Auditoría de Marketing Digital',
-          description: 'Analizamos tus canales digitales y entregamos un plan de acción claro para optimizar resultados inmediatos',
-          serviceType: 'Digital Marketing Audit',
-          category: 'Marketing Digital',
-          serviceOutput: 'Informe detallado con plan de acción específico'
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Estrategia de Contenido para Redes Sociales',
-          description: 'Diseñamos un plan estratégico adaptado a tu voz, para generar autoridad sin sacrificar tu esencia',
-          serviceType: 'Social Media Strategy',
-          category: 'Marketing Digital',
-          serviceOutput: 'Plan estratégico de contenido personalizado',
-          benefits: [
-            'Calendario editorial adaptado',
-            'Mensajes alineados a tus valores',
-            'Mayor conexión emocional'
-          ]
-        }
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Optimización de Canales Digitales',
-          description: 'Optimizamos perfiles en Google Mi Negocio, WhatsApp y más, para fortalecer tu reputación online y facilitar la conversión',
-          serviceType: 'Digital Channel Optimization',
-          category: 'Marketing Digital',
-          serviceOutput: 'Perfiles digitales optimizados para conversión'
-        }
+    itemListElement: services.map( service => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`
       }
-    ]
-  },
-  slogan: 'No necesitas gritar para ser escuchado',
-  brand: {
-    '@type': 'Brand',
-    name: 'Shine',
-    description: 'Marca de transformación digital que ayuda a Empresas, empresarios, profesionales y emprendedores a brillar con autenticidad',
-    logo: COMPANY_INFO.url + COMPANY_INFO.logo
-  },
-  targetAudience: {
-    '@type': 'Audience',
-    audienceType: 'Empresas, empresarios, profesionales y emprendedores introvertidos',
-    description: 'Profesionales brillantes que buscan crecer digitalmente sin perder su esencia auténtica'
+    }))
   }
 };
 
@@ -353,11 +306,119 @@ export function generatePageSEO(options: {
     },
     twitter: {
       card: 'summary_large_image',
-      site: '@shine_web',
-      creator: '@shine_web',
+      site: '@shine_agencia',
+      creator: '@shine_agencia',
       title: fullTitle,
       description: options.description,
       image: COMPANY_INFO.url + (options.image || COMPANY_INFO.image)
+    },
+    extend: {
+      meta: [
+        {
+          name: 'keywords',
+          content: [
+            ...MAIN_KEYWORDS.primary,
+            ...MAIN_KEYWORDS.secondary
+          ].join(', ')
+        }
+      ]
+    }
+  };
+}
+
+export function generateServiceSEO(service: Service): SEOProps {
+  const serviceUrl = `${COMPANY_INFO.url}/servicios/${service.slug}`;
+
+  const pageTitle = `${service.title} | ${COMPANY_INFO.name}`;
+
+  // Combine service-specific keywords with main brand keywords for consistency
+  const allKeywords = [
+    ...service.seoKeywords,
+    ...MAIN_KEYWORDS.primary
+  ];
+
+  const keywordsString = allKeywords.join(', ');
+
+  return {
+    title: pageTitle,
+    description: service.seoDescription,
+    canonical: serviceUrl,
+    noindex: false,
+    openGraph: {
+      basic: {
+        title: pageTitle,
+        type: 'website',
+        image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image),
+        url: serviceUrl
+      },
+      optional: {
+        description: service.seoDescription,
+        siteName: COMPANY_INFO.name,
+        locale: 'es_CO'
+      }
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@shine_agencia',
+      creator: '@shine_agencia',
+      title: pageTitle,
+      description: service.seoDescription,
+      image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image)
+    },
+
+    extend: {
+      meta: [
+        { name: 'keywords', content: keywordsString },
+        { name: 'author', content: COMPANY_INFO.name },
+        { name: 'robots', content: 'index, follow' },
+        { httpEquiv: 'Content-Language', content: 'es-CO' }
+      ]
+    }
+
+  }
+}
+
+export function generateServiceSchema(service: Service): JSONLDSchema {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+    name: service.title,
+    description: service.content,
+    serviceType: service.title,
+    provider: {
+      '@id': COMPANY_INFO.url + '#organizacion'
+    },
+
+    areaServed: {
+      '@type': 'Country',
+      name: 'Colombia'
+    },
+
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      serviceUrl: `${COMPANY_INFO.url}/servicios/${service.slug}`,
+      servicePhone: COMPANY_INFO.phone,
+      serviceLocation: {
+        '@type': 'Place',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: COMPANY_INFO.address.city,
+          addressCountry: 'CO'
+        }
+      }
+    },
+
+    keywords: service.seoKeywords.join(', '),
+
+    ...(service.benefits && {
+      serviceOutput: service.benefits.join(', ')
+    }),
+
+    isPartOf: {
+      '@type': 'WebPage',
+      '@id': COMPANY_INFO.url + '/servicios',
+      name: 'Servicios'
     }
   };
 }
@@ -392,76 +453,51 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
   };
 }
 
-// Universal Reviews Schema Generator
+// Base Reviews Schema generator
 export function generateReviewsSchema(reviews: Array<{
   author: string;
   text: string;
   rating: number;
-  date?: Date | string | number; // Flexible date handling
-  position?: string;
-  company?: string;
+  datePublished: number;
   image?: string;
-  platform?: string; // e.g., 'Google', 'Facebook', 'LinkedIn', 'Website'
-  verified?: boolean;
+  platform: string;
 }>): JSONLDSchema {
   // Calculate aggregate rating
   const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-  const averageRating = reviews.length > 0 ? (totalRating / reviews.length) : 0;
+  const averageRating = reviews.length > 0 ? totalRating / reviews.length : 0;
 
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': COMPANY_INFO.url + '#organizacion',
-    aggregateRating: reviews.length > 0 ? {
+    '@id': COMPANY_INFO.url + '#organizacion-reviews',
+    name: COMPANY_INFO.name,
+    aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: averageRating.toFixed(1),
       reviewCount: reviews.length,
-      bestRating: 5,
-      worstRating: 1
-    } : undefined,
-    review: reviews.map(review => {
-      // Handle different date formats
-      let publishedDate: string | undefined;
-      if (review.date) {
-        if (review.date instanceof Date) {
-          publishedDate = review.date.toISOString();
-        } else if (typeof review.date === 'string') {
-          publishedDate = new Date(review.date).toISOString();
-        } else if (typeof review.date === 'number') {
-          // Assume Unix timestamp
-          publishedDate = new Date(review.date * 1000).toISOString();
-        }
+      bestRating: '5',
+      worstRating: '1'
+    },
+    review: reviews.map(review => ({
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: review.author,
+        ...(review.image && { image: review.image })
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: review.rating,
+        bestRating: '5',
+        worstRating: '1'
+      },
+      reviewBody: review.text,
+      datePublished: new Date(review.datePublished * 1000).toISOString(),
+      publisher: {
+        '@type': 'Organization',
+        name: review.platform
       }
-
-      return {
-        '@type': 'Review',
-        author: {
-          '@type': 'Person',
-          name: review.author,
-          image: review.image,
-          jobTitle: review.position,
-          worksFor: review.company ? {
-            '@type': 'Organization',
-            name: review.company
-          } : undefined
-        },
-        reviewBody: review.text,
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: review.rating,
-          bestRating: 5,
-          worstRating: 1
-        },
-        datePublished: publishedDate,
-        publisher: review.platform ? {
-          '@type': 'Organization',
-          name: review.platform
-        } : {
-          '@type': 'Organization',
-          name: COMPANY_INFO.name
-        }
-      };
-    })
+    }))
   };
 }
 
@@ -470,64 +506,19 @@ export function generateGoogleReviewsSchema(reviews: Array<{
   author_name: string;
   text: string;
   rating: number;
-  time: number;
+  datePublished: number;
   author_url?: string;
-  profile_photo_url?: string;
+  profile_photo_url: ImageMetadata;
 }>): JSONLDSchema {
   const formattedReviews = reviews.map(review => ({
     author: review.author_name,
     text: review.text,
     rating: review.rating,
-    date: review.time,
-    image: review.profile_photo_url,
+    datePublished: review.datePublished,
+    image: review.profile_photo_url.src,
     platform: 'Google'
   }));
-  
+
   return generateReviewsSchema(formattedReviews);
 }
 
-export function generateLinkedInRecommendationsSchema(recommendations: Array<{
-  recommender: string;
-  text: string;
-  position?: string;
-  company?: string;
-  date?: string;
-}>) {
-  const formattedReviews = recommendations.map(rec => ({  
-    author: rec.recommender,
-    text: rec.text,
-    rating: 5, // LinkedIn recommendations don't have ratings, assume 5 stars
-    date: rec.date,
-    position: rec.position,
-    company: rec.company,
-    platform: 'LinkedIn'
-  }));
-  
-  return generateReviewsSchema(formattedReviews);
-}
-
-// For manual/website testimonials
-export function generateTestimonialsSchema(testimonials: Array<{
-  author: string;
-  text: string;
-  rating?: number;
-  date?: Date;
-  position?: string;
-  company?: string;
-  image?: string;
-  verified?: boolean;
-}>): JSONLDSchema {
-  const formattedReviews = testimonials.map(testimonial => ({
-    author: testimonial.author,
-    text: testimonial.text,
-    rating: testimonial.rating || 5, // Default to 5 if no rating provided
-    date: testimonial.date,
-    position: testimonial.position,
-    company: testimonial.company,
-    image: testimonial.image,
-    platform: 'Website',
-    verified: testimonial.verified
-  }));
-  
-  return generateReviewsSchema(formattedReviews);
-}

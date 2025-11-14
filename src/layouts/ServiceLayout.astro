@@ -1,0 +1,34 @@
+---
+import { Image } from "astro:assets";
+import MainLayout from "@/layouts/MainLayout.astro";
+import {
+  generateBreadcrumbSchema,
+  generateServiceSEO,
+  generateServiceSchema,
+} from "@/config/seo";
+import type { Service } from "@/config/services";
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+const seo = generateServiceSEO(service);
+
+const schema = generateServiceSchema(service);
+
+const breadcrumbs = [
+  { name: "Inicio", url: "/" },
+  { name: "Servicios", url: "/servicios" },
+  { name: service.title, url: `/servicios/${service.slug}` },
+];
+
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
+
+const schemas = [breadcrumbSchema, schema];
+---
+
+<MainLayout seoProps={seo} aditionalSchemas={schemas}>
+  <slot />
+</MainLayout>
