@@ -6,8 +6,9 @@ import WhiteLogo from "@/assets/images/logoshinewhitecharacters.svg";
 import MenuIcon from "@/assets/icons/menuIcon.svg";
 import CloseIcon from "@/assets/icons/closeIcon.svg";
 import Rocket from "@/assets/images/rocket.webp";
+import DropdownIcon from "@/assets/icons/dropdown.svg";
 
-import { navBarLinksConst } from "@/utils/navigation";
+import { navBarLinksConst, servicesLinksConst } from "@/utils/navigation";
 const currentPath = Astro.url.pathname;
 ---
 
@@ -21,28 +22,74 @@ const currentPath = Astro.url.pathname;
         <Logo class="h-14 w-auto object-contain md:h-20 md:w-64" />
       </a>
     </div>
-
-    <!--Standar Desktop menu -->
     <div
       id="visible-menu"
       class="hidden items-center justify-center space-x-5 lg:flex"
     >
+      <!-- desktop menu -->
       {
-        navBarLinksConst.map((item) => (
-          <div>
-            <a
-              href={item.path}
-              class={`text-smokyBlack text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${item.path === currentPath ? "bg-salviaGreen text-softWhite" : ""}`}
-              aria-current={item.path === currentPath ? "page" : undefined}
-            >
-              {item.name}
-            </a>
-          </div>
-        ))
+        navBarLinksConst
+          .filter((item) => item.path !== "/contacto")
+          .map((item) => (
+            <div>
+              <a
+                href={item.path}
+                class={`text-smokyBlack text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${item.path === currentPath ? "bg-salviaGreen text-softWhite" : ""}`}
+                aria-current={item.path === currentPath ? "page" : undefined}
+              >
+                {item.name}
+              </a>
+            </div>
+          ))
       }
+      <!-- Services dropdown menu -->
+      <div class="relative">
+        <a
+          href="#"
+          id="services-linkToggle"
+          class="cursor-pointer focus:outline-none flex items-center space-x-2 hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200"
+          class:list={{
+            "bg-salviaGreen text-softWhite": currentPath === "/servicios",
+            "text-smokyBlack text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200":
+              currentPath !== "/servicios",
+          }}
+          aria-current={currentPath === "/servicios" ? "page" : undefined}
+        >
+          <span> Servicios </span>
+          <DropdownIcon />
+        </a>
+        <div
+          id="services-dropdown"
+          class="w-52 absolute z-10 hidden bg-softWhite rounded-2xl p-2 shadow-lg"
+        >
+          <ul class="list-none space-y-2">
+            {
+              servicesLinksConst.map((link) => (
+                <li>
+                  <a
+                    href={link.path}
+                    class={`text-smokyBlack font-openSans font-semibold ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
+                    aria-current={
+                      link.path === currentPath ? "page" : undefined
+                    }
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <a
+        href="/contacto"
+        class={`text-smokyBlack text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/contacto" ? "bg-salviaGreen text-softWhite" : ""}`}
+        aria-current={currentPath === "/contacto" ? "page" : undefined}
+        >Contacto</a
+      >
     </div>
     <!-- Overlay menu -->
-    <div class="overlay-menu fixed inset-0 z-9999 hidden bg-deepplum">
+    <div class="overlay-menu fixed inset-0 z-100 hidden bg-deepplum">
       <div class="overlay-content relative w-full h-full">
         <!-- Header -->
         <div
@@ -88,23 +135,64 @@ const currentPath = Astro.url.pathname;
             </div>
           </div>
           <div
-            class="flex flex-col items-start w-1/2 list-none space-y-10 pl-12"
+            class="flex flex-col items-start w-1/2 list-none space-y-5 pl-12"
           >
             {
-              navBarLinksConst.map((item) => (
-                <li>
-                  <a
-                    href={item.path}
-                    class={`text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200 ${item.path === currentPath ? "underline underline-offset-3" : ""}`}
-                    aria-current={
-                      item.path === currentPath ? "page" : undefined
-                    }
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))
+              navBarLinksConst
+                .filter((item) => item.path !== "/contacto")
+                .map((item) => (
+                  <li>
+                    <a
+                      href={item.path}
+                      class={`text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200 ${item.path === currentPath ? "underline underline-offset-3" : ""}`}
+                      aria-current={
+                        item.path === currentPath ? "page" : undefined
+                      }
+                    >
+                      {item.name}
+                    </a>
+                  </li>
+                ))
             }
+            <div class="flex flex-col">
+              <a
+                href="#"
+                id="services-overlayMenu"
+                class="flex items-center space-x-2 text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200"
+                class:list={{
+                  "underline underline-offset-3": currentPath === "/servicios",
+                }}
+                aria-current={currentPath === "/servicios" ? "page" : undefined}
+              >
+                <span> Servicios </span>
+                <DropdownIcon />
+              </a>
+              <div id="services-dropdown-overlayMenu" class="hidden mt-5">
+                <ul class="list-none space-y-2">
+                  {
+                    servicesLinksConst.map((link) => (
+                      <li>
+                        <a
+                          href={link.path}
+                          class={`text-softWhite text-xl font-openSans font-semibold ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
+                          aria-current={
+                            link.path === currentPath ? "page" : undefined
+                          }
+                        >
+                          {link.name}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+            <a
+              href="/contacto"
+              class={`text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200 ${currentPath === "/contacto" ? "underline underline-offset-3" : ""}`}
+              aria-current={currentPath === "/contacto" ? "page" : undefined}
+              >Contacto</a
+            >
           </div>
         </div>
       </div>
@@ -124,6 +212,9 @@ const currentPath = Astro.url.pathname;
 
 <script>
   import { nabBarAltAnimation } from "@/utils/scripts/globalAnimations/nabBarAltAnimation.js";
+  import { servicesDropdownAnimation } from "@/utils/scripts/globalAnimations/servicesDropdownAnimation.js";
+
+  servicesDropdownAnimation();
 
   document.removeEventListener("DOMContentLoaded", nabBarAltAnimation);
   document.addEventListener("DOMContentLoaded", nabBarAltAnimation);
