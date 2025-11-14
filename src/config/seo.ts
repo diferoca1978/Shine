@@ -120,8 +120,10 @@ export const ORGANIZATION_SCHEMA = {
     addressLocality: COMPANY_INFO.address.city,
     addressRegion: COMPANY_INFO.address.region,
     postalCode: COMPANY_INFO.address.postalCode,
-    addressCountry: 'CO',
-    addressCountryName: 'Colombia'
+    addressCountry: {
+      '@type': 'Country',
+      name: 'Colombia'
+    }
   },
   founders: COMPANY_INFO.founders.map(founder => ({
     '@type': 'Person',
@@ -151,14 +153,7 @@ export const ORGANIZATION_SCHEMA = {
     'Experiencia de Usuario',
     'Conversión Web'
   ],
-  mission: 'Acompañamos a Empresas, empresarios, profesionales y emprendedores a transformar su presencia digital sin sacrificar su esencia, guiados por principios eternos de servicio y excelencia.',
-  values: [
-    'Autenticidad',
-    'Propósito',
-    'Servicio con valor',
-    'Crecimiento en unidad',
-    'Generosidad estratégica'
-  ],
+  slogan: 'No necesitas gritar para ser escuchado',
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Servicios de Transformación Digital Auténtica',
@@ -178,7 +173,6 @@ export const ORGANIZATION_SCHEMA = {
       } 
     }))
   },
-  slogan: 'No necesitas gritar para ser escuchado',
   brand: {
     '@type': 'Brand',
     name: 'Shine',
