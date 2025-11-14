@@ -9,7 +9,11 @@ import ArrowUpIcon from "@/assets/icons/arrowUp.svg";
 import WhatsAppIcon from "@/assets/icons/whatsapp.svg";
 import Button from "@/components/ui/button.astro";
 import DropdownIcon from "@/assets/icons/dropdown.svg";
-const currentPath = Astro.url.pathname;
+const currentPathRaw = decodeURIComponent(Astro.url.pathname);
+const currentPath =
+  currentPathRaw !== "/" && currentPathRaw.endsWith("/")
+    ? currentPathRaw.slice(0, -1)
+    : currentPathRaw;
 ---
 
 <footer class="w-full border-t border-softBeige/5 bg-smokyBlack relative mt-20">
