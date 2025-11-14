@@ -9,7 +9,11 @@ import Rocket from "@/assets/images/rocket.webp";
 import DropdownIcon from "@/assets/icons/dropdown.svg";
 
 import { navBarLinksConst, servicesLinksConst } from "@/utils/navigation";
-const currentPath = Astro.url.pathname;
+const currentPathRaw = decodeURIComponent(Astro.url.pathname);
+const currentPath =
+  currentPathRaw !== "/" && currentPathRaw.endsWith("/")
+    ? currentPathRaw.slice(0, -1)
+    : currentPathRaw;
 ---
 
 <header class="nav-container fixed top-0 z-50 mx-auto w-full">
