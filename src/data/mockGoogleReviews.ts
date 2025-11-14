@@ -21,7 +21,7 @@ export const mockGoogleReviews: GoogleReview[] = [
     rating: 5,
     datePublished: Date.now() / 1000,
     profile_photo_url: LogoAguilar,
-    tag: ["marca personal", "diseño web", "rediseño web"]
+    tag: ["marca personal", "diseño web", "rediseño web", "all"]
   },
   {
     author_name: 'Yohanna Ramirez',
@@ -29,7 +29,7 @@ export const mockGoogleReviews: GoogleReview[] = [
     rating: 5,
     datePublished: Date.now() / 1000,
     profile_photo_url: LogoZenith,
-    tag: ["diseño web"]
+    tag: ["diseño web", "all"]
   },
   {
     author_name: 'Luis Pinilla',
@@ -37,6 +37,30 @@ export const mockGoogleReviews: GoogleReview[] = [
     rating: 5,
     datePublished: Date.now() / 1000,
     profile_photo_url: "",
-    tag: ["diseño web"]
+    tag: ["diseño web", "all"]
   },
+  {
+    author_name: 'Francisco Suarez',
+    text: 'Super recomendados, excelentes profesionales',
+    rating: 5,
+    datePublished: Date.now() / 1000,
+    profile_photo_url: "",
+    tag: ["all"]
+  },
+  {
+    author_name: 'Angela P.',
+    text: 'Es una empresa altamente comprometida con el crecimiento de los emprendedores. Su enfoque estratégico en marketing digital, acompañado de un acompañamiento cercano y personalizado, permite que cada negocio fortalezca su presencia en línea y logre resultados medibles. Destaco el profesionalismo de Leidy y Diego y su creatividad y capacidad para adaptar las estrategias a las necesidades específicas de cada cliente.',
+    rating: 5,
+    datePublished: Date.now() / 1000,
+    profile_photo_url: "",
+    tag: ["all"]
+  },
+  {
+    author_name: 'Daniela Rodriguez',
+    text: 'En Shine trabajan con el corazón. Son muy profesionales y su especialidad son las estrategias de marketing para emprendedores. Ayudaron a robustecer la marca de nuestra firma de Abogados :) Sin duda hay mucho amor, trabajo y conocimiento detrás de todo su equipo.',
+    rating: 5,
+    datePublished: Date.now() / 1000,
+    profile_photo_url: "",
+    tag: ["all"]
+  }
 ];

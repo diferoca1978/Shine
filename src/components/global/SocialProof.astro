@@ -2,8 +2,6 @@
 import { mockGoogleReviews } from "../../data/mockGoogleReviews";
 import { generateGoogleReviewsSchema } from "../../config/seo";
 import GoogleLogo from "@/assets/icons/googleLogo.svg";
-import LogoAguilar from "@/assets/images/logoaguilar.svg";
-import LogoZenith from "@/assets/images/logozenith.svg";
 import ReviewCard from "../ui/ReviewCard.astro";
 
 interface Props {
@@ -15,13 +13,13 @@ interface Props {
 
 const { titleLine1, titleLine2, filterTag, limit = 3 } = Astro.props;
 
-const reviews = mockGoogleReviews.slice(0, limit);
+const reviews = mockGoogleReviews;
+
+const showReviews = reviews.slice(0, limit);
 
 const filteredReviews = filterTag
-  ? mockGoogleReviews
-      .filter((review) => review.tag.includes(filterTag))
-      .slice(0, limit)
-  : reviews;
+  ? reviews.filter((review) => review.tag.includes(filterTag)).slice(0, limit)
+  : showReviews;
 
 const schema = generateGoogleReviewsSchema(reviews);
 
