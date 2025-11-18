@@ -1,19 +1,20 @@
 ---
 const foundations = [
   {
-    title: "Autenticidad",
+    title: "Servicio",
+    text: "Tu éxito es nuestro éxito.",
+  },
+  {
+    title: "Excelencia",
+    text: "Obsesión por el detalle, desde la estrategia hasta el último clic.",
+  },
+  {
+    title: "Integridad",
+    text: "Claridad y honestidad radical, siempre.",
   },
   {
     title: "Propósito",
-  },
-  {
-    title: "Servicio con valor",
-  },
-  {
-    title: "Crecimiento en unidad",
-  },
-  {
-    title: "Generosidad estratégica",
+    text: "Creemos en negocios que transforman, no solo que transaccionan.",
   },
 ];
 ---
@@ -31,6 +32,9 @@ const foundations = [
           foundations.map((foundation) => (
             <span class="font-playfair text-smokyBlack text-[min(7vw,42px)] italic">
               {foundation.title}
+              <span class="block font-openSans text-deepplum text-[min(6vw,24px)] italic">
+                {foundation.text}
+              </span>
             </span>
           ))
         }
@@ -44,7 +48,7 @@ const foundations = [
     position: relative;
     display: inline-block;
     line-height: 1.1;
-    height: 6rem;
+    height: 9rem;
     overflow: hidden;
     width: 100%;
     text-align: center;
@@ -56,13 +60,49 @@ const foundations = [
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    height: 6rem;
+    height: 9rem;
     width: max-content;
     visibility: hidden;
   }
 
   .text-rotator.loaded > span {
     visibility: visible;
+  }
+
+  /* Mobile responsive: allow text wrapping */
+  @media (max-width: 768px) {
+    .text-rotator {
+      height: 12rem;
+      padding: 0 1rem;
+    }
+
+    .text-rotator > span {
+      white-space: normal;
+      max-width: 90vw;
+      width: auto;
+      height: auto;
+      min-height: 12rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-rotator > span > span.block {
+      max-width: 85vw;
+      text-align: center;
+    }
+  }
+
+  /* Tablet breakpoint */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .text-rotator {
+      height: 8rem;
+    }
+
+    .text-rotator > span {
+      height: 8rem;
+    }
   }
 </style>
 
