@@ -1,0 +1,114 @@
+---
+const foundations = [
+  {
+    title: "Servicio",
+    text: "Tu éxito es nuestro éxito.",
+  },
+  {
+    title: "Excelencia",
+    text: "Obsesión por el detalle, desde la estrategia hasta el último clic.",
+  },
+  {
+    title: "Integridad",
+    text: "Claridad y honestidad radical, siempre.",
+  },
+  {
+    title: "Propósito",
+    text: "Creemos en negocios que transforman, no solo que transaccionan.",
+  },
+];
+---
+
+<section id="foundations" class="w-full mx-auto">
+  <div class="max-w-6xl mx-auto py-5 lg:py-10">
+    <div class="hero-foundations flex flex-col items-center justify-center">
+      <h1
+        class="text-[min(10vw,72px)] opacity-0 font-playfair text-smokyBlack tracking-tight mb-4"
+      >
+        Nuestros Principios
+      </h1>
+      <span class="text-rotator">
+        {
+          foundations.map((foundation) => (
+            <span class="font-playfair text-smokyBlack text-[min(7vw,42px)] italic">
+              {foundation.title}
+              <span class="block font-openSans text-deepplum text-[min(6vw,24px)] italic">
+                {foundation.text}
+              </span>
+            </span>
+          ))
+        }
+      </span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .text-rotator {
+    position: relative;
+    display: inline-block;
+    line-height: 1.1;
+    height: 9rem;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+  }
+
+  .text-rotator > span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    height: 9rem;
+    width: max-content;
+    visibility: hidden;
+  }
+
+  .text-rotator.loaded > span {
+    visibility: visible;
+  }
+
+  /* Mobile responsive: allow text wrapping */
+  @media (max-width: 768px) {
+    .text-rotator {
+      height: 12rem;
+      padding: 0 1rem;
+    }
+
+    .text-rotator > span {
+      white-space: normal;
+      max-width: 90vw;
+      width: auto;
+      height: auto;
+      min-height: 12rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-rotator > span > span.block {
+      max-width: 85vw;
+      text-align: center;
+    }
+  }
+
+  /* Tablet breakpoint */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .text-rotator {
+      height: 8rem;
+    }
+
+    .text-rotator > span {
+      height: 8rem;
+    }
+  }
+</style>
+
+<script>
+  import { foundationsRotatorAnimation } from "@/utils/scripts/perPageAnimations/about/aboutFoundationsAnimation";
+
+  document.removeEventListener("DOMContentLoaded", foundationsRotatorAnimation);
+  document.addEventListener("DOMContentLoaded", foundationsRotatorAnimation);
+</script>
