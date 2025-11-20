@@ -22,7 +22,7 @@ export const whoAreAnimation = () => {
               trigger: ".bio-container",
               start: "top 70%",
               bottom: "bottom 30%",
-              markers: true,
+              markers: false,
           },
       })
       svgTimeline.to(sectionTitle, {
@@ -47,7 +47,7 @@ export const whoAreAnimation = () => {
           scrollTrigger: {
               trigger: ".bio-container",
               start: "top 80%",
-              markers: true,
+              markers: false,
           },
       });
     }
@@ -62,7 +62,7 @@ export const whoAreAnimation = () => {
                 start: bioStart,
                 end: "bottom 60%",
                 scrub: 1.5,
-                markers: true,
+                markers: false,
             },
         })
         .to(firstBio, {
