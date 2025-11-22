@@ -1,6 +1,7 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
+import ClientHurts from "@/components/section/landing/ClientHurts.astro";
 import Solution from "@/components/section/landing/Solution.astro";
 import ServicesLanding from "@/components/section/landing/ServicesLanding.astro";
 import LatestProjectsAlt from "@/components/section/landing/LatestProjectsAlt.astro";
@@ -12,21 +13,22 @@ import SocialProof from "@/components/global/SocialProof.astro";
 
 <MainLayout>
     <GlobalHero
-        titleLine1=" Haz que tu luz brille"
+        titleLine1="Haz que tu luz brille"
         subtitleBefore="Atrae a quienes necesitan tu"
         subtitleHighlight="talento"
         descriptionLine1="Construimos tu presencia digital con estrategia y"
         descriptionLine2="propósito"
     >
-        <Button slot="cta" href="/servicios" variant="primary" animation={true}>
-            Conoce nuestros servicios <StarIcon />
+        <Button slot="cta" href="/contacto" variant="primary" animation={true}>
+            Agenda tu Diagnóstico Estratégico <StarIcon />
         </Button>
     </GlobalHero>
     <Solution />
+    <ClientHurts />
     <ServicesLanding />
     <LatestProjectsAlt />
     <SocialProof
-        titleLine1=" Historias de éxito"
+        titleLine1="Historias de éxito"
         titleLine2="Así brillan nuestros aliados estratégicos"
         filterTag="all"
     />

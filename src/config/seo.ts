@@ -8,16 +8,19 @@ export type JSONLDSchema = Record<string, any>;
 // Centralized keyword configuration - Main SEO keywords for Shine
 export const MAIN_KEYWORDS = {
   primary: [
-    'shine agencia digital',
-    'diseño web astro colombia',
-    'marketing digital auténtico bogotá'
+    'Agencia de marketing digital Colombia',
+    'Diseño web estratégico Colombia',
+    'Estrategia de marca personal para líderes',
+    'Shine Agencia Digital',
+    'consultoría de marketing en bogota',
+    'Agencia de marketing B2B Bogotá'
   ],
   secondary: [
-    'agencia diseño web bogotá',
-    'rediseño web estratégico',
-    'estrategia marca personal',
-    'contenidos redes sociales',
-    'optimización web colombia'
+    'Páginas web con Astro',
+    'Consultoría de marketing para empresas',
+    'Posicionamiento de autoridad online',
+    'Marketing digital con propósito',
+    'Agencia Rocío Parra y Diego Rodríguez'
   ],
   tertiary: [
     'diseño web profesional',
@@ -56,8 +59,8 @@ export const COMPANY_INFO = {
 
 // Default SEO configuration
 export const DEFAULT_SEO: SEOProps = {
-  title: 'Shine | Haz que tu luz brille y atraiga a quienes necesitan tu talento',
-  description: 'Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.',
+  title: 'Shine | Agencia de Marketing Digital y Diseño Web en Colombia',
+  description: 'En Shine, unimos estrategia de marketing y tecnología web de punta para ayudar a líderes y empresas en Colombia a brillar con propósito.',
   canonical: COMPANY_INFO.url,
   openGraph: {
     basic: {
@@ -158,7 +161,7 @@ export const ORGANIZATION_SCHEMA = {
     '@type': 'OfferCatalog',
     name: 'Servicios de Transformación Digital Auténtica',
     description: 'Servicios especializados en diseño web estratégico y marketing digital para profesionales y empresas que buscan crecer con autenticidad',
-    itemListElement: services.map( service => ({
+    itemListElement: services.map(service => ({
       '@type': 'Offer',
       itemOffered: {
         '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`
