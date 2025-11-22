@@ -51,13 +51,7 @@ const currentPath =
         <a
           href="#"
           id="services-linkToggle"
-          class="cursor-pointer focus:outline-none flex items-center space-x-2 hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200"
-          class:list={{
-            "bg-salviaGreen text-softWhite": currentPath === "/servicios",
-            "text-smokyBlack text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200":
-              currentPath !== "/servicios",
-          }}
-          aria-current={currentPath === "/servicios" ? "page" : undefined}
+          class="cursor-pointer focus:outline-none flex items-center space-x-2 text-smokyBlack text-lg font-semibold hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200"
         >
           <span> Servicios </span>
           <DropdownIcon />
@@ -72,7 +66,7 @@ const currentPath =
                 <li>
                   <a
                     href={link.path}
-                    class={`text-smokyBlack font-openSans font-semibold ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
+                    class={`text-smokyBlack font-openSans font-semibold hover:underline hover:underline-offset-3 ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
                     aria-current={
                       link.path === currentPath ? "page" : undefined
                     }

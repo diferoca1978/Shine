@@ -1,10 +1,10 @@
 import { gsap } from "gsap";
-import {SplitText} from "gsap/SplitText";
+import { SplitText } from "gsap/SplitText";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger , MotionPathPlugin, DrawSVGPlugin, SplitText);
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, DrawSVGPlugin, SplitText);
 
 export const solutionsAnimation = () => {
 
@@ -12,8 +12,8 @@ export const solutionsAnimation = () => {
   const linePath = document.querySelector("#path");
 
   gsap.set(linePath, { drawSVG: "0%" });
-  
-  
+
+
   const svgTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".solution-way",
@@ -23,7 +23,7 @@ export const solutionsAnimation = () => {
       markers: false,
     },
   })
-  
+
   svgTimeline.to(linePath, {
     drawSVG: "100%",
   }, "<");
@@ -34,13 +34,13 @@ export const solutionsAnimation = () => {
   }, "<");
 
   svgTimeline.to("#arrow", {
-   motionPath: {
+    motionPath: {
       path: "#path",
       align: "#path",
       alignOrigin: [0.5, 0.5],
       autoRotate: -5,
     },
-  },0);
+  }, 0);
   // End svg animation
 
   // Content animation setup
@@ -56,7 +56,7 @@ export const solutionsAnimation = () => {
 
   // Quote animation function - defined BEFORE timeline creation
   function animateWord(word) {
-    
+
     if (st.direction == 1) {
       if (word.parentElement.nodeName == "P") {
         gsap.to(word, { color: divHighlight });
@@ -75,7 +75,7 @@ export const solutionsAnimation = () => {
     tl.call(animateWord, [word], (index * 1) + 0.01)
   })
 
-  tl.set({}, {}, "+=0.01");
+  tl.set({}, {}, "+=0.05");
 
   // Create ScrollTrigger for quote animation - defined AFTER timeline
   const st = ScrollTrigger.create({
@@ -107,5 +107,5 @@ export const solutionsAnimation = () => {
   //   backgroundColor: "#2f2f2f",
   //   text: "#fefefe", // softLavender
   // })
-  
+
 };
