@@ -12,7 +12,9 @@ interface Props {
 const { reviewerLogo: Logo, reviewerName, review, rating, tag } = Astro.props;
 ---
 
-<div class="review-card h-full">
+<div
+  class="review-card h-full dark:border dark:border-softWhite/20 dark:p-2 dark:rounded-lg dark:shadow-md dark:shadow-softWhite/10"
+>
   <div class="reviewer-info flex flex-col items-center gap-4 h-full">
     <div class="reviewer-logo shrink-0">
       {
@@ -34,19 +36,22 @@ const { reviewerLogo: Logo, reviewerName, review, rating, tag } = Astro.props;
       class="review relative flex flex-col items-center gap-6 flex-1 justify-center max-w-2xl"
     >
       <p
-        class="review-text text-base text-center font-openSans lg:max-h-[100px] hover:lg:max-h-[200px] overflow-hidden transition-all duration-500 ease-in-out"
+        class="review-text text-base dark:text-softWhite text-center font-openSans lg:max-h-[100px] hover:lg:max-h-[200px] overflow-hidden transition-all duration-500 ease-in-out"
       >
-        <span class="text-smokyBlack font-bold">"</span>
+        <span class="text-smokyBlack dark:text-softWhite font-bold">"</span>
         {review}
-        <span class="text-smokyBlack font-bold">"</span>
+        <span class="text-smokyBlack dark:text-softWhite font-bold">"</span>
       </p>
       <p class="flex items-center gap-2">
-        <span class="text-smokyBlack font-openSans font-bold">{rating}</span>
+        <span
+          class="text-smokyBlack dark:text-softWhite font-openSans font-bold"
+          >{rating}</span
+        >
         <span>⭐⭐⭐⭐⭐</span>
       </p>
     </div>
     <div class="reviewer-name shrink-0">
-      <p>{reviewerName}</p>
+      <p class="text-smokyBlack dark:text-softWhite">{reviewerName}</p>
     </div>
   </div>
 </div>
