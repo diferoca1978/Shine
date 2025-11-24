@@ -3,15 +3,14 @@
 ---
 
 <button
-  id="theme-toggle"
   type="button"
   aria-label="Toggle dark mode"
-  class="p-2 rounded-full hover:scale-110 dark:hover:scale-110 transition-all duration-200"
+  class="theme-toggle-btn p-2 rounded-full hover:scale-110 dark:hover:scale-110 transition-all duration-200"
+  onclick="window.toggleTheme?.()"
 >
   <!-- Sun Icon (visible in dark mode) -->
   <svg
-    id="sun-icon"
-    class="hidden dark:block w-6 h-6 text-yellow-500"
+    class="sun-icon hidden dark:block w-6 h-6 text-yellow-500"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -27,8 +26,7 @@
 
   <!-- Moon Icon (visible in light mode) -->
   <svg
-    id="moon-icon"
-    class="block dark:hidden w-6 h-6 text-smokyBlack"
+    class="moon-icon block dark:hidden w-6 h-6 text-smokyBlack"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
   >
@@ -40,34 +38,41 @@
   </svg>
 </button>
 
-<script>
-  function initThemeToggle() {
-    const toggle = document.getElementById("theme-toggle");
-    if (!toggle) return;
+<script is:inline>
+  // Make toggle function globally available
+  window.toggleTheme = function() {
+    const isDark = document.documentElement.classList.contains("dark");
+    const newTheme = isDark ? "light" : "dark";
 
-    // Handle toggle click
-    toggle.addEventListener("click", () => {
-      const isDark = document.documentElement.classList.contains("dark");
-      const newTheme = isDark ? "light" : "dark";
+    if (isDark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.theme = "light";
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.theme = "dark";
+    }
 
-      if (isDark) {
-        // Switch to light mode
-        document.documentElement.classList.remove("dark");
-        localStorage.theme = "light";
-      } else {
-        // Switch to dark mode
-        document.documentElement.classList.add("dark");
-        localStorage.theme = "dark";
-      }
+    // Dispatch custom event for theme-aware animations
+    window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: newTheme } }));
+  };
 
-      // Dispatch custom event for theme-aware animations
-      window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: newTheme } }));
+  // Initialize theme toggles with event delegation
+  function initThemeToggles() {
+    document.querySelectorAll(".theme-toggle-btn").forEach((btn) => {
+      // Remove inline onclick to prevent double-firing
+      btn.removeAttribute("onclick");
+      // Add event listener
+      btn.addEventListener("click", window.toggleTheme);
     });
   }
 
-  // Run on initial page load
-  initThemeToggle();
+  // Initialize on DOM ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initThemeToggles);
+  } else {
+    initThemeToggles();
+  }
 
-  // Re-run after Astro view transitions (if added later)
-  document.addEventListener("astro:page-load", initThemeToggle);
+  // Re-initialize after Astro view transitions
+  document.addEventListener("astro:page-load", initThemeToggles);
 </script>
