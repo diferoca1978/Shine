@@ -21,10 +21,12 @@ const privacySEO = generatePageSEO({
     <div class="max-w-4xl mx-auto">
       <!-- Header -->
       <header class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <h1
+          class="text-4xl md:text-5xl font-bold text-smokyBlack dark:text-softWhite mb-4"
+        >
           Política de Privacidad
         </h1>
-        <p class="text-lg text-gray-600">
+        <p class="text-lg text-smokyBlack/50 dark:text-softWhite">
           <strong
             >Última actualización: {new Date().toLocaleDateString()}</strong
           >
@@ -34,7 +36,9 @@ const privacySEO = generatePageSEO({
       <!-- Main Content -->
       <div class="prose prose-lg max-w-none">
         <!-- Introduction -->
-        <div class="mb-8 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+        <div
+          class="mb-8 p-6 bg-blue-50 dark:bg-softBeige rounded-lg border-l-4 border-blue-500"
+        >
           <p class="text-gray-700 leading-relaxed">
             En <strong>Shine</strong> (en adelante "nosotros", "nuestra agencia"
             o "la empresa"), respetamos su privacidad y nos comprometemos a proteger
@@ -48,41 +52,61 @@ const privacySEO = generatePageSEO({
         <!-- Section 1: Información que Recopilamos -->
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             1. Información que Recopilamos
           </h2>
 
           <div class="mb-6">
-            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+            <h3
+              class="text-xl font-semibold text-smokyBlack/50 dark:text-softWhite/50 mb-3"
+            >
               1.1 Información Personal
             </h3>
-            <p class="mb-3">
+            <p class="mb-3 text-smokyBlack dark:text-softWhite">
               Recopilamos únicamente la información que usted nos proporciona
               voluntariamente a través de nuestro formulario de contacto:
             </p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Nombre completo</strong></li>
-              <li><strong>Dirección de correo electrónico</strong></li>
-              <li><strong>Número de teléfono</strong></li>
-              <li><strong>Mensaje o consulta</strong></li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                <strong>Nombre completo</strong>
+              </li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                <strong>Dirección de correo electrónico</strong>
+              </li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                <strong>Número de teléfono</strong>
+              </li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                <strong>Mensaje o consulta</strong>
+              </li>
             </ul>
           </div>
 
           <div class="mb-6">
-            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+            <h3
+              class="text-xl font-semibold text-smokyBlack/50 dark:text-softWhite/50 mb-3"
+            >
               1.2 Información Técnica
             </h3>
-            <p class="mb-3">
+            <p class="mb-3 text-smokyBlack dark:text-softWhite">
               Automáticamente recopilamos cierta información técnica cuando
               visita nuestro sitio web:
             </p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Dirección IP</li>
-              <li>Tipo de navegador</li>
-              <li>Páginas visitadas</li>
-              <li>Fecha y hora de acceso</li>
-              <li>Información del dispositivo</li>
+              <li class="text-smokyBlack dark:text-softWhite">Dirección IP</li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                Tipo de navegador
+              </li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                Páginas visitadas
+              </li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                Fecha y hora de acceso
+              </li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                Información del dispositivo
+              </li>
             </ul>
           </div>
         </section>
@@ -90,29 +114,29 @@ const privacySEO = generatePageSEO({
         <!-- Section 2: Finalidad del Tratamiento -->
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             2. Finalidad del Tratamiento de Datos
           </h2>
-          <p class="mb-3">
+          <p class="mb-3 text-smokyBlack dark:text-softWhite">
             Utilizamos su información personal para los siguientes propósitos:
           </p>
           <ul class="list-disc list-inside space-y-2 ml-4">
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Responder a sus consultas</strong> y solicitudes de información
               sobre nuestros servicios
             </li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Contactarlo</strong> para agendar reuniones o consultas
             </li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Enviar información</strong> sobre nuestros servicios de marketing
               digital y diseño web
             </li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Mejorar nuestros servicios</strong> y experiencia del usuario
             </li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Cumplir con obligaciones legales</strong> y regulatorias
             </li>
           </ul>
@@ -121,21 +145,23 @@ const privacySEO = generatePageSEO({
         <!-- Section 3: Base Legal -->
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             3. Base Legal para el Tratamiento
           </h2>
-          <p class="mb-3">El tratamiento de sus datos personales se basa en:</p>
+          <p class="mb-3 text-smokyBlack dark:text-softWhite">
+            El tratamiento de sus datos personales se basa en:
+          </p>
           <ul class="list-disc list-inside space-y-2 ml-4">
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Consentimiento expreso:</strong> Al completar y enviar nuestro
               formulario de contacto
             </li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Interés legítimo:</strong> Para responder a sus consultas y
               ofrecer nuestros servicios
             </li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Ejecución contractual:</strong> Para la prestación de servicios
               solicitados
             </li>
@@ -145,7 +171,7 @@ const privacySEO = generatePageSEO({
         <!-- Section 4: Compartir Información -->
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             4. Compartir Información
           </h2>
@@ -156,14 +182,16 @@ const privacySEO = generatePageSEO({
             </p>
           </div>
           <ul class="list-disc list-inside space-y-2 ml-4">
-            <li>Con su <strong>consentimiento expreso</strong></li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
+              Con su <strong>consentimiento expreso</strong>
+            </li>
+            <li class="text-smokyBlack dark:text-softWhite">
               Para <strong>cumplir con la ley</strong> o responder a procesos legales
             </li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               Para <strong>proteger nuestros derechos</strong> o seguridad
             </li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
               Con <strong>proveedores de servicios</strong> que nos ayudan a operar
               nuestro negocio (bajo estrictos acuerdos de confidencialidad)
             </li>
@@ -173,21 +201,23 @@ const privacySEO = generatePageSEO({
         <!-- Section 5: Almacenamiento y Seguridad -->
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             5. Almacenamiento y Seguridad
           </h2>
 
           <div class="mb-6">
-            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+            <h3
+              class="text-xl font-semibold text-smokyBlack dark:text-softWhite mb-3"
+            >
               5.1 Almacenamiento
             </h3>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>
+              <li class="text-smokyBlack dark:text-softWhite">
                 Sus datos se almacenan en servidores seguros ubicados en
                 Colombia
               </li>
-              <li>
+              <li class="text-smokyBlack dark:text-softWhite">
                 Mantenemos su información solo durante el tiempo necesario para
                 cumplir con los propósitos descritos
               </li>
@@ -195,18 +225,28 @@ const privacySEO = generatePageSEO({
           </div>
 
           <div class="mb-6">
-            <h3 class="text-xl font-semibold text-gray-800 mb-3">
+            <h3
+              class="text-xl font-semibold text-smokyBlack dark:text-softWhite mb-3"
+            >
               5.2 Medidas de Seguridad
             </h3>
-            <p class="mb-3">
+            <p class="mb-3 text-smokyBlack dark:text-softWhite">
               Implementamos medidas técnicas y organizativas apropiadas para
               proteger su información:
             </p>
             <ul class="list-disc list-inside space-y-2 ml-4">
-              <li>Cifrado de datos</li>
-              <li>Acceso restringido</li>
-              <li>Monitoreo de seguridad</li>
-              <li>Actualizaciones regulares de sistemas</li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                Cifrado de datos
+              </li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                Acceso restringido
+              </li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                Monitoreo de seguridad
+              </li>
+              <li class="text-smokyBlack dark:text-softWhite">
+                Actualizaciones regulares de sistemas
+              </li>
             </ul>
           </div>
         </section>
@@ -214,22 +254,28 @@ const privacySEO = generatePageSEO({
         <!-- Section 6: Sus Derechos -->
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             6. Sus Derechos
           </h2>
-          <p class="mb-3">
+          <p class="mb-3 text-smokyBlack dark:text-softWhite">
             De acuerdo con la Ley 1581 de 2012 (Habeas Data) y el Decreto 1377
             de 2013, usted tiene derecho a:
           </p>
           <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
-            <li><strong>Acceder</strong> a su información personal</li>
-            <li><strong>Rectificar</strong> datos inexactos o incompletos</li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
+              <strong>Acceder</strong> a su información personal
+            </li>
+            <li class="text-smokyBlack dark:text-softWhite">
+              <strong>Rectificar</strong> datos inexactos o incompletos
+            </li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Suprimir</strong> su información (derecho al olvido)
             </li>
-            <li><strong>Revocar</strong> el consentimiento otorgado</li>
-            <li>
+            <li class="text-smokyBlack dark:text-softWhite">
+              <strong>Revocar</strong> el consentimiento otorgado
+            </li>
+            <li class="text-smokyBlack dark:text-softWhite">
               <strong>Presentar quejas</strong> ante la Superintendencia de Industria
               y Comercio
             </li>
@@ -258,11 +304,11 @@ const privacySEO = generatePageSEO({
         <!-- Additional sections continue with the same pattern... -->
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             7. Cookies y Tecnologías Similares
           </h2>
-          <p>
+          <p class="text-smokyBlack dark:text-softWhite">
             Nuestro sitio web puede utilizar cookies para mejorar su experiencia
             de navegación. Puede configurar su navegador para rechazar cookies,
             aunque esto puede afectar la funcionalidad del sitio.
@@ -271,11 +317,11 @@ const privacySEO = generatePageSEO({
 
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             8. Enlaces a Terceros
           </h2>
-          <p>
+          <p class="text-smokyBlack dark:text-softWhite">
             Nuestro sitio web puede contener enlaces a sitios de terceros. No
             somos responsables de las prácticas de privacidad de estos sitios
             externos.
@@ -284,11 +330,11 @@ const privacySEO = generatePageSEO({
 
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             9. Menores de Edad
           </h2>
-          <p>
+          <p class="text-smokyBlack dark:text-softWhite">
             No recopilamos intencionalmente información personal de menores de
             18 años. Si descubrimos que hemos recopilado información de un
             menor, la eliminaremos inmediatamente.
@@ -297,11 +343,11 @@ const privacySEO = generatePageSEO({
 
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             10. Transferencias Internacionales
           </h2>
-          <p>
+          <p class="text-smokyBlack dark:text-softWhite">
             En caso de transferir datos fuera de Colombia, nos aseguraremos de
             que existan garantías adecuadas de protección según la normativa
             aplicable.
@@ -310,11 +356,11 @@ const privacySEO = generatePageSEO({
 
         <section class="mb-8">
           <h2
-            class="text-2xl font-bold text-gray-900 mb-4 border-b-2 border-blue-500 pb-2"
+            class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-4 border-b-2 border-blue-500 pb-2"
           >
             11. Cambios a esta Política
           </h2>
-          <p>
+          <p class="text-smokyBlack dark:text-softWhite">
             Podemos actualizar esta Política de Privacidad ocasionalmente. Los
             cambios serán publicados en esta página con una nueva fecha de
             "última actualización".
@@ -322,8 +368,10 @@ const privacySEO = generatePageSEO({
         </section>
 
         <!-- Legal compliance note -->
-        <div class="mt-12 p-6 bg-gray-100 rounded-lg">
-          <p class="text-sm text-gray-700 italic text-center">
+        <div class="mt-12 p-6 bg-softBeige dark:bg-softLavender rounded-lg">
+          <p
+            class="text-sm text-smokyBlack dark:text-smokyBlack italic text-center"
+          >
             Esta política cumple with la Ley 1581 de 2012 (Ley de Protección de
             Datos Personales de Colombia) y sus decretos reglamentarios.
           </p>

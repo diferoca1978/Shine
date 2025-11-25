@@ -23,16 +23,16 @@ const foundations = [
   <div class="max-w-6xl mx-auto py-5 lg:py-10">
     <div class="hero-foundations flex flex-col items-center justify-center">
       <h1
-        class="text-[min(10vw,72px)] opacity-0 font-playfair text-smokyBlack tracking-tight mb-4"
+        class="text-[min(10vw,72px)] opacity-0 font-playfair text-smokyBlack dark:text-softWhite tracking-tight mb-4"
       >
         Nuestros Principios
       </h1>
       <span class="text-rotator">
         {
           foundations.map((foundation) => (
-            <span class="font-playfair text-smokyBlack text-[min(7vw,42px)] italic">
+            <span class="font-playfair text-smokyBlack dark:text-softWhite text-[min(7vw,42px)] italic">
               {foundation.title}
-              <span class="block font-openSans text-deepplum text-[min(6vw,24px)] italic">
+              <span class="block font-openSans text-deepplum dark:text-accentGold text-[min(6vw,24px)] italic">
                 {foundation.text}
               </span>
             </span>

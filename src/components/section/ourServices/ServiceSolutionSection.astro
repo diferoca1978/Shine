@@ -27,17 +27,17 @@ const {
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <!-- Left Column: Benefits -->
       <div id="solution-benefits" class="flex flex-col space-y-4 px-6">
-        <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-4 font-playfair opacity-0">
+        <h2 class="text-smokyBlack dark:text-softWhite text-center font-bold text-xl md:text-2xl mb-4 font-playfair opacity-0">
           {benefitsTitle}
         </h2>
         {benefits && (
-          <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold opacity-0">
+          <h4 class="text-smokyBlack dark:text-softWhite font-openSans mb-8 text-center md:text-left text-xl font-semibold opacity-0">
             {benefitsIntro}
           </h4>
           <ul class="flex flex-col gap-2">
             {benefits.map((benefit) => (
-              <li class="benefits-item font-openSans text-lg flex items-center gap-2 px-2 opacity-0">
-                <span class="w-3 h-3 bg-accentGold rounded-full flex-shrink-0" />
+              <li class="benefits-item text-smokyBlack dark:text-softWhite font-openSans text-lg flex items-center gap-2 px-2 opacity-0">
+                <span class="w-3 h-3 bg-accentGold rounded-full shrink-0" />
                 {benefit}
               </li>
             ))}
@@ -50,16 +50,16 @@ const {
 
       <!-- Right Column: Target Audience -->
       <div id="solution-audience" class="flex flex-col px-4 space-y-4">
-        <h2 class="text-smokyBlack text-center font-bold text-xl md:text-2xl mb-8 md:mb-12 font-playfair opacity-0">
+        <h2 class="text-smokyBlack dark:text-softWhite text-center font-bold text-xl md:text-2xl mb-8 md:mb-12 font-playfair opacity-0">
           {audienceTitle}
         </h2>
         {checkmarks && (
-          <h4 class="text-smokyBlack font-openSans mb-8 text-center md:text-left text-xl font-semibold opacity-0">
+          <h4 class="text-smokyBlack dark:text-softWhite font-openSans mb-8 text-center md:text-left text-xl font-semibold opacity-0">
             {audienceIntro}
           </h4>
           <ul class="flex flex-col gap-2">
             {checkmarks.map((checkMark) => (
-              <li class="checkmarks-item font-openSans text-lg flex items-center gap-2 px-2 opacity-0">
+              <li class="checkmarks-item text-smokyBlack dark:text-softWhite font-openSans text-lg flex items-center gap-2 px-2 opacity-0">
                 <CheckIcon />
                 {checkMark}
               </li>
