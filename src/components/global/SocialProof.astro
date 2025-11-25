@@ -2,7 +2,9 @@
 import { mockGoogleReviews } from "../../data/mockGoogleReviews";
 import { generateGoogleReviewsSchema } from "../../config/seo";
 import GoogleLogo from "@/assets/icons/googleLogo.svg";
+import StarIcon from "@/assets/icons/star40x40.svg";
 import ReviewCard from "../ui/ReviewCard.astro";
+import Button from "../ui/button.astro";
 
 interface Props {
   titleLine1: string;
@@ -35,6 +37,7 @@ const formatDate = (timestamp: number) => {
     day: "numeric",
   });
 };
+const currentPath = Astro.url.pathname;
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -42,7 +45,7 @@ const formatDate = (timestamp: number) => {
 <section class="social-proof max-w-7xl mx-auto pb-10 lg:pb-20">
   <div class="reviews-wrapper flex flex-col items-center p-4">
     <h2
-      class="section-title text-[min(10vw,42px)] text-center font-playfair text-smokyBlack leading-tight tracking-tight mb-16"
+      class="section-title text-[min(10vw,42px)] text-center font-playfair text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-16"
     >
       {titleLine1}
       {titleLine2 && <span class="block">{titleLine2}</span>}
@@ -67,30 +70,40 @@ const formatDate = (timestamp: number) => {
     </div>
     <!-- Average rating -->
     <div
-      class="average-rating grid grid-cols-1 md:grid-cols-2 border-t border-smokyBlack/70 p-6"
+      class="average-rating grid grid-cols-1 md:grid-cols-2 border-t border-smokyBlack/70 dark:border-softWhite dark:border-t p-6"
     >
       <div
-        class="rating flex flex-col justify-center items-center px-8 gap-1 border-b md:border-b-0 md:border-r border-smokyBlack/40 md:pb-0"
+        class="rating flex flex-col justify-center items-center px-8 gap-1 border-b md:border-b-0 md:border-r border-smokyBlack/40 dark:border-softWhite md:pb-0"
       >
         <span
-          class="rating-value flex items-center text-5xl text-smokyBlack/80 font-bold font-openSans"
+          class="rating-value flex items-center text-5xl text-smokyBlack/80 dark:text-softWhite font-bold font-openSans"
           >{averageRating}</span
         >
         <span
-          class="rating-text flex items-center justify-center gap-2 text-smokyBlack/80 font-openSans"
+          class="rating-text flex items-center justify-center gap-2 text-smokyBlack/80 dark:text-softWhite font-openSans"
           >Promedio calificaciones <GoogleLogo class="w-10 h-10" /></span
         >
       </div>
       <div
         class="satisfaction-count flex flex-col justify-center items-center gap-2 mt-4 md:mt-0"
       >
-        <span class="count text-5xl text-smokyBlack/80 font-bold font-openSans"
+        <span
+          class="count text-5xl text-smokyBlack/80 dark:text-softWhite font-bold font-openSans"
           >{satisfactionCount}+</span
         >
-        <span class="text-smokyBlack/80 font-openSans"
+        <span class="text-smokyBlack/80 dark:text-softWhite font-openSans"
           >Clientes satisfechos</span
         >
       </div>
     </div>
+    {
+      currentPath === "/" && (
+        <div class="mt-8">
+          <Button href="/contacto" variant="primary" animation={true}>
+            Agenda tu Diagnóstico Estratégico <StarIcon />
+          </Button>
+        </div>
+      )
+    }
   </div>
 </section>

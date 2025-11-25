@@ -7,6 +7,7 @@ import MenuIcon from "@/assets/icons/menuIcon.svg";
 import CloseIcon from "@/assets/icons/closeIcon.svg";
 import Rocket from "@/assets/images/rocket.webp";
 import DropdownIcon from "@/assets/icons/dropdown.svg";
+import ThemeToggle from "@/components/ui/ThemeToggle.astro";
 
 import { navBarLinksConst, servicesLinksConst } from "@/utils/navigation";
 const currentPathRaw = decodeURIComponent(Astro.url.pathname);
@@ -16,14 +17,19 @@ const currentPath =
     : currentPathRaw;
 ---
 
-<header class="nav-container fixed top-0 z-50 mx-auto w-full">
+<header
+  class="nav-container fixed top-0 z-50 mx-auto w-full dark:bg-smokyBlack transition-colors duration-300"
+>
   <nav
     class="nav-content relative flex max-w-6xl mx-auto items-center justify-between py-2"
   >
     <!-- Logo -->
     <div id="logo-container" class="flex items-center">
       <a href="/" aria-label="Home">
-        <Logo class="h-14 w-auto object-contain md:h-20 md:w-64" />
+        <Logo class="h-14 w-auto object-contain md:h-20 md:w-64 dark:hidden" />
+        <WhiteLogo
+          class="h-14 w-auto object-contain md:h-20 md:w-64 dark:block hidden"
+        />
       </a>
     </div>
     <div
@@ -38,7 +44,7 @@ const currentPath =
             <div>
               <a
                 href={item.path}
-                class={`text-smokyBlack text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${item.path === currentPath ? "bg-salviaGreen text-softWhite" : ""}`}
+                class={`text-smokyBlack dark:text-softWhite text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen dark:hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${item.path === currentPath ? "bg-salviaGreen text-softWhite" : ""}`}
                 aria-current={item.path === currentPath ? "page" : undefined}
               >
                 {item.name}
@@ -51,14 +57,14 @@ const currentPath =
         <a
           href="#"
           id="services-linkToggle"
-          class="cursor-pointer focus:outline-none flex items-center space-x-2 text-smokyBlack text-lg font-semibold hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200"
+          class="cursor-pointer focus:outline-none flex items-center space-x-2 text-smokyBlack dark:text-softWhite text-lg font-semibold hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200"
         >
           <span> Servicios </span>
           <DropdownIcon />
         </a>
         <div
           id="services-dropdown"
-          class="w-52 absolute z-10 hidden bg-softWhite rounded-2xl p-2 shadow-lg"
+          class="w-52 absolute z-10 hidden bg-softWhite dark:bg-smokyBlack rounded-2xl p-2 shadow-lg"
         >
           <ul class="list-none space-y-2">
             {
@@ -66,7 +72,7 @@ const currentPath =
                 <li>
                   <a
                     href={link.path}
-                    class={`text-smokyBlack font-openSans font-semibold hover:underline hover:underline-offset-3 ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
+                    class={`text-smokyBlack dark:text-softWhite font-openSans font-semibold hover:underline hover:underline-offset-3 ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
                     aria-current={
                       link.path === currentPath ? "page" : undefined
                     }
@@ -81,10 +87,11 @@ const currentPath =
       </div>
       <a
         href="/contacto"
-        class={`text-smokyBlack text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/contacto" ? "bg-salviaGreen text-softWhite" : ""}`}
+        class={`text-smokyBlack dark:text-softWhite text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/contacto" ? "bg-salviaGreen text-softWhite" : ""}`}
         aria-current={currentPath === "/contacto" ? "page" : undefined}
         >Contacto</a
       >
+      <ThemeToggle />
     </div>
     <!-- Overlay menu -->
     <div class="overlay-menu fixed inset-0 z-100 hidden bg-deepplum">
@@ -196,8 +203,11 @@ const currentPath =
       </div>
     </div>
   </nav>
-  <!-- Menu Button -->
-  <div class="absolute top-6 right-6 lg:right-16 items-center flex z-50">
+  <!-- Menu Button and Theme Toggle -->
+  <div class="absolute top-6 right-6 lg:right-16 items-center flex gap-4 z-50">
+    <div class="lg:hidden z-50 relative opacity-100">
+      <ThemeToggle />
+    </div>
     <button
       type="button"
       id="btn-open-close"

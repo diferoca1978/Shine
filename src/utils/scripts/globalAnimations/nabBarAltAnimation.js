@@ -8,8 +8,9 @@ export const nabBarAltAnimation = () => {
   const logoContainer = document.querySelector("#logo-container");
   const visibleMenu = document.querySelector("#visible-menu");
   const overlayMenu = document.querySelector(".overlay-menu");
+  const navContainer = document.querySelector(".nav-container");
 
-  if (!btnOpenClose || !logoContainer || !visibleMenu || !overlayMenu) {
+  if (!btnOpenClose || !logoContainer || !visibleMenu || !overlayMenu || !navContainer) {
     console.warn("Navbar not found");
     return;
   }
@@ -18,7 +19,7 @@ export const nabBarAltAnimation = () => {
   gsap.set(btnOpenClose, { opacity: 0 });
   gsap.set(logoContainer, { opacity: 1 });
   gsap.set(visibleMenu, { opacity: 1 });
-  
+
   // Set initial state for overlay menu
   const overlayContent = overlayMenu.querySelector(".overlay-content");
   const navItems = overlayMenu.querySelectorAll("li");
@@ -48,20 +49,20 @@ export const nabBarAltAnimation = () => {
     ease: "power2.out"
   });
 
- 
+
 
   // Overlay menu animation functions
   const openOverlay = () => {
     // Show overlay first
     overlayMenu.classList.remove("hidden");
-    
+
     // Reset to initial states before animating
     gsap.set(overlayContent, { x: "-100%", opacity: 0 });
     gsap.set(navItems, { x: -50, opacity: 0 });
-    
+
     // Create timeline for opening animation
     const tl = gsap.timeline();
-    
+
     // Animate overlay sliding in from left
     tl.to(overlayContent, {
       x: "0%",
@@ -210,9 +211,13 @@ overlayRocketAnimation();
       if (self.scroll() > 1) {
         hideLogoMenu.play();
         showButton.play();
+        // Remove dark background when scrolled
+        navContainer.classList.remove("dark:bg-smokyBlack");
       } else {
         hideLogoMenu.reverse();
         showButton.reverse();
+        // Restore dark background when at top
+        navContainer.classList.add("dark:bg-smokyBlack");
       }
     }
   });

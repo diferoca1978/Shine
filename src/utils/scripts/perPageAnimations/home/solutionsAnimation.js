@@ -7,6 +7,27 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, DrawSVGPlugin, SplitText);
 
 export const solutionsAnimation = () => {
+  // Define colors for both themes
+  const colors = {
+    light: {
+      default: "oklch(96.8% 0.007 247.896)",      // softWhite
+      divHighlight: "oklch(0.3052 0 0)",          // smokyBlack
+      spanHighlight: "oklch(0.3911 0.0534 7.52)", // deepplum
+    },
+    dark: {
+      default: "oklch(0.3052 0 0)",                // smokyBlack
+      divHighlight: "oklch(96.8% 0.007 247.896)",  // softWhite
+      spanHighlight: "oklch(0.8987 0.119 87.54)",    // accentGold
+    }
+  };
+
+  // Function to get current theme colors
+  const getCurrentColors = () => {
+    const isDark = document.documentElement.classList.contains('dark');
+    return isDark ? colors.dark : colors.light;
+  };
+
+  let currentColors = getCurrentColors();
 
   // Initial setup to svg animation
   const linePath = document.querySelector("#path");
@@ -43,28 +64,23 @@ export const solutionsAnimation = () => {
   }, 0);
   // End svg animation
 
-  // Content animation setup
-  const defaultColor = "oklch(96.8% 0.007 247.896)";
-  const divHighlight = "oklch(0.3052 0 0)";
-  const spanHighlight = "oklch(0.3911 0.0534 7.52)";
-
+  // Content animation setup with theme-aware colors
   const quoteSplit = SplitText.create(".solution-content p", { type: "words" });
-  const numWords = quoteSplit.words.length;
 
-  // IMMEDIATELY set initial state to prevent flicker
-  gsap.set(quoteSplit.words, { color: defaultColor });
+  // IMMEDIATELY set initial state to prevent flicker with theme-appropriate color
+  gsap.set(quoteSplit.words, { color: currentColors.default });
 
   // Quote animation function - defined BEFORE timeline creation
   function animateWord(word) {
 
     if (st.direction == 1) {
       if (word.parentElement.nodeName == "P") {
-        gsap.to(word, { color: divHighlight });
+        gsap.to(word, { color: currentColors.divHighlight });
       } else {
-        gsap.to(word, { color: spanHighlight });
+        gsap.to(word, { color: currentColors.spanHighlight });
       }
     } else {
-      gsap.to(word, { color: defaultColor });
+      gsap.to(word, { color: currentColors.default });
     }
   }
 
@@ -86,12 +102,26 @@ export const solutionsAnimation = () => {
     animation: tl,
     onRefresh: () => {
       // Ensure initial state is maintained on refresh
-      gsap.set(quoteSplit.words, { color: defaultColor });
+      gsap.set(quoteSplit.words, { color: currentColors.default });
     }
   });
 
   // Immediate refresh without delay to prevent flicker
   ScrollTrigger.refresh();
+
+  // Listen for theme changes and update all word colors
+  window.addEventListener("themechange", () => {
+    currentColors = getCurrentColors();
+
+    // Update all words based on current scroll position
+    quoteSplit.words.forEach((word) => {
+      if (word.parentElement.nodeName == "P") {
+        gsap.to(word, { color: currentColors.divHighlight, duration: 0.3 });
+      } else {
+        gsap.to(word, { color: currentColors.spanHighlight, duration: 0.3 });
+      }
+    });
+  });
 
   // Soft transition to next section
   // gsap.to(".to-smokyBlack-section", {
