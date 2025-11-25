@@ -18,13 +18,13 @@ import Modal from "./Modal.astro";
         name="fullName"
         required
         aria-describedby="fullName-error"
-        class="peer font-playfair h-15 w-full border-b-2 border-smokyBlack/30 text-smokyBlack bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
+        class="peer font-playfair h-15 w-full border-b-2 border-smokyBlack/30 dark:border-softBeige/30 text-smokyBlack dark:text-softWhite bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
       />
       <p id="error_fullName" class="text-red-600 text-sm font-openSans"></p>
 
       <label
         for="fullName"
-        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base"
+        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack dark:text-softWhite text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base dark:peer-focus:text-softWhite dark:peer-placeholder-shown:text-softWhite dark:peer-placeholder-shown:font-semibold"
       >
         Nombre
       </label>
@@ -39,13 +39,13 @@ import Modal from "./Modal.astro";
         name="email"
         required
         aria-describedby="email-error"
-        class="peer font-playfair h-15 w-full border-b-2 border-smokyBlack/30 text-smokyBlack bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
+        class="peer font-playfair h-15 w-full border-b-2 border-smokyBlack/30 dark:border-softBeige/30 text-smokyBlack dark:text-softWhite bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
       />
       <p id="error_email" class="text-red-500 text-sm font-openSans"></p>
 
       <label
         for="email"
-        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base"
+        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack dark:text-softWhite text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base dark:peer-focus:text-softWhite dark:peer-placeholder-shown:text-softWhite dark:peer-placeholder-shown:font-semibold"
       >
         E-mail
       </label>
@@ -60,12 +60,12 @@ import Modal from "./Modal.astro";
         name="telefono"
         required
         aria-describedby="telefono-error"
-        class="peer font-playfair h-15 w-full border-b-2 border-smokyBlack/30 text-smokyBlack bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
+        class="peer font-playfair h-15 w-full border-b-2 border-smokyBlack/30 dark:border-softBeige/30 text-smokyBlack dark:text-softWhite bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
       />
 
       <label
         for="telefono"
-        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base"
+        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack dark:text-softWhite text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base dark:peer-focus:text-softWhite dark:peer-placeholder-shown:text-softWhite dark:peer-placeholder-shown:font-semibold"
       >
         Telefono
       </label>
@@ -81,12 +81,12 @@ import Modal from "./Modal.astro";
         name="inquietudes"
         required
         aria-describedby="inquietudes-error"
-        class="peer field-sizing-content font-playfair h-15 w-full border-b-2 border-smokyBlack/30 text-smokyBlack bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
+        class="peer field-sizing-content font-playfair h-15 w-full border-b-2 border-smokyBlack/30 dark:border-softBeige/30 text-smokyBlack dark:text-softWhite bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
       ></textarea>
       <p id="error_inquietudes" class="text-red-500 text-sm font-openSans"></p>
       <label
         for="inquietudes"
-        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base"
+        class="absolute font-playfair left-0 -top-3.5 text-smokyBlack dark:text-softWhite text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base dark:peer-focus:text-softWhite dark:peer-placeholder-shown:text-softWhite dark:peer-placeholder-shown:font-semibold"
       >
         Mensaje
       </label>
@@ -102,7 +102,9 @@ import Modal from "./Modal.astro";
           aria-describedby="terms-error"
           class="accent-salviaGreen rounded-md h-4 w-4"
         />
-        Aceptar terminos y condiciones
+        <span class="text-smokyBlack dark:text-softWhite"
+          >Aceptar terminos y condiciones</span
+        >
       </label>
       <p id="error_terms" class="text-red-500 text-sm font-openSans"></p>
     </div>
@@ -165,7 +167,7 @@ import Modal from "./Modal.astro";
           duration: 0.5,
           ease: "back.out(1.7)",
         },
-        "-=0.2"
+        "-=0.2",
       )
       .to(
         modalIcon,
@@ -175,7 +177,7 @@ import Modal from "./Modal.astro";
           duration: 0.6,
           ease: "elastic.out(1, 0.5)",
         },
-        "-=0.3"
+        "-=0.3",
       );
 
     // Auto-close after 5 seconds
@@ -221,7 +223,7 @@ import Modal from "./Modal.astro";
           duration: 0.3,
           ease: "power2.in",
         },
-        "-=0.2"
+        "-=0.2",
       )
       .to(
         modal,
@@ -230,7 +232,7 @@ import Modal from "./Modal.astro";
           duration: 0.2,
           ease: "power2.in",
         },
-        "-=0.1"
+        "-=0.1",
       );
   }
 
@@ -248,7 +250,6 @@ import Modal from "./Modal.astro";
       closeModal();
     }
   });
-
 
   // Form Submission
   form.addEventListener("submit", async (e) => {

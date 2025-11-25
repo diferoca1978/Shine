@@ -12,7 +12,9 @@ const { titleLine1, titleLine2, service } = Astro.props;
 
 <section id="process" class="max-w-6xl mx-auto py-10 lg:py-20 px-4">
   <div class="process-heading opacity-0">
-    <h2 class="text-center text-[min(10vw,42px)] font-playfair mb-0">
+    <h2
+      class="text-smokyBlack dark:text-softWhite text-center text-[min(10vw,42px)] font-playfair mb-0"
+    >
       <span class="block">{titleLine1}</span>
       <span class="">{titleLine2}</span>
     </h2>
@@ -41,20 +43,20 @@ const { titleLine1, titleLine2, service } = Astro.props;
       {
         service.process.map((step, index) => (
           <div class="stage flex flex-col h-80 w-50 px-2">
-            <span class="numbers text-3xl font-bold text-deepplum font-openSans mb-3 md:mb-4 opacity-0">
+            <span class="numbers text-3xl font-bold text-deepplum dark:text-accentGold font-openSans mb-3 md:mb-4 opacity-0">
               {String(index + 1).padStart(3, "0")}
             </span>
             <div class="heading h-16 overflow-hidden">
               <div class="headings">
-                <span class="text-smokyBlack font-playfair text-2xl block leading-tight">
+                <span class="text-smokyBlack dark:text-softWhite font-playfair text-2xl block leading-tight">
                   {step.title}
                 </span>
-                <span class="text-deepplum font-playfair font-bold text-2xl">
+                <span class="text-deepplum dark:text-accentGold font-playfair font-bold text-2xl">
                   {step.title}
                 </span>
               </div>
             </div>
-            <p class="text-smokyBlack font-openSans text-lg mt-4 opacity-0">
+            <p class="text-smokyBlack dark:text-softWhite font-openSans text-lg mt-4 opacity-0">
               {step.description}
             </p>
           </div>
