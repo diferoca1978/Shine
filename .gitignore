@@ -35,3 +35,10 @@ pnpm-lock.yaml
 
 # Local Netlify folder
 .netlify
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

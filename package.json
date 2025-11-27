@@ -23,7 +23,9 @@
     "three": "^0.180.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^24.10.1",
     "@types/three": "^0.180.0",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.0"
