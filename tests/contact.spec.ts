@@ -1,5 +1,19 @@
 import { test, expect } from '@playwright/test';
 
+/**
+ * Contact Form Test
+ * 
+ * How to run:
+ * 
+ * Development (Local):
+ * npx playwright test tests/contact.spec.ts
+ * (This will automatically start the local dev server at http://localhost:4321)
+ * 
+ * Production:
+ * BASE_URL=https://shineagencia.com npx playwright test tests/contact.spec.ts
+ * (This will run the test against the live production site)
+ */
+
 test.describe('Contact Form', () => {
   test('should submit the contact form successfully with correct payload', async ({ page }) => {
     // Navigate to the contact page
@@ -35,7 +49,7 @@ test.describe('Contact Form', () => {
           url: request.url(),
           postData: request.postData(),
         });
-        console.log('>> POST', request.url());
+        // console.log('>> POST', request.url());
       }
     });
 
@@ -52,9 +66,9 @@ test.describe('Contact Form', () => {
 
     if (!contactRequest) {
       console.log('All captured POST requests:', JSON.stringify(requests, null, 2));
-      // throw new Error('Did not find contact form submission request');
+      throw new Error('Did not find contact form submission request');
     } else {
-      console.log('Found contact request:', contactRequest.url);
+      // console.log('Found contact request:', contactRequest.url);
       expect(contactRequest.postData).toContain(testData.fullName);
       expect(contactRequest.postData).toContain(testData.email);
       expect(contactRequest.postData).toContain(testData.telefono);
