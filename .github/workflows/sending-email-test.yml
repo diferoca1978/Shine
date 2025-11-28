@@ -1,0 +1,141 @@
+name: sending-email-test
+
+on:
+  # Run every 3 days at 8:00 AM Colombia time (1 PM UTC)
+  schedule:
+    - cron: "0 13 */3 * *"
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run Playwright Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run Playwright tests
+        id: test
+        run: npx playwright test
+        continue-on-error: true
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.run_number }}
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload test screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-screenshots-${{ github.run_number }}
+          path: test-results/
+          retention-days: 30
+
+      - name: Send Email Notification
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: |
+            ${{ steps.test.outcome == 'success' && '✅' || '❌' }} Playwright Tests - ${{ github.event.repository.name }}
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: ${{ secrets.EMAIL_USERNAME }}
+          html_body: |
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <style>
+                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                .header { background: ${{ steps.test.outcome == 'success' && '#10b981' || '#ef4444' }}; color: white; padding: 20px; border-radius: 5px; }
+                .content { background: #f9fafb; padding: 20px; margin-top: 20px; border-radius: 5px; }
+                .status { font-size: 24px; font-weight: bold; }
+                .info { margin: 10px 0; }
+                .label { font-weight: bold; color: #6b7280; }
+                .button { display: inline-block; background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 15px; }
+                .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px; }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <div class="header">
+                  <div class="status">
+                    ${{ steps.test.outcome == 'success' && '✅ All Tests Passed' || '❌ Tests Failed' }}
+                  </div>
+                  <p>Automated Playwright E2E Testing</p>
+                </div>
+
+                <div class="content">
+                  <div class="info">
+                    <span class="label">Status:</span>
+                    ${{ steps.test.outcome == 'success' && 'All end-to-end tests passed successfully' || 'Some tests failed - action required' }}
+                  </div>
+
+                  <div class="info">
+                    <span class="label">Trigger:</span>
+                    ${{ github.event_name }}
+                  </div>
+
+                  <div class="info">
+                    <span class="label">Test Date:</span>
+                    ${{ github.event.repository.updated_at }}
+                  </div>
+
+                  <div class="info">
+                    <span class="label">Repository:</span>
+                    ${{ github.repository }}
+                  </div>
+
+                  <div class="info">
+                    <span class="label">Branch:</span>
+                    ${{ github.ref_name }}
+                  </div>
+
+                  <div class="info">
+                    <span class="label">Run Number:</span>
+                    #${{ github.run_number }}
+                  </div>
+
+                  ${{ steps.test.outcome == 'failure' && '<div class="info" style="margin-top: 20px; padding: 15px; background: #fee2e2; border-left: 4px solid #ef4444; border-radius: 3px;"><strong>⚠️ Action Required:</strong><br>One or more Playwright tests have failed. Please check the workflow logs and test reports for details.</div>' || '' }}
+
+                  <a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" class="button">
+                    View Detailed Report
+                  </a>
+                </div>
+
+                <div class="footer">
+                  <p>This is an automated test report for the Shine website E2E tests.</p>
+                  <p>Shine - Agencia Digital - Automated Testing System</p>
+                </div>
+              </div>
+            </body>
+            </html>
