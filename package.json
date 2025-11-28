@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test:email": "npx playwright test tests/contact-form.spec.ts --project=chromium"
   },
   "dependencies": {
     "@astrojs/netlify": "^6.5.13",
@@ -23,6 +24,7 @@
     "three": "^0.180.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/three": "^0.180.0",
     "prettier": "^3.6.2",
