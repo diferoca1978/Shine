@@ -1,120 +1,27 @@
-name: weekly-email-test
-
+name: Playwright Tests
 on:
-  # Run every third day at 12:00 PM UTC (7 AM Colombia time UTC-5)
-  schedule:
-    - cron: "0 12 */3 * *"
-
-  # Allow manual trigger
-  workflow_dispatch:
-
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
 jobs:
-  test-email:
-    name: Test Contact Form Email Sending
+  test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Playwright
-        run: npx playwright install --with-deps chromium
-
-      - name: Run Email Test
-        id: test
-        run: npx playwright test tests/contact.spec.ts --project=chromium
-        continue-on-error: true
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-
-      - name: Upload Test Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-report-${{ github.run_number }}
-          path: playwright-report/
-          retention-days: 7
-
-      - name: Send Email Notification
-        if: always()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: |
-            ${{ steps.test.outcome == 'success' && '✅' || '❌' }} Contact Form Test - ${{ github.event.repository.name }}
-          to: ${{ secrets.NOTIFICATION_EMAIL }}
-          from: ${{ secrets.EMAIL_USERNAME }}
-          html_body: |
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                .header { background: ${{ steps.test.outcome == 'success' && '#10b981' || '#ef4444' }}; color: white; padding: 20px; border-radius: 5px; }
-                .content { background: #f9fafb; padding: 20px; margin-top: 20px; border-radius: 5px; }
-                .status { font-size: 24px; font-weight: bold; }
-                .info { margin: 10px 0; }
-                .label { font-weight: bold; color: #6b7280; }
-                .button { display: inline-block; background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 15px; }
-                .footer { margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px; }
-              </style>
-            </head>
-            <body>
-              <div class="container">
-                <div class="header">
-                  <div class="status">
-                    ${{ steps.test.outcome == 'success' && '✅ Test Passed' || '❌ Test Failed' }}
-                  </div>
-                  <p>Daily Contact Form Email Test</p>
-                </div>
-                
-                <div class="content">
-                  <div class="info">
-                    <span class="label">Status:</span> 
-                    ${{ steps.test.outcome == 'success' && 'Email sending is working correctly' || 'Email sending failed - action required' }}
-                  </div>
-                  
-                  <div class="info">
-                    <span class="label">Test Date:</span> 
-                    ${{ github.event.repository.updated_at }}
-                  </div>
-                  
-                  <div class="info">
-                    <span class="label">Repository:</span> 
-                    ${{ github.repository }}
-                  </div>
-                  
-                  <div class="info">
-                    <span class="label">Branch:</span> 
-                    ${{ github.ref_name }}
-                  </div>
-                  
-                  ${{ steps.test.outcome == 'failure' && '<div class="info" style="margin-top: 20px; padding: 15px; background: #fee2e2; border-left: 4px solid #ef4444; border-radius: 3px;"><strong>⚠️ Action Required:</strong><br>The contact form email test has failed. Please check the workflow logs and verify your Resend configuration.</div>' || '' }}
-                  
-                  <a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" class="button">
-                    View Detailed Report
-                  </a>
-                </div>
-                
-                <div class="footer">
-                  <p>This is an automated daily test report for the contact form email functionality.</p>
-                  <p>Aguilar Abogados Asociados - Automated Testing System</p>
-                </div>
-              </div>
-            </body>
-            </html>
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npx playwright test
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
