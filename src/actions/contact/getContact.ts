@@ -10,16 +10,16 @@ export const getContact = defineAction({
     fullName: z.string().min(3, 'El nombre debe contener minimo 3 letras').max(30, 'El nombre es demasiado largo'),
     email: z.string().email('Debe ser un correo valido'),
     telefono: z.string().min(10, 'El teléfono debe tener al menos 10 dígitos'),
-    inquietudes: z.string().min(10, 'El mensaje debe contener minimo 10 letras.' ).max(500, 'El mensaje es demasiado largo.'),
-    terms: z.union([z.literal('true'), z.null()]).refine(val => val === 'true', { 
-      message: 'Debes aceptar los términos y condiciones' 
+    inquietudes: z.string().min(10, 'El mensaje debe contener minimo 10 letras.').max(500, 'El mensaje es demasiado largo.'),
+    terms: z.union([z.literal('true'), z.null()]).refine(val => val === 'true', {
+      message: 'Debes aceptar los términos y condiciones'
     })
   }),
-  handler: async ({fullName, email, telefono, inquietudes}) => {
+  handler: async ({ fullName, email, telefono, inquietudes }) => {
     try {
-       const { data, error } = await resend.emails.send({
+      const { data, error } = await resend.emails.send({
         from: 'Shine <noreply@shineagencia.com>',
-        to: ['rocio.shineagencia@gmail.com'],
+        to: [import.meta.env.EMAIL_CONTACT],
         subject: 'Nuevo contacto desde la web',
         html: `
         <!DOCTYPE html>
@@ -100,13 +100,13 @@ export const getContact = defineAction({
                   Este mensaje fue enviado desde el formulario de contacto de <strong>shineagencia.com</strong>
                 </p>
                 <p style="margin: 8px 0 0 0; color: rgba(95, 122, 122, 0.7); font-size: 12px;">
-                  ${new Date().toLocaleDateString('es-CO', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  })}
+                  ${new Date().toLocaleDateString('es-CO', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        })}
                 </p>
               </div>
             </div>
@@ -122,10 +122,10 @@ export const getContact = defineAction({
           message: error.message
         });
       }
-      
-      
+
+
       return { ok: true, data }
-      
+
     } catch (err) {
       console.error('Handler error:', err);
       throw new ActionError({

@@ -6,11 +6,11 @@ import { test, expect } from '@playwright/test';
  * How to run:
  * 
  * Development (Local):
- * npx playwright test tests/contact.spec.ts
+ * npx playwright test tests/contact.spec.ts --project=chromium
  * (This will automatically start the local dev server at http://localhost:4321)
  * 
  * Production:
- * BASE_URL=https://shineagencia.com npx playwright test tests/contact.spec.ts
+ * BASE_URL=https://shineagencia.com npx playwright test tests/contact.spec.ts --project=chromium
  * (This will run the test against the live production site)
  */
 
