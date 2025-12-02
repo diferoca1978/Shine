@@ -1,0 +1,34 @@
+---
+import { getPosts } from "./blog.api";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import BlogCard from "@/components/ui/BlogCard.astro";
+
+const posts = await getPosts();
+
+const date = (date: string) =>
+  new Date(date).toLocaleDateString("es-CO", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+---
+
+<BlogLayout title="Blog" description="Blog de Shine">
+  <h1>Blog</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <BlogCard
+            slug={post.slug}
+            title={post.title}
+            author={post.author}
+            publishDate={date(post.publishDate)}
+            summary={post.summary}
+            image={post.image.url}
+          />
+        </li>
+      ))
+    }
+  </ul>
+</BlogLayout>

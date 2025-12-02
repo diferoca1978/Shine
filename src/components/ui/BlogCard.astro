@@ -1,0 +1,43 @@
+---
+interface Post {
+  slug: string;
+  title: string;
+  author: string;
+  publishDate: string; // Stores the date in ISO 8601 format.
+  summary: string;
+  image: string;
+}
+
+const { slug, title, author, publishDate, summary, image } = Astro.props;
+---
+
+<article
+  class="blog-card group rounded-xl overflow-hidden focus:outline-hidden md:max-w-xl flex flex-col md:flex-row p-4 gap-2"
+>
+  <div class="shrink-0 relative rounded-xl overflow-hidden w-full md:w-56 h-44">
+    <img
+      src={image}
+      alt={title}
+      class="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out absolute top-0 start-0 object-cover rounded-xl"
+    />
+  </div>
+  <div class="flex flex-col gap-0.5">
+    <h2 class="font-playfair text-xl leading-tight dark:text-softWhite">
+      {title}
+    </h2>
+    <p class="font-openSans dark:text-softWhite">
+      <strong>Autor:</strong>
+      {author}
+    </p>
+    <p class="font-openSans dark:text-softWhite">
+      Publicado el: {publishDate}
+    </p>
+    <p class="font-openSans text-base dark:text-softWhite">
+      {summary}
+    </p>
+    <a
+      class="text-sm leading-tight font-semibold font-openSans text-deepplum group-hover:font-bold group-hover:underline group-hover:underline-offset-2 dark:text-accentGold"
+      href={`/blog/${slug}`}>Leer más</a
+    >
+  </div>
+</article>
