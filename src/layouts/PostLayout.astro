@@ -10,19 +10,17 @@ interface Props {
     title: string;
     description: string;
     publishDate: Date;
-    tags?: string[];
     image?: string;
     slug: string;
 }
 
-const { title, description, publishDate, tags, image, slug } = Astro.props;
+const { title, description, publishDate, image, slug } = Astro.props;
 
 // Generate specific schemas for the post
 const postSchema = generateBlogPostSchema({
     title,
     description,
     publishDate,
-    tags,
     image,
     id: slug,
 });
@@ -43,7 +41,5 @@ const aditionalSchemas: JSONLDSchema[] = [postSchema, breadcrumbSchema];
     image={image}
     aditionalSchemas={aditionalSchemas}
 >
-    <article>
-        <slot />
-    </article>
+    <slot />
 </MainLayout>

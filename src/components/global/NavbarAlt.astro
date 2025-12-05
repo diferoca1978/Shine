@@ -39,7 +39,7 @@ const currentPath =
       <!-- desktop menu -->
       {
         navBarLinksConst
-          .filter((item) => item.path !== "/contacto")
+          .filter((item) => item.path !== "/contacto" && item.path !== "/blog")
           .map((item) => (
             <div>
               <a
@@ -85,6 +85,11 @@ const currentPath =
           </ul>
         </div>
       </div>
+      <a
+        href="/blog"
+        class={`text-smokyBlack dark:text-softWhite text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/blog" ? "bg-salviaGreen text-softWhite" : ""}`}
+        aria-current={currentPath === "/blog" ? "page" : undefined}>Blog</a
+      >
       <a
         href="/contacto"
         class={`text-smokyBlack dark:text-softWhite text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/contacto" ? "bg-salviaGreen text-softWhite" : ""}`}
@@ -144,7 +149,9 @@ const currentPath =
           >
             {
               navBarLinksConst
-                .filter((item) => item.path !== "/contacto")
+                .filter(
+                  (item) => item.path !== "/contacto" && item.path !== "/blog",
+                )
                 .map((item) => (
                   <li>
                     <a
@@ -192,6 +199,12 @@ const currentPath =
                 </ul>
               </div>
             </div>
+            <a
+              href="/blog"
+              class={`text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200 ${currentPath === "/blog" ? "underline underline-offset-3" : ""}`}
+              aria-current={currentPath === "/blog" ? "page" : undefined}
+              >Blog</a
+            >
             <a
               href="/contacto"
               class={`text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200 ${currentPath === "/contacto" ? "underline underline-offset-3" : ""}`}
