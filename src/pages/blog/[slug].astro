@@ -1,0 +1,110 @@
+---
+import PostLayout from "@/layouts/PostLayout.astro";
+import { getPosts } from "./blog.api";
+import { marked } from "marked";
+import hljs from "highlight.js";
+import "highlight.js/styles/github-dark.css";
+import Prose from "@/components/ui/Prose.astro";
+
+const renderer = new marked.Renderer();
+renderer.code = ({ text, lang }) => {
+  const validLang = hljs.getLanguage(lang || "plaintext")
+    ? lang || "plaintext"
+    : "plaintext";
+  const highlighted = hljs.highlight(text, { language: validLang }).value;
+  return `<pre><code class="hljs ${validLang}">${highlighted}</code></pre>`;
+};
+
+marked.setOptions({ renderer });
+
+// Generate all possible paths
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+// Per path let's generate the page
+const { post } = Astro.props;
+// Convert markdown to HTML
+const postContent = marked(post.content || "");
+
+const formatDate = (date: string) =>
+  new Date(date).toLocaleDateString("es-CO", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+---
+
+<PostLayout
+  title={post.title}
+  description={post.summary}
+  publishDate={new Date(post.publishDate)}
+  image={post.image.url}
+  slug={post.slug}
+>
+  <article class="container mt-[130px] md:mt-0 mx-auto px-2 py-8 md:py-16">
+    <nav
+      class="max-w-4xl px-4 pt-6 sm:px-6 lg:px-8 mx-auto"
+      aria-label="Breadcrumb"
+    >
+      <ol class="flex items-center space-x-2 text-sm text-gray-600">
+        <li>
+          <a
+            href="/"
+            class="hover:text-deepdark-900 text-[min(5vw,16px)] transition-colors dark:text-softWhite/80"
+            >Inicio</a
+          >
+        </li>
+        <li class="text-deepdark-500 dark:text-softWhite/80">/</li>
+        <li>
+          <a
+            href="/blog"
+            class="hover:text-deepdark-900 text-[min(5vw,16px)] transition-colors dark:text-softWhite/80"
+            >Blog</a
+          >
+        </li>
+        <li class="text-deepdark-500 dark:text-softWhite/80">/</li>
+        <li
+          class="text-deepdark-900 text-[min(5vw,16px)] font-bold dark:text-softWhite/80"
+          aria-current="page"
+        >
+          {post.title}
+        </li>
+      </ol>
+    </nav>
+    <div class="max-w-4xl px-2 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
+      <div class="flex justify-center h-80 mx-auto">
+        <img
+          src={post.image.url}
+          alt={post.title}
+          class="object-cover w-full h-full rounded-2xl"
+        />
+      </div>
+      <div class="space-y-5 md:space-y-8">
+        <h1
+          class="text-center font-bold mb-5 text-[min(6vw,36px)] dark:text-softWhite"
+        >
+          {post.title}
+        </h1>
+        <p
+          class="text-[min(5vw,20px)] text-balance text-center text-deepdark-900 dark:text-softWhite"
+        >
+          {post.summary}
+        </p>
+
+        <div class="flex space-x-2">
+          <span class="text-deepdark-500 text-sm dark:text-softWhite"
+            >Publicado el: {formatDate(post.publishDate)}</span
+          >
+        </div>
+      </div>
+      <Prose>
+        <Fragment set:html={postContent} />
+      </Prose>
+    </div>
+  </article>
+</PostLayout>

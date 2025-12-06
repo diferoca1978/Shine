@@ -48,6 +48,7 @@
 }
 
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
 
 /* Enable class-based dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
