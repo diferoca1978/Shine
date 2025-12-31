@@ -1,6 +1,5 @@
 ---
 import { mockGoogleReviews } from "../../data/mockGoogleReviews";
-import { generateGoogleReviewsSchema } from "../../config/seo";
 import GoogleLogo from "@/assets/icons/googleLogo.svg";
 import StarIcon from "@/assets/icons/star40x40.svg";
 import ReviewCard from "../ui/ReviewCard.astro";
@@ -23,8 +22,6 @@ const filteredReviews = filterTag
   ? reviews.filter((review) => review.tag.includes(filterTag)).slice(0, limit)
   : showReviews;
 
-const schema = generateGoogleReviewsSchema(reviews);
-
 const satisfactionCount = reviews.filter((review) => review.rating >= 4).length;
 
 const averageRating =
@@ -39,8 +36,6 @@ const formatDate = (timestamp: number) => {
 };
 const currentPath = Astro.url.pathname;
 ---
-
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
 <section class="social-proof max-w-7xl mx-auto pb-10 lg:pb-20">
   <div class="reviews-wrapper flex flex-col items-center p-4">

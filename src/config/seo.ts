@@ -2,34 +2,9 @@ import type { SEOProps } from 'astro-seo';
 import type { ImageMetadata } from 'astro';
 import type { Service } from './services';
 import { services } from './services';
+import { mockGoogleReviews } from '@/data/mockGoogleReviews';
 
 export type JSONLDSchema = Record<string, any>;
-
-// Centralized keyword configuration - Main SEO keywords for Shine
-export const MAIN_KEYWORDS = {
-  primary: [
-    'Agencia de marketing digital Colombia',
-    'Diseño web estratégico Colombia',
-    'Estrategia de marca personal para líderes',
-    'Shine Agencia Digital',
-    'consultoría de marketing en bogota',
-    'Agencia de marketing B2B Bogotá'
-  ],
-  secondary: [
-    'Páginas web con Astro',
-    'Consultoría de marketing para empresas',
-    'Posicionamiento de autoridad online',
-    'Marketing digital con propósito',
-    'Agencia Rocío Parra y Diego Rodríguez'
-  ],
-  tertiary: [
-    'diseño web profesional',
-    'marketing digital introvertidos',
-    'transformación digital',
-    'sitios web alto rendimiento',
-    'agencia marketing auténtico'
-  ]
-};
 
 // Company base information
 export const COMPANY_INFO = {
@@ -85,18 +60,9 @@ export const DEFAULT_SEO: SEOProps = {
   },
   extend: {
     meta: [
-
       { name: 'robots', content: 'index, follow' },
       { name: 'author', content: COMPANY_INFO.name },
-      {
-        name: 'keywords',
-        content: [
-          ...MAIN_KEYWORDS.primary,
-          ...MAIN_KEYWORDS.secondary,
-          ...MAIN_KEYWORDS.tertiary
-        ].join(', ')
-      },
-      { name: 'theme-color', content: '#FFD97D' }, // Dorado acento
+      { name: 'theme-color', content: '#FFD97D' },
       { name: 'msapplication-TileColor', content: '#FFD97D' },
       { httpEquiv: 'Content-Language', content: 'es-CO' }
     ]
@@ -187,14 +153,6 @@ export const WEBSITE_SCHEMA = {
   },
   publisher: {
     '@id': COMPANY_INFO.url + '#organizacion'
-  },
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: COMPANY_INFO.url + '/buscar?q={search_term_string}'
-    },
-    'query-input': 'required name=search_term_string'
   },
   mainEntity: {
     '@id': COMPANY_INFO.url + '#organizacion'
@@ -314,33 +272,13 @@ export function generatePageSEO(options: {
       title: fullTitle,
       description: options.description,
       image: COMPANY_INFO.url + (options.image || COMPANY_INFO.image)
-    },
-    extend: {
-      meta: [
-        {
-          name: 'keywords',
-          content: [
-            ...MAIN_KEYWORDS.primary,
-            ...MAIN_KEYWORDS.secondary
-          ].join(', ')
-        }
-      ]
     }
   };
 }
 
 export function generateServiceSEO(service: Service): SEOProps {
   const serviceUrl = `${COMPANY_INFO.url}/servicios/${service.slug}`;
-
   const pageTitle = `${service.title} | ${COMPANY_INFO.name}`;
-
-  // Combine service-specific keywords with main brand keywords for consistency
-  const allKeywords = [
-    ...service.seoKeywords,
-    ...MAIN_KEYWORDS.primary
-  ];
-
-  const keywordsString = allKeywords.join(', ');
 
   return {
     title: pageTitle,
@@ -368,17 +306,14 @@ export function generateServiceSEO(service: Service): SEOProps {
       description: service.seoDescription,
       image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image)
     },
-
     extend: {
       meta: [
-        { name: 'keywords', content: keywordsString },
         { name: 'author', content: COMPANY_INFO.name },
         { name: 'robots', content: 'index, follow' },
         { httpEquiv: 'Content-Language', content: 'es-CO' }
       ]
     }
-
-  }
+  };
 }
 
 export function generateServiceSchema(service: Service): JSONLDSchema {
@@ -440,24 +375,8 @@ export function generateBreadcrumbSchema(breadcrumbs: Array<{ name: string; url:
   };
 }
 
-// FAQ Schema generator for service pages
-export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>): JSONLDSchema {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer
-      }
-    }))
-  };
-}
-
-// Base Reviews Schema generator
-export function generateReviewsSchema(reviews: Array<{
+// Internal helper for reviews schema generation
+function generateReviewsSchema(reviews: Array<{
   author: string;
   text: string;
   rating: number;
@@ -524,4 +443,10 @@ export function generateGoogleReviewsSchema(reviews: Array<{
 
   return generateReviewsSchema(formattedReviews);
 }
+
+/**
+ * Pre-generated reviews schema using mockGoogleReviews data.
+ * Use this constant in layouts/pages that include SocialProof component.
+ */
+export const REVIEWS_SCHEMA = generateGoogleReviewsSchema(mockGoogleReviews);
 

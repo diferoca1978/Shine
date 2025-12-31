@@ -1,10 +1,10 @@
 ---
-import { Image } from "astro:assets";
 import MainLayout from "@/layouts/MainLayout.astro";
 import {
   generateBreadcrumbSchema,
   generateServiceSEO,
   generateServiceSchema,
+  REVIEWS_SCHEMA,
 } from "@/config/seo";
 import type { Service } from "@/config/services";
 
@@ -26,7 +26,8 @@ const breadcrumbs = [
 
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 
-const schemas = [breadcrumbSchema, schema];
+// Include REVIEWS_SCHEMA since all service pages display SocialProof component
+const schemas = [breadcrumbSchema, schema, REVIEWS_SCHEMA];
 ---
 
 <MainLayout seoProps={seo} aditionalSchemas={schemas}>

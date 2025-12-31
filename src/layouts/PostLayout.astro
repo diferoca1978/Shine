@@ -10,27 +10,28 @@ interface Props {
     title: string;
     description: string;
     publishDate: Date;
-    tags?: string[];
     image?: string;
     slug: string;
 }
 
-const { title, description, publishDate, tags, image, slug } = Astro.props;
+const { title, description, publishDate, image, slug } = Astro.props;
+
+// Sanitize slug: trim whitespace and ensure it's URL-safe
+const sanitizedSlug = slug.trim().replace(/\s+/g, '-').toLowerCase();
 
 // Generate specific schemas for the post
 const postSchema = generateBlogPostSchema({
     title,
     description,
     publishDate,
-    tags,
     image,
-    id: slug,
+    id: sanitizedSlug,
 });
 
 const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Blog", url: "/blog" },
-    { name: title, url: `/blog/${slug}` },
+    { name: title, url: `/blog/${sanitizedSlug}` },
 ]);
 
 const aditionalSchemas: JSONLDSchema[] = [postSchema, breadcrumbSchema];
@@ -39,11 +40,9 @@ const aditionalSchemas: JSONLDSchema[] = [postSchema, breadcrumbSchema];
 <MainLayout
     title={title}
     description={description}
-    path={`/blog/${slug}`}
+    path={`/blog/${sanitizedSlug}`}
     image={image}
     aditionalSchemas={aditionalSchemas}
 >
-    <article>
-        <slot />
-    </article>
+    <slot />
 </MainLayout>
