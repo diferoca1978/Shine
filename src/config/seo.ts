@@ -450,3 +450,166 @@ export function generateGoogleReviewsSchema(reviews: Array<{
  */
 export const REVIEWS_SCHEMA = generateGoogleReviewsSchema(mockGoogleReviews);
 
+// ============================================================================
+// FAQ Page Schema - For AEO (Answer Engine Optimization)
+// ============================================================================
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+/**
+ * Generates FAQPage schema for rich snippets in Google and AI citation.
+ * Use this on service pages, landing pages, or any page with Q&A content.
+ *
+ * @example
+ * const faqSchema = generateFAQSchema([
+ *   { question: '¿Qué incluye el diseño web?', answer: 'Incluye diseño, desarrollo...' },
+ *   { question: '¿Cuánto tiempo toma?', answer: 'Entre 4-8 semanas...' }
+ * ]);
+ */
+export function generateFAQSchema(faqs: FAQItem[]): JSONLDSchema {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
+  };
+}
+
+/**
+ * Combines FAQPage schema with a specific page reference.
+ * Useful for linking FAQs to a specific service or page.
+ */
+export function generateFAQSchemaWithPage(
+  faqs: FAQItem[],
+  pageUrl: string,
+  pageName: string
+): JSONLDSchema {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${pageUrl}#faq`,
+    name: `Preguntas Frecuentes - ${pageName}`,
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    })),
+    isPartOf: {
+      '@type': 'WebPage',
+      '@id': pageUrl
+    }
+  };
+}
+
+// ============================================================================
+// HowTo Schema - For instructional content and step-by-step guides
+// ============================================================================
+
+export interface HowToStep {
+  name: string;
+  text: string;
+  image?: string;
+  url?: string;
+}
+
+export interface HowToOptions {
+  name: string;
+  description: string;
+  steps: HowToStep[];
+  totalTime?: string; // ISO 8601 duration format (e.g., 'PT30M' for 30 minutes)
+  estimatedCost?: {
+    currency: string;
+    value: string;
+  };
+  image?: string;
+  supply?: string[]; // Tools or materials needed
+}
+
+/**
+ * Generates HowTo schema for step-by-step guides.
+ * Perfect for blog posts with tutorials or process explanations.
+ *
+ * @example
+ * const howToSchema = generateHowToSchema({
+ *   name: 'Cómo preparar tu rediseño web',
+ *   description: 'Guía paso a paso para preparar tu negocio...',
+ *   steps: [
+ *     { name: 'Audita tu sitio', text: 'Analiza métricas actuales...' },
+ *     { name: 'Define objetivos', text: 'Establece metas claras...' }
+ *   ],
+ *   totalTime: 'P2W' // 2 weeks
+ * });
+ */
+export function generateHowToSchema(options: HowToOptions): JSONLDSchema {
+  const schema: JSONLDSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: options.name,
+    description: options.description,
+    step: options.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.image && { image: COMPANY_INFO.url + step.image }),
+      ...(step.url && { url: COMPANY_INFO.url + step.url })
+    }))
+  };
+
+  // Add optional properties if provided
+  if (options.totalTime) {
+    schema.totalTime = options.totalTime;
+  }
+
+  if (options.estimatedCost) {
+    schema.estimatedCost = {
+      '@type': 'MonetaryAmount',
+      currency: options.estimatedCost.currency,
+      value: options.estimatedCost.value
+    };
+  }
+
+  if (options.image) {
+    schema.image = COMPANY_INFO.url + options.image;
+  }
+
+  if (options.supply && options.supply.length > 0) {
+    schema.supply = options.supply.map(item => ({
+      '@type': 'HowToSupply',
+      name: item
+    }));
+  }
+
+  return schema;
+}
+
+/**
+ * Generates HowTo schema linked to a specific blog post or page.
+ */
+export function generateHowToSchemaWithPage(
+  options: HowToOptions,
+  pageUrl: string
+): JSONLDSchema {
+  const baseSchema = generateHowToSchema(options);
+
+  return {
+    ...baseSchema,
+    '@id': `${pageUrl}#howto`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': pageUrl
+    }
+  };
+}
