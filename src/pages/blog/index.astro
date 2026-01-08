@@ -6,10 +6,7 @@ import BlogCard from "@/components/ui/BlogCard.astro";
 const posts = await getPosts();
 
 const recentPosts = posts
-  .sort(
-    (a, b) =>
-      new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime(),
-  )
+  .sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime())
   .slice(0, 4);
 
 const formatDate = (date: string) =>
@@ -45,8 +42,8 @@ const formatDate = (date: string) =>
               slug={post.slug}
               title={post.title}
               author={post.author}
-              publishDate={formatDate(post.publishDate)}
-              summary={post.summary}
+              publishDate={formatDate(post.pubDate)}
+              summary={post.description}
               image={post.image.url}
             />
           ))

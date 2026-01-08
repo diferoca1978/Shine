@@ -41,8 +41,8 @@ const formatDate = (date: string) =>
 
 <PostLayout
   title={post.title}
-  description={post.summary}
-  publishDate={new Date(post.publishDate)}
+  description={post.description}
+  publishDate={new Date(post.pubDate)}
   image={post.image.url}
   slug={post.slug}
 >
@@ -93,12 +93,12 @@ const formatDate = (date: string) =>
         <p
           class="text-[min(5vw,20px)] text-balance text-center text-deepdark-900 dark:text-softWhite"
         >
-          {post.summary}
+          {post.description}
         </p>
 
         <div class="flex space-x-2">
           <span class="text-deepdark-500 text-sm dark:text-softWhite"
-            >Publicado el: {formatDate(post.publishDate)}</span
+            >Publicado el: {formatDate(post.pubDate)}</span
           >
         </div>
       </div>

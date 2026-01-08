@@ -6,9 +6,11 @@ export interface Post {
   lastUpdate: string; // Stores the date in ISO 8601 format. For example: 2021-09-10T19:30:00.000Z
   title: string;
   slug: string;
+  description: string;
+  pubDate: string; // Stores the date in ISO 8601 format. For example: 2021-09-10T19:30:00.000Z
   author: string;
-  publishDate: string; // Stores the date in ISO 8601 format. For example: 2021-09-10T19:30:00.000Z
-  summary: string;
   image: Media;
+  tags?: string[];
   content: string;
+  draft?: boolean;
 }
