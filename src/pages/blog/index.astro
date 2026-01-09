@@ -43,8 +43,9 @@ const formatDate = (date: string) =>
               title={post.title}
               author={post.author}
               publishDate={formatDate(post.pubDate)}
-              summary={post.description}
+              description={post.description}
               image={post.image.url}
+              tags={post.tags}
             />
           ))
         }
