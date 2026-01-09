@@ -20,6 +20,8 @@ const { slug, title, author, publishDate, description, image, tags } =
     <img
       src={image}
       alt={title}
+      loading="lazy"
+      decoding="async"
       class="w-full h-full object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out absolute inset-0 rounded-xl"
     />
   </div>

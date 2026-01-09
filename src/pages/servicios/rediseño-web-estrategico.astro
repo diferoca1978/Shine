@@ -9,6 +9,7 @@ import ServicesStepsProcess from "@/components/section/ourServices/ServicesSteps
 import ServiceProblemSection from "@/components/section/ourServices/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolutionSection.astro";
 import SocialProof from "@/components/global/SocialProof.astro";
+import FAQ from "@/components/section/FAQ.astro";
 
 const service = getServiceBySlug("rediseño-web-estrategico");
 
@@ -78,6 +79,8 @@ if (!service) {
     titleLine2="herramienta de éxito"
     filterTag="rediseño web"
   />
+  <!-- FAQ -->
+  {service.faqs && <FAQ faqs={service.faqs} />}
   <!-- CTA -->
   <div class="px-2">
     <CTABanner

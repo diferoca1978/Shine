@@ -10,6 +10,7 @@ import ServiceProblemSection from "@/components/section/ourServices/ServiceProbl
 import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolutionSection.astro";
 import ServiceTechStack from "@/components/section/ourServices/serviceTechStack.astro";
 import SocialProof from "@/components/global/SocialProof.astro";
+import FAQ from "@/components/section/FAQ.astro";
 
 const service = getServiceBySlug("diseno-web-estrategico");
 
@@ -71,6 +72,8 @@ if (!service) {
     titleLine2="para su base digital"
     filterTag="diseño web"
   />
+  <!-- FAQ -->
+  {service.faqs && <FAQ faqs={service.faqs} />}
   <!-- CTA -->
   <div class="px-2">
     <CTABanner

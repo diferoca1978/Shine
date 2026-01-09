@@ -29,7 +29,6 @@ export async function getStaticPaths() {
 
 // Per path let's generate the page
 const { post } = Astro.props;
-console.log(post.tags);
 
 // Add reading time
 const readingTime = post.content ? getReadingTime(post.content) : "";
@@ -84,6 +83,8 @@ const formatDate = (date: string) =>
         <img
           src={post.image.url}
           alt={post.title}
+          fetchpriority="high"
+          decoding="async"
           class="object-cover w-full h-full rounded-2xl"
         />
       </div>
@@ -103,6 +104,13 @@ const formatDate = (date: string) =>
           <span class="text-deepdark-500 text-sm dark:text-softWhite"
             >Publicado el: {formatDate(post.pubDate)}</span
           >
+          {
+            post.lastUpdate && post.lastUpdate !== post.pubDate && (
+              <span class="block text-deepdark-500 text-sm dark:text-softWhite">
+                Actualizado el: {formatDate(post.lastUpdate)}
+              </span>
+            )
+          }
           <span class="block text-deepdark-500 text-sm dark:text-softWhite">
             Autor: {post.author}
           </span>
