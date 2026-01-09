@@ -1,4 +1,5 @@
 import type { ImageMetadata } from 'astro';
+import type { FAQItem } from '@/config/seo';
 
 import SocialContent from '@/assets/images/redessociales.webp';
 import InvisibilityProblem from '@/assets/images/invisibility.webp';
@@ -31,6 +32,8 @@ export interface Service {
     seoDescription: string;
     seoKeywords: string[]; // Primary keywords for meta tags
     secondaryKeywords?: string[]; // Secondary/long-tail keywords for content optimization
+    // FAQ for AEO (Answer Engine Optimization)
+    faqs?: FAQItem[];
 }
 
 export const services: Service[] = [
@@ -107,6 +110,28 @@ export const services: Service[] = [
       "atraer clientes de alto valor",
       "crear contenido que vende"
     ],
+    faqs: [
+      {
+        question: "¿Qué es una estrategia de marca personal y por qué la necesito?",
+        answer: "Una estrategia de marca personal es un plan estructurado para comunicar tu valor único, posicionarte como autoridad en tu industria y atraer clientes ideales de forma consistente. La necesitas porque en el mundo digital actual, tu reputación online determina las oportunidades que llegan a ti."
+      },
+      {
+        question: "¿Cuánto tiempo toma ver resultados con una estrategia de marca personal?",
+        answer: "Los primeros resultados tangibles suelen verse entre 3 y 6 meses: mayor engagement, solicitudes de colaboración y leads entrantes. Sin embargo, construir una autoridad sólida es un proceso continuo que se fortalece con el tiempo y la consistencia."
+      },
+      {
+        question: "¿Necesito estar en todas las redes sociales para construir mi marca personal?",
+        answer: "No. Es más efectivo dominar 1 o 2 plataformas donde esté tu audiencia ideal que tener presencia mediocre en todas. Te ayudamos a identificar los canales estratégicos para tu perfil y objetivos específicos."
+      },
+      {
+        question: "¿Funciona la marca personal para profesionales introvertidos?",
+        answer: "Absolutamente. La marca personal no se trata de ser extrovertido, sino de comunicar valor de forma auténtica. Diseñamos estrategias que respetan tu personalidad, enfocándonos en formatos de contenido donde te sientas cómodo."
+      },
+      {
+        question: "¿Qué incluye el servicio de estrategia de marca personal de Shine?",
+        answer: "Incluye diagnóstico inicial, definición de tu posicionamiento único, arquitectura de contenidos, estrategia multicanal adaptada (LinkedIn, Instagram, blog), plan de acción con calendario editorial y métricas de seguimiento para medir tu evolución."
+      }
+    ],
   },
   {
     slug: "diseno-web-estrategico",
@@ -177,6 +202,28 @@ export const services: Service[] = [
       "sitios web estáticos para empresas",
       "mejorar velocidad de carga de mi nueva web",
       "diseño web para startups en Colombia"
+    ],
+    faqs: [
+      {
+        question: "¿Qué es Astro Framework y por qué lo usan para diseño web?",
+        answer: "Astro es un framework moderno que genera sitios web ultrarrápidos al enviar solo HTML y CSS al navegador, sin JavaScript innecesario. Lo usamos porque ofrece velocidad de carga excepcional, mejor SEO, mayor seguridad y costos de hosting reducidos comparado con WordPress u otras plataformas."
+      },
+      {
+        question: "¿Cuánto tiempo toma desarrollar un sitio web profesional con Shine?",
+        answer: "Un sitio web típico toma entre 4 y 8 semanas dependiendo de la complejidad. Esto incluye estrategia, diseño UX/UI, desarrollo, optimización SEO y pruebas. Proyectos más simples pueden completarse en 3 semanas, mientras que sitios más complejos pueden requerir hasta 12 semanas."
+      },
+      {
+        question: "¿Mi sitio web será responsive y se verá bien en móviles?",
+        answer: "Sí, todos nuestros sitios son 100% responsive y están optimizados para móviles desde el diseño inicial (mobile-first). Probamos en múltiples dispositivos y navegadores para garantizar una experiencia perfecta en cualquier pantalla."
+      },
+      {
+        question: "¿Incluyen SEO en el desarrollo del sitio web?",
+        answer: "Absolutamente. El SEO técnico está integrado desde la arquitectura: URLs optimizadas, meta tags, schema markup para rich snippets, sitemap automático, velocidad de carga optimizada y estructura semántica. Tu sitio nace listo para posicionar en Google."
+      },
+      {
+        question: "¿Podré actualizar el contenido de mi web yo mismo después?",
+        answer: "Sí. Integramos sistemas de gestión de contenido (CMS) headless que te permiten actualizar textos, imágenes y publicar blog posts sin tocar código. Te capacitamos para que tengas autonomía total sobre tu contenido."
+      }
     ],
   },
   {
@@ -253,6 +300,28 @@ export const services: Service[] = [
       "actualizar diseño web",
       "agencia de optimización web",
       "optimización de la experiencia de usuario (UX)"
+    ],
+    faqs: [
+      {
+        question: "¿Cuándo debo considerar rediseñar mi sitio web actual?",
+        answer: "Deberías rediseñar si: tu web tarda más de 3 segundos en cargar, el diseño tiene más de 3 años, no es responsive en móviles, no genera leads ni conversiones, o tu tasa de rebote supera el 70%. Cualquiera de estas señales indica que tu web está frenando tu negocio."
+      },
+      {
+        question: "¿Perderé mi posicionamiento en Google si rediseño mi web?",
+        answer: "No si se hace correctamente. Preservamos la autoridad de tus páginas existentes, mantenemos la estructura de contenido optimizada y mejoramos los factores técnicos. De hecho, un rediseño bien ejecutado suele mejorar tu posicionamiento en buscadores."
+      },
+      {
+        question: "¿Qué es AEO y GEO y por qué son importantes para mi negocio?",
+        answer: "AEO y GEO son estrategias para que tu negocio aparezca cuando las personas buscan usando asistentes de IA como ChatGPT o Google. Hoy más del 60% de búsquedas no terminan en un clic tradicional, por eso es crucial que tu web esté preparada para ser la fuente que estas IAs recomienden."
+      },
+      {
+        question: "¿Cómo logran que mi negocio aparezca en las respuestas de inteligencia artificial?",
+        answer: "Estructuramos tu contenido para que sea fácilmente comprensible por las IAs, incluimos secciones de preguntas frecuentes optimizadas, y nos aseguramos de que tu web permita el acceso a los sistemas de IA más importantes. El resultado: cuando alguien pregunta sobre tu industria, tu negocio puede ser la respuesta."
+      },
+      {
+        question: "¿Migrarán todo mi contenido existente al nuevo diseño?",
+        answer: "Sí, migramos todo el contenido valioso: textos, imágenes, blog posts y recursos. Durante el proceso también optimizamos el contenido para que funcione mejor tanto en Google tradicional como en los nuevos asistentes de IA."
+      }
     ],
   }
 ]

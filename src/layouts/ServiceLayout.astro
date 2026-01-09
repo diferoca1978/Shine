@@ -4,6 +4,7 @@ import {
   generateBreadcrumbSchema,
   generateServiceSEO,
   generateServiceSchema,
+  generateFAQSchema,
   REVIEWS_SCHEMA,
 } from "@/config/seo";
 import type { Service } from "@/config/services";
@@ -26,8 +27,11 @@ const breadcrumbs = [
 
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 
+// Generate FAQ schema if service has FAQs
+const faqSchema = service.faqs ? generateFAQSchema(service.faqs) : null;
+
 // Include REVIEWS_SCHEMA since all service pages display SocialProof component
-const schemas = [breadcrumbSchema, schema, REVIEWS_SCHEMA];
+const schemas = [breadcrumbSchema, schema, REVIEWS_SCHEMA, ...(faqSchema ? [faqSchema] : [])];
 ---
 
 <MainLayout seoProps={seo} aditionalSchemas={schemas}>
