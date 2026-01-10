@@ -6,6 +6,7 @@ import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import Prose from "@/components/ui/Prose.astro";
 import { getReadingTime } from "@/utils/readinTime";
+import { getAuthor, DEFAULT_AUTHOR } from "@/config/authors";
 
 const renderer = new marked.Renderer();
 renderer.code = ({ text, lang }) => {
@@ -30,11 +31,17 @@ export async function getStaticPaths() {
 // Per path let's generate the page
 const { post } = Astro.props;
 
+// Get author info from local config (enriches CMS data with bio, credentials, etc.)
+const author = getAuthor(post.author) || DEFAULT_AUTHOR;
+
 // Add reading time
 const readingTime = post.content ? getReadingTime(post.content) : "";
 
 // Convert markdown to HTML
 const postContent = marked(post.content || "");
+
+// Parse dates for layout
+const modifiedDate = post.lastUpdate ? new Date(post.lastUpdate) : undefined;
 
 const formatDate = (date: string) =>
   new Date(date).toLocaleDateString("es-CO", {
@@ -48,8 +55,10 @@ const formatDate = (date: string) =>
   title={post.title}
   description={post.description}
   publishDate={new Date(post.pubDate)}
+  modifiedDate={modifiedDate}
   image={post.image.url}
   slug={post.slug}
+  author={author}
 >
   <article class="container md:mt-0 mx-auto px-2 py-8 md:py-16">
     <nav class="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto" aria-label="Breadcrumb">
@@ -100,23 +109,36 @@ const formatDate = (date: string) =>
           {post.description}
         </p>
 
-        <div class="mb-8">
-          <span class="text-deepdark-500 text-sm dark:text-softWhite"
-            >Publicado el: {formatDate(post.pubDate)}</span
+        <!-- Author & Post Meta -->
+        <div
+          class="mb-8 flex flex-col sm:flex-row sm:items-start gap-4 border-y border-deepdark-200 dark:border-softWhite/20 py-4"
+        >
+          <!-- Author Info -->
+          <div class="flex-1">
+            <p class="font-medium text-deepdark-900 dark:text-softWhite">
+              {author.name}
+            </p>
+            <p class="text-sm text-deepdark-500 dark:text-softWhite/80">
+              {author.role}
+            </p>
+            <p
+              class="text-sm text-deepdark-500 dark:text-softWhite/70 mt-1 max-w-prose"
+            >
+              {author.bio}
+            </p>
+          </div>
+          <!-- Post Meta -->
+          <div
+            class="text-sm text-deepdark-500 dark:text-softWhite/80 sm:text-right shrink-0"
           >
-          {
-            post.lastUpdate && post.lastUpdate !== post.pubDate && (
-              <span class="block text-deepdark-500 text-sm dark:text-softWhite">
-                Actualizado el: {formatDate(post.lastUpdate)}
-              </span>
-            )
-          }
-          <span class="block text-deepdark-500 text-sm dark:text-softWhite">
-            Autor: {post.author}
-          </span>
-          <span class="block text-deepdark text-sm dark:text-softWhite">
-            {readingTime}
-          </span>
+            <p>Publicado: {formatDate(post.pubDate)}</p>
+            <!-- {
+              post.lastUpdate && post.lastUpdate !== post.pubDate && (
+                <p>Actualizado: {formatDate(post.lastUpdate)}</p>
+              )
+            } -->
+            <p class="text-deepdark dark:text-softWhite/70">{readingTime}</p>
+          </div>
         </div>
       </div>
       <Prose>
