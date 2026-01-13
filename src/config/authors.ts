@@ -6,7 +6,6 @@
  * 2. Generating Person schema for structured SEO
  * 3. Maintaining consistency without depending on CMS
  *
- * The object key must match the `author` field from the CMS.
  */
 
 import { COMPANY_INFO } from './seo';
@@ -46,8 +45,8 @@ export const AUTHORS: Record<string, Author> = {
       'Comunicación corporativa'
     ],
     socialMedia: {
-      instagram: COMPANY_INFO.socialMedia.instagram,
-      linkedin: COMPANY_INFO.socialMedia.linkedin
+      instagram: 'https://www.instagram.com/rocio.parra/',
+      linkedin: 'https://www.linkedin.com/in/rocio-parra/'
     }
   },
   'Diego': {
@@ -60,8 +59,7 @@ export const AUTHORS: Record<string, Author> = {
       'SEO técnico'
     ],
     socialMedia: {
-      instagram: COMPANY_INFO.socialMedia.instagram,
-      linkedin: COMPANY_INFO.socialMedia.linkedin
+      linkedin: 'https://www.linkedin.com/in/diego-rodriguez/'
     }
   }
 };
