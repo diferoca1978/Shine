@@ -5,16 +5,19 @@ import {
     generateBlogPostSchema,
     type JSONLDSchema,
 } from "@/config/seo";
+import type { Author } from "@/config/authors";
 
 interface Props {
     title: string;
     description: string;
     publishDate: Date;
+    modifiedDate?: Date;
     image?: string;
     slug: string;
+    author?: Author;
 }
 
-const { title, description, publishDate, image, slug } = Astro.props;
+const { title, description, publishDate, modifiedDate, image, slug, author } = Astro.props;
 
 // Sanitize slug: trim whitespace and ensure it's URL-safe
 const sanitizedSlug = slug.trim().replace(/\s+/g, '-').toLowerCase();
@@ -24,8 +27,15 @@ const postSchema = generateBlogPostSchema({
     title,
     description,
     publishDate,
+    modifiedDate,
     image,
     id: sanitizedSlug,
+    author: author ? {
+        name: author.name,
+        role: author.role,
+        url: author.url,
+        credentials: author.credentials,
+    } : undefined,
 });
 
 const breadcrumbSchema = generateBreadcrumbSchema([

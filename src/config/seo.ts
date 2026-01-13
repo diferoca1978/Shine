@@ -190,7 +190,6 @@ export function generateBlogSchema(posts: Array<{
       url: `${COMPANY_INFO.url}/blog/${post.id}`,
       datePublished: post.publishDate.toISOString(),
       image: post.image ? COMPANY_INFO.url + post.image : COMPANY_INFO.url + COMPANY_INFO.image,
-      keywords: post.tags?.join(', ') || 'diseño web, marketing digital, autenticidad, transformación digital',
       mainEntityOfPage: {
         '@type': 'WebPage',
         '@id': `${COMPANY_INFO.url}/blog/${post.id}`
@@ -204,10 +203,33 @@ export function generateBlogPostSchema(post: {
   title: string;
   description: string;
   publishDate: Date;
+  modifiedDate?: Date;
   tags?: string[];
   image?: string;
   id: string;
+  author?: {
+    name: string;
+    role?: string;
+    url?: string;
+    credentials?: string[];
+  };
 }): JSONLDSchema {
+  // Build author schema - uses Person if provided, falls back to Organization
+  const authorSchema = post.author
+    ? {
+        '@type': 'Person',
+        name: post.author.name,
+        ...(post.author.role && { jobTitle: post.author.role }),
+        ...(post.author.url && { url: post.author.url }),
+        ...(post.author.credentials && { knowsAbout: post.author.credentials }),
+        worksFor: {
+          '@id': COMPANY_INFO.url + '#organizacion'
+        }
+      }
+    : {
+        '@id': COMPANY_INFO.url + '#organizacion'
+      };
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -216,6 +238,8 @@ export function generateBlogPostSchema(post: {
     description: post.description,
     url: `${COMPANY_INFO.url}/blog/${post.id}`,
     datePublished: post.publishDate.toISOString(),
+    ...(post.modifiedDate && { dateModified: post.modifiedDate.toISOString() }),
+    author: authorSchema,
     publisher: {
       '@id': COMPANY_INFO.url + '#organizacion'
     },
@@ -224,7 +248,6 @@ export function generateBlogPostSchema(post: {
       '@id': `${COMPANY_INFO.url}/blog/${post.id}`
     },
     image: post.image ? COMPANY_INFO.url + post.image : COMPANY_INFO.url + COMPANY_INFO.image,
-    keywords: post.tags?.join(', ') || 'diseño web, marketing digital, autenticidad, transformación digital',
     inLanguage: 'es-CO',
     isPartOf: {
       '@id': COMPANY_INFO.url + '/blog#blog'
@@ -346,8 +369,6 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
         }
       }
     },
-
-    keywords: service.seoKeywords.join(', '),
 
     ...(service.benefits && {
       serviceOutput: service.benefits.join(', ')
