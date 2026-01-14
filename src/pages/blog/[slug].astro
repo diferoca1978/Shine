@@ -1,29 +1,17 @@
 ---
+import { getCollection, render } from "astro:content";
 import PostLayout from "@/layouts/PostLayout.astro";
-import { getPosts } from "./blog.api";
 import { marked } from "marked";
-import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import Prose from "@/components/ui/Prose.astro";
 import { getReadingTime } from "@/utils/readinTime";
-import { getAuthor, DEFAULT_AUTHOR } from "@/config/authors";
-
-const renderer = new marked.Renderer();
-renderer.code = ({ text, lang }) => {
-  const validLang = hljs.getLanguage(lang || "plaintext")
-    ? lang || "plaintext"
-    : "plaintext";
-  const highlighted = hljs.highlight(text, { language: validLang }).value;
-  return `<pre><code class="hljs ${validLang}">${highlighted}</code></pre>`;
-};
-
-marked.setOptions({ renderer });
+import { AUTHORS, DEFAULT_AUTHOR } from "@/config/authors";
 
 // Generate all possible paths
 export async function getStaticPaths() {
-  const posts = await getPosts();
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.data.slug },
     props: { post },
   }));
 }
@@ -31,19 +19,22 @@ export async function getStaticPaths() {
 // Per path let's generate the page
 const { post } = Astro.props;
 
+// To render the blog content
+const { Content } = await render(post);
+
 // Get author info from local config (enriches CMS data with bio, credentials, etc.)
-const author = getAuthor(post.author) || DEFAULT_AUTHOR;
+const author =
+  AUTHORS.find((author) => author.name === post.data.author) || DEFAULT_AUTHOR;
 
 // Add reading time
-const readingTime = post.content ? getReadingTime(post.content) : "";
-
-// Convert markdown to HTML
-const postContent = marked(post.content || "");
+const readingTime = post.body ? getReadingTime(post.body) : "";
 
 // Parse dates for layout
-const modifiedDate = post.lastUpdate ? new Date(post.lastUpdate) : undefined;
+const modifiedDate = post.data.lastUpdate
+  ? new Date(post.data.lastUpdate)
+  : undefined;
 
-const formatDate = (date: string) =>
+const formatDate = (date: Date): string =>
   new Date(date).toLocaleDateString("es-CO", {
     day: "numeric",
     month: "short",
@@ -52,15 +43,15 @@ const formatDate = (date: string) =>
 ---
 
 <PostLayout
-  title={post.title}
-  description={post.description}
-  publishDate={new Date(post.pubDate)}
+  title={post.data.title}
+  description={post.data.description}
+  publishDate={new Date(post.data.pubDate)}
   modifiedDate={modifiedDate}
-  image={post.image.url}
-  slug={post.slug}
+  image={post.data.image.src}
+  slug={post.data.slug}
   author={author}
 >
-  <article class="container md:mt-0 mx-auto px-2 py-8 md:py-16">
+  <article class="container md:mt-0 mx-auto px-2 py-8 md:py-12">
     <nav class="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto" aria-label="Breadcrumb">
       <ol class="flex items-center space-x-2 text-sm text-gray-600">
         <li>
@@ -83,15 +74,15 @@ const formatDate = (date: string) =>
           class="text-deepdark-900 text-[min(5vw,16px)] font-bold dark:text-softWhite/80"
           aria-current="page"
         >
-          {post.title}
+          {post.data.title}
         </li>
       </ol>
     </nav>
     <div class="max-w-5xl px-2 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
-      <div class="flex justify-center h-90 mx-auto">
+      <div class="flex justify-center h-90 mx-auto mb-8">
         <img
-          src={post.image.url}
-          alt={post.title}
+          src={post.data.image.src}
+          alt={post.data.title}
           fetchpriority="high"
           decoding="async"
           class="object-cover w-full h-full rounded-2xl"
@@ -101,12 +92,12 @@ const formatDate = (date: string) =>
         <h1
           class="text-center font-bold mb-5 text-[min(6vw,36px)] dark:text-softWhite"
         >
-          {post.title}
+          {post.data.title}
         </h1>
         <p
           class="text-[min(5vw,20px)] text-balance text-center text-deepdark-900 dark:text-softWhite"
         >
-          {post.description}
+          {post.data.description}
         </p>
 
         <!-- Author & Post Meta -->
@@ -131,7 +122,7 @@ const formatDate = (date: string) =>
           <div
             class="text-sm text-deepdark-500 dark:text-softWhite/80 sm:text-right shrink-0"
           >
-            <p>Publicado: {formatDate(post.pubDate)}</p>
+            <p>Publicado el: {formatDate(post.data.pubDate)}</p>
             <!-- {
               post.lastUpdate && post.lastUpdate !== post.pubDate && (
                 <p>Actualizado: {formatDate(post.lastUpdate)}</p>
@@ -142,7 +133,7 @@ const formatDate = (date: string) =>
         </div>
       </div>
       <Prose>
-        <Fragment set:html={postContent} />
+        <Content />
       </Prose>
     </div>
   </article>

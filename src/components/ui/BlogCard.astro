@@ -45,7 +45,7 @@ const { slug, title, author, publishDate, description, image, tags } =
       class="text-sm leading-tight font-semibold font-openSans text-deepplum group-hover:text-base group-hover:underline group-hover:underline-offset-2 transition-all duration-300 ease-linear dark:text-accentGold"
       href={`/blog/${slug}`}>Continuar leyendo</a
     >
-    <div class="flex gap-4 justify-center items-center mt-4">
+    <div class="gap-4 justify-center items-center mt-4 hidden md:flex">
       {
         tags &&
           tags.map((tag) => (
