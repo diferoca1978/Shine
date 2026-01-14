@@ -65,32 +65,6 @@ export const AUTHORS: Record<string, Author> = {
 };
 
 /**
- * Gets author information by name
- * @param name - Author name (must match post.author from CMS)
- * @returns Author data or undefined if not found
- */
-export function getAuthor(name: string): Author | undefined {
-  // Try exact match first
-  if (AUTHORS[name]) {
-    return AUTHORS[name];
-  }
-
-  // Try partial match (in case CMS sends full name)
-  const normalizedName = name.toLowerCase().trim();
-  for (const [key, author] of Object.entries(AUTHORS)) {
-    if (
-      key.toLowerCase() === normalizedName ||
-      author.name.toLowerCase().includes(normalizedName) ||
-      normalizedName.includes(key.toLowerCase())
-    ) {
-      return author;
-    }
-  }
-
-  return undefined;
-}
-
-/**
  * Default author when no match is found
  * Uses organization as generic author
  */
