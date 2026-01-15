@@ -17,6 +17,7 @@ interface LlmsTxtConfig {
   description: string;
   site: string;
   items: LlmsItem[];
+  services?: LlmsItem[];
   optional?: LlmsItem[];
 }
 
@@ -81,6 +82,11 @@ export function llmsTxt(config: LlmsTxtConfig): Response {
     header(config.name, config.description),
     linkList("Posts", config.items, config.site),
   ];
+
+  // Services section - helps LLMs discover business offerings
+  if (config.services?.length) {
+    sections.push(linkList("Services", config.services, config.site));
+  }
 
   if (config.optional?.length) {
     sections.push(linkList("Optional", config.optional, config.site));
