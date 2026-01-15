@@ -3,6 +3,7 @@ title: "Marca Personal en la Era de la IA: Tu Ventaja Competitiva"
 slug: marca-personal-ai
 description: "La inteligencia artificial está transformando cómo los profesionales se posicionan. Descubre por qué construir una marca personal auténtica es tu ventaja competitiva ante la automatización."
 pubDate: 2026-01-08
+modifiedDate: 2026-01-15
 author: Rocio Parra
 image: "images/personalbranding.webp"
 tags: ["Marca Personal", "inteligencia artificial","Marketing Digital"]

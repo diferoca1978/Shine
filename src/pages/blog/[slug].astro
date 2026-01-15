@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import PostLayout from "@/layouts/PostLayout.astro";
 import { marked } from "marked";
@@ -80,11 +81,10 @@ const formatDate = (date: Date): string =>
     </nav>
     <div class="max-w-5xl px-2 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
       <div class="flex justify-center h-90 mx-auto mb-8">
-        <img
-          src={post.data.image.src}
+        <Image
+          src={post.data.image}
           alt={post.data.title}
-          fetchpriority="high"
-          decoding="async"
+          priority
           class="object-cover w-full h-full rounded-2xl"
         />
       </div>
@@ -107,7 +107,7 @@ const formatDate = (date: Date): string =>
           <!-- Author Info -->
           <div class="flex-1">
             <p class="font-medium text-deepdark-900 dark:text-softWhite">
-              {author.name}
+              Por: {author.name}
             </p>
             <p class="text-sm text-deepdark-500 dark:text-softWhite/80">
               {author.role}
