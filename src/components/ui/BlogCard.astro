@@ -1,43 +1,64 @@
 ---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
 interface Props {
-  slug: string;
-  title: string;
-  author: string;
-  publishDate: string; // Formatted date string (e.g., "3 dic 2025")
-  summary: string;
-  image: string; // Image URL extracted from Media object
+  post: CollectionEntry<"blog">;
 }
 
-const { slug, title, author, publishDate, summary, image } = Astro.props;
+const { post } = Astro.props;
+const { data } = post;
+const { title, author, pubDate, description, image, tags, slug } = data;
+
+const formatDate = (date: Date): string =>
+  new Date(date).toLocaleDateString("es-CO", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 ---
 
 <article
-  class="blog-card group rounded-xl overflow-hidden hover:shadow-2xl w-full flex flex-col md:flex-row p-4 gap-2"
+  class="blog-card group rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-deepdark dark:hover:shadow-accentGold dark:hover:shadow-sm transition-shadow duration-300 ease-linear w-full flex flex-col p-4 gap-3"
 >
-  <div class="shrink-0 relative rounded-xl overflow-hidden w-full md:w-56 h-44">
-    <img
+  <div class="relative rounded-xl overflow-hidden w-full h-64">
+    <Image
       src={image}
       alt={title}
-      class="w-full h-full object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out absolute top-0 start-0 rounded-xl"
+      priority
+      class="w-full h-full object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out absolute inset-0 rounded-xl"
     />
   </div>
-  <div class="flex flex-col gap-0.5">
-    <h2 class="font-playfair text-xl leading-tight dark:text-softWhite">
-      {title}
-    </h2>
-    <p class="font-openSans dark:text-softWhite">
-      <strong>Autor:</strong>
-      {author}
-    </p>
-    <p class="font-openSans dark:text-softWhite">
-      Publicado el: {publishDate}
-    </p>
-    <p class="font-openSans text-base dark:text-softWhite">
-      {summary}
-    </p>
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-0.5">
+      <h2 class="font-playfair text-xl leading-tight dark:text-softWhite">
+        {title}
+      </h2>
+      <p class="font-openSans dark:text-softWhite">
+        <strong>Autor:</strong>
+        {author}
+      </p>
+      <p class="font-openSans dark:text-softWhite">
+        Publicado el: {formatDate(pubDate)}
+      </p>
+      <p class="font-openSans text-base dark:text-softWhite">
+        {description}
+      </p>
+    </div>
     <a
-      class="text-sm leading-tight font-semibold font-openSans text-deepplum group-hover:font-bold group-hover:underline group-hover:underline-offset-2 dark:text-accentGold"
-      href={`/blog/${slug}`}>Leer más</a
+      class="text-sm leading-tight font-semibold font-openSans text-deepplum group-hover:text-base group-hover:underline group-hover:underline-offset-2 transition-all duration-300 ease-linear dark:text-accentGold"
+      href={`/blog/${slug}`}>Continuar leyendo</a
     >
+    <div class="gap-4 justify-center items-center mt-4 hidden md:flex">
+      {
+        tags &&
+          tags.map((tag) => (
+            <span class="flex tracking-tight items-center gap-1 text-sm font-semibold font-openSans text-deepplum group-hover:text-base dark:text-softWhite/30 transition-all duration-300 ease-linear">
+              <div class="w-1 h-1 rounded-full bg-deepplum dark:bg-softWhite/30" />
+              {tag}
+            </span>
+          ))
+      }
+    </div>
   </div>
 </article>

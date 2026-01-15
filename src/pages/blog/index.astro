@@ -1,23 +1,16 @@
 ---
-import { getPosts } from "./blog.api";
+import { getCollection } from "astro:content";
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import BlogCard from "@/components/ui/BlogCard.astro";
 
-const posts = await getPosts();
+const posts = await getCollection("blog", ({ data }) => !data.draft);
 
 const recentPosts = posts
   .sort(
     (a, b) =>
-      new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime(),
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
   )
   .slice(0, 4);
-
-const formatDate = (date: string) =>
-  new Date(date).toLocaleDateString("es-CO", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
 ---
 
 <BlogLayout
@@ -35,22 +28,11 @@ const formatDate = (date: string) =>
         <p
           class="text-[min(5vw,24px)] text-center font-openSans text-smokyBlack dark:text-softWhite mb-8 max-w-2xl mx-auto"
         >
-          Aquí encontrarás nuestros posts más recientes.
+          Inspiración y conocimiento para impulsar tu negocio digital.
         </p>
       </div>
-      <div class="blog-grid grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8">
-        {
-          recentPosts.map((post) => (
-            <BlogCard
-              slug={post.slug}
-              title={post.title}
-              author={post.author}
-              publishDate={formatDate(post.publishDate)}
-              summary={post.summary}
-              image={post.image.url}
-            />
-          ))
-        }
+      <div class="blog-grid grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        {recentPosts.map((post) => <BlogCard post={post} />)}
       </div>
     </div>
   </section>

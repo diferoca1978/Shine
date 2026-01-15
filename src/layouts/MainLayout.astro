@@ -89,6 +89,34 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
+
+		<!-- Preload de fuentes críticas -->
+		<link
+			rel="preload"
+			href="/fonts/PlayfairDisplay-VariableFont_wght.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="/fonts/Poppins-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="/fonts/OpenSans-VariableFont_wdth,wght.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+
+		<!-- Preconnect a dominios externos -->
+		<link rel="preconnect" href="https://www.googletagmanager.com" />
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
 		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
@@ -107,6 +135,7 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 		<link rel="shortcut icon" href="/favicon.ico" />
 
 		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
 
 		<SEOHead seoProps={finalSeoProps} schemas={allSchemas} />
 
