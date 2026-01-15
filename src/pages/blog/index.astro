@@ -11,13 +11,6 @@ const recentPosts = posts
       new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
   )
   .slice(0, 4);
-
-const formatDate = (date: Date): string =>
-  new Date(date).toLocaleDateString("es-CO", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
 ---
 
 <BlogLayout
@@ -39,19 +32,7 @@ const formatDate = (date: Date): string =>
         </p>
       </div>
       <div class="blog-grid grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        {
-          recentPosts.map((post) => (
-            <BlogCard
-              slug={post.data.slug}
-              title={post.data.title}
-              author={post.data.author}
-              publishDate={formatDate(post.data.pubDate)}
-              description={post.data.description}
-              image={post.data.image.src}
-              tags={post.data.tags}
-            />
-          ))
-        }
+        {recentPosts.map((post) => <BlogCard post={post} />)}
       </div>
     </div>
   </section>

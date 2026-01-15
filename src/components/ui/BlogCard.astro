@@ -1,27 +1,31 @@
 ---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
 interface Props {
-  slug: string;
-  title: string;
-  author: string;
-  publishDate: string; // Formatted date string (e.g., "3 dic 2025")
-  description: string;
-  image: string; // Image URL extracted from Media object
-  tags?: string[];
+  post: CollectionEntry<"blog">;
 }
 
-const { slug, title, author, publishDate, description, image, tags } =
-  Astro.props;
+const { post } = Astro.props;
+const { data } = post;
+const { title, author, pubDate, description, image, tags, slug } = data;
+
+const formatDate = (date: Date): string =>
+  new Date(date).toLocaleDateString("es-CO", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 ---
 
 <article
   class="blog-card group rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-deepdark dark:hover:shadow-accentGold dark:hover:shadow-sm transition-shadow duration-300 ease-linear w-full flex flex-col p-4 gap-3"
 >
   <div class="relative rounded-xl overflow-hidden w-full h-64">
-    <img
+    <Image
       src={image}
       alt={title}
-      loading="lazy"
-      decoding="async"
+      priority
       class="w-full h-full object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out absolute inset-0 rounded-xl"
     />
   </div>
@@ -35,7 +39,7 @@ const { slug, title, author, publishDate, description, image, tags } =
         {author}
       </p>
       <p class="font-openSans dark:text-softWhite">
-        Publicado el: {publishDate}
+        Publicado el: {formatDate(pubDate)}
       </p>
       <p class="font-openSans text-base dark:text-softWhite">
         {description}
