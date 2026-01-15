@@ -14,7 +14,7 @@ const servicesToLlmsItems = () =>
   services.map((service) => ({
     title: service.title,
     description: service.seoDescription,
-    link: `/servicios/${service.slug}`,
+    link: `/llms/servicios/${service.slug}.txt`,
   }));
 
 export const GET: APIRoute = async () => {

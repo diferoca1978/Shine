@@ -1,4 +1,11 @@
 import type { BlogPost } from "./posts";
+import type { Service } from "@/config/services";
+
+interface LlmsServiceConfig {
+  service: Service;
+  site: string;
+  link: string;
+}
 
 interface LlmsItem {
   title: string;
@@ -157,4 +164,49 @@ export function postsToLlmsFullItems(
     category: post.data.tags?.[0] ?? "General",
     body: post.body ?? "",
   }));
+}
+
+export function llmsService(config: LlmsServiceConfig): Response {
+  const { service, site, link } = config;
+
+  const sections: string[] = [
+    `# ${service.title}`,
+    "",
+    `> ${service.seoDescription}`,
+    "",
+    `URL: ${site}${link}`,
+    `Category: Servicios`,
+    "",
+    "---",
+    "",
+    "## Descripción",
+    "",
+    service.content,
+  ];
+
+  // Benefits
+  if (service.benefits?.length) {
+    sections.push("", "## Beneficios", "");
+    service.benefits.forEach((benefit) => {
+      sections.push(`- ${benefit}`);
+    });
+  }
+
+  // Work process 
+  if (service.process?.length) {
+    sections.push("", "## Proceso de Trabajo", "");
+    service.process.forEach((step, index) => {
+      sections.push(`${index + 1}. **${step.title}**: ${step.description}`);
+    });
+  }
+
+  // FAQs (Very important for AEO)
+  if (service.faqs?.length) {
+    sections.push("", "## Preguntas Frecuentes", "");
+    service.faqs.forEach((faq) => {
+      sections.push(`### ${faq.question}`, "", faq.answer, "");
+    });
+  }
+
+  return doc(...sections);
 }
