@@ -30,11 +30,6 @@ const author =
 // Add reading time
 const readingTime = post.body ? getReadingTime(post.body) : "";
 
-// Parse dates for layout
-const modifiedDate = post.data.lastUpdate
-  ? new Date(post.data.lastUpdate)
-  : undefined;
-
 const formatDate = (date: Date): string =>
   new Date(date).toLocaleDateString("es-CO", {
     day: "numeric",
@@ -43,15 +38,7 @@ const formatDate = (date: Date): string =>
   });
 ---
 
-<PostLayout
-  title={post.data.title}
-  description={post.data.description}
-  publishDate={new Date(post.data.pubDate)}
-  modifiedDate={modifiedDate}
-  image={post.data.image.src}
-  slug={post.data.slug}
-  author={author}
->
+<PostLayout post={post}>
   <article class="container md:mt-0 mx-auto px-2 py-8 md:py-12">
     <nav class="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto" aria-label="Breadcrumb">
       <ol class="flex items-center space-x-2 text-sm text-gray-600">
