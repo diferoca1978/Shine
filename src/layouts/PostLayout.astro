@@ -3,39 +3,43 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import {
     generateBreadcrumbSchema,
     generateBlogPostSchema,
+    generateFAQSchema,
     type JSONLDSchema,
 } from "@/config/seo";
-import type { Author } from "@/config/authors";
+import { AUTHORS, DEFAULT_AUTHOR } from "@/config/authors";
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-    title: string;
-    description: string;
-    publishDate: Date;
-    modifiedDate?: Date;
-    image?: string;
-    slug: string;
-    author?: Author;
+    post: CollectionEntry<"blog">;
 }
 
-const { title, description, publishDate, modifiedDate, image, slug, author } = Astro.props;
+const { post } = Astro.props;
+
+// Extract post data for better readability
+const { data, id } = post;
+const { title, slug, description, pubDate, modifiedDate, image, faqs } = data;
 
 // Sanitize slug: trim whitespace and ensure it's URL-safe
-const sanitizedSlug = slug.trim().replace(/\s+/g, '-').toLowerCase();
+const sanitizedSlug = slug.trim().replace(/\s+/g, "-").toLowerCase();
+
+// Resolve author from AUTHORS array or use default
+const author = AUTHORS.find((a) => a.name === data.author) ?? DEFAULT_AUTHOR;
 
 // Generate specific schemas for the post
 const postSchema = generateBlogPostSchema({
     title,
+    sanitizedSlug,
     description,
-    publishDate,
+    publishDate: pubDate,
     modifiedDate,
-    image,
-    id: sanitizedSlug,
-    author: author ? {
+    image: image?.src,
+    id,
+    author: {
         name: author.name,
         role: author.role,
         url: author.url,
         credentials: author.credentials,
-    } : undefined,
+    },
 });
 
 const breadcrumbSchema = generateBreadcrumbSchema([
@@ -44,14 +48,19 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     { name: title, url: `/blog/${sanitizedSlug}` },
 ]);
 
-const aditionalSchemas: JSONLDSchema[] = [postSchema, breadcrumbSchema];
+// Build schemas array, including FAQ schema if faqs exist
+const aditionalSchemas: JSONLDSchema[] = [
+    postSchema,
+    breadcrumbSchema,
+    ...(faqs && faqs.length > 0 ? [generateFAQSchema(faqs)] : []),
+];
 ---
 
 <MainLayout
-    title={title}
+    title={sanitizedSlug}
     description={description}
     path={`/blog/${sanitizedSlug}`}
-    image={image}
+    image={image?.src}
     aditionalSchemas={aditionalSchemas}
 >
     <slot />

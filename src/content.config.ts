@@ -31,6 +31,10 @@ const blog = defineCollection({
         author: z.enum(['Diego Rodriguez', 'Rocio Parra']),
         image: image(),
         tags: z.array(z.string()).optional(),
+        faqs: z.array(z.object({
+            question: z.string(),
+            answer: z.string(),
+        })).optional(),
         draft: z.boolean().optional().default(false),
     }),
 })

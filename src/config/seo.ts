@@ -201,6 +201,7 @@ export function generateBlogSchema(posts: Array<{
 // Function to generate JSON-LD for individual blog posts
 export function generateBlogPostSchema(post: {
   title: string;
+  sanitizedSlug: string;
   description: string;
   publishDate: Date;
   modifiedDate?: Date;
@@ -217,18 +218,18 @@ export function generateBlogPostSchema(post: {
   // Build author schema - uses Person if provided, falls back to Organization
   const authorSchema = post.author
     ? {
-        '@type': 'Person',
-        name: post.author.name,
-        ...(post.author.role && { jobTitle: post.author.role }),
-        ...(post.author.url && { url: post.author.url }),
-        ...(post.author.credentials && { knowsAbout: post.author.credentials }),
-        worksFor: {
-          '@id': COMPANY_INFO.url + '#organizacion'
-        }
-      }
-    : {
+      '@type': 'Person',
+      name: post.author.name,
+      ...(post.author.role && { jobTitle: post.author.role }),
+      ...(post.author.url && { url: post.author.url }),
+      ...(post.author.credentials && { knowsAbout: post.author.credentials }),
+      worksFor: {
         '@id': COMPANY_INFO.url + '#organizacion'
-      };
+      }
+    }
+    : {
+      '@id': COMPANY_INFO.url + '#organizacion'
+    };
 
   return {
     '@context': 'https://schema.org',
