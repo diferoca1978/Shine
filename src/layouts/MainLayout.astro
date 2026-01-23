@@ -3,11 +3,11 @@ import "@/styles/global.css";
 
 import SEOHead from "@/components/SEOHead.astro";
 import {
-	DEFAULT_SEO,
-	ORGANIZATION_SCHEMA,
-	WEBSITE_SCHEMA,
-	generatePageSEO,
-	type JSONLDSchema,
+  DEFAULT_SEO,
+  ORGANIZATION_SCHEMA,
+  WEBSITE_SCHEMA,
+  generatePageSEO,
+  type JSONLDSchema,
 } from "@/config/seo";
 import type { SEOProps } from "astro-seo";
 import BgTexture from "@/components/global/BgTexture.astro";
@@ -17,38 +17,38 @@ import Footer from "@/components/global/Footer.astro";
 import WhatsApp from "@/components/global/WhatsApp.astro";
 
 interface Props {
-	title?: string;
-	description?: string;
-	seoProps?: SEOProps;
-	aditionalSchemas?: JSONLDSchema[];
-	path?: string;
-	image?: string;
-	noIndex?: boolean;
+  title?: string;
+  description?: string;
+  seoProps?: SEOProps;
+  aditionalSchemas?: JSONLDSchema[];
+  path?: string;
+  image?: string;
+  noIndex?: boolean;
 }
 
 const {
-	title,
-	description,
-	seoProps,
-	aditionalSchemas = [],
-	path = Astro.url.pathname,
-	image,
-	noIndex = false,
+  title,
+  description,
+  seoProps,
+  aditionalSchemas = [],
+  path = Astro.url.pathname,
+  image,
+  noIndex = false,
 } = Astro.props;
 
 // Generate seo props if not provided
 
 const finalSeoProps = seoProps
-	? seoProps
-	: title && description
-		? generatePageSEO({
-				title: title || "",
-				description: description || "",
-				path,
-				image,
-				noindex: noIndex || false,
-			})
-		: DEFAULT_SEO;
+  ? seoProps
+  : title && description
+    ? generatePageSEO({
+        title: title || "",
+        description: description || "",
+        path,
+        image,
+        noindex: noIndex || false,
+      })
+    : DEFAULT_SEO;
 
 // Base schemas that are always added to all pages
 const baseSchemas: JSONLDSchema[] = [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA];
@@ -56,123 +56,121 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 ---
 
 <html lang="es-CO" class="scrollbar-hide">
-	<head>
-		<!-- Google Tag Manager - Must be as high as possible in <head> -->
-		<script is:inline>
-			(function (w, d, s, l, i) {
-				w[l] = w[l] || [];
-				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-				var f = d.getElementsByTagName(s)[0],
-					j = d.createElement(s),
-					dl = l != "dataLayer" ? "&l=" + l : "";
-				j.async = true;
-				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-				f.parentNode.insertBefore(j, f);
-			})(window, document, "script", "dataLayer", "GTM-KWDKMGBL");
-		</script>
-		<!-- End Google Tag Manager -->
+  <head>
+    <!-- Google Tag Manager - Must be as high as possible in <head> -->
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KWDKMGBL");
+    </script>
+    <!-- End Google Tag Manager -->
 
-		<!-- Theme initialization - prevents flash of wrong theme -->
-		<script is:inline>
-			// Apply theme immediately based on localStorage or system preference
-			const shouldBeDark =
-				localStorage.theme === "dark" ||
-				(!("theme" in localStorage) &&
-					window.matchMedia("(prefers-color-scheme: dark)").matches);
+    <!-- Theme initialization - prevents flash of wrong theme -->
+    <script is:inline>
+      // Apply theme immediately based on localStorage or system preference
+      const shouldBeDark =
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-			if (shouldBeDark) {
-				document.documentElement.classList.add("dark");
-			} else {
-				document.documentElement.classList.remove("dark");
-			}
-		</script>
+      shouldBeDark.documentElement.documentElement.classList.contains("dark")
+        ? "dark"
+        : "light";
+    </script>
 
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
 
-		<!-- Preload de fuentes críticas -->
-		<link
-			rel="preload"
-			href="/fonts/PlayfairDisplay-VariableFont_wght.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			href="/fonts/Poppins-Regular.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			href="/fonts/OpenSans-VariableFont_wdth,wght.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
+    <!-- Preload de fuentes críticas -->
+    <link
+      rel="preload"
+      href="/fonts/PlayfairDisplay-VariableFont_wght.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Poppins-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/OpenSans-VariableFont_wdth,wght.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
-		<!-- Preconnect a dominios externos -->
-		<link rel="preconnect" href="https://www.googletagmanager.com" />
-		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <!-- Preconnect a dominios externos -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
-		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
-		<link
-			rel="icon"
-			type="image/png"
-			href="/android-chrome-192x192.png"
-			sizes="192x192"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			href="/android-chrome-512x512.png"
-			sizes="512x512"
-		/>
-		<link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/android-chrome-192x192.png"
+      sizes="192x192"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/android-chrome-512x512.png"
+      sizes="512x512"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
 
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
 
-		<SEOHead seoProps={finalSeoProps} schemas={allSchemas} />
+    <SEOHead seoProps={finalSeoProps} schemas={allSchemas} />
 
-		<!-- Lenis -->
-		<script>
-			import "@/utils/scripts/lenis/lenisSmooth.js";
-		</script>
-	</head>
-	<body class="w-full p-0 m-0 overflow-x-hidden dark:bg-smokyBlack">
-		<!-- Google Tag Manager (noscript) -->
-		<noscript
-			><iframe
-				src="https://www.googletagmanager.com/ns.html?id=GTM-KWDKMGBL"
-				height="0"
-				width="0"
-				style="display:none;visibility:hidden"></iframe></noscript
-		>
-		<BgTexture />
-		<CursorFollower />
-		<NavBarAlt />
-		<main class="w-full mx-auto pt-20 md:pt-16">
-			<slot />
-		</main>
-		<Footer />
-		<div class="whatsapp fixed bottom-20 right-20 z-50">
-			<WhatsApp />
-		</div>
-		<style>
-			/* CSS rules for the page scrollbar */
-			.scrollbar-hide::-webkit-scrollbar {
-				display: none;
-			}
+    <!-- Lenis -->
+    <script>
+      import "@/utils/scripts/lenis/lenisSmooth.js";
+    </script>
+  </head>
+  <body class="w-full p-0 m-0 overflow-x-hidden dark:bg-smokyBlack">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KWDKMGBL"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe></noscript
+    >
+    <BgTexture />
+    <CursorFollower />
+    <NavBarAlt />
+    <main class="w-full mx-auto pt-20 md:pt-16">
+      <slot />
+    </main>
+    <Footer />
+    <div class="whatsapp fixed bottom-20 right-20 z-50">
+      <WhatsApp />
+    </div>
+    <style>
+      /* CSS rules for the page scrollbar */
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
 
-			.scrollbar-hide {
-				-ms-overflow-style: none;
-				scrollbar-width: none;
-			}
-		</style>
-	</body>
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </body>
 </html>
