@@ -75,14 +75,13 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
     <!-- Theme initialization - prevents flash of wrong theme -->
     <script is:inline>
       // Apply theme immediately based on localStorage or system preference
-      const shouldBeDark =
+      if (
         localStorage.theme === "dark" ||
         (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-      shouldBeDark.documentElement.documentElement.classList.contains("dark")
-        ? "dark"
-        : "light";
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      }
     </script>
 
     <meta charset="utf-8" />
