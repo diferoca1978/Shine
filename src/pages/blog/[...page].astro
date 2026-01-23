@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import BlogCard from "@/components/ui/BlogCard.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+  const recentPosts = posts
+    .sort(
+      (a, b) =>
+        new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+    )
+    .slice(0, 4);
+
+  return paginate(recentPosts, { pageSize: 2 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+console.log(page);
+---
+
+<BlogLayout
+  title="Blog de Marketing Digital y Diseño Web"
+  description="Tips de marketing digital, diseño web y marca personal para tu negocio."
+>
+  <section class="container w-full mx-auto">
+    <div class="blog-wrapper max-w-7xl mx-auto px-4 py-8 md:py-16 lg:py-20">
+      <div id="blog-header" class="flex flex-col items-center gap-2">
+        <h1
+          class="text-[min(10vw,72px)] font-playfair font-medium text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-4"
+        >
+          Shine Blog
+        </h1>
+        <p
+          class="text-[min(5vw,24px)] text-center font-openSans text-smokyBlack dark:text-softWhite mb-8 max-w-2xl mx-auto"
+        >
+          Inspiración y conocimiento para impulsar tu negocio digital.
+        </p>
+      </div>
+      <div class="blog-grid grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        {page.data.map((post) => <BlogCard post={post} />)}
+      </div>
+      <div class="flex justify-center items-center gap-6">
+        {
+          page.url.prev && (
+            <a
+              href={page.url.prev}
+              class="inline-block text-sm font-medium text-smokyBlack dark:text-softWhite/80 px-2 py-1 rounded-md border border-deepplum dark:border-softWhite/20 hover:bg-accentGold/5 hover:text-deepdark-900 hover:backdrop-blur-sm dark:hover:text-softWhite"
+            >
+              Anterior
+            </a>
+          )
+        }
+        {
+          page.currentPage && (
+            <span class="inline-block text-base font-medium text-smokyBlack dark:text-softWhite/80">
+              pag. {page.currentPage}
+            </span>
+          )
+        }
+        {
+          page.url.next && (
+            <a
+              href={page.url.next}
+              class="inline-block text-sm font-medium text-smokyBlack dark:text-softWhite/80 px-2 py-1 rounded-md border border-deepplum dark:border-softWhite/20 hover:bg-accentGold/5 hover:text-deepdark-900 hover:backdrop-blur-sm dark:hover:text-softWhite"
+            >
+              Siguiente
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </section>
+</BlogLayout>
