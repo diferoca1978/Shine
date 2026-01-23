@@ -8,7 +8,7 @@ export type JSONLDSchema = Record<string, any>;
 
 // Company base information
 export const COMPANY_INFO = {
-  name: 'Shine',
+  name: 'Shine Agencia',
   description: 'Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.',
   url: 'https://shineagencia.com', // Replace with your current domain
   phone: '+57-3162560670', // Replace with actual phone
@@ -23,7 +23,7 @@ export const COMPANY_INFO = {
   logo: '/images/shine-logo.svg', // Replace with current logo path
   image: '/images/shine-og-image.png', // Replace with current OG image path
   foundingDate: '2025', // Replace with current founding date
-  founders: ['Rocío', 'Diego'],
+  founders: ['Rocio Parra', 'Diego Rodriguez'],
   socialMedia: {
     instagram: 'https://www.instagram.com/rochi.diego',
     linkedin: 'https://www.linkedin.com/company/shine-brilla-con-propósito',
@@ -72,7 +72,7 @@ export const DEFAULT_SEO: SEOProps = {
 // JSON-LD Schema for Organization
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'ProfessionalService',
   '@id': COMPANY_INFO.url + '#organizacion',
   name: COMPANY_INFO.name,
   alternateName: 'Shine Agencia | Transformamos tu presencia digital con propósito',
@@ -83,6 +83,7 @@ export const ORGANIZATION_SCHEMA = {
   foundingDate: COMPANY_INFO.foundingDate,
   telephone: COMPANY_INFO.phone,
   email: COMPANY_INFO.email,
+  priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
     streetAddress: COMPANY_INFO.address.street,
@@ -127,10 +128,18 @@ export const ORGANIZATION_SCHEMA = {
     '@type': 'OfferCatalog',
     name: 'Servicios de Transformación Digital Auténtica',
     description: 'Servicios especializados en diseño web estratégico y marketing digital para profesionales y empresas que buscan crecer con autenticidad',
-    itemListElement: services.map(service => ({
+    itemListElement: services.map((service, index) => ({
       '@type': 'Offer',
+      position: index + 1,
       itemOffered: {
-        '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`
+        '@type': 'Service',
+        '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+        name: service.title,
+        description: service.seoDescription,
+        url: `${COMPANY_INFO.url}/servicios/${service.slug}`,
+        provider: {
+          '@id': COMPANY_INFO.url + '#organizacion'
+        },
       }
     }))
   }
