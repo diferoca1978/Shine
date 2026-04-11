@@ -2,9 +2,9 @@
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import PostLayout from "@/layouts/PostLayout.astro";
-import { marked } from "marked";
 import "highlight.js/styles/github-dark.css";
 import Prose from "@/components/ui/Prose.astro";
+import ArrowUp from "@/assets/icons/arrowUp.svg";
 import { getReadingTime } from "@/utils/readinTime";
 import { AUTHORS, DEFAULT_AUTHOR } from "@/config/authors";
 
@@ -21,7 +21,8 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 
 // To render the blog content
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+
 
 // Get author info from local config (enriches CMS data with bio, credentials, etc.)
 const author =
@@ -119,9 +120,48 @@ const formatDate = (date: Date): string =>
           </div>
         </div>
       </div>
+      <div class="max-w-5xl pt-6 pb-12 mx-auto border-b border-deepdark-200 dark:border-softWhite/20 mb-8">
+        <h2 class="text-deepdark-900 dark:text-softWhite mb-4 font-bold">Índice</h2>
+        <ul class="flex flex-col gap-1">
+          {headings.map((heading) => (
+            <li class="text-deepdark-900 dark:text-softWhite hover:text-accentGold">
+              {heading.depth === 2 ? (
+                <span class="text-accentGold">•</span>
+                <a href={`#${heading.slug}`}> {heading.text}</a>
+              ) : (
+                ""
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
       <Prose>
         <Content />
+        <div>
+          <button
+          type="button"
+          id="back-to-top"
+          class=" cursor-pointer flex items-center text-sm font-medium text-smokyBlack dark:text-softWhite/80 px-2 py-1 rounded-md border border-deepplum dark:border-softWhite/20 hover:bg-accentGold/5 hover:text-deepdark-900 hover:backdrop-blur-sm dark:hover:text-softWhite"
+          >Volver Arriba <ArrowUp class="ml-2 w-4 h-4 text-deepdark-900 dark:text-softWhite"/></button
+        </div>
       </Prose>
     </div>
   </article>
 </PostLayout>
+
+<script>
+  const backToTopButton = document.querySelector("#back-to-top") as HTMLButtonElement;
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+</script>
+  
+
+
+
+
+
+
