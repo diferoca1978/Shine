@@ -25,7 +25,7 @@ const currentPath =
   >
     <!-- Logo -->
     <div id="logo-container" class="flex items-center">
-      <a href="/" aria-label="Home">
+      <a href="/" aria-label="Inicio">
         <Logo class="h-14 w-auto object-contain md:h-20 md:w-64 dark:hidden" />
         <WhiteLogo
           class="h-14 w-auto object-contain md:h-20 md:w-64 dark:block hidden"
@@ -44,7 +44,7 @@ const currentPath =
             <div>
               <a
                 href={item.path}
-                class={`text-smokyBlack dark:text-softWhite text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen dark:hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${item.path === currentPath ? "bg-salviaGreen text-softWhite" : ""}`}
+                class={`text-smokyBlack dark:text-softWhite text-lg font-semibold rounded-4xl hover:bg-salviaGreen dark:hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${item.path === currentPath ? "bg-salviaGreen text-softWhite" : ""}`}
                 aria-current={item.path === currentPath ? "page" : undefined}
               >
                 {item.name}
@@ -72,7 +72,7 @@ const currentPath =
                 <li>
                   <a
                     href={link.path}
-                    class={`text-smokyBlack dark:text-softWhite font-openSans font-semibold hover:underline hover:underline-offset-3 ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
+                    class={`text-smokyBlack dark:text-softWhite font-semibold hover:underline hover:underline-offset-3 ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
                     aria-current={
                       link.path === currentPath ? "page" : undefined
                     }
@@ -87,12 +87,12 @@ const currentPath =
       </div>
       <a
         href="/blog"
-        class={`text-smokyBlack dark:text-softWhite text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/blog" ? "bg-salviaGreen text-softWhite" : ""}`}
+        class={`text-smokyBlack dark:text-softWhite text-lg font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/blog" ? "bg-salviaGreen text-softWhite" : ""}`}
         aria-current={currentPath === "/blog" ? "page" : undefined}>Blog</a
       >
       <a
         href="/contacto"
-        class={`text-smokyBlack dark:text-softWhite text-lg font-openSans font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/contacto" ? "bg-salviaGreen text-softWhite" : ""}`}
+        class={`text-smokyBlack dark:text-softWhite text-lg font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/contacto" ? "bg-salviaGreen text-softWhite" : ""}`}
         aria-current={currentPath === "/contacto" ? "page" : undefined}
         >Contacto</a
       >
@@ -156,7 +156,7 @@ const currentPath =
                   <li>
                     <a
                       href={item.path}
-                      class={`text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200 ${item.path === currentPath ? "underline underline-offset-3" : ""}`}
+                      class={`text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200 ${item.path === currentPath ? "underline underline-offset-3" : ""}`}
                       aria-current={
                         item.path === currentPath ? "page" : undefined
                       }
@@ -170,7 +170,7 @@ const currentPath =
               <a
                 href="#"
                 id="services-overlayMenu"
-                class="flex items-center space-x-2 text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200"
+                class="flex items-center space-x-2 text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200"
                 class:list={{
                   "underline underline-offset-3": currentPath === "/servicios",
                 }}
@@ -186,7 +186,7 @@ const currentPath =
                       <li>
                         <a
                           href={link.path}
-                          class={`text-softWhite text-xl font-openSans font-semibold ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
+                          class={`text-softWhite text-xl font-semibold ${link.path === currentPath ? "underline underline-offset-3" : ""}`}
                           aria-current={
                             link.path === currentPath ? "page" : undefined
                           }
@@ -201,13 +201,13 @@ const currentPath =
             </div>
             <a
               href="/blog"
-              class={`text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200 ${currentPath === "/blog" ? "underline underline-offset-3" : ""}`}
+              class={`text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200 ${currentPath === "/blog" ? "underline underline-offset-3" : ""}`}
               aria-current={currentPath === "/blog" ? "page" : undefined}
               >Blog</a
             >
             <a
               href="/contacto"
-              class={`text-softWhite text-4xl lg:text-6xl font-playfair hover:text-accentGold transition-colors duration-200 ${currentPath === "/contacto" ? "underline underline-offset-3" : ""}`}
+              class={`text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200 ${currentPath === "/contacto" ? "underline underline-offset-3" : ""}`}
               aria-current={currentPath === "/contacto" ? "page" : undefined}
               >Contacto</a
             >

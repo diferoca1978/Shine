@@ -2,6 +2,7 @@
 import "@/styles/global.css";
 
 import SEOHead from "@/components/SEOHead.astro";
+import { Font } from "astro:assets";
 import {
   DEFAULT_SEO,
   ORGANIZATION_SCHEMA,
@@ -57,6 +58,8 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 
 <html lang="es-CO" class="scrollbar-hide">
   <head>
+    <SEOHead seoProps={finalSeoProps} schemas={allSchemas} />
+
     <!-- Google Tag Manager - Must be as high as possible in <head> -->
     <script is:inline>
       (function (w, d, s, l, i) {
@@ -87,28 +90,6 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
 
-    <!-- Preload de fuentes críticas -->
-    <link
-      rel="preload"
-      href="/fonts/PlayfairDisplay-VariableFont_wght.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/Poppins-Regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/OpenSans-VariableFont_wdth,wght.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
 
     <!-- Preconnect a dominios externos -->
     <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -134,7 +115,9 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
 
-    <SEOHead seoProps={finalSeoProps} schemas={allSchemas} />
+    <Font cssVariable="--font-playfair" />
+    <Font cssVariable="--font-openSans" />
+
 
     <!-- Lenis -->
     <script>

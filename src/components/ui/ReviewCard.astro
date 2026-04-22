@@ -36,14 +36,14 @@ const { reviewerLogo: Logo, reviewerName, review, rating, tag } = Astro.props;
       class="review relative flex flex-col items-center gap-6 flex-1 justify-center max-w-2xl"
     >
       <p
-        class="review-text text-base text-center font-openSans lg:max-h-[100px] hover:lg:max-h-[200px] overflow-hidden transition-all duration-500 ease-in-out"
+        class="review-text text-base text-center lg:max-h-[100px] hover:lg:max-h-[200px] overflow-hidden transition-all duration-500 ease-in-out"
       >
         <span class="text-smokyBlack font-bold">"</span>
         {review}
         <span class="text-smokyBlack font-bold">"</span>
       </p>
       <p class="flex items-center gap-2">
-        <span class="text-smokyBlack font-openSans font-bold">{rating}</span>
+        <span class="text-smokyBlack font-bold">{rating}</span>
         <span>⭐⭐⭐⭐⭐</span>
       </p>
     </div>

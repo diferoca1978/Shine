@@ -141,7 +141,7 @@ const formatDate = (date: Date): string =>
           <button
           type="button"
           id="back-to-top"
-          class=" cursor-pointer flex items-center text-sm font-medium text-smokyBlack dark:text-softWhite/80 px-2 py-1 rounded-md border border-deepplum dark:border-softWhite/20 hover:bg-accentGold/5 hover:text-deepdark-900 hover:backdrop-blur-sm dark:hover:text-softWhite"
+          class="cursor-pointer flex items-center text-sm font-medium text-smokyBlack dark:text-softWhite/80 px-2 py-1 rounded-md border border-deepplum dark:border-softWhite/20 hover:bg-accentGold/5 hover:text-deepdark-900 hover:backdrop-blur-sm dark:hover:text-softWhite"
           >Volver Arriba <ArrowUp class="ml-2 w-4 h-4 text-deepdark-900 dark:text-softWhite"/></button
         </div>
       </Prose>
@@ -150,12 +150,12 @@ const formatDate = (date: Date): string =>
 </PostLayout>
 
 <script>
+  // Back to top — delegate to Lenis so it stays smooth and controlled
+  import { lenis } from "@/utils/scripts/lenis/lenisSmooth.js";
+
   const backToTopButton = document.querySelector("#back-to-top") as HTMLButtonElement;
   backToTopButton.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    lenis.scrollTo(0, { duration: 1.2 });
   });
 </script>
   
