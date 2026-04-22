@@ -27,7 +27,7 @@ const sortedWorks = allworks.sort(
       </Button>
     </div>
     <h1
-      class="text-smokyBlack dark:text-softWhite font-playfair font-medium text-3xl lg:hidden"
+      class="text-smokyBlack dark:text-softWhite font-medium text-3xl lg:hidden"
     >
       Proyectos recientes
     </h1>
@@ -46,10 +46,10 @@ const sortedWorks = allworks.sort(
             </div>
             <div class="p-6 bg-softWhite dark:bg-smokyBlack">
               <div class="flex justify-between items-baseline mb-4">
-                <h2 class="text-smokyBlack dark:text-softWhite font-playfair font-medium text-lg">
+                <h2 class="text-smokyBlack dark:text-softWhite font-medium text-lg">
                   {project.data.title}
                 </h2>
-                <span class="text-smokyBlack dark:text-softWhite font-playfair font-bold text-2xl">
+                <span class="text-smokyBlack dark:text-softWhite font-bold text-2xl">
                   {project.data.pubDate.getFullYear()}
                 </span>
               </div>
@@ -67,7 +67,7 @@ const sortedWorks = allworks.sort(
               <a
                 href={project.data.link}
                 target="_blank"
-                class="inline-flex items-center gap-2 bg-gray-200 hover:bg-salviaGreen hover:text-softWhite px-4 py-1 rounded transition-colors duration-200 font-openSans text-sm"
+                class="inline-flex items-center gap-2 bg-gray-200 hover:bg-salviaGreen hover:text-softWhite px-4 py-1 rounded transition-colors duration-200 text-sm"
               >
                 Ver Proyecto
                 <DiagonalArrow />
@@ -86,7 +86,7 @@ const sortedWorks = allworks.sort(
     <div
       class="desktop-title hidden lg:flex absolute top-8 left-1/2 transform -translate-x-1/2 z-10 items-center justify-center mb-8"
     >
-      <h1 class="text-smokyBlack font-playfair font-bold text-6xl">
+      <h1 class="text-smokyBlack font-bold text-6xl">
         Proyectos recientes
       </h1>
     </div>
@@ -123,13 +123,13 @@ const sortedWorks = allworks.sort(
       >
         <div class="flex items-center justify-between p-2">
           <h2
-            class="text-softWhite font-playfair font-semibold text-xl mb-2"
+            class="text-softWhite font-semibold text-xl mb-2"
             id="overlay-title"
           >
             {sortedWorks[0]?.data.title}
           </h2>
           <span
-            class="text-softWhite font-playfair font-bold text-5xl"
+            class="text-softWhite font-bold text-5xl"
             id="overlay-year"
           >
             {sortedWorks[0]?.data.pubDate.getFullYear()}
@@ -144,7 +144,7 @@ const sortedWorks = allworks.sort(
             href={sortedWorks[0]?.data.link}
             target="_blank"
             id="overlay-link"
-            class="flex items-center text-smokyBlack text-semibold font-openSans justify-end gap-2 bg-softBeige px-4 py-2 hover:font-bold transition-all duration-200"
+            class="flex items-center text-smokyBlack text-semibold justify-end gap-2 bg-softBeige px-4 py-2 hover:font-bold transition-all duration-200"
           >
             Ver Proyecto
             <DiagonalArrow />

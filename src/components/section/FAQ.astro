@@ -18,11 +18,11 @@ const {
   <div class="max-w-4xl mx-auto px-4">
     <!-- Header -->
     <div class="text-center mb-12">
-      <h2 class="text-[min(8vw,48px)] font-playfair font-medium text-smokyBlack dark:text-softWhite leading-tight mb-4">
+      <h2 class="text-[min(8vw,48px)] font-medium text-smokyBlack dark:text-softWhite leading-tight mb-4">
         {title}
       </h2>
       {subtitle && (
-        <p class="text-[min(4vw,18px)] font-openSans text-smokyBlack/80 dark:text-softWhite/80 max-w-2xl mx-auto">
+        <p class="text-[min(4vw,18px)] text-smokyBlack/80 dark:text-softWhite/80 max-w-2xl mx-auto">
           {subtitle}
         </p>
       )}
@@ -35,7 +35,7 @@ const {
           class="group border border-smokyBlack/10 dark:border-softWhite/10 rounded-xl overflow-hidden bg-white/50 dark:bg-smokyBlack/50 backdrop-blur-sm"
         >
           <summary
-            class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none font-playfair text-[min(4.5vw,20px)] font-medium text-smokyBlack dark:text-softWhite hover:bg-smokyBlack/5 dark:hover:bg-softWhite/5 transition-colors duration-200"
+            class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none text-[min(4.5vw,20px)] font-medium text-smokyBlack dark:text-softWhite hover:bg-smokyBlack/5 dark:hover:bg-softWhite/5 transition-colors duration-200"
           >
             <span class="text-left pr-4">{faq.question}</span>
             <span class="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full border-2 border-deepplum dark:border-accentGold text-deepplum dark:text-accentGold transition-transform duration-300 group-open:rotate-45">
@@ -52,7 +52,7 @@ const {
             </span>
           </summary>
           <div class="px-6 pb-6 pt-2">
-            <p class="font-openSans text-[min(4vw,16px)] text-smokyBlack/80 dark:text-softWhite/80 leading-relaxed">
+            <p class="text-[min(4vw,16px)] text-smokyBlack/80 dark:text-softWhite/80 leading-relaxed">
               {faq.answer}
             </p>
           </div>

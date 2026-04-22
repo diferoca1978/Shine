@@ -5,12 +5,14 @@ import AboutFoundations from "@/components/section/perPage/AboutFoundations.astr
 import AboutMission from "@/components/section/perPage/AboutMission.astro";
 import AboutBio from "@/components/section/perPage/AboutBio.astro";
 import CTABanner from "@/components/ui/CTABanner.astro";
-import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
+import { generateBreadcrumbSchema, generatePageSEO, generateAllAuthorsSchemas, LOCAL_BUSINESS_SCHEMA } from "@/config/seo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Inicio", url: "/" },
     { name: "Nosotros", url: "/nosotros" },
 ]);
+
+const authorSchemas = generateAllAuthorsSchemas();
 
 const nosotrosSEO = generatePageSEO({
     title: "Nosotros - Shine Agencia Digital",
@@ -20,7 +22,7 @@ const nosotrosSEO = generatePageSEO({
 });
 ---
 
-<MainLayout seoProps={nosotrosSEO} aditionalSchemas={[breadcrumbSchema]}>
+<MainLayout seoProps={nosotrosSEO} aditionalSchemas={[breadcrumbSchema, LOCAL_BUSINESS_SCHEMA, ...authorSchemas]}>
     <HeroAbout />
     <AboutMission />
     <AboutFoundations />

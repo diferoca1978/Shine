@@ -57,7 +57,7 @@ const aditionalSchemas: JSONLDSchema[] = [
 ---
 
 <MainLayout
-    title={sanitizedSlug}
+    title={title}
     description={description}
     path={`/blog/${sanitizedSlug}`}
     image={image?.src}
@@ -65,3 +65,4 @@ const aditionalSchemas: JSONLDSchema[] = [
 >
     <slot />
 </MainLayout>
+

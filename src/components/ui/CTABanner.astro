@@ -61,7 +61,7 @@ const textColorVariants = {
   <!-- Content container -->
   <div class="relative z-10 text-center max-w-4xl mx-auto">
     <!-- Title -->
-    <h2 class={`cta-title font-playfair text-2xl md:text-3xl lg:text-4xl font-bold mb-4 ${textColorVariants[variant]}`}>
+    <h2 class={`cta-title text-2xl md:text-3xl lg:text-4xl font-bold mb-4 ${textColorVariants[variant]}`}>
       {title}
     </h2>
 
@@ -79,7 +79,7 @@ const textColorVariants = {
         target={buttonTarget}
         variant={buttonVariant}
         animation={true}
-        className="inline-flex items-center gap-2 px-8 py-2 font-poppins"
+        className="inline-flex items-center gap-2 px-8 py-2"
       >
         {buttonText}
         <StarIcon class="star w-8 h-8" />

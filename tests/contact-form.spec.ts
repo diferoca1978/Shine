@@ -8,7 +8,7 @@
  *   BASE_URL=https://shineagencia.com npm run test:email
  */
 
-import { test, expect } from "playwright/test";
+import { test, expect } from "@playwright/test";
 
 test.describe('Shine Contact Form - Email Sending', () => {
   test('should submit form and send email successfully @production @smoke', async ({ page }) => {

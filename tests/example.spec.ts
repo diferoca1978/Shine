@@ -9,7 +9,7 @@ test.describe('Homepage', () => {
     await page.goto('/');
 
     // Wait for page to be fully loaded
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
 
     // Check that the page title is present
     await expect(page).toHaveTitle(/Shine/i);
