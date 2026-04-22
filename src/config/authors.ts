@@ -7,8 +7,6 @@
  *
  */
 
-import { COMPANY_INFO } from './seo';
-
 export interface Author {
   /** Author's full name */
   name: string;
@@ -35,42 +33,45 @@ export interface Author {
  */
 export const AUTHORS: Author[] = [
   {
-    name: 'Rocio Parra',
-    role: 'Co-fundadora & Estratega de Marca',
-    bio: 'Especialista en estrategia de marca personal y comunicación digital. Ayuda a profesionales y empresas a construir una presencia auténtica que conecta con su audiencia.',
+    name: "Rocio Parra",
+    role: "Co-fundadora & Estratega de Marca",
+    bio: "Especialista en estrategia de marca personal y comunicación digital. Ayuda a profesionales y empresas a construir una presencia auténtica que conecta con su audiencia.",
     credentials: [
-      'Estrategia de marca personal',
-      'Marketing digital',
-      'Comunicación corporativa'
+      "Estrategia de marca personal",
+      "Marketing digital",
+      "Comunicación corporativa",
     ],
     socialMedia: {
-      instagram: 'https://www.instagram.com/rocio.parra/',
-      linkedin: 'https://www.linkedin.com/in/rocio-parra/'
-    }
+      instagram: "https://www.instagram.com/rocio.parra/",
+      linkedin: "https://www.linkedin.com/in/rocio-parra/",
+    },
   },
   {
-    name: 'Diego Rodriguez',
-    role: 'Co-fundador & Desarrollador Web',
-    bio: 'Desarrollador web especializado en crear sitios de alto rendimiento con tecnologías modernas. Enfocado en experiencia de usuario y optimización para motores de búsqueda.',
+    name: "Diego Rodriguez",
+    role: "Co-fundador & Desarrollador Web",
+    bio: "Desarrollador web especializado en crear sitios de alto rendimiento con tecnologías modernas. Enfocado en experiencia de usuario y optimización para motores de búsqueda.",
     credentials: [
-      'Desarrollo web con Astro',
-      'Optimización de rendimiento',
-      'SEO técnico'
+      "Desarrollo web con Astro",
+      "Optimización de rendimiento",
+      "SEO técnico",
     ],
     socialMedia: {
-      linkedin: 'https://www.linkedin.com/in/diego-rodriguez/'
-    }
-  }
+      linkedin: "https://www.linkedin.com/in/diego-rodriguez/",
+    },
+  },
 ];
 
-/**
- * Default author when no match is found
- * Uses organization as generic author
- */
-export const DEFAULT_AUTHOR: Author = AUTHORS.find((author) => author.name === COMPANY_INFO.name) || {
-  name: COMPANY_INFO.name,
-  role: 'Agencia de Marketing Digital',
-  bio: COMPANY_INFO.description,
-  credentials: ['Marketing digital', 'Diseño web', 'Estrategia de marca'],
-  socialMedia: COMPANY_INFO.socialMedia
+export const DEFAULT_AUTHOR: Author = {
+  name: "Shine Agencia",
+  role: "Agencia de Marketing Digital y Diseño Web",
+  bio: "Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.",
+  credentials: ["Marketing digital", "Diseño web", "Estrategia de marca"],
+  socialMedia: {
+    linkedin: "https://www.linkedin.com/company/shine-agencia",
+    instagram: "https://www.instagram.com/shine.agencia",
+  },
 };
+
+export function getAuthorByName(name: string): Author {
+  return AUTHORS.find((author) => author.name === name) || DEFAULT_AUTHOR;
+}

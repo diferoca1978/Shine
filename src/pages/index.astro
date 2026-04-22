@@ -9,7 +9,7 @@ import CTABanner from "@/components/ui/CTABanner.astro";
 import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
 import SocialProof from "@/components/global/SocialProof.astro";
-import { REVIEWS_SCHEMA, generatePageSEO } from "@/config/seo";
+import { REVIEWS_SCHEMA, LOCAL_BUSINESS_SCHEMA, generatePageSEO } from "@/config/seo";
 
 const homeSEO = generatePageSEO({
     title: "Agencia de Marketing Digital y Diseño Web ",
@@ -20,7 +20,7 @@ const homeSEO = generatePageSEO({
 });
 ---
 
-<MainLayout seoProps={homeSEO} aditionalSchemas={[REVIEWS_SCHEMA]}>
+<MainLayout seoProps={homeSEO} aditionalSchemas={[REVIEWS_SCHEMA, LOCAL_BUSINESS_SCHEMA]}>
     <GlobalHero
         titleLine1="Haz que tu luz brille"
         subtitleBefore="Atrae a quienes necesitan tu"

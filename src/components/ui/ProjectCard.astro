@@ -27,7 +27,7 @@ const { image, link, stack, title } = data;
       class="flex items-center justify-between text-base font-medium lg:gap-x-8"
     >
       <h3
-        class="font-playfair text-lg font-medium capitalize tracking-wide md:mt-0 lg:text-xl mb-2"
+        class="text-lg font-medium capitalize tracking-wide md:mt-0 lg:text-xl mb-2"
       >
         {title}
       </h3>
@@ -41,7 +41,7 @@ const { image, link, stack, title } = data;
         <div class="tech-stack flex flex-wrap gap-2 mb-4">
           {stack.map((tech: string) => (
             <span
-              class={`inline-flex items-center px-2.5 py-1 bg-softBeige text-smokyBlack rounded-md text-xs font-poppins`}
+              class={`inline-flex items-center px-2.5 py-1 bg-softBeige text-smokyBlack rounded-md text-xs`}
             >
               {tech}
             </span>

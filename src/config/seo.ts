@@ -3,6 +3,8 @@ import type { ImageMetadata } from 'astro';
 import type { Service } from './services';
 import { services } from './services';
 import { mockGoogleReviews } from '@/data/mockGoogleReviews';
+import { AUTHORS } from './authors';
+import type { Author } from './authors';
 
 export type JSONLDSchema = Record<string, any>;
 
@@ -64,7 +66,9 @@ export const DEFAULT_SEO: SEOProps = {
       { name: 'author', content: COMPANY_INFO.name },
       { name: 'theme-color', content: '#FFD97D' },
       { name: 'msapplication-TileColor', content: '#FFD97D' },
-      { httpEquiv: 'Content-Language', content: 'es-CO' }
+      { httpEquiv: 'Content-Language', content: 'es-CO' },
+      { name: 'geo.region', content: 'CO-DC' },
+      { name: 'geo.placename', content: `${COMPANY_INFO.address.city}, ${COMPANY_INFO.address.country}` }
     ]
   }
 };
@@ -73,7 +77,7 @@ export const DEFAULT_SEO: SEOProps = {
 export const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  '@id': COMPANY_INFO.url + '#organizacion',
+  '@id': COMPANY_INFO.url + '#organization',
   name: COMPANY_INFO.name,
   alternateName: 'Shine Agencia | Transformamos tu presencia digital con propósito',
   description: COMPANY_INFO.description,
@@ -138,7 +142,7 @@ export const ORGANIZATION_SCHEMA = {
         description: service.seoDescription,
         url: `${COMPANY_INFO.url}/servicios/${service.slug}`,
         provider: {
-          '@id': COMPANY_INFO.url + '#organizacion'
+          '@id': COMPANY_INFO.url + '#organization'
         },
       }
     }))
@@ -161,10 +165,18 @@ export const WEBSITE_SCHEMA = {
     name: COMPANY_INFO.name
   },
   publisher: {
-    '@id': COMPANY_INFO.url + '#organizacion'
+    '@id': COMPANY_INFO.url + '#organization'
   },
   mainEntity: {
-    '@id': COMPANY_INFO.url + '#organizacion'
+    '@id': COMPANY_INFO.url + '#organization'
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${COMPANY_INFO.url}/blog?q={search_term_string}`
+    },
+    'query-input': 'required name=search_term_string'
   }
 };
 
@@ -186,10 +198,10 @@ export function generateBlogSchema(posts: Array<{
     url: COMPANY_INFO.url + '/blog',
     inLanguage: 'es-CO',
     author: {
-      '@id': COMPANY_INFO.url + '#organizacion'
+      '@id': COMPANY_INFO.url + '#organization'
     },
     publisher: {
-      '@id': COMPANY_INFO.url + '#organizacion'
+      '@id': COMPANY_INFO.url + '#organization'
     },
     blogPost: posts.map(post => ({
       '@type': 'BlogPosting',
@@ -224,20 +236,28 @@ export function generateBlogPostSchema(post: {
     credentials?: string[];
   };
 }): JSONLDSchema {
-  // Build author schema - uses Person if provided, falls back to Organization
+  // Resolve full author data from AUTHORS registry for richer E-E-A-T signals
+  const fullAuthor: Author | undefined = post.author?.name
+    ? AUTHORS.find(a => a.name === post.author!.name)
+    : undefined;
+
+  // Build author schema - uses Person with @id if found in registry, falls back to Organization
   const authorSchema = post.author
     ? {
       '@type': 'Person',
-      name: post.author.name,
-      ...(post.author.role && { jobTitle: post.author.role }),
-      ...(post.author.url && { url: post.author.url }),
-      ...(post.author.credentials && { knowsAbout: post.author.credentials }),
+      '@id': `${COMPANY_INFO.url}/nosotros#${(fullAuthor?.name ?? post.author.name).toLowerCase().replace(/\s+/g, '-')}`,
+      name: fullAuthor?.name ?? post.author.name,
+      ...(( fullAuthor?.role ?? post.author.role) && { jobTitle: fullAuthor?.role ?? post.author.role }),
+      ...(fullAuthor?.bio && { description: fullAuthor.bio }),
+      ...(fullAuthor?.image && { image: COMPANY_INFO.url + fullAuthor.image }),
+      ...((fullAuthor?.url ?? post.author.url) && { url: COMPANY_INFO.url + (fullAuthor?.url ?? post.author.url) }),
+      ...((fullAuthor?.credentials ?? post.author.credentials) && { knowsAbout: fullAuthor?.credentials ?? post.author.credentials }),
       worksFor: {
-        '@id': COMPANY_INFO.url + '#organizacion'
+        '@id': COMPANY_INFO.url + '#organization'
       }
     }
     : {
-      '@id': COMPANY_INFO.url + '#organizacion'
+      '@id': COMPANY_INFO.url + '#organization'
     };
 
   return {
@@ -251,7 +271,7 @@ export function generateBlogPostSchema(post: {
     ...(post.modifiedDate && { dateModified: post.modifiedDate.toISOString() }),
     author: authorSchema,
     publisher: {
-      '@id': COMPANY_INFO.url + '#organizacion'
+      '@id': COMPANY_INFO.url + '#organization'
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -277,7 +297,8 @@ export function generatePageSEO(options: {
   image?: string;
   noindex?: boolean;
 }): SEOProps {
-  const fullUrl = COMPANY_INFO.url + options.path;
+  const normalizedPath = options.path.endsWith("/") ? options.path : options.path + "/";
+  const fullUrl = COMPANY_INFO.url + normalizedPath;
   const fullTitle = `${options.title} | ${COMPANY_INFO.name}`;
 
   return {
@@ -310,7 +331,7 @@ export function generatePageSEO(options: {
 }
 
 export function generateServiceSEO(service: Service): SEOProps {
-  const serviceUrl = `${COMPANY_INFO.url}/servicios/${service.slug}`;
+  const serviceUrl = `${COMPANY_INFO.url}/servicios/${service.slug}/`;
   const pageTitle = `${service.title} | ${COMPANY_INFO.name}`;
 
   return {
@@ -355,10 +376,10 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
     '@type': 'Service',
     '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
     name: service.title,
-    description: service.content,
+    description: service.seoDescription,
     serviceType: service.title,
     provider: {
-      '@id': COMPANY_INFO.url + '#organizacion'
+      '@id': COMPANY_INFO.url + '#organization'
     },
 
     areaServed: {
@@ -406,6 +427,44 @@ export function generateBreadcrumbSchema(breadcrumbs: Array<{ name: string; url:
   };
 }
 
+// LocalBusiness Schema - critical for Google Maps and local search rankings
+export const LOCAL_BUSINESS_SCHEMA: JSONLDSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': COMPANY_INFO.url + '#localbusiness',
+  name: COMPANY_INFO.name,
+  description: COMPANY_INFO.description,
+  url: COMPANY_INFO.url,
+  telephone: COMPANY_INFO.phone,
+  email: COMPANY_INFO.email,
+  logo: COMPANY_INFO.url + COMPANY_INFO.logo,
+  image: COMPANY_INFO.url + COMPANY_INFO.image,
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: COMPANY_INFO.address.street,
+    addressLocality: COMPANY_INFO.address.city,
+    addressRegion: COMPANY_INFO.address.region,
+    postalCode: COMPANY_INFO.address.postalCode,
+    addressCountry: 'CO'
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 4.7109886,
+    longitude: -74.072092
+  },
+  sameAs: [
+    COMPANY_INFO.socialMedia.instagram,
+    COMPANY_INFO.socialMedia.linkedin
+  ],
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '18:00'
+  }
+};
+
 // Internal helper for reviews schema generation
 function generateReviewsSchema(reviews: Array<{
   author: string;
@@ -422,7 +481,7 @@ function generateReviewsSchema(reviews: Array<{
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': COMPANY_INFO.url + '#organizacion-reviews',
+    '@id': COMPANY_INFO.url + '#organization-reviews',
     name: COMPANY_INFO.name,
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -643,4 +702,42 @@ export function generateHowToSchemaWithPage(
       '@id': pageUrl
     }
   };
+}
+
+// ============================================================================
+// Author / Person Schema - For E-E-A-T on /nosotros and blog posts
+// ============================================================================
+
+/**
+ * Generates a Person schema for a single author.
+ * Use on /nosotros page to establish author authority as a named entity in Google's Knowledge Graph.
+ */
+export function generateAuthorSchema(author: Author): JSONLDSchema {
+  const sameAs: string[] = [];
+  if (author.socialMedia?.linkedin) sameAs.push(author.socialMedia.linkedin);
+  if (author.socialMedia?.instagram) sameAs.push(author.socialMedia.instagram);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${COMPANY_INFO.url}/nosotros#${author.name.toLowerCase().replace(/\s+/g, '-')}`,
+    name: author.name,
+    description: author.bio,
+    jobTitle: author.role,
+    ...(author.image && { image: COMPANY_INFO.url + author.image }),
+    ...(author.url && { url: COMPANY_INFO.url + author.url }),
+    worksFor: {
+      '@id': COMPANY_INFO.url + '#organization'
+    },
+    knowsAbout: author.credentials,
+    ...(sameAs.length > 0 && { sameAs })
+  };
+}
+
+/**
+ * Generates Person schemas for all registered authors.
+ * Pass the result as `aditionalSchemas` to MainLayout on the /nosotros page.
+ */
+export function generateAllAuthorsSchemas(): JSONLDSchema[] {
+  return AUTHORS.map(author => generateAuthorSchema(author));
 }

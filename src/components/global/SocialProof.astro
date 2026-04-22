@@ -40,7 +40,7 @@ const currentPath = Astro.url.pathname;
 <section class="social-proof max-w-7xl mx-auto pb-10 lg:pb-20">
   <div class="reviews-wrapper flex flex-col items-center p-4">
     <h2
-      class="section-title text-[min(10vw,42px)] text-center font-playfair text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-16"
+      class="section-title text-[min(10vw,42px)] text-center text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-16"
     >
       {titleLine1}
       {titleLine2 && <span class="block">{titleLine2}</span>}
@@ -71,11 +71,11 @@ const currentPath = Astro.url.pathname;
         class="rating flex flex-col justify-center items-center px-8 gap-1 border-b md:border-b-0 md:border-r border-smokyBlack/40 dark:border-softWhite md:pb-0"
       >
         <span
-          class="rating-value flex items-center text-5xl text-smokyBlack/80 dark:text-softWhite font-bold font-openSans"
+          class="rating-value flex items-center text-5xl text-smokyBlack/80 dark:text-softWhite font-bold"
           >{averageRating}</span
         >
         <span
-          class="rating-text flex items-center justify-center gap-2 text-smokyBlack/80 dark:text-softWhite font-openSans"
+          class="rating-text flex items-center justify-center gap-2 text-smokyBlack/80 dark:text-softWhite"
           >Promedio calificaciones <GoogleLogo class="w-10 h-10" /></span
         >
       </div>
@@ -83,10 +83,10 @@ const currentPath = Astro.url.pathname;
         class="satisfaction-count flex flex-col justify-center items-center gap-2 mt-4 md:mt-0"
       >
         <span
-          class="count text-5xl text-smokyBlack/80 dark:text-softWhite font-bold font-openSans"
+          class="count text-5xl text-smokyBlack/80 dark:text-softWhite font-bold"
           >{satisfactionCount}+</span
         >
-        <span class="text-smokyBlack/80 dark:text-softWhite font-openSans"
+        <span class="text-smokyBlack/80 dark:text-softWhite"
           >Clientes satisfechos</span
         >
       </div>
