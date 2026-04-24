@@ -6,7 +6,7 @@ description: "Desarrollo de sitio web corporativo para Grupo Zenith"
 image: "./img/zenithdesktopsketch.webp"
 link: "https://grupozenith.com"
 stack: ["Wordpress", "Elementor", "SEO"]
-
+tags: ["Desarrollo Web", "Branding"]
 ---
 
 # Key project features:

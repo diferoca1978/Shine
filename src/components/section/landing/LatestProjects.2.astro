@@ -1,0 +1,161 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+const allWorks = await getCollection("works");
+const projects = allWorks
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .map((work, i) => ({
+    number: String(i + 1).padStart(2, "0"),
+    title: work.data.title,
+    category: work.data.tags?.join(" · ") ?? work.data.stack?.join(" · ") ?? "",
+    year: String(work.data.pubDate.getFullYear()),
+    image: work.data.image,
+    link: work.data.link,
+  }));
+---
+
+<section
+  data-cursor-section
+  class="relative w-full bg-smokyBlack select-none"
+>
+  <div class="mx-auto max-w-7xl px-6 lg:px-12">
+    <div class="flex gap-16 lg:gap-24">
+
+      <!-- Left column: isolated image preview panel -->
+      <!-- GSAP pins this column via ScrollTrigger — no CSS sticky needed -->
+      <div class="hidden lg:flex lg:w-2/5 shrink-0 pointer-events-none" data-preview-column>
+        <div class="w-full h-screen flex flex-col justify-center py-16" data-preview-inner>
+
+          <!-- Image stack — GSAP crossfades between them -->
+          <div
+            data-preview-panel
+            class="relative w-full overflow-hidden rounded-2xl shadow-2xl ring-1 ring-softBeige/10 pointer-events-auto"
+            style="aspect-ratio: 5/4;"
+          >
+            {
+              projects.map((project, i) => (
+                <div
+                  data-preview-img
+                  data-index={i}
+                  class="absolute inset-0 h-full w-full flex flex-col justify-end bg-smokyBlack"
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    class="absolute inset-0 w-full h-full object-contain p-4"
+                    
+                  />
+                  <div class="absolute inset-0 bg-linear-to-t from-smokyBlack via-smokyBlack/10 to-transparent" />
+                  <div class="absolute inset-x-0 top-4/5 z-10 p-7 space-y-1">
+                    <p class="text-softWhite text-lg font-playfair font-semibold leading-snug">
+                      {project.title}
+                    </p>
+                    <p class="text-softBeige/50 text-xs font-openSans">{project.year}</p>
+                  </div>
+                </div>
+              ))
+            }
+
+            <!-- Default idle state shown before any hover -->
+            <div
+              data-preview-idle
+              class="absolute inset-0 h-full w-full bg-deepplum/40 flex items-center justify-center"
+            >
+              <p class="text-softBeige/30 text-xs font-openSans uppercase tracking-widest">
+                Selecciona un proyecto
+              </p>
+            </div>
+          </div>
+
+          <!-- Project counter below the image -->
+          <div class="mt-6 flex items-center justify-between">
+            <span data-preview-counter class="text-softBeige/40 text-xs font-openSans">
+              — / {projects.length}
+            </span>
+            <span class="text-softBeige/30 text-xs font-openSans uppercase tracking-widest">
+              Proyecto
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: project list -->
+      <div class="flex-1 min-w-0 py-24" data-project-list>
+
+        <!-- Header -->
+        <div class="mb-14">
+          <p class="mb-3 text-xs font-openSans uppercase tracking-[0.3em] text-accentGold">
+            Clientes
+          </p>
+          <h2 class="text-5xl font-playfair font-bold tracking-tight text-softWhite lg:text-6xl">
+            Proyectos <span class="text-accentGold block">Recientes</span>
+          </h2>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-px bg-softBeige/10"></div>
+
+        <!-- Project rows -->
+        <ul>
+          {
+            projects.map((project, i) => (
+              <li
+                data-project-item
+                data-index={i}
+                class="border-b border-softBeige/10"
+              >
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-6 py-8"
+                >
+                  <!-- Number -->
+                  <span
+                    data-project-number
+                    class="w-10 shrink-0 font-openSans text-xs text-softBeige/25"
+                  >
+                    {project.number}
+                  </span>
+
+                  <!-- Title + category -->
+                  <div class="flex-1 min-w-0">
+                    <h3
+                      data-project-title
+                      class="text-xl font-playfair font-semibold text-softWhite truncate lg:text-2xl"
+                    >
+                      {project.title}
+                    </h3>
+                    <p class="mt-0.5 text-xs text-softBeige/50 font-openSans uppercase tracking-widest">
+                      {project.category}
+                    </p>
+                  </div>
+
+                  <!-- Year (desktop only) -->
+                  <span class="hidden shrink-0 font-openSans text-sm text-softBeige/40 lg:block">
+                    {project.year}
+                  </span>
+
+                  <!-- Arrow -->
+                  <span
+                    data-project-arrow
+                    class="shrink-0 text-lg text-softBeige/40"
+                  >
+                    ↗
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import { cursorTrackingImgPreview } from "@/utils/scripts/perPageAnimations/home/latestPojects2Animation.js";
+  cursorTrackingImgPreview();
+</script>

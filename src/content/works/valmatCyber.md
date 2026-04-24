@@ -6,7 +6,7 @@ description: "Desarrollo de sitio web corporativo para Valmat Cyber"
 image: "./img/valmatdesktopsketch.webp"
 link: "https://valmatcyber.com"
 stack: ["Astro", "TypeScript", "TailwindCSS", "SEO"]
-
+tags: ["Desarrollo Web", "Optimización SEO", "Internacionalización"]
 ---
 
 # Key project features:
