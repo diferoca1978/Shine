@@ -60,9 +60,12 @@ export const cursorTrackingImgPreview = () => {
   let activeIndex = -1;
 
   const showImage = (i) => {
+    // Kill any in-flight tweens on the idle element and all images to avoid conflicts
+    gsap.killTweensOf(idleEl);
     gsap.to(idleEl, { autoAlpha: 0, duration: 0.25 });
 
     if (activeIndex !== -1 && activeIndex !== i) {
+      gsap.killTweensOf(previewImages[activeIndex]);
       gsap.to(previewImages[activeIndex], {
         autoAlpha: 0,
         scale: 1.06,
@@ -71,6 +74,7 @@ export const cursorTrackingImgPreview = () => {
       });
     }
 
+    gsap.killTweensOf(previewImages[i]);
     gsap.to(previewImages[i], {
       autoAlpha: 1,
       scale: 1,
@@ -86,9 +90,12 @@ export const cursorTrackingImgPreview = () => {
   };
 
   const resetToIdle = () => {
-    if (activeIndex !== -1) {
-      gsap.to(previewImages[activeIndex], { autoAlpha: 0, scale: 1.06, duration: 0.4 });
-    }
+    gsap.killTweensOf(idleEl);
+    // Fade ALL images out — rapid hover leaves intermediate images mid-tween
+    previewImages.forEach((img) => {
+      gsap.killTweensOf(img);
+      gsap.to(img, { autoAlpha: 0, scale: 1.06, duration: 0.35, ease: "power2.in" });
+    });
     gsap.to(idleEl, { autoAlpha: 1, duration: 0.35, delay: 0.1 });
     if (counterEl) counterEl.textContent = `— / ${String(total).padStart(2, "0")}`;
     activeIndex = -1;
