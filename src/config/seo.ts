@@ -1,85 +1,92 @@
-import type { SEOProps } from 'astro-seo';
-import type { ImageMetadata } from 'astro';
-import type { Service } from './services';
-import { services } from './services';
-import { mockGoogleReviews } from '@/data/mockGoogleReviews';
-import { AUTHORS } from './authors';
-import type { Author } from './authors';
+import type { SEOProps } from "astro-seo";
+import type { ImageMetadata } from "astro";
+import type { Service } from "./services";
+import { services } from "./services";
+import { mockGoogleReviews } from "@/data/mockGoogleReviews";
+import { AUTHORS } from "./authors";
+import type { Author } from "./authors";
 
 export type JSONLDSchema = Record<string, any>;
 
 // Company base information
 export const COMPANY_INFO = {
-  name: 'Shine Agencia',
-  description: 'Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.',
-  url: 'https://shineagencia.com', // Replace with your current domain
-  phone: '+57-3162560670', // Replace with actual phone
-  email: 'rocio.shineagencia@gmail.com', // Replace with actual email
+  name: "Shine Agencia",
+  description:
+    "Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.",
+  url: "https://shineagencia.com", // Replace with your current domain
+  phone: "+57-3162560670", // Replace with actual phone
+  email: "rocio.shineagencia@gmail.com", // Replace with actual email
   address: {
-    street: 'Bogotá, Colombia', // Replace with current address
-    city: 'Bogotá',
-    region: 'Cundinamarca',
-    postalCode: '110111', // Replace with current postal code
-    country: 'Colombia'
+    street: "Bogotá, Colombia", // Replace with current address
+    city: "Bogotá",
+    region: "Cundinamarca",
+    postalCode: "110111", // Replace with current postal code
+    country: "Colombia",
   },
-  logo: '/images/shine-logo.svg', // Replace with current logo path
-  image: '/images/shine-og-image.png', // Replace with current OG image path
-  foundingDate: '2025', // Replace with current founding date
-  founders: ['Rocio Parra', 'Diego Rodriguez'],
+  logo: "/images/shine-logo.svg", // Replace with current logo path
+  image: "/images/shine-og-image.png", // Replace with current OG image path
+  foundingDate: "2025", // Replace with current founding date
+  founders: ["Rocio Parra", "Diego Rodriguez"],
   socialMedia: {
-    instagram: 'https://www.instagram.com/rochi.diego',
-    linkedin: 'https://www.linkedin.com/company/shine-brilla-con-propósito',
-    tiktok: 'https://www.tiktok.com/@rochi..diego',
-    whatsapp: 'https://api.whatsapp.com/send?phone=573162560670&text=Hola%20buen%20d%C3%ADa%2C%0AEstoy%20interesado%2Fa%20en%20sus%20servicios'
-  }
+    instagram: "https://www.instagram.com/shine.agenciam/",
+    linkedin: "https://www.linkedin.com/company/shine-brilla-con-propósito",
+    tiktok: "https://www.tiktok.com/@shine.agenciam",
+    whatsapp:
+      "https://api.whatsapp.com/send?phone=573162560670&text=Hola%20buen%20d%C3%ADa%2C%0AEstoy%20interesado%2Fa%20en%20sus%20servicios",
+  },
 };
 
 // Default SEO configuration
 export const DEFAULT_SEO: SEOProps = {
-  title: 'Shine | Agencia de Marketing Digital y Diseño Web en Colombia',
-  description: 'En Shine, unimos estrategia de marketing y tecnología web de punta para ayudar a líderes y empresas en Colombia a brillar con propósito.',
+  title: "Shine | Agencia de Marketing Digital y Diseño Web en Colombia",
+  description:
+    "En Shine, unimos estrategia de marketing y tecnología web de punta para ayudar a líderes y empresas en Colombia a brillar con propósito.",
   canonical: COMPANY_INFO.url,
   openGraph: {
     basic: {
-      title: 'Shine | Transformamos tu presencia digital con propósito',
-      type: 'website',
+      title: "Shine | Transformamos tu presencia digital con propósito",
+      type: "website",
       image: COMPANY_INFO.url + COMPANY_INFO.image,
-      url: COMPANY_INFO.url
+      url: COMPANY_INFO.url,
     },
     optional: {
       description: COMPANY_INFO.description,
       siteName: COMPANY_INFO.name,
-      locale: 'es_CO'
-    }
+      locale: "es_CO",
+    },
   },
   twitter: {
-    card: 'summary_large_image',
-    site: '@shine_agencia',
-    creator: '@shine_agencia',
-    title: 'Shine | Transformamos tu presencia digital con propósito',
+    card: "summary_large_image",
+    site: "@shine_agencia",
+    creator: "@shine_agencia",
+    title: "Shine | Transformamos tu presencia digital con propósito",
     description: COMPANY_INFO.description,
-    image: COMPANY_INFO.url + COMPANY_INFO.image
+    image: COMPANY_INFO.url + COMPANY_INFO.image,
   },
   extend: {
     meta: [
-      { name: 'robots', content: 'index, follow' },
-      { name: 'author', content: COMPANY_INFO.name },
-      { name: 'theme-color', content: '#FFD97D' },
-      { name: 'msapplication-TileColor', content: '#FFD97D' },
-      { httpEquiv: 'Content-Language', content: 'es-CO' },
-      { name: 'geo.region', content: 'CO-DC' },
-      { name: 'geo.placename', content: `${COMPANY_INFO.address.city}, ${COMPANY_INFO.address.country}` }
-    ]
-  }
+      { name: "robots", content: "index, follow" },
+      { name: "author", content: COMPANY_INFO.name },
+      { name: "theme-color", content: "#FFD97D" },
+      { name: "msapplication-TileColor", content: "#FFD97D" },
+      { httpEquiv: "Content-Language", content: "es-CO" },
+      { name: "geo.region", content: "CO-DC" },
+      {
+        name: "geo.placename",
+        content: `${COMPANY_INFO.address.city}, ${COMPANY_INFO.address.country}`,
+      },
+    ],
+  },
 };
 
 // JSON-LD Schema for Organization
 export const ORGANIZATION_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  '@id': COMPANY_INFO.url + '#organization',
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": COMPANY_INFO.url + "#organization",
   name: COMPANY_INFO.name,
-  alternateName: 'Shine Agencia | Transformamos tu presencia digital con propósito',
+  alternateName:
+    "Shine Agencia | Transformamos tu presencia digital con propósito",
   description: COMPANY_INFO.description,
   url: COMPANY_INFO.url,
   logo: COMPANY_INFO.url + COMPANY_INFO.logo,
@@ -87,135 +94,142 @@ export const ORGANIZATION_SCHEMA = {
   foundingDate: COMPANY_INFO.foundingDate,
   telephone: COMPANY_INFO.phone,
   email: COMPANY_INFO.email,
-  priceRange: '$$',
+  priceRange: "$$",
   address: {
-    '@type': 'PostalAddress',
+    "@type": "PostalAddress",
     streetAddress: COMPANY_INFO.address.street,
     addressLocality: COMPANY_INFO.address.city,
     addressRegion: COMPANY_INFO.address.region,
     postalCode: COMPANY_INFO.address.postalCode,
     addressCountry: {
-      '@type': 'Country',
-      name: 'Colombia'
-    }
+      "@type": "Country",
+      name: "Colombia",
+    },
   },
-  founders: COMPANY_INFO.founders.map(founder => ({
-    '@type': 'Person',
-    name: founder
+  founders: COMPANY_INFO.founders.map((founder) => ({
+    "@type": "Person",
+    name: founder,
   })),
   sameAs: [
     COMPANY_INFO.socialMedia.instagram,
     COMPANY_INFO.socialMedia.linkedin,
-    COMPANY_INFO.socialMedia.tiktok
+    COMPANY_INFO.socialMedia.tiktok,
   ],
-  serviceType: 'Servicios de Marketing Digital y Diseño Web',
+  serviceType: "Servicios de Marketing Digital y Diseño Web",
   areaServed: {
-    '@type': 'Country',
-    name: 'Colombia',
-    sameAs: 'https://es.wikipedia.org/wiki/Colombia'
+    "@type": "Country",
+    name: "Colombia",
+    sameAs: "https://es.wikipedia.org/wiki/Colombia",
   },
   knowsAbout: [
-    'Diseño Web Estratégico',
-    'Marketing Digital Auténtico',
-    'Rediseño Web',
-    'Optimización Web',
-    'Estrategia de Contenido',
-    'Redes Sociales',
-    'Auditoría Digital',
-    'Branding Auténtico',
-    'SEO',
-    'Experiencia de Usuario',
-    'Conversión Web'
+    "Diseño Web Estratégico",
+    "Marketing Digital Auténtico",
+    "Rediseño Web",
+    "Optimización Web",
+    "Estrategia de Contenido",
+    "Redes Sociales",
+    "Auditoría Digital",
+    "Branding Auténtico",
+    "SEO",
+    "Experiencia de Usuario",
+    "Conversión Web",
   ],
-  slogan: 'No necesitas gritar para ser escuchado',
+  slogan: "No necesitas gritar para ser escuchado",
   hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Servicios de Transformación Digital Auténtica',
-    description: 'Servicios especializados en diseño web estratégico y marketing digital para profesionales y empresas que buscan crecer con autenticidad',
+    "@type": "OfferCatalog",
+    name: "Servicios de Transformación Digital Auténtica",
+    description:
+      "Servicios especializados en diseño web estratégico y marketing digital para profesionales y empresas que buscan crecer con autenticidad",
     itemListElement: services.map((service, index) => ({
-      '@type': 'Offer',
+      "@type": "Offer",
       position: index + 1,
       itemOffered: {
-        '@type': 'Service',
-        '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+        "@type": "Service",
+        "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
         name: service.title,
         description: service.seoDescription,
         url: `${COMPANY_INFO.url}/servicios/${service.slug}`,
         provider: {
-          '@id': COMPANY_INFO.url + '#organization'
+          "@id": COMPANY_INFO.url + "#organization",
         },
-      }
-    }))
-  }
+      },
+    })),
+  },
 };
 
 // JSON-LD Schema for Website
 export const WEBSITE_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': COMPANY_INFO.url + '#website',
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": COMPANY_INFO.url + "#website",
   name: COMPANY_INFO.name,
-  alternateName: 'Shine Agencia | Transformamos tu presencia digital con propósito',
+  alternateName:
+    "Shine Agencia | Transformamos tu presencia digital con propósito",
   description: COMPANY_INFO.description,
   url: COMPANY_INFO.url,
-  inLanguage: 'es-CO',
+  inLanguage: "es-CO",
   copyrightYear: new Date().getFullYear(),
   copyrightHolder: {
-    '@type': 'Organization',
-    name: COMPANY_INFO.name
+    "@type": "Organization",
+    name: COMPANY_INFO.name,
   },
   publisher: {
-    '@id': COMPANY_INFO.url + '#organization'
+    "@id": COMPANY_INFO.url + "#organization",
   },
   mainEntity: {
-    '@id': COMPANY_INFO.url + '#organization'
+    "@id": COMPANY_INFO.url + "#organization",
   },
   potentialAction: {
-    '@type': 'SearchAction',
+    "@type": "SearchAction",
     target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${COMPANY_INFO.url}/blog?q={search_term_string}`
+      "@type": "EntryPoint",
+      urlTemplate: `${COMPANY_INFO.url}/blog?q={search_term_string}`,
     },
-    'query-input': 'required name=search_term_string'
-  }
+    "query-input": "required name=search_term_string",
+  },
 };
 
 // Dynamic Blog Schema Generator
-export function generateBlogSchema(posts: Array<{
-  id: string;
-  title: string;
-  description: string;
-  publishDate: Date;
-  tags?: string[];
-  image?: string;
-}>): JSONLDSchema {
+export function generateBlogSchema(
+  posts: Array<{
+    id: string;
+    title: string;
+    description: string;
+    publishDate: Date;
+    tags?: string[];
+    image?: string;
+  }>,
+): JSONLDSchema {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Blog',
-    '@id': COMPANY_INFO.url + '/blog#blog',
-    name: 'Blog - ' + COMPANY_INFO.name,
-    description: 'Guías prácticas, reflexiones honestas y consejos estratégicos para construir tu presencia digital con paz y propósito',
-    url: COMPANY_INFO.url + '/blog',
-    inLanguage: 'es-CO',
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": COMPANY_INFO.url + "/blog#blog",
+    name: "Blog - " + COMPANY_INFO.name,
+    description:
+      "Guías prácticas, reflexiones honestas y consejos estratégicos para construir tu presencia digital con paz y propósito",
+    url: COMPANY_INFO.url + "/blog",
+    inLanguage: "es-CO",
     author: {
-      '@id': COMPANY_INFO.url + '#organization'
+      "@id": COMPANY_INFO.url + "#organization",
     },
     publisher: {
-      '@id': COMPANY_INFO.url + '#organization'
+      "@id": COMPANY_INFO.url + "#organization",
     },
-    blogPost: posts.map(post => ({
-      '@type': 'BlogPosting',
-      '@id': `${COMPANY_INFO.url}/blog/${post.id}#article`,
+    blogPost: posts.map((post) => ({
+      "@type": "BlogPosting",
+      "@id": `${COMPANY_INFO.url}/blog/${post.id}#article`,
       headline: post.title,
       description: post.description,
       url: `${COMPANY_INFO.url}/blog/${post.id}`,
       datePublished: post.publishDate.toISOString(),
-      image: post.image ? COMPANY_INFO.url + post.image : COMPANY_INFO.url + COMPANY_INFO.image,
+      image: post.image
+        ? COMPANY_INFO.url + post.image
+        : COMPANY_INFO.url + COMPANY_INFO.image,
       mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': `${COMPANY_INFO.url}/blog/${post.id}`
-      }
-    }))
+        "@type": "WebPage",
+        "@id": `${COMPANY_INFO.url}/blog/${post.id}`,
+      },
+    })),
   };
 }
 
@@ -238,32 +252,40 @@ export function generateBlogPostSchema(post: {
 }): JSONLDSchema {
   // Resolve full author data from AUTHORS registry for richer E-E-A-T signals
   const fullAuthor: Author | undefined = post.author?.name
-    ? AUTHORS.find(a => a.name === post.author!.name)
+    ? AUTHORS.find((a) => a.name === post.author!.name)
     : undefined;
 
   // Build author schema - uses Person with @id if found in registry, falls back to Organization
   const authorSchema = post.author
     ? {
-      '@type': 'Person',
-      '@id': `${COMPANY_INFO.url}/nosotros#${(fullAuthor?.name ?? post.author.name).toLowerCase().replace(/\s+/g, '-')}`,
-      name: fullAuthor?.name ?? post.author.name,
-      ...(( fullAuthor?.role ?? post.author.role) && { jobTitle: fullAuthor?.role ?? post.author.role }),
-      ...(fullAuthor?.bio && { description: fullAuthor.bio }),
-      ...(fullAuthor?.image && { image: COMPANY_INFO.url + fullAuthor.image }),
-      ...((fullAuthor?.url ?? post.author.url) && { url: COMPANY_INFO.url + (fullAuthor?.url ?? post.author.url) }),
-      ...((fullAuthor?.credentials ?? post.author.credentials) && { knowsAbout: fullAuthor?.credentials ?? post.author.credentials }),
-      worksFor: {
-        '@id': COMPANY_INFO.url + '#organization'
+        "@type": "Person",
+        "@id": `${COMPANY_INFO.url}/nosotros#${(fullAuthor?.name ?? post.author.name).toLowerCase().replace(/\s+/g, "-")}`,
+        name: fullAuthor?.name ?? post.author.name,
+        ...((fullAuthor?.role ?? post.author.role) && {
+          jobTitle: fullAuthor?.role ?? post.author.role,
+        }),
+        ...(fullAuthor?.bio && { description: fullAuthor.bio }),
+        ...(fullAuthor?.image && {
+          image: COMPANY_INFO.url + fullAuthor.image,
+        }),
+        ...((fullAuthor?.url ?? post.author.url) && {
+          url: COMPANY_INFO.url + (fullAuthor?.url ?? post.author.url),
+        }),
+        ...((fullAuthor?.credentials ?? post.author.credentials) && {
+          knowsAbout: fullAuthor?.credentials ?? post.author.credentials,
+        }),
+        worksFor: {
+          "@id": COMPANY_INFO.url + "#organization",
+        },
       }
-    }
     : {
-      '@id': COMPANY_INFO.url + '#organization'
-    };
+        "@id": COMPANY_INFO.url + "#organization",
+      };
 
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    '@id': `${COMPANY_INFO.url}/blog/${post.id}#article`,
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${COMPANY_INFO.url}/blog/${post.id}#article`,
     headline: post.title,
     description: post.description,
     url: `${COMPANY_INFO.url}/blog/${post.id}`,
@@ -271,21 +293,23 @@ export function generateBlogPostSchema(post: {
     ...(post.modifiedDate && { dateModified: post.modifiedDate.toISOString() }),
     author: authorSchema,
     publisher: {
-      '@id': COMPANY_INFO.url + '#organization'
+      "@id": COMPANY_INFO.url + "#organization",
     },
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${COMPANY_INFO.url}/blog/${post.id}`
+      "@type": "WebPage",
+      "@id": `${COMPANY_INFO.url}/blog/${post.id}`,
     },
-    image: post.image ? COMPANY_INFO.url + post.image : COMPANY_INFO.url + COMPANY_INFO.image,
-    inLanguage: 'es-CO',
+    image: post.image
+      ? COMPANY_INFO.url + post.image
+      : COMPANY_INFO.url + COMPANY_INFO.image,
+    inLanguage: "es-CO",
     isPartOf: {
-      '@id': COMPANY_INFO.url + '/blog#blog'
+      "@id": COMPANY_INFO.url + "/blog#blog",
     },
     about: {
-      '@type': 'Thing',
-      name: 'Marketing Digital Auténtico'
-    }
+      "@type": "Thing",
+      name: "Marketing Digital Auténtico",
+    },
   };
 }
 
@@ -297,7 +321,9 @@ export function generatePageSEO(options: {
   image?: string;
   noindex?: boolean;
 }): SEOProps {
-  const normalizedPath = options.path.endsWith("/") ? options.path : options.path + "/";
+  const normalizedPath = options.path.endsWith("/")
+    ? options.path
+    : options.path + "/";
   const fullUrl = COMPANY_INFO.url + normalizedPath;
   const fullTitle = `${options.title} | ${COMPANY_INFO.name}`;
 
@@ -309,24 +335,24 @@ export function generatePageSEO(options: {
     openGraph: {
       basic: {
         title: fullTitle,
-        type: 'website',
+        type: "website",
         image: COMPANY_INFO.url + (options.image || COMPANY_INFO.image),
-        url: fullUrl
+        url: fullUrl,
       },
       optional: {
         description: options.description,
         siteName: COMPANY_INFO.name,
-        locale: 'es_CO'
-      }
+        locale: "es_CO",
+      },
     },
     twitter: {
-      card: 'summary_large_image',
-      site: '@shine_agencia',
-      creator: '@shine_agencia',
+      card: "summary_large_image",
+      site: "@shine_agencia",
+      creator: "@shine_agencia",
       title: fullTitle,
       description: options.description,
-      image: COMPANY_INFO.url + (options.image || COMPANY_INFO.image)
-    }
+      image: COMPANY_INFO.url + (options.image || COMPANY_INFO.image),
+    },
   };
 }
 
@@ -342,96 +368,98 @@ export function generateServiceSEO(service: Service): SEOProps {
     openGraph: {
       basic: {
         title: pageTitle,
-        type: 'website',
+        type: "website",
         image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image),
-        url: serviceUrl
+        url: serviceUrl,
       },
       optional: {
         description: service.seoDescription,
         siteName: COMPANY_INFO.name,
-        locale: 'es_CO'
-      }
+        locale: "es_CO",
+      },
     },
     twitter: {
-      card: 'summary_large_image',
-      site: '@shine_agencia',
-      creator: '@shine_agencia',
+      card: "summary_large_image",
+      site: "@shine_agencia",
+      creator: "@shine_agencia",
       title: pageTitle,
       description: service.seoDescription,
-      image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image)
+      image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image),
     },
     extend: {
       meta: [
-        { name: 'author', content: COMPANY_INFO.name },
-        { name: 'robots', content: 'index, follow' },
-        { httpEquiv: 'Content-Language', content: 'es-CO' }
-      ]
-    }
+        { name: "author", content: COMPANY_INFO.name },
+        { name: "robots", content: "index, follow" },
+        { httpEquiv: "Content-Language", content: "es-CO" },
+      ],
+    },
   };
 }
 
 export function generateServiceSchema(service: Service): JSONLDSchema {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    '@id': `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
     name: service.title,
     description: service.seoDescription,
     serviceType: service.title,
     provider: {
-      '@id': COMPANY_INFO.url + '#organization'
+      "@id": COMPANY_INFO.url + "#organization",
     },
 
     areaServed: {
-      '@type': 'Country',
-      name: 'Colombia'
+      "@type": "Country",
+      name: "Colombia",
     },
 
     availableChannel: {
-      '@type': 'ServiceChannel',
+      "@type": "ServiceChannel",
       serviceUrl: `${COMPANY_INFO.url}/servicios/${service.slug}`,
       servicePhone: COMPANY_INFO.phone,
       serviceLocation: {
-        '@type': 'Place',
+        "@type": "Place",
         address: {
-          '@type': 'PostalAddress',
+          "@type": "PostalAddress",
           addressLocality: COMPANY_INFO.address.city,
-          addressCountry: 'CO'
-        }
-      }
+          addressCountry: "CO",
+        },
+      },
     },
 
     ...(service.benefits && {
-      serviceOutput: service.benefits.join(', ')
+      serviceOutput: service.benefits.join(", "),
     }),
 
     isPartOf: {
-      '@type': 'WebPage',
-      '@id': COMPANY_INFO.url + '/servicios',
-      name: 'Servicios'
-    }
+      "@type": "WebPage",
+      "@id": COMPANY_INFO.url + "/servicios",
+      name: "Servicios",
+    },
   };
 }
 
 // Breadcrumb schema generator
-export function generateBreadcrumbSchema(breadcrumbs: Array<{ name: string; url: string }>): JSONLDSchema {
+export function generateBreadcrumbSchema(
+  breadcrumbs: Array<{ name: string; url: string }>,
+): JSONLDSchema {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: breadcrumbs.map((crumb, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       name: crumb.name,
-      item: crumb.url
-    }))
+      item: crumb.url,
+    })),
   };
 }
 
 // LocalBusiness Schema - critical for Google Maps and local search rankings
 export const LOCAL_BUSINESS_SCHEMA: JSONLDSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': COMPANY_INFO.url + '#localbusiness',
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": COMPANY_INFO.url + "#localbusiness",
   name: COMPANY_INFO.name,
   description: COMPANY_INFO.description,
   url: COMPANY_INFO.url,
@@ -439,96 +467,100 @@ export const LOCAL_BUSINESS_SCHEMA: JSONLDSchema = {
   email: COMPANY_INFO.email,
   logo: COMPANY_INFO.url + COMPANY_INFO.logo,
   image: COMPANY_INFO.url + COMPANY_INFO.image,
-  priceRange: '$$',
+  priceRange: "$$",
   address: {
-    '@type': 'PostalAddress',
+    "@type": "PostalAddress",
     streetAddress: COMPANY_INFO.address.street,
     addressLocality: COMPANY_INFO.address.city,
     addressRegion: COMPANY_INFO.address.region,
     postalCode: COMPANY_INFO.address.postalCode,
-    addressCountry: 'CO'
+    addressCountry: "CO",
   },
   geo: {
-    '@type': 'GeoCoordinates',
+    "@type": "GeoCoordinates",
     latitude: 4.7109886,
-    longitude: -74.072092
+    longitude: -74.072092,
   },
   sameAs: [
     COMPANY_INFO.socialMedia.instagram,
-    COMPANY_INFO.socialMedia.linkedin
+    COMPANY_INFO.socialMedia.linkedin,
   ],
   openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    opens: '09:00',
-    closes: '18:00'
-  }
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
 };
 
 // Internal helper for reviews schema generation
-function generateReviewsSchema(reviews: Array<{
-  author: string;
-  text: string;
-  rating: number;
-  datePublished: number;
-  image?: string;
-  platform: string;
-}>): JSONLDSchema {
+function generateReviewsSchema(
+  reviews: Array<{
+    author: string;
+    text: string;
+    rating: number;
+    datePublished: number;
+    image?: string;
+    platform: string;
+  }>,
+): JSONLDSchema {
   // Calculate aggregate rating
   const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
   const averageRating = reviews.length > 0 ? totalRating / reviews.length : 0;
 
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': COMPANY_INFO.url + '#organization-reviews',
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": COMPANY_INFO.url + "#organization-reviews",
     name: COMPANY_INFO.name,
     aggregateRating: {
-      '@type': 'AggregateRating',
+      "@type": "AggregateRating",
       ratingValue: averageRating.toFixed(1),
       reviewCount: reviews.length,
-      bestRating: '5',
-      worstRating: '1'
+      bestRating: "5",
+      worstRating: "1",
     },
-    review: reviews.map(review => ({
-      '@type': 'Review',
+    review: reviews.map((review) => ({
+      "@type": "Review",
       author: {
-        '@type': 'Person',
+        "@type": "Person",
         name: review.author,
-        ...(review.image && { image: review.image })
+        ...(review.image && { image: review.image }),
       },
       reviewRating: {
-        '@type': 'Rating',
+        "@type": "Rating",
         ratingValue: review.rating,
-        bestRating: '5',
-        worstRating: '1'
+        bestRating: "5",
+        worstRating: "1",
       },
       reviewBody: review.text,
       datePublished: new Date(review.datePublished * 1000).toISOString(),
       publisher: {
-        '@type': 'Organization',
-        name: review.platform
-      }
-    }))
+        "@type": "Organization",
+        name: review.platform,
+      },
+    })),
   };
 }
 
 // Specific generators for different platforms
-export function generateGoogleReviewsSchema(reviews: Array<{
-  author_name: string;
-  text: string;
-  rating: number;
-  datePublished: number;
-  author_url?: string;
-  profile_photo_url: ImageMetadata;
-}>): JSONLDSchema {
-  const formattedReviews = reviews.map(review => ({
+export function generateGoogleReviewsSchema(
+  reviews: Array<{
+    author_name: string;
+    text: string;
+    rating: number;
+    datePublished: number;
+    author_url?: string;
+    profile_photo_url: ImageMetadata;
+  }>,
+): JSONLDSchema {
+  const formattedReviews = reviews.map((review) => ({
     author: review.author_name,
     text: review.text,
     rating: review.rating,
     datePublished: review.datePublished,
     image: review.profile_photo_url.src,
-    platform: 'Google'
+    platform: "Google",
   }));
 
   return generateReviewsSchema(formattedReviews);
@@ -561,16 +593,16 @@ export interface FAQItem {
  */
 export function generateFAQSchema(faqs: FAQItem[]): JSONLDSchema {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
-      '@type': 'Question',
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
       name: faq.question,
       acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer
-      }
-    }))
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
   };
 }
 
@@ -581,25 +613,25 @@ export function generateFAQSchema(faqs: FAQItem[]): JSONLDSchema {
 export function generateFAQSchemaWithPage(
   faqs: FAQItem[],
   pageUrl: string,
-  pageName: string
+  pageName: string,
 ): JSONLDSchema {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    '@id': `${pageUrl}#faq`,
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
     name: `Preguntas Frecuentes - ${pageName}`,
-    mainEntity: faqs.map(faq => ({
-      '@type': 'Question',
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
       name: faq.question,
       acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer
-      }
+        "@type": "Answer",
+        text: faq.answer,
+      },
     })),
     isPartOf: {
-      '@type': 'WebPage',
-      '@id': pageUrl
-    }
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
   };
 }
 
@@ -644,18 +676,18 @@ export interface HowToOptions {
  */
 export function generateHowToSchema(options: HowToOptions): JSONLDSchema {
   const schema: JSONLDSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
+    "@context": "https://schema.org",
+    "@type": "HowTo",
     name: options.name,
     description: options.description,
     step: options.steps.map((step, index) => ({
-      '@type': 'HowToStep',
+      "@type": "HowToStep",
       position: index + 1,
       name: step.name,
       text: step.text,
       ...(step.image && { image: COMPANY_INFO.url + step.image }),
-      ...(step.url && { url: COMPANY_INFO.url + step.url })
-    }))
+      ...(step.url && { url: COMPANY_INFO.url + step.url }),
+    })),
   };
 
   // Add optional properties if provided
@@ -665,9 +697,9 @@ export function generateHowToSchema(options: HowToOptions): JSONLDSchema {
 
   if (options.estimatedCost) {
     schema.estimatedCost = {
-      '@type': 'MonetaryAmount',
+      "@type": "MonetaryAmount",
       currency: options.estimatedCost.currency,
-      value: options.estimatedCost.value
+      value: options.estimatedCost.value,
     };
   }
 
@@ -676,9 +708,9 @@ export function generateHowToSchema(options: HowToOptions): JSONLDSchema {
   }
 
   if (options.supply && options.supply.length > 0) {
-    schema.supply = options.supply.map(item => ({
-      '@type': 'HowToSupply',
-      name: item
+    schema.supply = options.supply.map((item) => ({
+      "@type": "HowToSupply",
+      name: item,
     }));
   }
 
@@ -690,17 +722,17 @@ export function generateHowToSchema(options: HowToOptions): JSONLDSchema {
  */
 export function generateHowToSchemaWithPage(
   options: HowToOptions,
-  pageUrl: string
+  pageUrl: string,
 ): JSONLDSchema {
   const baseSchema = generateHowToSchema(options);
 
   return {
     ...baseSchema,
-    '@id': `${pageUrl}#howto`,
+    "@id": `${pageUrl}#howto`,
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': pageUrl
-    }
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
   };
 }
 
@@ -718,19 +750,19 @@ export function generateAuthorSchema(author: Author): JSONLDSchema {
   if (author.socialMedia?.instagram) sameAs.push(author.socialMedia.instagram);
 
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${COMPANY_INFO.url}/nosotros#${author.name.toLowerCase().replace(/\s+/g, '-')}`,
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${COMPANY_INFO.url}/nosotros#${author.name.toLowerCase().replace(/\s+/g, "-")}`,
     name: author.name,
     description: author.bio,
     jobTitle: author.role,
     ...(author.image && { image: COMPANY_INFO.url + author.image }),
     ...(author.url && { url: COMPANY_INFO.url + author.url }),
     worksFor: {
-      '@id': COMPANY_INFO.url + '#organization'
+      "@id": COMPANY_INFO.url + "#organization",
     },
     knowsAbout: author.credentials,
-    ...(sameAs.length > 0 && { sameAs })
+    ...(sameAs.length > 0 && { sameAs }),
   };
 }
 
@@ -739,5 +771,5 @@ export function generateAuthorSchema(author: Author): JSONLDSchema {
  * Pass the result as `aditionalSchemas` to MainLayout on the /nosotros page.
  */
 export function generateAllAuthorsSchemas(): JSONLDSchema[] {
-  return AUTHORS.map(author => generateAuthorSchema(author));
+  return AUTHORS.map((author) => generateAuthorSchema(author));
 }
