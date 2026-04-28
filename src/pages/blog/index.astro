@@ -9,11 +9,23 @@ const sortedPosts = posts.sort(
   (a, b) =>
     new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
 );
+
+const postsForSchema = sortedPosts.map((post) => {
+    return {
+        id: post.data.slug,
+        title: post.data.title,
+        description: post.data.description,
+        publishDate: post.data.pubDate,
+        tags: post.data.tags,
+        image: post.data.image?.src,
+    };
+});
 ---
 
 <BlogLayout
   title="Blog de Marketing Digital y Diseño Web"
   description="Guías prácticas de marketing digital, diseño web y marca personal para líderes y empresas que quieren crecer con estrategia, propósito y visibilidad digital."
+  posts={postsForSchema}
 >
   <section class="container w-full mx-auto">
     <div class="blog-wrapper max-w-7xl mx-auto px-4 py-8 md:py-16 lg:py-20">

@@ -2,6 +2,7 @@
 import MainLayout from "@/layouts/MainLayout.astro";
 import {
     generateBreadcrumbSchema,
+    generatePageSEO,
     generateBlogPostSchema,
     generateFAQSchema,
     type JSONLDSchema,
@@ -24,6 +25,17 @@ const sanitizedSlug = slug.trim().replace(/\s+/g, "-").toLowerCase();
 
 // Resolve author from AUTHORS array or use default
 const author = AUTHORS.find((a) => a.name === data.author) ?? DEFAULT_AUTHOR;
+
+//Generate page SEO
+const postSeoProps = generatePageSEO({
+    title,
+    description,
+    path: `/blog/${sanitizedSlug}`,
+    image: image?.src,
+});
+
+//override og:type to article
+postSeoProps.openGraph!.basic.type = "article";
 
 // Generate specific schemas for the post
 const postSchema = generateBlogPostSchema({
@@ -56,11 +68,8 @@ const aditionalSchemas: JSONLDSchema[] = [
 ];
 ---
 
-<MainLayout
-    title={title}
-    description={description}
-    path={`/blog/${sanitizedSlug}`}
-    image={image?.src}
+<MainLayout 
+    seoProps={postSeoProps}
     aditionalSchemas={aditionalSchemas}
 >
     <slot />
