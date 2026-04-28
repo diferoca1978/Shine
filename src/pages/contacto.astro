@@ -1,6 +1,6 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
+import { generateBreadcrumbSchema, generatePageSEO, LOCAL_BUSINESS_SCHEMA } from "@/config/seo";
 import ContactForm from "@/components/section/perPage/ContactForm.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 
@@ -17,7 +17,7 @@ const contactoSEO = generatePageSEO({
 });
 ---
 
-<MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema]}>
+<MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema, LOCAL_BUSINESS_SCHEMA]}>
     <GlobalHero
         titleLine1="Contacto"
         subtitleBefore="Cuéntanos tu idea, solicita tu sesión de diagnóstico y da el primer paso"
