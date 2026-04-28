@@ -30,30 +30,17 @@ export const cursorTrackingImgPreview = () => {
   gsap.set(previewImages, { autoAlpha: 0, scale: 1.08 });
   gsap.set(idleEl, { autoAlpha: 1 });
 
-  // --- PIN: GSAP pins the left column for the full scroll height of the right column.
-  // trigger = left column, endTrigger = right column bottom.
-  // pinSpacing: false because the right column already provides the scroll height.
-  // This works with Lenis because ScrollTrigger.update is already wired to lenis.on("scroll").
+  // --- PIN: start when the section top hits the viewport top, end when the
+  // project list bottom hits the viewport bottom — this keeps the card pinned
+  // exactly for the duration of the list and releases it before the CTA enters.
   ScrollTrigger.create({
-    trigger: previewColumn,
+    trigger: projectList,
     endTrigger: projectList,
     start: "top top",
     end: "bottom bottom",
-    pin: true,
+    pin: previewColumn,
     pinSpacing: false,
-  });
-
-  // --- Scroll parallax: move the inner wrapper up/down as the user scrolls through the section.
-  // The range maps the section's scroll progress to a ±60px vertical offset on the card.
-  gsap.to(previewInner, {
-    y: -60,
-    ease: "none",
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1,
-    },
+    markers: false,
   });
 
   // --- Crossfade state ---
@@ -94,10 +81,16 @@ export const cursorTrackingImgPreview = () => {
     // Fade ALL images out — rapid hover leaves intermediate images mid-tween
     previewImages.forEach((img) => {
       gsap.killTweensOf(img);
-      gsap.to(img, { autoAlpha: 0, scale: 1.06, duration: 0.35, ease: "power2.in" });
+      gsap.to(img, {
+        autoAlpha: 0,
+        scale: 1.06,
+        duration: 0.35,
+        ease: "power2.in",
+      });
     });
     gsap.to(idleEl, { autoAlpha: 1, duration: 0.35, delay: 0.1 });
-    if (counterEl) counterEl.textContent = `— / ${String(total).padStart(2, "0")}`;
+    if (counterEl)
+      counterEl.textContent = `— / ${String(total).padStart(2, "0")}`;
     activeIndex = -1;
   };
 
@@ -109,15 +102,33 @@ export const cursorTrackingImgPreview = () => {
 
     item.addEventListener("mouseenter", () => {
       showImage(i);
-      gsap.to(numberEl, { color: "var(--color-softBeige)", opacity: 1, duration: 0.25 });
+      gsap.to(numberEl, {
+        color: "var(--color-softBeige)",
+        opacity: 1,
+        duration: 0.25,
+      });
       gsap.to(titleEl, { x: 12, duration: 0.35, ease: "power2.out" });
-      gsap.to(arrowEl, { x: 5, color: "var(--color-accentGold)", opacity: 1, duration: 0.3 });
+      gsap.to(arrowEl, {
+        x: 5,
+        color: "var(--color-accentGold)",
+        opacity: 1,
+        duration: 0.3,
+      });
     });
 
     item.addEventListener("mouseleave", () => {
-      gsap.to(numberEl, { color: "var(--color-softBeige)", opacity: 0.25, duration: 0.3 });
+      gsap.to(numberEl, {
+        color: "var(--color-softBeige)",
+        opacity: 0.25,
+        duration: 0.3,
+      });
       gsap.to(titleEl, { x: 0, duration: 0.35, ease: "power2.out" });
-      gsap.to(arrowEl, { x: 0, color: "var(--color-softBeige)", opacity: 0.4, duration: 0.3 });
+      gsap.to(arrowEl, {
+        x: 0,
+        color: "var(--color-softBeige)",
+        opacity: 0.4,
+        duration: 0.3,
+      });
     });
   });
 

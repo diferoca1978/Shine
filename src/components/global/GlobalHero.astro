@@ -28,7 +28,7 @@ const {
       <div class="max-w-4xl">
         <div class="title-wrapper">
           <h1
-            class="text-4xl md:text-7xl font-medium text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-4"
+            class="hero-title invisible text-4xl md:text-7xl font-medium text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-4"
           >
             {titleLine1}
             <span class="block"> {titleLine2}</span>
@@ -36,7 +36,7 @@ const {
         </div>
         <div class="subtitle-wrapper">
           <h2
-            class="text-[min(7vw,42px)] text-smokyBlack dark:text-softWhite italic mb-6"
+            class="hero-subtitle text-[min(7vw,42px)] text-smokyBlack dark:text-softWhite italic mb-6 invisible"
           >
             {subtitleBefore}
             <span class="font-bold text-deepplum dark:text-accentGold"
@@ -47,7 +47,7 @@ const {
         </div>
         <div class="description-wrapper">
           <p
-            class="text-[min(5vw,24px)] text-smokyBlack dark:text-softWhite mb-8 max-w-2xl mx-auto"
+            class="description-text text-[min(5vw,24px)] text-smokyBlack dark:text-softWhite mb-8 max-w-2xl mx-auto invisible break-keep"
           >
             {descriptionLine1}
             <span class="block"> {descriptionLine2}</span>
@@ -61,10 +61,7 @@ const {
   </div>
 </section>
 
-<!-- <script>
+<script>
   import { globalHeroAnimation } from "@/utils/scripts/globalAnimations/globalHeroAnimation.js";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    globalHeroAnimation();
-  });
-</script> -->
+  globalHeroAnimation();
+</script>
