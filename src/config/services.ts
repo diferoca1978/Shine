@@ -89,7 +89,7 @@ export const services: Service[] = [
     image: SocialContent,
     secondaryImage: InvisibilityProblem,
     alt: "Estrategia de Marca Personal y contenidos - Shine Agencia",
-    seoDescription: "Descubre cómo construir una marca personal que atrae clientes ideales. Estrategias de contenido para fundadores y emprendedores",
+    seoDescription: "Construye una marca personal que atrae clientes ideales. Estrategia de contenido y posicionamiento digital para líderes y empresas en Colombia. Agenda hoy.",
     seoKeywords: [
       "estrategia de marca personal",
       "estrategia de contenidos B2B",
@@ -186,7 +186,7 @@ export const services: Service[] = [
     image: WebDesign,
     secondaryImage: InvisibilityProblem,
     alt: "Diseño Web de Alto Rendimiento con Astro framework - Shine Agencia",
-    seoDescription: "Creamos sitios web ultrarrápidos, seguros y optimizados con Astro Framework para líderes que necesitan una presencia digital sólida desde cero. ¡Agenda tu diagnóstico gratuito!",
+    seoDescription: "Creamos sitios web ultrarrápidos con Astro Framework para líderes y empresas que necesitan presencia digital sólida desde cero. Agenda tu diagnóstico gratuito.",
     seoKeywords: [
       "diseño web con Astro Framework Colombia",
       "desarrollo web de alto rendimiento",
@@ -280,7 +280,7 @@ export const services: Service[] = [
     image: Audit,
     secondaryImage: InvisibilityProblem,
     alt: "Optimización y Rediseño Estratégico Web - Shine Agencia",
-    seoDescription: "¿Tu web no genera resultados? En Shine, optimizamos y rediseñamos tu plataforma actual para mejorar conversiones, velocidad y SEO. ¡Agenda tu auditoría gratuita!",
+    seoDescription: "¿Tu web no genera resultados? Optimizamos y rediseñamos tu plataforma para mejorar conversiones, velocidad y SEO en Colombia. Agenda tu auditoría gratuita hoy.",
     seoKeywords: [
       "optimización web estratégica",
       "rediseño web estratégico",
