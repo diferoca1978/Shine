@@ -1,41 +1,51 @@
-import {gsap} from "gsap";
-import {SplitText} from "gsap/SplitText";
+import { gsap } from "gsap";
+import { SplitText } from "gsap/SplitText";
 
-// Register the SplitText plugin with GSAP
 gsap.registerPlugin(SplitText);
 
 export const globalHeroAnimation = () => {
+  const heroTitle = document.querySelector(".hero-title");
+  const heroSubtitle = document.querySelector(".hero-subtitle");
+  const heroDescription = document.querySelector(".description-text");
 
-    let subtitleSplitText = new SplitText(".subtitle-wrapper h2", {
-      type: "lines",
-      autoSplit: true,
-      onSplit: (self) => {
-      gsap.set(".subtitle-wrapper", {opacity:1})
-      return gsap.from(self.lines, {
-      opacity: 0,
-      y: 20,
-      duration: 0.5,
-      stagger: 0.5,
-      onComplete: () => self.revert(),
-      });
-    }});
+  gsap.set([heroTitle, heroSubtitle, heroDescription], { autoAlpha: 1 });
 
-    let descriptionSplitText = document.querySelector(".description-wrapper p");
-    
-    if (descriptionSplitText) {
-      gsap.set(".description-wrapper", {opacity:1})
-      descriptionSplitText = new SplitText(".description-wrapper p", {
-        type: "lines",
-        autoSplit: true,
-        onSplit: (self) => {
-        return gsap.from(self.lines, {
-        y:20,
-        opacity:0,
-        stagger:0.5,
-        duration: 0.5,
-        onComplete: () => self.revert(),
-        }, "+=0.5");
-      }});
-    };
+  const tl = gsap.timeline({
+    defaults: { duration: 1, ease: "power3.out" },
+  });
 
-}
+  // Each onSplit fires synchronously, so tweens are added to tl in order.
+  // "-=0.7" overlaps the next animation with the previous one for a fluid feel.
+  SplitText.create(heroTitle, {
+    type: "chars",
+    autoSplit: true,
+    onSplit(self) {
+      tl.from(self.chars, { opacity: 0, yPercent: 100, stagger: 0.05 });
+    },
+  });
+
+  SplitText.create(heroSubtitle, {
+    type: "chars",
+    autoSplit: true,
+    onSplit(self) {
+      tl.from(
+        self.chars,
+        { opacity: 0, yPercent: 100, stagger: 0.04 },
+        "-=0.7",
+      );
+    },
+  });
+
+  SplitText.create(heroDescription, {
+    type: "words,chars",
+    autoSplit: true,
+    wordsClass: "inline-block overflow-hidden",
+    onSplit(self) {
+      tl.from(
+        self.words,
+        { opacity: 0, yPercent: 100, stagger: 0.02 },
+        "-=1.2",
+      );
+    },
+  });
+};
