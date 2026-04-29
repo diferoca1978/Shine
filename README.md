@@ -1,47 +1,155 @@
-# Astro Starter Kit: Minimal
+# Shine Agency — Website
 
-```sh
-npm create astro@latest -- --template minimal
+Marketing agency website built with **Astro 6**, deployed on **Netlify**. Features SSR, GSAP animations, smooth scrolling, a contact form backed by Resend, comprehensive SEO with JSON-LD schemas, and AI-crawler endpoints (`llms.txt`).
+
+---
+
+## Tech Stack
+
+| Layer      | Technology                                       |
+| ---------- | ------------------------------------------------ |
+| Framework  | Astro 6 (SSR via `@astrojs/netlify`)             |
+| Styling    | Tailwind CSS 4 (Vite plugin) + Typography plugin |
+| Animations | GSAP 3 + Lenis smooth scroll                     |
+| Email      | Resend (via Astro Actions)                       |
+| 3D         | Three.js                                         |
+| Carousel   | Swiper                                           |
+| SEO        | astro-seo + custom JSON-LD schema generators     |
+| Testing    | Playwright                                       |
+| Deployment | Netlify                                          |
+
+---
+
+## Development Commands
+
+```bash
+npm install          # Install dependencies (lockfile: bun.lockb)
+npm run dev          # Dev server → http://localhost:4321
+npm run build        # Production build → ./dist/
+npm run preview      # Preview production build locally
+npm run astro ...    # Run Astro CLI commands
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+### Testing
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm run test:email              # Contact form E2E test (Chromium only)
+npx playwright test             # Run all Playwright tests
+npx playwright test --ui        # Interactive Playwright UI
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Environment Variables
 
-Any static assets, like images, can be placed in the `public/` directory.
+Copy `.env.template` and fill in:
 
-## 🧞 Commands
+```
+RESEND_API_KEY=   # Resend API key for contact form email delivery
+EMAIL_CONTACT=    # Recipient address for contact form submissions
+```
 
-All commands are run from the root of the project, from a terminal:
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Architecture
 
-## 👀 Want to learn more?
+### Layout Hierarchy
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Every page renders through a layout chain:
+
+```
+MainLayout.astro          ← SEO, navbar, footer, cursor follower, WhatsApp widget
+├── ServiceLayout.astro   ← wraps MainLayout for service pages
+├── BlogLayout.astro      ← wraps MainLayout for blog listing
+└── PostLayout.astro      ← wraps MainLayout for individual blog posts
+```
+
+`MainLayout` delegates all SEO to `SEOHead.astro`, which handles the `astro-seo` component and JSON-LD script injection.
+
+### Content Collections (`src/content.config.ts`)
+
+Two collections, both using Astro's glob loader with Zod-validated frontmatter:
+
+**`works`** — Portfolio projects (`src/content/works/*.md`):
+
+- Fields: `title`, `slug`, `description`, `client`, `date`, `image`, `tags`, `url`
+
+**`blog`** — Blog posts (`src/content/blog/*.md`):
+
+- Fields: `title`, `slug`, `description`, `pubDate`, `modifiedDate`, `author`, `image`, `tags`, `draft`, `faqs`
+- `draft: true` posts are excluded from production builds
+
+### Services Data Model (`src/config/services.ts`)
+
+Services are defined as a typed array. Each service entry includes:
+
+- **Content**: `title`, `subtitle`, `problem`, `benefits`, `process` (steps), `techStack`
+- **SEO**: `primaryKeyword`, `secondaryKeywords`, `seoDescription`, `slug`
+- **AEO**: `faqs` array for Answer Engine Optimization (powers FAQ JSON-LD schema)
+- **Media**: `image` (`ImageMetadata`)
+
+To add a new service:
+
+1. Add an entry to the `services` array in `src/config/services.ts`
+2. Create the page at `src/pages/servicios/<slug>.astro` using `ServiceLayout`
+
+### SEO Architecture (`src/config/seo.ts`)
+
+Centralized SEO configuration with schema generators:
+
+| Export                            | Purpose                                       |
+| --------------------------------- | --------------------------------------------- |
+| `COMPANY_INFO`                    | Company name, address, social URLs, contact   |
+| `DEFAULT_SEO`                     | Base `astro-seo` props inherited by all pages |
+| `generatePageSEO(opts)`           | Builds per-page Open Graph + meta tags        |
+| `generateServiceSchema(service)`  | `Service` JSON-LD schema                      |
+| `generateBlogPostSchema(post)`    | `BlogPosting` JSON-LD schema                  |
+| `generateFAQSchema(faqs)`         | `FAQPage` JSON-LD schema                      |
+| `generateHowToSchema(steps)`      | `HowTo` JSON-LD schema                        |
+| `generateBreadcrumbSchema(items)` | `BreadcrumbList` JSON-LD schema               |
+
+Organization and Website schemas are automatically included in every page via `MainLayout`.
+
+### Contact Form (`src/actions/contact/getContact.ts`)
+
+Uses Astro Actions (server-side):
+
+- Input validated with Zod (error messages in Spanish)
+- Sends branded HTML email via Resend API
+- Environment variables: `RESEND_API_KEY`, `EMAIL_CONTACT`
+
+### Animation System
+
+Animations are split by scope and loaded via `<script>` tags in their respective components — no global bundle bloat.
+
+**Global animations** (run on every page):
+
+- `nabBarAltAnimation.js` — Navbar scroll behavior
+- `globalHeroAnimation.js` — Hero section entrance (GSAP timeline, word splitting)
+- `servicesDropdownAnimation.js` — Services nav dropdown
+- `bgAnimation.js` — Background texture animation
+
+**Per-page animations** (loaded only on their page):
+
+**Smooth scrolling**: Lenis is initialized in `src/utils/scripts/lenis/lenisSmooth.js` and its CSS lives alongside it in `lenis/styles/lenis.css`.
+
+### AI Crawler Support (LLMs.txt)
+
+The site exposes structured plain-text endpoints for AI crawlers:
+
+| Route                        | Content                 |
+| ---------------------------- | ----------------------- |
+| `/llms.txt`                  | Summary of the site     |
+| `/llms-full.txt`             | Full site content       |
+| `/llms/[slug].txt`           | Individual blog post    |
+| `/llms/servicios/[slug].txt` | Individual service page |
+
+---
+
+## Deployment
+
+- **Platform**: Netlify (adapter: `@astrojs/netlify`)
+- **Domain**: shineagencia.com
+- **Sitemap**: Auto-generated via `@astrojs/sitemap`
+- **Build command**: `npm run build`
+- **Publish directory**: `dist/`

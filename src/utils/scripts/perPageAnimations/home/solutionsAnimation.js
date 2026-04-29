@@ -65,7 +65,7 @@ export const solutionsAnimation = () => {
   // End svg animation
 
   // Content animation setup with theme-aware colors
-  const quoteSplit = SplitText.create(".solution-content p", { type: "words" });
+  const quoteSplit = SplitText.create(".solution-content p", { type: "words", aria: false });
 
   // IMMEDIATELY set initial state to prevent flicker with theme-appropriate color
   gsap.set(quoteSplit.words, { color: currentColors.default });
