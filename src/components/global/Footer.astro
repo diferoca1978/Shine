@@ -39,12 +39,12 @@ const currentPath =
         </p>
 
         <!-- Social Media -->
-        <div class="flex space-x-4">
+        <div class="flex space-x-1">
           <a
             href={COMPANY_INFO.socialMedia.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-softWhite hover:text-accentGold transition-colors duration-300"
+            class="p-3 text-softWhite hover:text-accentGold transition-colors duration-300"
             aria-label="Instagram"
           >
             <InstagramIcon fill="currentColor" />
@@ -53,7 +53,7 @@ const currentPath =
             href={COMPANY_INFO.socialMedia.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-softWhite hover:text-accentGold transition-colors duration-300"
+            class="p-3 text-softWhite hover:text-accentGold transition-colors duration-300"
             aria-label="LinkedIn"
           >
             <LinkedInIcon />
@@ -62,7 +62,7 @@ const currentPath =
             href={COMPANY_INFO.socialMedia.tiktok}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-softWhite hover:text-accentGold transition-colors duration-300"
+            class="p-3 text-softWhite hover:text-accentGold transition-colors duration-300"
             aria-label="TikTok"
           >
             <TikTokIcon />
@@ -71,7 +71,7 @@ const currentPath =
             href={COMPANY_INFO.socialMedia.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-softWhite hover:text-accentGold transition-colors duration-300"
+            class="p-3 text-softWhite hover:text-accentGold transition-colors duration-300"
             aria-label="WhatsApp"
           >
             <WhatsAppIcon width="26" height="26" fill="currentColor" />
@@ -99,7 +99,7 @@ const currentPath =
                 </li>
               ))
           }
-          <div class="flex flex-col">
+          <li class="flex flex-col">
             <a
               href="#"
               id="footer-services"
@@ -131,12 +131,14 @@ const currentPath =
                 }
               </ul>
             </div>
-          </div>
-          <a
-            href="/contacto"
-            class="text-softWhite hover:text-accentGold transition-colors duration-300"
-            >Contacto</a
-          >
+          </li>
+          <li>
+            <a
+              href="/contacto"
+              class="text-softWhite hover:text-accentGold transition-colors duration-300"
+              >Contacto</a
+            >
+          </li>
         </ul>
       </div>
     </div>

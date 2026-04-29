@@ -6,9 +6,7 @@ import { SplitText } from "gsap/SplitText";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export default function hurtsAnimation() {
-  const isMobile = window.innerWidth <= 768;
   const hurtsItems = document.querySelectorAll(".hurts-item ");
-  let split = new SplitText(".text-split", { type: "words" });
 
   gsap.set([".hurts-item", ".text-split"], { opacity: 1 });
 
