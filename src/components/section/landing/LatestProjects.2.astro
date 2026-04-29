@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 const allWorks = await getCollection("works");
 const projects = allWorks
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 5)
   .map((work, i) => ({
     number: String(i + 1).padStart(2, "0"),
     title: work.data.title,

@@ -19,6 +19,7 @@ export const globalHeroAnimation = () => {
   SplitText.create(heroTitle, {
     type: "chars",
     autoSplit: true,
+    aria: false,
     onSplit(self) {
       tl.from(self.chars, { opacity: 0, yPercent: 100, stagger: 0.05 });
     },
@@ -27,6 +28,7 @@ export const globalHeroAnimation = () => {
   SplitText.create(heroSubtitle, {
     type: "chars",
     autoSplit: true,
+    aria: false,
     onSplit(self) {
       tl.from(
         self.chars,
@@ -39,6 +41,7 @@ export const globalHeroAnimation = () => {
   SplitText.create(heroDescription, {
     type: "words,chars",
     autoSplit: true,
+    aria: false,
     wordsClass: "inline-block overflow-hidden",
     onSplit(self) {
       tl.from(

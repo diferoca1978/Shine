@@ -192,6 +192,8 @@ overlayRocketAnimation();
   // Add click event listeners
   btnOpenClose.addEventListener("click", (e) => {
     e.preventDefault();
+    btnOpenClose.setAttribute("aria-expanded", "true");
+    btnOpenClose.setAttribute("aria-label", "Cerrar menú");
     openOverlay();
   });
 
@@ -199,6 +201,8 @@ overlayRocketAnimation();
   if (btnClose) {
     btnClose.addEventListener("click", (e) => {
       e.preventDefault();
+      btnOpenClose.setAttribute("aria-expanded", "false");
+      btnOpenClose.setAttribute("aria-label", "Abrir menú");
       closeOverlay();
     });
   }
