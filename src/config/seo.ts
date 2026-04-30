@@ -115,24 +115,13 @@ export const ORGANIZATION_SCHEMA = {
     COMPANY_INFO.socialMedia.linkedin,
     COMPANY_INFO.socialMedia.tiktok,
   ],
-  serviceType: "Servicios de Marketing Digital y Diseño Web",
   areaServed: {
     "@type": "Country",
     name: "Colombia",
     sameAs: "https://es.wikipedia.org/wiki/Colombia",
   },
   knowsAbout: [
-    "Diseño Web Estratégico",
-    "Marketing Digital Auténtico",
-    "Rediseño Web",
-    "Optimización Web",
-    "Estrategia de Contenido",
-    "Redes Sociales",
-    "Auditoría Digital",
-    "Branding Auténtico",
-    "SEO",
-    "Experiencia de Usuario",
-    "Conversión Web",
+    ...new Set(services.flatMap((s) => s.seoKeywords)),
   ],
   slogan: "No necesitas gritar para ser escuchado",
   hasOfferCatalog: {
@@ -140,9 +129,8 @@ export const ORGANIZATION_SCHEMA = {
     name: "Servicios de Transformación Digital Auténtica",
     description:
       "Servicios especializados en diseño web estratégico y marketing digital para profesionales y empresas que buscan crecer con autenticidad",
-    itemListElement: services.map((service, index) => ({
+    itemListElement: services.map((service) => ({
       "@type": "Offer",
-      position: index + 1,
       itemOffered: {
         "@type": "Service",
         "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
@@ -403,7 +391,7 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
     "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
     name: service.title,
     description: service.seoDescription,
-    serviceType: service.title,
+    keywords: service.seoKeywords.join(", "),
     provider: {
       "@id": COMPANY_INFO.url + "#organization",
     },
@@ -454,6 +442,22 @@ export function generateBreadcrumbSchema(
     })),
   };
 }
+
+// ContactPage Schema - signals to Google and LLMs that this is the official contact entry point
+export const CONTACT_PAGE_SCHEMA: JSONLDSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": COMPANY_INFO.url + "/contacto#contactpage",
+  name: "Contacto — " + COMPANY_INFO.name,
+  description: "Agenda tu sesión de diagnóstico digital gratuita con el equipo de Shine Agencia. Respuesta garantizada en 24 horas.",
+  url: COMPANY_INFO.url + "/contacto",
+  isPartOf: { "@id": COMPANY_INFO.url + "#website" },
+  about: { "@id": COMPANY_INFO.url + "#organization" },
+  contactOption: "https://schema.org/TollFree",
+  telephone: COMPANY_INFO.phone,
+  email: COMPANY_INFO.email,
+  areaServed: { "@type": "Country", name: "Colombia" },
+};
 
 // LocalBusiness Schema - critical for Google Maps and local search rankings
 export const LOCAL_BUSINESS_SCHEMA: JSONLDSchema = {

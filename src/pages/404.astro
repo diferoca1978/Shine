@@ -3,9 +3,17 @@ import Button from "@/components/ui/button.astro";
 import MainLayout from "@/layouts/MainLayout.astro";
 import { Image } from "astro:assets";
 import Logo from "@/assets/images/logoshinewhitecharacters.svg";
+import { generatePageSEO } from "@/config/seo";
+
+const notFoundSEO = generatePageSEO({
+  title: "Página no encontrada | Shine",
+  description: "La página que buscas no existe. Vuelve al inicio de Shine Agencia.",
+  path: "/404",
+  noindex: true,
+});
 ---
 
-<MainLayout>
+<MainLayout seoProps={notFoundSEO}>
   <div
     class="blackBg fixed inset-0 flex items-center justify-center z-50 overflow-auto"
   >

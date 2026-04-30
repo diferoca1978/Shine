@@ -1,6 +1,6 @@
 ---
 import ServiceLayout from "@/layouts/ServiceLayout.astro";
-import { getServiceBySlug, type Service } from "@/config/services";
+import { getServiceBySlug } from "@/config/services";
 import CTABanner from "@/components/ui/CTABanner.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 import Button from "@/components/ui/button.astro";
@@ -30,7 +30,7 @@ if (!service) {
   >
     <Button
       slot="cta"
-      href="/contacto"
+      href="/contacto/"
       variant="primary"
       animation={true}
       className="w-fit mx-auto"
@@ -58,7 +58,7 @@ if (!service) {
   >
     <Button
       slot="cta"
-      href="/contacto"
+      href="/contacto/"
       variant="primary"
       animation={true}
       className="w-fit mx-auto"
@@ -87,7 +87,7 @@ if (!service) {
       title="No dejes que tu web sea un potencial desaprovechado."
       description={`Es hora de que tu activo digital trabaje tan duro como tú. Descubre cómo podemos desbloquear su verdadero potencial.`}
       buttonText="Revitaliza tu presencia online"
-      buttonHref="/contacto"
+      buttonHref="/contacto/"
       variant="default"
       className="max-w-6xl mx-auto"
     />
