@@ -115,7 +115,6 @@ export const ORGANIZATION_SCHEMA = {
     COMPANY_INFO.socialMedia.linkedin,
     COMPANY_INFO.socialMedia.tiktok,
   ],
-  serviceType: "Servicios de Marketing Digital y Diseño Web",
   areaServed: {
     "@type": "Country",
     name: "Colombia",
@@ -130,9 +129,8 @@ export const ORGANIZATION_SCHEMA = {
     name: "Servicios de Transformación Digital Auténtica",
     description:
       "Servicios especializados en diseño web estratégico y marketing digital para profesionales y empresas que buscan crecer con autenticidad",
-    itemListElement: services.map((service, index) => ({
+    itemListElement: services.map((service) => ({
       "@type": "Offer",
-      position: index + 1,
       itemOffered: {
         "@type": "Service",
         "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
@@ -393,7 +391,6 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
     "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
     name: service.title,
     description: service.seoDescription,
-    serviceType: service.title,
     keywords: service.seoKeywords.join(", "),
     provider: {
       "@id": COMPANY_INFO.url + "#organization",
