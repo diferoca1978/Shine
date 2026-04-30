@@ -31,9 +31,9 @@ const { title, image, imageAlt, introText, problems, imagePosition } = Astro.pro
       </div>
       <div id="problem-hurts" class="w-full flex flex-col justify-center">
         {introText && (
-          <h4 class="text-smokyBlack dark:text-softWhite mb-4 text-center md:text-left text-xl md:text-2xl font-semibold leading-tight opacity-0">
+          <h3 class="text-smokyBlack dark:text-softWhite mb-4 text-center md:text-left text-xl md:text-2xl font-semibold leading-tight opacity-0">
             {introText}
-          </h4>
+          </h3>
           <ul class="flex flex-col gap-2">
             {problems.map((hurt) => (
               <li class="hurts text-smokyBlack dark:text-softWhite text-lg flex items-center gap-2 px-2 opacity-0">

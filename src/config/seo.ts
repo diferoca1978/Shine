@@ -122,17 +122,7 @@ export const ORGANIZATION_SCHEMA = {
     sameAs: "https://es.wikipedia.org/wiki/Colombia",
   },
   knowsAbout: [
-    "Diseño Web Estratégico",
-    "Marketing Digital Auténtico",
-    "Rediseño Web",
-    "Optimización Web",
-    "Estrategia de Contenido",
-    "Redes Sociales",
-    "Auditoría Digital",
-    "Branding Auténtico",
-    "SEO",
-    "Experiencia de Usuario",
-    "Conversión Web",
+    ...new Set(services.flatMap((s) => s.seoKeywords)),
   ],
   slogan: "No necesitas gritar para ser escuchado",
   hasOfferCatalog: {
@@ -404,6 +394,7 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
     name: service.title,
     description: service.seoDescription,
     serviceType: service.title,
+    keywords: service.seoKeywords.join(", "),
     provider: {
       "@id": COMPANY_INFO.url + "#organization",
     },
@@ -454,6 +445,22 @@ export function generateBreadcrumbSchema(
     })),
   };
 }
+
+// ContactPage Schema - signals to Google and LLMs that this is the official contact entry point
+export const CONTACT_PAGE_SCHEMA: JSONLDSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": COMPANY_INFO.url + "/contacto#contactpage",
+  name: "Contacto — " + COMPANY_INFO.name,
+  description: "Agenda tu sesión de diagnóstico digital gratuita con el equipo de Shine Agencia. Respuesta garantizada en 24 horas.",
+  url: COMPANY_INFO.url + "/contacto",
+  isPartOf: { "@id": COMPANY_INFO.url + "#website" },
+  about: { "@id": COMPANY_INFO.url + "#organization" },
+  contactOption: "https://schema.org/TollFree",
+  telephone: COMPANY_INFO.phone,
+  email: COMPANY_INFO.email,
+  areaServed: { "@type": "Country", name: "Colombia" },
+};
 
 // LocalBusiness Schema - critical for Google Maps and local search rankings
 export const LOCAL_BUSINESS_SCHEMA: JSONLDSchema = {
