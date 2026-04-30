@@ -1,6 +1,6 @@
 ---
 import ServiceLayout from "@/layouts/ServiceLayout.astro";
-import { getServiceBySlug, type Service } from "@/config/services";
+import { getServiceBySlug } from "@/config/services";
 import CTABanner from "@/components/ui/CTABanner.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 import Button from "@/components/ui/button.astro";
@@ -31,7 +31,7 @@ if (!service) {
   >
     <Button
       slot="cta"
-      href="/contacto"
+      href="/contacto/"
       variant="primary"
       animation={true}
       className="w-fit mx-auto"
@@ -80,7 +80,7 @@ if (!service) {
       title="No te conformes con menos. Tu negocio merece una web extraordinaria."
       description={`Tu primera gran impresión digital es crucial.`}
       buttonText="Empecemos a construir tu futuro digital"
-      buttonHref="/contacto"
+      buttonHref="/contacto/"
       variant="default"
       className="max-w-6xl mx-auto"
     />

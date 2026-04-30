@@ -15,7 +15,16 @@ export default defineConfig({
 
   site: "https://shineagencia.com",
 
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) =>
+        ![
+          "https://shineagencia.com/politicadeprivacidad/",
+          "https://shineagencia.com/terminosycondiciones/",
+          "https://shineagencia.com/404/",
+        ].includes(page),
+    }),
+  ],
 
   fonts: [
     {
