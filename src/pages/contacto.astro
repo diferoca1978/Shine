@@ -1,6 +1,6 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import { generateBreadcrumbSchema, generatePageSEO, LOCAL_BUSINESS_SCHEMA } from "@/config/seo";
+import { generateBreadcrumbSchema, generatePageSEO, LOCAL_BUSINESS_SCHEMA, CONTACT_PAGE_SCHEMA } from "@/config/seo";
 import ContactForm from "@/components/section/perPage/ContactForm.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 
@@ -15,9 +15,10 @@ const contactoSEO = generatePageSEO({
         "Contáctanos y agenda tu sesión de diagnóstico gratuita. Te ayudamos a transformar tu presencia digital con estrategia y propósito. Respuesta en 24 horas.",
     path: "/contacto",
 });
+
 ---
 
-<MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema, LOCAL_BUSINESS_SCHEMA]}>
+<MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema, LOCAL_BUSINESS_SCHEMA, CONTACT_PAGE_SCHEMA]}>
     <GlobalHero
         titleLine1="Contacto"
         subtitleBefore="Cuéntanos tu idea, solicita tu sesión de diagnóstico y da el primer paso"
