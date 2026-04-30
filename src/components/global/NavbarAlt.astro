@@ -39,7 +39,7 @@ const currentPath =
       <!-- desktop menu -->
       {
         navBarLinksConst
-          .filter((item) => item.path !== "/contacto" && item.path !== "/blog")
+          .filter((item) => item.path !== "/contacto/" && item.path !== "/blog/")
           .map((item) => (
             <div>
               <a
@@ -86,14 +86,14 @@ const currentPath =
         </div>
       </div>
       <a
-        href="/blog"
-        class={`text-smokyBlack dark:text-softWhite text-lg font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/blog" ? "bg-salviaGreen text-softWhite" : ""}`}
-        aria-current={currentPath === "/blog" ? "page" : undefined}>Blog</a
+        href="/blog/"
+        class={`text-smokyBlack dark:text-softWhite text-lg font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/blog/" ? "bg-salviaGreen text-softWhite" : ""}`}
+        aria-current={currentPath === "/blog/" ? "page" : undefined}>Blog</a
       >
       <a
-        href="/contacto"
-        class={`text-smokyBlack dark:text-softWhite text-lg font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/contacto" ? "bg-salviaGreen text-softWhite" : ""}`}
-        aria-current={currentPath === "/contacto" ? "page" : undefined}
+        href="/contacto/"
+        class={`text-smokyBlack dark:text-softWhite text-lg font-semibold rounded-4xl hover:bg-salviaGreen py-2 px-4 hover:rounded-4xl hover:text-softWhite transition-colors duration-200 ${currentPath === "/contacto/" ? "bg-salviaGreen text-softWhite" : ""}`}
+        aria-current={currentPath === "/contacto/" ? "page" : undefined}
         >Contacto</a
       >
       <ThemeToggle />
@@ -151,7 +151,7 @@ const currentPath =
             {
               navBarLinksConst
                 .filter(
-                  (item) => item.path !== "/contacto" && item.path !== "/blog",
+                  (item) => item.path !== "/contacto/" && item.path !== "/blog/",
                 )
                 .map((item) => (
                   <li>
@@ -169,13 +169,13 @@ const currentPath =
             }
             <li class="flex flex-col">
               <a
-                href="/servicios"
+                href="/servicios/"
                 id="services-overlayMenu"
                 class="flex items-center space-x-2 text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200"
                 class:list={{
-                  "underline underline-offset-3": currentPath === "/servicios",
+                  "underline underline-offset-3": currentPath === "/servicios/",
                 }}
-                aria-current={currentPath === "/servicios" ? "page" : undefined}
+                aria-current={currentPath === "/servicios/" ? "page" : undefined}
               >
                 <span> Servicios </span>
                 <DropdownIcon />
@@ -202,17 +202,17 @@ const currentPath =
             </li>
             <li>
               <a
-                href="/blog"
-                class={`text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200 ${currentPath === "/blog" ? "underline underline-offset-3" : ""}`}
-                aria-current={currentPath === "/blog" ? "page" : undefined}
+                href="/blog/"
+                class={`text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200 ${currentPath === "/blog/" ? "underline underline-offset-3" : ""}`}
+                aria-current={currentPath === "/blog/" ? "page" : undefined}
                 >Blog</a
               >
             </li>
             <li>
               <a
-                href="/contacto"
-                class={`text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200 ${currentPath === "/contacto" ? "underline underline-offset-3" : ""}`}
-                aria-current={currentPath === "/contacto" ? "page" : undefined}
+                href="/contacto/"
+                class={`text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200 ${currentPath === "/contacto/" ? "underline underline-offset-3" : ""}`}
+                aria-current={currentPath === "/contacto/" ? "page" : undefined}
                 >Contacto</a
               >
             </li>
