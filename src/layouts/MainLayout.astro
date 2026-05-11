@@ -118,24 +118,6 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
     <Font cssVariable="--font-playfair" />
     <Font cssVariable="--font-openSans" />
 
-    <!-- Font display swap and fallback metrics for CLS prevention -->
-    <style is:global>
-      @font-face {
-        font-family: 'Playfair Display';
-        font-display: swap;
-        size-adjust: 105%;
-        ascent-override: 95%;
-        descent-override: 20%;
-      }
-      @font-face {
-        font-family: 'Open Sans';
-        font-display: swap;
-        size-adjust: 103%;
-        ascent-override: 90%;
-        descent-override: 22%;
-      }
-    </style>
-
     <!-- Speculation Rules API for instant navigations (LCP optimization) -->
     <script type="speculationrules">
       {
