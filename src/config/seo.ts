@@ -79,10 +79,10 @@ export const DEFAULT_SEO: SEOProps = {
   },
 };
 
-// JSON-LD Schema for Organization
+// JSON-LD Schema for Organization (merged ProfessionalService + LocalBusiness)
 export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": ["ProfessionalService", "LocalBusiness"],
   "@id": COMPANY_INFO.url + "#organization",
   name: COMPANY_INFO.name,
   alternateName:
@@ -106,6 +106,11 @@ export const ORGANIZATION_SCHEMA = {
       name: "Colombia",
     },
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 4.7109886,
+    longitude: -74.072092,
+  },
   founders: COMPANY_INFO.founders.map((founder) => ({
     "@type": "Person",
     name: founder,
@@ -124,6 +129,12 @@ export const ORGANIZATION_SCHEMA = {
     ...new Set(services.flatMap((s) => s.seoKeywords)),
   ],
   slogan: "No necesitas gritar para ser escuchado",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Servicios de Transformación Digital Auténtica",
@@ -166,14 +177,6 @@ export const WEBSITE_SCHEMA = {
   },
   mainEntity: {
     "@id": COMPANY_INFO.url + "#organization",
-  },
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${COMPANY_INFO.url}/blog?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
   },
 };
 
@@ -459,44 +462,6 @@ export const CONTACT_PAGE_SCHEMA: JSONLDSchema = {
   areaServed: { "@type": "Country", name: "Colombia" },
 };
 
-// LocalBusiness Schema - critical for Google Maps and local search rankings
-export const LOCAL_BUSINESS_SCHEMA: JSONLDSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": COMPANY_INFO.url + "#localbusiness",
-  name: COMPANY_INFO.name,
-  description: COMPANY_INFO.description,
-  url: COMPANY_INFO.url,
-  telephone: COMPANY_INFO.phone,
-  email: COMPANY_INFO.email,
-  logo: COMPANY_INFO.url + COMPANY_INFO.logo,
-  image: COMPANY_INFO.url + COMPANY_INFO.image,
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: COMPANY_INFO.address.street,
-    addressLocality: COMPANY_INFO.address.city,
-    addressRegion: COMPANY_INFO.address.region,
-    postalCode: COMPANY_INFO.address.postalCode,
-    addressCountry: "CO",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 4.7109886,
-    longitude: -74.072092,
-  },
-  sameAs: [
-    COMPANY_INFO.socialMedia.instagram,
-    COMPANY_INFO.socialMedia.linkedin,
-  ],
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "09:00",
-    closes: "18:00",
-  },
-};
-
 // Internal helper for reviews schema generation
 function generateReviewsSchema(
   reviews: Array<{
@@ -575,6 +540,8 @@ export function generateGoogleReviewsSchema(
  * Use this constant in layouts/pages that include SocialProof component.
  */
 export const REVIEWS_SCHEMA = generateGoogleReviewsSchema(mockGoogleReviews);
+
+// Removed LOCAL_BUSINESS_SCHEMA - merged into ORGANIZATION_SCHEMA as @type: ["ProfessionalService", "LocalBusiness"]
 
 // ============================================================================
 // FAQ Page Schema - For AEO (Answer Engine Optimization)

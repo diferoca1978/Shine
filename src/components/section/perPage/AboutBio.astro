@@ -18,7 +18,7 @@ const bio = [
 <section class="w-full mx-auto max-w-6xl py-10 lg:py-20">
   <div class="bio-container flex flex-col items-center justify-center">
     <h2
-      class="bio-title text-[min(10vw,72px)] text-center lg:text-left text-smokyBlack dark:text-softWhite tracking-tight"
+      class="bio-title text-[min(10vw,72px)] text-center lg:text-left text-smokyBlack dark:text-softWhite mb-10 lg:mb-20 tracking-tight"
     >
       Quienes Somos
     </h2>
@@ -63,6 +63,5 @@ const bio = [
 
 <script>
   import { whoAreAnimation } from "@/utils/scripts/perPageAnimations/about/aboutWhoAreAnimation.js";
-  document.removeEventListener("DOMContentLoaded", whoAreAnimation);
-  document.addEventListener("DOMContentLoaded", whoAreAnimation);
+  whoAreAnimation();
 </script>

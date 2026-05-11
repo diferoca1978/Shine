@@ -9,17 +9,9 @@ export const aboutMissionAnimation = () => {
   const text = document.querySelector(".mission-text");
   const image = document.querySelector(".mission-image");
 
-  gsap.set([title, subtitle, text, image], { opacity: 0, xPercent: -100 })
+  gsap.set([title, subtitle, text, image], { autoAlpha: 0, xPercent: -100 })
 
-  if (!title || !subtitle || !text || !image) {
-    console.warn('Animation elements not found:', { 
-      title: !!title, 
-      subtitle: !!subtitle, 
-      text: !!text, 
-      image: !!image 
-    });
-    return;
-  }
+  if (!title || !subtitle || !text || !image) return;
 
   gsap.timeline({
     scrollTrigger: {
@@ -31,25 +23,25 @@ export const aboutMissionAnimation = () => {
     }
   })
   .to(title, {
-    opacity: 1,
+    autoAlpha: 1,
     xPercent: 0,
     duration: 0.8,
     ease: "power2.out"
   })
   .to(subtitle, {
-    opacity: 1,
+    autoAlpha: 1,
     xPercent: 0,
     duration: 0.8,
     ease: "power2.out"
   }, "-=0.4")
   .to(text, {
-    opacity: 1,
+    autoAlpha: 1,
     xPercent: 0,
     duration: 0.8,
     ease: "power2.out"
   }, "-=0.4")
   .to(image, {
-    opacity: 1,
+    autoAlpha: 1,
     xPercent: 0,
     duration: 0.8,
     ease: "power2.out"

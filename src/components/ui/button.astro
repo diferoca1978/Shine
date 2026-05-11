@@ -12,8 +12,12 @@ export interface Props {
   animation?: boolean;
 }
 
-const { type, href, rel, target, variant, className, id, animation } =
+const { type, href, rel: relProp, target, variant, className, id, animation } =
   Astro.props;
+
+const rel = target === "_blank"
+  ? [relProp, "noopener noreferrer"].filter(Boolean).join(" ")
+  : relProp;
 /**
  * Variants: Defines predefined styling options for the 'variant' prop.
  * - primary: Gradient button from deepplum to lavender with white text and hover effects.
@@ -55,7 +59,7 @@ Both types of elements share a similar structure and styling logic, with customi
       rel={rel ? rel : undefined}
       target={target ? target : undefined}
       class={twMerge(
-        `rounded-3xl px-4 py-2 text-center focus:outline-hidden ${variants[variant ?? "primary"]} ${animation ? "star-animate" : ""} ${className || ""}`,
+        `rounded-3xl px-4 py-2 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-salviaGreen focus-visible:ring-offset-2 ${variants[variant ?? "primary"]} ${animation ? "star-animate" : ""} ${className || ""}`,
       )}
     >
       <slot />
@@ -65,7 +69,7 @@ Both types of elements share a similar structure and styling logic, with customi
       id={id}
       type={type || "button"}
       class={twMerge(
-        `rounded-3xl px-4 py-2 text-center focus:outline-hidden ${variants[variant ?? "primary"]} ${animation ? "star-animate" : ""} ${className || ""}`,
+        `rounded-3xl px-4 py-2 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-salviaGreen focus-visible:ring-offset-2 ${variants[variant ?? "primary"]} ${animation ? "star-animate" : ""} ${className || ""}`,
       )}
     >
       <slot />

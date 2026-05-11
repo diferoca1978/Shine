@@ -9,12 +9,9 @@ export const servicesTechStackAnimation = () => {
   const container = document.querySelector(".techStack-section .tech-rotator");
   const hero = document.querySelector(".techStack-section .stack-hero");
 
-  if (!container || !hero) {
-    console.log("Missing elements:", { container: !!container, hero: !!hero });
-    return;
-  }
+  if (!container || !hero) return;
 
-  gsap.set(hero, { opacity: 1 });
+  gsap.set(hero, { autoAlpha: 1 });
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -31,7 +28,7 @@ export const servicesTechStackAnimation = () => {
 
   if (stackItems.length < 2) {
     container.classList.add("loaded");
-    gsap.set(stackItems, { opacity: 1, yPercent: 0 });
+    gsap.set(stackItems, { autoAlpha: 1, yPercent: 0 });
     return;
   }
 
@@ -44,11 +41,11 @@ export const servicesTechStackAnimation = () => {
 
   gsap.set(items, {
     position: "absolute",
-    opacity: 0,
+    autoAlpha: 0,
     yPercent: 100
   });
 
-  gsap.set(items[0], { opacity: 1, yPercent: 0 });
+  gsap.set(items[0], { autoAlpha: 1, yPercent: 0 });
 
   const rotatorTimeline = gsap.timeline({
     repeat: -1,
@@ -60,12 +57,12 @@ export const servicesTechStackAnimation = () => {
     const next = items[i + 1];
 
     rotatorTimeline.fromTo(next,
-      { yPercent: 100, opacity: 0 },
-      { yPercent: 0, opacity: 1 }
+      { yPercent: 100, autoAlpha: 0 },
+      { yPercent: 0, autoAlpha: 1 }
     );
 
     rotatorTimeline.to(current,
-      { yPercent: -100, opacity: 0 },
+      { yPercent: -100, autoAlpha: 0 },
       "<0.0"
     );
   }

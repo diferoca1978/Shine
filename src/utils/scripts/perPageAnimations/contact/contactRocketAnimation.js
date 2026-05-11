@@ -5,13 +5,10 @@ export const contactRocketAnimation = () => {
   const rocket = document.querySelector("#contact-rocket");
   const contactForm = document.querySelector("#contact-form");
 
-  if (!rocket || !contactForm) {
-    console.warn("Rocket or contact form not found");
-    return;
-  }
+  if (!rocket || !contactForm) return;
 
-  gsap.set(rocket, {x: -100, opacity: 0 });
-  gsap.set(contactForm, {x: 100, opacity: 0 });
+  gsap.set(rocket, {x: -100, autoAlpha: 0 });
+  gsap.set(contactForm, {x: 100, autoAlpha: 0 });
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -25,13 +22,13 @@ export const contactRocketAnimation = () => {
 
   tl.to(rocket, {
     x: 0,
-    opacity: 1,
+    autoAlpha: 1,
     duration: 0.5,
     ease: "power2.out"
   })
   .to(contactForm, {
     x: 0,
-    opacity: 1,
+    autoAlpha: 1,
     duration: 0.5,
     ease: "power2.out"
   }, "-=0.3");
@@ -41,10 +38,7 @@ export const launchRocket = () => {
   const rocket = document.querySelector("#contact-rocket");
   const stars = document.querySelectorAll(".contact-section svg");
   
-  if (!rocket) {
-    console.warn("Rocket not found for launch");
-    return;
-  }
+  if (!rocket) return;
 
   const launchTl = gsap.timeline();
   

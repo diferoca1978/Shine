@@ -71,7 +71,7 @@ const formatDate = (date: Date): string =>
       <div class="flex justify-center h-90 mx-auto mb-8">
         <Image
           src={post.data.image}
-          alt={post.data.title}
+          alt={post.data.imageAlt ?? post.data.title}
           priority
           class="object-cover w-full h-full rounded-2xl"
         />
@@ -142,7 +142,7 @@ const formatDate = (date: Date): string =>
           type="button"
           id="back-to-top"
           class="cursor-pointer flex items-center text-sm font-medium text-smokyBlack dark:text-softWhite/80 px-2 py-1 rounded-md border border-deepplum dark:border-softWhite/20 hover:bg-accentGold/5 hover:text-deepdark-900 hover:backdrop-blur-sm dark:hover:text-softWhite"
-          >Volver Arriba <ArrowUp class="ml-2 w-4 h-4 text-deepdark-900 dark:text-softWhite"/></button
+          >Volver Arriba <ArrowUp class="ml-2 w-4 h-4 text-deepdark-900 dark:text-softWhite"/></button>
         </div>
       </Prose>
     </div>

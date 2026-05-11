@@ -1,12 +1,12 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import { generateBreadcrumbSchema, generatePageSEO, LOCAL_BUSINESS_SCHEMA, CONTACT_PAGE_SCHEMA } from "@/config/seo";
+import { generateBreadcrumbSchema, generatePageSEO, CONTACT_PAGE_SCHEMA, COMPANY_INFO } from "@/config/seo";
 import ContactForm from "@/components/section/perPage/ContactForm.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Inicio", url: "/" },
-    { name: "Contacto", url: "/contacto" },
+    { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+    { name: "Contacto", url: `${COMPANY_INFO.url}/contacto/` },
 ]);
 
 const contactoSEO = generatePageSEO({
@@ -18,7 +18,7 @@ const contactoSEO = generatePageSEO({
 
 ---
 
-<MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema, LOCAL_BUSINESS_SCHEMA, CONTACT_PAGE_SCHEMA]}>
+<MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema, CONTACT_PAGE_SCHEMA]}>
     <GlobalHero
         titleLine1="Contacto"
         subtitleBefore="Cuéntanos tu idea, solicita tu sesión de diagnóstico y da el primer paso"

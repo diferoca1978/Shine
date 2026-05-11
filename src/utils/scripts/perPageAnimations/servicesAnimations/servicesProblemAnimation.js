@@ -18,28 +18,28 @@ export function gsapProblemAnimation() {
   })
 
   .to(".problem-heading", {
-    opacity: 1,
+    autoAlpha: 1,
     yPercent: -20,
     duration: 1,
     ease: "power2.out",
   })
 
   .to("#problem-image", {
-    opacity: 1,
+    autoAlpha: 1,
     yPercent: 5,
     duration: 1,
     ease: "back",
   },"+=0.5")
 
   .to("#problem-hurts h4", {
-    opacity: 1,
+    autoAlpha: 1,
     duration: 1,
     ease: "power2.out",
   },">+=0.2")
 
   listItems.forEach((li, i) => {
     tl.to(li, {
-      opacity: 1,
+      autoAlpha: 1,
       stagger: 0.02,
       ease: "power2.out",
     })

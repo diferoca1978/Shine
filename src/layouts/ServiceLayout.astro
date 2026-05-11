@@ -6,6 +6,7 @@ import {
   generateServiceSchema,
   generateFAQSchema,
   REVIEWS_SCHEMA,
+  COMPANY_INFO,
 } from "@/config/seo";
 import type { Service } from "@/config/services";
 
@@ -20,9 +21,9 @@ const seo = generateServiceSEO(service);
 const schema = generateServiceSchema(service);
 
 const breadcrumbs = [
-  { name: "Inicio", url: "/" },
-  { name: "Servicios", url: "/servicios" },
-  { name: service.title, url: `/servicios/${service.slug}` },
+  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+  { name: "Servicios", url: `${COMPANY_INFO.url}/servicios/` },
+  { name: service.title, url: `${COMPANY_INFO.url}/servicios/${service.slug}/` },
 ];
 
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);

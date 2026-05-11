@@ -34,7 +34,7 @@ export const gsapProcessStepsAnimation = () => {
     })
 
     // STEP 1: Fade in and slide up the title
-    .to(".process-heading", {opacity:1, yPercent:-20})
+    .to(".process-heading", {autoAlpha:1, yPercent:-20})
 
     // STEP 2: Draw the SVG path from a point to a horizontal line
     // This creates the visual effect of the progress bar "growing" across the screen
@@ -63,12 +63,12 @@ export const gsapProcessStepsAnimation = () => {
         // Move the highlight to the corresponding position for this step
         gsap.to("#path-highlight", {drawSVG:positions[i], duration:1, ease:"power2.out"});
         // Hide the number on hover
-        gsap.to(number, {opacity:0, duration:0.3})
+        gsap.to(number, {autoAlpha:0, duration:0.3})
       });
     });
 
     // Make all step descriptions visible by default
-    gsap.set(".stage p", {opacity:1})
+    gsap.set(".stage p", {autoAlpha:1})
 
     // Get all stage cards
     const stages = gsap.utils.toArray(".stage");
@@ -83,7 +83,7 @@ export const gsapProcessStepsAnimation = () => {
       // 1. Slide the headings container up by 50% to reveal the colored title
       .to(stage.querySelector(".headings"), {yPercent:-50})
       // 2. Fade in the description text (starting at 0 time, so it happens simultaneously)
-      .from(stage.querySelector("p"), {y:10, opacity: 0}, 0)
+      .from(stage.querySelector("p"), {y:10, autoAlpha: 0}, 0)
 
       // When mouse enters the card
       stage.addEventListener("mouseenter", () => {
@@ -91,14 +91,14 @@ export const gsapProcessStepsAnimation = () => {
         // Move the progress bar highlight to this step's position
         gsap.to("#path-highlight", {drawSVG:positions[i], duration:1, ease:"power2.out"});
         // Show this step's number
-        gsap.to(numbers[i], {opacity:1, duration:0.3})
+        gsap.to(numbers[i], {autoAlpha:1, duration:0.3})
       })
 
       // When mouse leaves the card
       stage.addEventListener("mouseleave", () => {
         tl.reverse();                 // Reverse the card's hover animation
         // Hide this step's number
-        gsap.to(numbers[i], {opacity:0, duration:0.3})
+        gsap.to(numbers[i], {autoAlpha:0, duration:0.3})
       })
     })
   }
@@ -128,7 +128,7 @@ export const gsapProcessStepsAnimation = () => {
         once: true,                     // Animation only runs once
         markers: false,                 // Set to true for debugging
       }
-    }).to(".process-heading", {opacity:1, duration:0.8})
+    }).to(".process-heading", {autoAlpha:1, duration:0.8})
 
     /**
      * Core function to transition between carousel steps
@@ -144,7 +144,7 @@ export const gsapProcessStepsAnimation = () => {
         if (i === index) {
           // SHOW: Animate the active step into view
           gsap.to(stage, {
-            opacity: 1,                 // Fully visible
+            autoAlpha: 1,                 // Fully visible
             x: 0,                       // Centered position
             duration: 0.5,              // Animation duration
             ease: "power2.out",         // Smooth deceleration
@@ -153,7 +153,7 @@ export const gsapProcessStepsAnimation = () => {
         } else {
           // HIDE: Animate inactive steps out of view
           gsap.to(stage, {
-            opacity: 0,                 // Fully transparent
+            autoAlpha: 0,                 // Fully transparent
             x: direction * -20,         // Slight horizontal offset based on direction
             duration: 0.5,              // Animation duration
             ease: "power2.out",         // Smooth deceleration
