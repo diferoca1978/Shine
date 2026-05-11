@@ -118,6 +118,64 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
     <Font cssVariable="--font-playfair" />
     <Font cssVariable="--font-openSans" />
 
+    <!-- Font display swap and fallback metrics for CLS prevention -->
+    <style is:global>
+      @font-face {
+        font-family: 'Playfair Display';
+        font-display: swap;
+        size-adjust: 105%;
+        ascent-override: 95%;
+        descent-override: 20%;
+      }
+      @font-face {
+        font-family: 'Open Sans';
+        font-display: swap;
+        size-adjust: 103%;
+        ascent-override: 90%;
+        descent-override: 22%;
+      }
+    </style>
+
+    <!-- Speculation Rules API for instant navigations (LCP optimization) -->
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "where": {
+              "and": [
+                { "href_matches": "/servicios/*" },
+                { "not": { "href_matches": "/contacto/*" } },
+                { "not": { "href_matches": "/politicadeprivacidad*" } },
+                { "not": { "href_matches": "/terminosycondiciones*" } },
+                { "not": { "href_matches": "/404*" } }
+              ]
+            },
+            "eagerness": "moderate"
+          },
+          {
+            "where": {
+              "and": [
+                { "href_matches": "/blog/*" },
+                { "not": { "href_matches": "/contacto/*" } },
+                { "not": { "href_matches": "/politicadeprivacidad*" } },
+                { "not": { "href_matches": "/terminosycondiciones*" } },
+                { "not": { "href_matches": "/404*" } }
+              ]
+            },
+            "eagerness": "moderate"
+          },
+          {
+            "where": {
+              "and": [
+                { "href_matches": "/nosotros" },
+                { "not": { "href_matches": "/contacto/*" } }
+              ]
+            },
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
 
     <!-- Lenis -->
     <script>
@@ -127,7 +185,7 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
   <body class="w-full p-0 m-0 overflow-x-hidden dark:bg-smokyBlack">
     <a
       href="#main-content"
-      class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-[9999] focus-visible:rounded-md focus-visible:bg-softBeige focus-visible:px-4 focus-visible:py-2 focus-visible:text-smokyBlack focus-visible:font-semibold focus-visible:shadow-lg"
+      class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-9999 focus-visible:rounded-md focus-visible:bg-softBeige focus-visible:px-4 focus-visible:py-2 focus-visible:text-smokyBlack focus-visible:font-semibold focus-visible:shadow-lg"
     >
       Saltar al contenido principal
     </a>

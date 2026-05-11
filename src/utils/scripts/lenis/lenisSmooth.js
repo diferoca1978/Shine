@@ -5,7 +5,15 @@ import "@/utils/scripts/lenis/styles/lenis.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const lenis = new Lenis();
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  orientation: 'vertical',
+  gestureOrientation: 'vertical',
+  smoothWheel: true,
+  touchMultiplier: 2,
+  infinite: false,
+});
 
 // Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
 lenis.on("scroll", ScrollTrigger.update);
