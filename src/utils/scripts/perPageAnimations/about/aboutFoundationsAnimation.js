@@ -27,7 +27,7 @@ export const foundationsRotatorAnimation = () => {
 
       if (reducedMotion) {
         // CSS already shows only the first principle statically — just reveal the title
-        gsap.set(title, { opacity: 1, y: 0 });
+        gsap.set(title, { autoAlpha: 1, y: 0 });
         container.classList.add("loaded");
         return;
       }
@@ -45,8 +45,8 @@ export const foundationsRotatorAnimation = () => {
 
       titleTimeline.fromTo(
         title,
-        { opacity: 0, y: -50 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
+        { autoAlpha: 0, y: -50 },
+        { autoAlpha: 1, y: 0, duration: 1, ease: "power3.out" },
       );
 
       const words = Array.from(container.querySelectorAll(":scope > span"));

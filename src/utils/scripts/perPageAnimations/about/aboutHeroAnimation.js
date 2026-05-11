@@ -8,8 +8,8 @@ export const aboutHeroAnimation = () => {
   const mainImage = document.querySelector("#diegorochiblack");
   const secondaryImage = document.querySelector("#diegorochi");
   
-  gsap.set(".split-text", { opacity: 1 }); 
-  gsap.set(".split-title", { opacity: 1 });// Set opacity to 1 to prevent "FOUC"
+  gsap.set(".split-text", { autoAlpha: 1 }); 
+  gsap.set(".split-title", { autoAlpha: 1 });// Set autoAlpha to 1 to prevent "FOUC"
 
   let tl = gsap.timeline({
     // scrollTrigger: {
@@ -25,7 +25,7 @@ export const aboutHeroAnimation = () => {
 
   tl.from(splittextWords.chars, {
     y: -100,
-    opacity: 0,
+    autoAlpha: 0,
     stagger: 0.05,
     ease: "power2.out",
     

@@ -100,9 +100,9 @@ const textColorVariants = {
 
       if (ctaBanner) {
         // Set initial states
-        gsap.set(".cta-title", { y: 30, opacity: 0 });
-        gsap.set(".cta-description", { y: 30, opacity: 0 });
-        gsap.set(".cta-button", { y: 30, opacity: 0 });
+        gsap.set(".cta-title", { y: 30, autoAlpha: 0 });
+        gsap.set(".cta-description", { y: 30, autoAlpha: 0 });
+        gsap.set(".cta-button", { y: 30, autoAlpha: 0 });
 
         // Create timeline for sequential animation
         const tl = gsap.timeline({
@@ -117,19 +117,19 @@ const textColorVariants = {
 
         tl.to(".cta-title", {
           y: 0,
-          opacity: 1,
+          autoAlpha: 1,
           duration: 0.8,
           ease: "power2.out"
         })
         .to(".cta-description", {
           y: 0,
-          opacity: 1,
+          autoAlpha: 1,
           duration: 0.8,
           ease: "power2.out"
         }, "-=0.4")
         .to(".cta-button", {
           y: 0,
-          opacity: 1,
+          autoAlpha: 1,
           duration: 0.8,
           ease: "power2.out"
         }, "-=0.4");

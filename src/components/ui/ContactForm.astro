@@ -17,10 +17,10 @@ import Modal from "./Modal.astro";
         id="fullName"
         name="fullName"
         required
-        aria-describedby="fullName-error"
+        aria-describedby="error_fullName"
         class="peer h-15 w-full border-b-2 border-smokyBlack/30 dark:border-softBeige/30 text-smokyBlack dark:text-softWhite bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
       />
-      <p id="error_fullName" class="text-red-600 text-sm"></p>
+      <p id="error_fullName" role="alert" class="text-red-600 text-sm"></p>
 
       <label
         for="fullName"
@@ -38,10 +38,10 @@ import Modal from "./Modal.astro";
         id="email"
         name="email"
         required
-        aria-describedby="email-error"
+        aria-describedby="error_email"
         class="peer h-15 w-full border-b-2 border-smokyBlack/30 dark:border-softBeige/30 text-smokyBlack dark:text-softWhite bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
       />
-      <p id="error_email" class="text-red-500 text-sm"></p>
+      <p id="error_email" role="alert" class="text-red-500 text-sm"></p>
 
       <label
         for="email"
@@ -59,9 +59,10 @@ import Modal from "./Modal.astro";
         id="telefono"
         name="telefono"
         required
-        aria-describedby="telefono-error"
+        aria-describedby="error_telefono"
         class="peer h-15 w-full border-b-2 border-smokyBlack/30 dark:border-softBeige/30 text-smokyBlack dark:text-softWhite bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
       />
+      <p id="error_telefono" role="alert" class="text-red-500 text-sm"></p>
 
       <label
         for="telefono"
@@ -80,10 +81,10 @@ import Modal from "./Modal.astro";
         id="inquietudes"
         name="inquietudes"
         required
-        aria-describedby="inquietudes-error"
+        aria-describedby="error_inquietudes"
         class="peer field-sizing-content h-15 w-full border-b-2 border-smokyBlack/30 dark:border-softBeige/30 text-smokyBlack dark:text-softWhite bg-transparent placeholder-transparent focus:outline-none focus:border-salviaGreen"
       ></textarea>
-      <p id="error_inquietudes" class="text-red-500 text-sm"></p>
+      <p id="error_inquietudes" role="alert" class="text-red-500 text-sm"></p>
       <label
         for="inquietudes"
         class="absolute left-0 -top-3.5 text-smokyBlack dark:text-softWhite text-xl transition-all peer-placeholder-shown:font-semibold peer-placeholder-shown:text-smokyBlack peer-placeholder-shown:top-2 peer-focus:-top-5.5 peer-focus:text-smokyBlack/50 peer-focus:text-base dark:peer-focus:text-softWhite dark:peer-placeholder-shown:text-softWhite dark:peer-placeholder-shown:font-semibold"
@@ -99,14 +100,14 @@ import Modal from "./Modal.astro";
           id="terms"
           name="terms"
           value="true"
-          aria-describedby="terms-error"
+          aria-describedby="error_terms"
           class="accent-salviaGreen rounded-md h-4 w-4"
         />
         <span class="text-smokyBlack dark:text-softWhite"
           >Aceptar terminos y condiciones</span
         >
       </label>
-      <p id="error_terms" class="text-red-500 text-sm"></p>
+      <p id="error_terms" role="alert" class="text-red-500 text-sm"></p>
     </div>
 
     <div class="flex justify-center">
@@ -146,7 +147,7 @@ import Modal from "./Modal.astro";
     document.body.style.overflow = "hidden";
 
     // Set initial state
-    gsap.set(modal, { display: "flex", opacity: 0 });
+    gsap.set(modal, { display: "flex", autoAlpha: 0 });
     gsap.set(modalContent, { scale: 0.8, y: 30 });
     gsap.set(modalIcon, { scale: 0, rotation: -180 });
 
@@ -155,7 +156,7 @@ import Modal from "./Modal.astro";
 
     timeline
       .to(modal, {
-        opacity: 1,
+        autoAlpha: 1,
         duration: 0.3,
         ease: "power2.out",
       })
@@ -228,7 +229,7 @@ import Modal from "./Modal.astro";
       .to(
         modal,
         {
-          opacity: 0,
+          autoAlpha: 0,
           duration: 0.2,
           ease: "power2.in",
         },
@@ -271,7 +272,6 @@ import Modal from "./Modal.astro";
 
     try {
       if (error && isInputError(error)) {
-        console.log(error.fields);
         Object.entries(error.fields).forEach(([label, messages]) => {
           (
             document.querySelector(`#error_${label}`) as HTMLParagraphElement

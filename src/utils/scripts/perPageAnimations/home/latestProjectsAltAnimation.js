@@ -55,10 +55,10 @@ export const latestProjectsAltAnimation = () => {
   if (desktopTitle) {
     entranceTimeline.fromTo(desktopTitle, {
       x: "100vw",
-      opacity: 0,
+      autoAlpha: 0,
     }, {
       x: "0%",
-      opacity: 1,
+      autoAlpha: 1,
       duration: 1.0,
       ease: "back.out(1.7)",
     });
@@ -68,7 +68,7 @@ export const latestProjectsAltAnimation = () => {
     entranceTimeline.fromTo(projectInfoOverlay, {
       width: "0%",
       x: "0%",
-      opacity: 1,
+      autoAlpha: 1,
     }, {
       width: "25vw",
       duration: 1.2,

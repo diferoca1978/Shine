@@ -5,11 +5,11 @@ import AboutFoundations from "@/components/section/perPage/AboutFoundations.astr
 import AboutMission from "@/components/section/perPage/AboutMission.astro";
 import AboutBio from "@/components/section/perPage/AboutBio.astro";
 import CTABanner from "@/components/ui/CTABanner.astro";
-import { generateBreadcrumbSchema, generatePageSEO, generateAllAuthorsSchemas, LOCAL_BUSINESS_SCHEMA } from "@/config/seo";
+import { generateBreadcrumbSchema, generatePageSEO, generateAllAuthorsSchemas, COMPANY_INFO } from "@/config/seo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Inicio", url: "/" },
-    { name: "Nosotros", url: "/nosotros" },
+    { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+    { name: "Nosotros", url: `${COMPANY_INFO.url}/nosotros/` },
 ]);
 
 const authorSchemas = generateAllAuthorsSchemas();
@@ -24,7 +24,7 @@ const nosotrosSEO = generatePageSEO({
 nosotrosSEO.openGraph!.basic.type = "profile";
 ---
 
-<MainLayout seoProps={nosotrosSEO} aditionalSchemas={[breadcrumbSchema, LOCAL_BUSINESS_SCHEMA, ...authorSchemas]}>
+<MainLayout seoProps={nosotrosSEO} aditionalSchemas={[breadcrumbSchema, ...authorSchemas]}>
     <HeroAbout />
     <AboutMission />
     <AboutFoundations />

@@ -50,7 +50,7 @@ export const solutionsAnimation = () => {
   }, "<");
 
   svgTimeline.to("#arrow", {
-    opacity: 1,
+    autoAlpha: 1,
     duration: 0.1,
   }, "<");
 

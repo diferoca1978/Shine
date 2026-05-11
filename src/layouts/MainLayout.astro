@@ -58,6 +58,9 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 
 <html lang="es-CO" class="scrollbar-hide">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <SEOHead seoProps={finalSeoProps} schemas={allSchemas} />
 
     <!-- Google Tag Manager - Must be as high as possible in <head> -->
@@ -86,9 +89,6 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
         document.documentElement.classList.add("dark");
       }
     </script>
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
     <!-- Preconnect a dominios externos -->
@@ -125,6 +125,12 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
     </script>
   </head>
   <body class="w-full p-0 m-0 overflow-x-hidden dark:bg-smokyBlack">
+    <a
+      href="#main-content"
+      class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-[9999] focus-visible:rounded-md focus-visible:bg-softBeige focus-visible:px-4 focus-visible:py-2 focus-visible:text-smokyBlack focus-visible:font-semibold focus-visible:shadow-lg"
+    >
+      Saltar al contenido principal
+    </a>
     <!-- Google Tag Manager (noscript) -->
     <noscript
       ><iframe
@@ -136,7 +142,7 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
     <BgTexture />
     <CursorFollower />
     <NavBarAlt />
-    <main class="w-full mx-auto pt-20 md:pt-16">
+    <main id="main-content" class="w-full mx-auto pt-20 md:pt-16">
       <slot />
     </main>
     <Footer />

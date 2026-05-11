@@ -5,6 +5,7 @@ import {
     generatePageSEO,
     generateBlogPostSchema,
     generateFAQSchema,
+    COMPANY_INFO,
     type JSONLDSchema,
 } from "@/config/seo";
 import { AUTHORS, DEFAULT_AUTHOR } from "@/config/authors";
@@ -55,9 +56,9 @@ const postSchema = generateBlogPostSchema({
 });
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Inicio", url: "/" },
-    { name: "Blog", url: "/blog" },
-    { name: title, url: `/blog/${sanitizedSlug}` },
+    { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+    { name: "Blog", url: `${COMPANY_INFO.url}/blog/` },
+    { name: title, url: `${COMPANY_INFO.url}/blog/${sanitizedSlug}/` },
 ]);
 
 // Build schemas array, including FAQ schema if faqs exist

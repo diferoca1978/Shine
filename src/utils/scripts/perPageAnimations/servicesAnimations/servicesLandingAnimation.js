@@ -37,7 +37,7 @@ export const servicesLandingAnimation = () => {
       trigger: image,
       containerAnimation: tween,
       animation: gsap.from(image, {
-        opacity: 0,
+        autoAlpha: 0,
         scale: 0.5,
       }),
       scrub:true,
