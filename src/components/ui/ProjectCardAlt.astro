@@ -18,6 +18,13 @@ const { image, title } = data;
   style={style}
 >
   <div class="w-full max-w-md mx-auto mb-4">
-    <Image src={image} alt={title} class="w-full h-auto" />
+    <Image
+      src={image}
+      alt={title}
+      class="w-full h-auto"
+      width={720}
+      height={720}
+      sizes="(max-width: 768px) 100vw, 50vw"
+    />
   </div>
 </div>
