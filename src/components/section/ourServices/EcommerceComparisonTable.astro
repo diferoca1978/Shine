@@ -1,0 +1,99 @@
+---
+import CheckIcon from "@/assets/icons/check.svg";
+import CloseIcon from "@/assets/icons/closeIcon.svg";
+
+type Cell = { text: string; positive?: boolean; negative?: boolean };
+const rows: [string, Cell, Cell, Cell][] = [
+  ["Hecho para LATAM",     { text: "✓ Sí", positive: true }, { text: "✗ No", negative: true }, { text: "✗ No", negative: true }],
+  ["PSE integrado",        { text: "✓ Sí", positive: true }, { text: "No nativo", negative: true }, { text: "No nativo", negative: true }],
+  ["Soporte en español",   { text: "✓ Sí", positive: true }, { text: "Limitado" }, { text: "Comunidad" }],
+  ["Comisión por venta",   { text: "Sin comisión (plan pago)", positive: true }, { text: "Cobra comisión", negative: true }, { text: "Sin comisión" }],
+  ["Facilidad de uso",     { text: "Muy fácil", positive: true }, { text: "Fácil" }, { text: "Técnico" }],
+  ["Costo mensual",        { text: "Accesible para LATAM", positive: true }, { text: "En USD" }, { text: "Hosting aparte" }],
+];
+---
+
+<section class="w-full">
+  <div class="max-w-6xl mx-auto px-4 py-10 lg:py-20">
+
+    <div class="mb-10 lg:mb-14">
+      <h2 class="text-[min(10vw,48px)] text-smokyBlack dark:text-softWhite tracking-tight mb-3">
+        ¿Por qué Tienda Nube y no Shopify o WooCommerce?
+      </h2>
+      <p class="text-[min(5vw,18px)] text-smokyBlack/70 dark:text-softWhite/70 max-w-xl">
+        Shopify es excelente para el mercado anglosajón. Para vender en Colombia, Tienda Nube gana en integración local, precio y soporte.
+      </p>
+    </div>
+
+    <div class="overflow-x-auto rounded-2xl border border-smokyBlack/10 dark:border-softWhite/10">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="border-b border-smokyBlack/10 dark:border-softWhite/10">
+            <th class="py-5 px-6 text-left w-1/4"></th>
+
+            <th class="py-5 px-6 text-left bg-deepplum/5 dark:bg-accentGold/10">
+              <div class="flex flex-col gap-2">
+                <span class="inline-flex w-fit text-[min(3vw,11px)] font-semibold tracking-widest uppercase bg-deepplum dark:bg-accentGold text-softWhite dark:text-smokyBlack rounded-full px-3 py-1">
+                  Recomendado
+                </span>
+                <span class="text-[min(4vw,15px)] font-semibold text-deepplum dark:text-accentGold">
+                  Tienda Nube
+                </span>
+              </div>
+            </th>
+
+            <th class="py-5 px-6 text-left">
+              <span class="text-[min(4vw,14px)] font-medium text-smokyBlack/50 dark:text-softWhite/40 tracking-wide">
+                Shopify
+              </span>
+            </th>
+
+            <th class="py-5 px-6 text-left">
+              <span class="text-[min(4vw,14px)] font-medium text-smokyBlack/50 dark:text-softWhite/40 tracking-wide">
+                WooCommerce
+              </span>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {rows.map(([feature, tiendaNube, shopify, woo]) => (
+            <tr class="border-b border-smokyBlack/10 dark:border-softWhite/10 last:border-0 group hover:bg-smokyBlack/3 dark:hover:bg-softWhite/3">
+              <td class="py-4 px-6 text-[min(4vw,14px)] font-medium text-smokyBlack/80 dark:text-softWhite/80">
+                {feature}
+              </td>
+
+              <td class="py-4 px-6 bg-deepplum/5 dark:bg-accentGold/10 group-hover:bg-deepplum/8 dark:group-hover:bg-accentGold/15">
+                <div class="flex items-center gap-2">
+                  {tiendaNube.positive && <CheckIcon class="w-4 h-4 shrink-0 text-deepplum dark:text-accentGold" />}
+                  <span class="text-[min(4vw,14px)] font-semibold text-deepplum dark:text-accentGold">
+                    {tiendaNube.text}
+                  </span>
+                </div>
+              </td>
+
+              <td class="py-4 px-6 text-[min(4vw,14px)] text-smokyBlack/50 dark:text-softWhite/40">
+                <div class="flex items-center gap-2">
+                  {shopify.negative && <CloseIcon class="w-4 h-4 shrink-0 text-smokyBlack/30 dark:text-softWhite/30" />}
+                  <span>{shopify.text}</span>
+                </div>
+              </td>
+
+              <td class="py-4 px-6 text-[min(4vw,14px)] text-smokyBlack/50 dark:text-softWhite/40">
+                <div class="flex items-center gap-2">
+                  {woo.negative && <CloseIcon class="w-4 h-4 shrink-0 text-smokyBlack/30 dark:text-softWhite/30" />}
+                  <span>{woo.text}</span>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-8 text-[min(5vw,15px)] text-smokyBlack/60 dark:text-softWhite/60 max-w-2xl italic">
+      Tienda Nube fue pensada desde el inicio para Colombia y Latinoamérica — con PSE, soporte en español y sin comisión por venta. Para vender online en Colombia, es la decisión más inteligente.
+    </p>
+
+  </div>
+</section>

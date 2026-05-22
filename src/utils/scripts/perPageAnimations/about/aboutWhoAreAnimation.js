@@ -52,31 +52,37 @@ export const whoAreAnimation = () => {
       });
     }
 
-    // Bio transition with different timing for mobile and desktop
+    // Bio transition
     if (firstBio && secondBio) {
-        const bioStart = isMobile ? "top 40%" : "top 20%";
-
-        gsap.timeline({
-            scrollTrigger: {
-                trigger: ".bio-wrapper",
-                start: bioStart,
-                end: "bottom 60%",
-                scrub: 1.5,
-                markers: false,
-            },
-        })
-        .to(firstBio, {
-            opacity: 0,
-            y: -30,
-            duration: 2,
-            ease: "power2.inOut",
-        })
-        .to(secondBio, {
-            opacity: 1,
-            y: 0,
-            duration: 2,
-            ease: "power2.inOut",
-        }, "<");
+        if (isMobile) {
+            // On mobile bios are stacked — fade each in independently as they scroll into view
+            gsap.fromTo(firstBio,
+                { opacity: 0, y: 24 },
+                {
+                    opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
+                    scrollTrigger: { trigger: firstBio, start: "top 85%", markers: false },
+                }
+            );
+            gsap.fromTo(secondBio,
+                { opacity: 0, y: 24 },
+                {
+                    opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
+                    scrollTrigger: { trigger: secondBio, start: "top 85%", markers: false },
+                }
+            );
+        } else {
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".bio-wrapper",
+                    start: "top 20%",
+                    end: "bottom 80%",
+                    scrub: 1.5,
+                    markers: false,
+                },
+            })
+            .to(firstBio, { opacity: 0, y: -30, duration: 2, ease: "power2.inOut" })
+            .to(secondBio, { opacity: 1, y: 0, duration: 2, ease: "power2.inOut" }, "<");
+        }
     }
 
 }

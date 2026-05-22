@@ -8,10 +8,12 @@ import StarIcon from "@/assets/icons/star40x40.svg";
 import ServicesStepsProcess from "@/components/section/ourServices/ServicesStepsProcess.astro";
 import ServiceProblemSection from "@/components/section/ourServices/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolutionSection.astro";
+import EcommerceComparisonTable from "@/components/section/ourServices/EcommerceComparisonTable.astro";
 import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
+import { ecommerceFAQs } from "@/config/faqs";
 
-const service = getServiceBySlug("rediseño-web-estrategico");
+const service = getServiceBySlug("ecommerce");
 
 if (!service) {
   return Astro.redirect("/404");
@@ -21,12 +23,13 @@ if (!service) {
 <ServiceLayout service={service}>
   <!-- Hero -->
   <GlobalHero
-    titleLine1="Tu web ya existe."
-    titleLine2="Ahora, haz que realmente funcione para tu negocio"
-    subtitleBefore="Transformamos tu sitio web actual en una"
-    subtitleHighlight="máquina de leads y ventas"
-    subtitleAfter="sin empezar de cero"
-    descriptionLine1="¿Invertiste en una web pero no ves resultados? No necesitas una nueva, necesitas una estrategia. Optimiza tu plataforma para convertir, mejorar tu SEO y proyectar la autoridad que tu marca merece."
+    titleLine1="Tu negocio ya está listo"
+    titleLine2="para vender por internet"
+    subtitleBefore="Creamos tu tienda online con Tienda Nube:"
+    subtitleHighlight="diseño personalizado, medios de pago colombianos"
+    subtitleAfter="y lista para vender desde el primer día"
+    descriptionLine1="Pasá de vender por WhatsApp e Instagram a tener tu propia tienda online profesional."
+    descriptionLine2="Sin depender de intermediarios. Con el control total de tu negocio."
   >
     <Button
       slot="cta"
@@ -35,7 +38,7 @@ if (!service) {
       animation={true}
       className="w-fit mx-auto"
     >
-      Agenda tu Auditoría Web Gratuita <StarIcon />
+      Agenda tu diagnóstico de ecommerce gratuito <StarIcon />
     </Button>
   </GlobalHero>
   <!-- Problem -->
@@ -45,7 +48,7 @@ if (!service) {
     imageAlt={service.alt}
     introText={service.introText!}
     problems={service.hurts!}
-    imagePosition="left"
+    imagePosition="right"
   />
   <!-- Solution -->
   <ServiceSolutionSection
@@ -55,38 +58,30 @@ if (!service) {
     audienceTitle={service.audienceTitle!}
     audienceIntro={service.audienceIntro!}
     checkmarks={service.checkMarks!}
-  >
-    <Button
-      slot="cta"
-      href="/contacto/"
-      variant="primary"
-      animation={true}
-      className="w-fit mx-auto"
-    >
-      Quiero optimizar mi web para resultados <StarIcon />
-    </Button>
-  </ServiceSolutionSection>
+  />
+
+  <EcommerceComparisonTable />
 
   <!-- Our process -->
   <ServicesStepsProcess
-    titleLine1="Nuestro enfoque para"
-    titleLine2="revitalizar tu plataforma digital"
+    titleLine1="De cero a tu tienda"
+    titleLine2="lista para vender"
     service={service}
   />
   <!-- Social proof -->
   <SocialProof
-    titleLine1="Líderes que transformaron su web en una"
-    titleLine2="herramienta de éxito"
-    filterTag="rediseño web"
+    titleLine1="La voz de quienes ya confiaron en Shine"
+    titleLine2="para su tienda online"
+    filterTag="all"
   />
   <!-- FAQ -->
-  {service.faqs && <FAQ faqs={service.faqs} />}
+  <FAQ faqs={ecommerceFAQs} />
   <!-- CTA -->
   <div class="px-2">
     <CTABanner
-      title="No dejes que tu web sea un potencial desaprovechado."
-      description={`Es hora de que tu activo digital trabaje tan duro como tú. Descubre cómo podemos desbloquear su verdadero potencial.`}
-      buttonText="Revitaliza tu presencia online"
+      title="¿Listo para vender online sin depender de nadie?"
+      description="Tu tienda online puede estar lista en menos de 4 semanas. Empieza con un diagnóstico gratuito — sin compromiso. Sin complicaciones. Con acompañamiento real."
+      buttonText="Agenda tu diagnóstico de ecommerce gratuito"
       buttonHref="/contacto/"
       variant="default"
       className="max-w-6xl mx-auto"
