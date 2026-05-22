@@ -1,5 +1,12 @@
 import type { BlogPost } from "./posts";
 import type { Service } from "@/config/services";
+import { getFAQsByCategory } from "@/config/faqs";
+
+const slugToCategory: Record<string, string> = {
+  "diseno-web-estrategico": "diseno-web",
+  "publicidad-digital": "publicidad-digital",
+  "ecommerce": "ecommerce",
+};
 
 interface LlmsServiceConfig {
   service: Service;
@@ -201,9 +208,10 @@ export function llmsService(config: LlmsServiceConfig): Response {
   }
 
   // FAQs (Very important for AEO)
-  if (service.faqs?.length) {
+  const faqs = getFAQsByCategory(slugToCategory[service.slug] ?? "");
+  if (faqs.length) {
     sections.push("", "## Preguntas Frecuentes", "");
-    service.faqs.forEach((faq) => {
+    faqs.forEach((faq) => {
       sections.push(`### ${faq.question}`, "", faq.answer, "");
     });
   }

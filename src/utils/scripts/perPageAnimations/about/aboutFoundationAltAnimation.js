@@ -29,6 +29,7 @@ export const foundationAltAnimation = () => {
           trigger: ".foundations-alt-section",
           start: "top 80%",
           toggleActions: "play none none reverse",
+          markers: true
         },
       });
 
@@ -42,15 +43,17 @@ export const foundationAltAnimation = () => {
       // Cards drop from above, staggered
       tl.fromTo(
         cards,
-        { autoAlpha: 0, y: -56 },
+        { autoAlpha: 0, y: 56, rotateX: -90, z: 30 },
         {
           autoAlpha: 1,
           y: 0,
-          duration: 0.65,
+          rotateX: 0,
+          z: 0,
+          duration: 1.5,
           ease: "power3.out",
-          stagger: { amount: 0.3, from: "start" },
+          stagger: 0.5,
         },
-        "-=0.3"
+        "<1.8"
       );
     }
   );

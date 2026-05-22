@@ -1,0 +1,84 @@
+---
+import CheckIcon from "@/assets/icons/check.svg";
+import CloseIcon from "@/assets/icons/closeIcon.svg";
+
+const rows: [string, string, string, boolean][] = [
+  ["Velocidad de carga",    "3–6 segundos promedio",        "Menos de 1 segundo",              true],
+  ["PageSpeed Score",       "40–70 típico",                 "95–100 garantizado",              true],
+  ["Plugins necesarios",    "20–40 plugins",                "Cero plugins",                    true],
+  ["Riesgo de hackeo",      "Alto (blanco frecuente)",      "Mínimo",                          true],
+  ["Costo de hosting",      "Servidor PHP necesario",       "Hosting estático económico",      true],
+  ["Mantenimiento",         "Actualizaciones constantes",   "Sin mantenimiento técnico",       true],
+  ["Indexación en Google",  "Renderizado por servidor",     "HTML puro, indexación inmediata", true],
+];
+---
+
+<section class="w-full">
+  <div class="max-w-6xl mx-auto px-4 py-10 lg:py-20">
+
+    <div class="mb-10 lg:mb-14">
+      <h2 class="text-[min(10vw,48px)] text-smokyBlack dark:text-softWhite tracking-tight mb-3">
+        ¿Por qué Astro y no WordPress?
+      </h2>
+      <p class="text-[min(5vw,18px)] text-smokyBlack/70 dark:text-softWhite/70 max-w-xl">
+        La mayoría de agencias en Colombia entregan WordPress. Nosotros no. Esto es lo que eso significa para tu negocio:
+      </p>
+    </div>
+
+    <div class="overflow-x-auto rounded-2xl border border-smokyBlack/10 dark:border-softWhite/10">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="border-b border-smokyBlack/10 dark:border-softWhite/10">
+            <th class="py-5 px-6 text-left w-1/3"></th>
+
+            <th class="py-5 px-6 text-left">
+              <span class="text-[min(4vw,14px)] font-medium text-smokyBlack/50 dark:text-softWhite/40 tracking-wide">
+                WordPress
+              </span>
+            </th>
+
+            <th class="py-5 px-6 text-left bg-deepplum/5 dark:bg-accentGold/10">
+              <div class="flex flex-col gap-2">
+                <span class="inline-flex w-fit text-[min(3vw,11px)] font-semibold tracking-widest uppercase bg-deepplum dark:bg-accentGold text-softWhite dark:text-smokyBlack rounded-full px-3 py-1">
+                  Recomendado
+                </span>
+                <span class="text-[min(4vw,15px)] font-semibold text-deepplum dark:text-accentGold">
+                  Astro — Shine
+                </span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {rows.map(([feature, wp, astro, positive]) => (
+            <tr class="border-b border-smokyBlack/10 dark:border-softWhite/10 last:border-0 group hover:bg-smokyBlack/3 dark:hover:bg-softWhite/3">
+              <td class="py-4 px-6 text-[min(4vw,14px)] font-medium text-smokyBlack/80 dark:text-softWhite/80">
+                {feature}
+              </td>
+              <td class="py-4 px-6 text-[min(4vw,14px)] text-smokyBlack/50 dark:text-softWhite/40">
+                {wp}
+              </td>
+              <td class="py-4 px-6 bg-deepplum/5 dark:bg-accentGold/10 group-hover:bg-deepplum/8 dark:group-hover:bg-accentGold/15">
+                <div class="flex items-center gap-2">
+                  {positive
+                    ? <CheckIcon class="w-4 h-4 shrink-0 text-deepplum dark:text-accentGold" />
+                    : <CloseIcon class="w-4 h-4 shrink-0 text-smokyBlack/40 dark:text-softWhite/40" />
+                  }
+                  <span class="text-[min(4vw,14px)] font-semibold text-deepplum dark:text-accentGold">
+                    {astro}
+                  </span>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-8 text-[min(5vw,15px)] text-smokyBlack/60 dark:text-softWhite/60 max-w-2xl italic">
+      Un sitio en Astro no necesita base de datos, no corre PHP y no depende de plugins que se rompen con cada actualización. Es código limpio, entregado directamente al navegador. Google lo ama. Tus visitantes también.
+    </p>
+
+  </div>
+</section>

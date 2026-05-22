@@ -1,0 +1,134 @@
+---
+import GoogleLogo from "@/assets/icons/googleLogo.svg";
+import CalendarIcon from "@/assets/icons/calendarProject.svg";
+import { services } from "@/config/services";
+import { getCollection } from "astro:content";
+
+const works = await getCollection("works");
+const projectCount = works.length;
+---
+
+<section class="stats-section w-full mx-auto">
+  <div class="max-w-6xl mx-auto px-4 py-10 lg:py-16">
+    <div
+      class="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-sm sm:max-w-xl lg:max-w-3xl mx-auto"
+    >
+      <!-- Google Review Card -->
+      <div
+        class="about-stat invisible flex flex-col items-center justify-center rounded-2xl border border-smokyBlack/10 dark:border-softWhite/12 bg-softBeige dark:bg-smokyBlack p-3 sm:p-7 lg:p-5 shadow-sm"
+      >
+        <div class="flex items-center gap-3">
+          <span
+            class="font-playfair text-[min(14vw,72px)] leading-none font-bold text-smokyBlack dark:text-softWhite"
+            aria-label="Calificación 5 estrellas"
+          >
+            <span class="stat-count" data-count-to="5">5</span>
+          </span>
+          <span class="text-base flex flex-col items-center gap-2">
+            ⭐⭐⭐⭐⭐
+            <GoogleLogo
+              class="h-4 lg:h-5 w-auto opacity-90"
+              aria-label="Google"
+            />
+          </span>
+        </div>
+        <p
+          class="text-center text-[min(3vw,13px)] leading-snug text-smokyBlack/60 dark:text-softWhite/55 max-w-28"
+        >
+          Calificación en Google
+        </p>
+      </div>
+
+      <!-- 10+ Floating -->
+      <div
+        class="about-stat invisible flex flex-col items-start justify-center gap-2 pl-2 sm:pl-4"
+      >
+        <h3
+          class="text-[min(16vw,88px)] leading-none font-bold text-deepplum dark:text-accentGold"
+          aria-label="Más de 10 años"
+        >
+          <span class="stat-count" data-count-to="10">10</span><span class="text-[min(10vw,52px)]">+</span>
+        </h3>
+        <div
+          class="w-8 h-px bg-smokyBlack/20 dark:bg-softWhite/20 mb-1"
+          aria-hidden="true"
+        >
+        </div>
+        <p
+          class="text-[min(3vw,14px)] leading-snug text-smokyBlack/65 dark:text-softWhite/60 max-w-32 lg:max-w-40"
+        >
+          Años de experiencia en marketing digital
+        </p>
+      </div>
+
+      <!-- 3 Servicios Floating -->
+      <div
+        class="about-stat invisible flex flex-col items-start justify-center gap-2 pl-2 sm:pl-4"
+      >
+        <div class="flex items-center gap-2 mb-2">
+
+          <div class="flex flex-col items-start justify-center gap-1 mb-2">
+            <h3
+              class="text-[min(16vw,88px)] leading-none font-bold text-deepplum dark:text-accentGold mb-3"
+              aria-label="3 servicios especializados"
+            >
+              <span class="stat-count" data-count-to="3">3</span>
+            </h3>
+            <span
+              class="w-8 h-px bg-smokyBlack/20 dark:bg-softWhite/20 mb-1"
+              aria-hidden="true"
+            >
+            </span>
+          </div>
+  
+          <p
+            class="text-[min(3vw,14px)] leading-snug text-smokyBlack/65 dark:text-softWhite/60 max-w-32 lg:max-w-40"
+          >
+            Servicios especializados
+          </p>
+        </div>
+        <div>
+          <ul class="flex flex-col gap-1 list-disc list-inside">
+            {services.map((service) => (
+              <li
+                class="text-smokyBlack/65 dark:text-softWhite/60 text-sm"
+              >
+                {service.title}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Proyectos Card -->
+      <div
+        class="about-stat invisible flex flex-col items-center justify-center gap-3 rounded-2xl border border-smokyBlack/10 dark:border-softWhite/12 bg-softBeige dark:bg-smokyBlack p-3 lg:p-5 shadow-sm"
+      >
+        <CalendarIcon
+          class="h-6 w-6 sm:h-7 sm:w-7 text-deepplum dark:text-accentGold"
+          aria-hidden="true"
+        />
+        <div class="flex items-center justify-center gap-2">
+          <span
+          class="font-playfair text-[min(14vw,72px)] leading-none font-bold text-smokyBlack dark:text-softWhite"
+          aria-label={`${projectCount} proyectos`}
+        >
+          +<span class="stat-count" data-count-to={projectCount}>{projectCount}</span>
+        </span>
+        <p
+          class="text-center text-[min(3vw,14px)] leading-snug text-smokyBlack/60 dark:text-softWhite/55 max-w-28"
+        >
+          Proyectos entregados <span class="block">
+            2025-2026
+          </span>
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { aboutStatsAnimation } from "@/utils/scripts/perPageAnimations/about/aboutStatsAnimation";
+  aboutStatsAnimation();
+</script>

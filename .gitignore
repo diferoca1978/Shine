@@ -27,6 +27,7 @@ pnpm-debug.log*
 .claude
 CLAUDE.md
 todo.md
+.agents
 
 
 
