@@ -28,8 +28,8 @@ export const foundationAltAnimation = () => {
         scrollTrigger: {
           trigger: ".foundations-alt-section",
           start: "top 80%",
-          toggleActions: "play none none reverse",
-          markers: true
+          toggleActions: "play none none none",
+          markers: false
         },
       });
 

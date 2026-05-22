@@ -5,6 +5,7 @@ import AboutFoundationsAlt from "@/components/section/perPage/AboutFoundationsAl
 import AboutMission from "@/components/section/perPage/AboutMission.astro";
 import AboutStats from "@/components/section/perPage/AboutStats.astro";
 import AboutBio from "@/components/section/perPage/AboutBio.astro";
+import AboutServiceLinks from "@/components/section/perPage/AboutServiceLinks.astro";
 import CTABanner from "@/components/ui/CTABanner.astro";
 import {
   generateBreadcrumbSchema,
@@ -38,9 +39,13 @@ const nosotrosSEO = generatePageSEO({
   <AboutStats />
   <AboutFoundationsAlt />
   <AboutBio />
+  <AboutServiceLinks />
   <CTABanner
-    title="Listo para brillar con Propósito?"
-    description="Descubre cómo Shine puede ayudarte a crecer con autenticidad."
+    title="¿Listo para trabajar con un equipo
+que entiende tu negocio?"
+    description="El primer paso es una conversación de 30 minutos.
+Cuéntanos tu proyecto y te decimos con honestidad
+si podemos ayudarte."
     buttonText="Agenda tu diagnóstico estratégico"
     buttonHref="/contacto/"
     variant="default"

@@ -1,49 +1,41 @@
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(SplitText);
 
 export const aboutHeroAnimation = () => {
   const mainImage = document.querySelector("#diegorochiblack");
   const secondaryImage = document.querySelector("#diegorochi");
-  
-  gsap.set(".split-text", { autoAlpha: 1 }); 
-  gsap.set(".split-title", { autoAlpha: 1 });// Set autoAlpha to 1 to prevent "FOUC"
+  const title = document.querySelector(".split-title");
+  const subTitle = document.querySelector(".split-subtitle");
+   
+  gsap.set([title, subTitle], { autoAlpha: 1 });// Set autoAlpha to 1 to prevent "FOUC"
 
-  let tl = gsap.timeline({
-    // scrollTrigger: {
-    //   trigger: "#wrapper-about",
-    //   start: "top top",
-    //   end: "bottom top",
-    //   markers: false,
-    //   toggleActions: "play none none reverse",
-    // },
-  });
 
-  let splittextWords = SplitText.create(".split-title", { type: "chars" });
+  let splitTitle = SplitText.create(title, { type: "words, chars" });
+  let splitSubTitle = SplitText.create(subTitle, { type: "words, chars" });
 
-  tl.from(splittextWords.chars, {
-    y: -100,
+  gsap.from(splitTitle.chars, {
+    yPercent: "random(-100, 100)",
+    rotation: "random(-30, 30)",
+    ease: "back.out(2)",
     autoAlpha: 0,
-    stagger: 0.05,
-    ease: "power2.out",
-    
+    stagger: {
+      amount: 0.7,
+      from: "random",
+    },
+  })
+  gsap.from(splitSubTitle.chars, {
+    yPercent: "random(-100, 100)",
+    rotation: "random(-30, 30)",
+    ease: "back.out(2)",
+    autoAlpha: 0,
+    stagger: {
+      amount: 0.7,
+      from: "random",
+    },
   })
 
-  // let splitTextMask = SplitText.create(".split-text", { type: "chars, words", mask: "chars" });
-
-  // tl.from(splitTextMask.chars, {
-  //   yPercent: "random(-150, 150)",
-  //   xPercent: "random(-150, 150)",
-  //   stagger: {
-  //     from: "random",
-  //     amount: 0.8,
-  //   },
-  //   ease: "back.out(1.7)",
-  //   duration: 1,
-    
-  // })
 
   // Image hover functionality with opacity
   if (mainImage && secondaryImage) {

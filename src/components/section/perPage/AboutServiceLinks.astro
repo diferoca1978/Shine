@@ -1,0 +1,90 @@
+---
+import DiagonalArrow from "@/assets/icons/diagonalArrow.svg";
+
+const services = [
+  {
+    number: "01",
+    title: "Diseño Web con Astro",
+    desc: "Sitios que cargan en menos de 1 segundo, con puntajes de 95–100 en Google PageSpeed.",
+    href: "/servicios/diseno-web-estrategico/",
+    label: "Ver servicio",
+  },
+  {
+    number: "02",
+    title: "Google Ads y Facebook Ads",
+    desc: "Campañas configuradas para generar clientes reales, con reporte mensual en lenguaje humano.",
+    href: "/servicios/publicidad-digital/",
+    label: "Ver servicio",
+  },
+  {
+    number: "03",
+    title: "Ecommerce con Tienda Nube",
+    desc: "Tu tienda online lista para vender en Colombia: PSE, MercadoPago, Servientrega y más.",
+    href: "/servicios/ecommerce/",
+    label: "Ver servicio",
+  },
+];
+---
+
+<section class="w-full">
+  <div class="max-w-6xl mx-auto px-4 py-10 lg:py-20">
+
+    <!-- Section label -->
+    <p
+      class="text-[min(3vw,12px)] uppercase tracking-[0.2em] text-smokyBlack/45 dark:text-softWhite/45 mb-10 lg:mb-16"
+    >
+      Conoce cómo trabajamos
+    </p>
+
+    <!-- Service rows -->
+    <ul class="flex flex-col" role="list">
+      {
+        services.map((service) => (
+          <li class="group border-t border-smokyBlack/15 dark:border-softWhite/15 hover:border-deepplum dark:hover:border-accentGold transition-colors duration-300">
+            <a
+              href={service.href}
+              class="flex items-center gap-4 lg:gap-10 py-7 lg:py-10 w-full"
+              aria-label={`${service.title} — ${service.label}`}
+            >
+              {/* Ghost number */}
+              <span
+                aria-hidden="true"
+                class="shrink-0 font-playfair text-[min(14vw,96px)] font-bold leading-none text-smokyBlack/8 dark:text-softWhite/8 select-none w-14 lg:w-28 text-right tabular-nums"
+              >
+                {service.number}
+              </span>
+
+              {/* Content */}
+              <div class="flex-1 min-w-0">
+                <h3 class="text-[min(6vw,30px)] text-smokyBlack dark:text-softWhite tracking-tight leading-tight group-hover:text-deepplum dark:group-hover:text-accentGold transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p class="text-[min(3.5vw,15px)] text-smokyBlack/50 dark:text-softWhite/50 mt-2 leading-relaxed max-w-lg">
+                  {service.desc}
+                </p>
+              </div>
+
+              {/* Arrow + label */}
+              <div class="shrink-0 flex flex-col items-end gap-2">
+                <DiagonalArrow
+                  aria-hidden="true"
+                  class="w-5 h-5 lg:w-6 lg:h-6 text-smokyBlack/25 dark:text-softWhite/25 group-hover:text-deepplum dark:group-hover:text-accentGold transition-colors duration-300"
+                />
+                <span class="hidden lg:block text-[11px] uppercase tracking-widest text-smokyBlack/35 dark:text-softWhite/35 group-hover:text-deepplum dark:group-hover:text-accentGold transition-colors duration-300">
+                  {service.label}
+                </span>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+      <!-- Closing border -->
+      <li
+        class="border-t border-smokyBlack/15 dark:border-softWhite/15"
+        aria-hidden="true"
+      >
+      </li>
+    </ul>
+
+  </div>
+</section>
