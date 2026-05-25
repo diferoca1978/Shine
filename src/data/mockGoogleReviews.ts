@@ -2,7 +2,7 @@
 // Replace with real API call once Google Business is approved
 
 import type { ImageMetadata } from "astro";
-import LogoAguilar from "@/assets/images/logoaguilar.svg";
+import LogoAguilar from "@/assets/images/Aguilar&Abogados.png";
 import LogoZenith from "@/assets/images/logozenith.svg";
 
 export interface GoogleReview {
@@ -32,6 +32,14 @@ export const mockGoogleReviews: GoogleReview[] = [
     tag: ["diseño web", "all"]
   },
   {
+    author_name: 'Daniela Rodriguez',
+    text: 'En Shine trabajan con el corazón. Son muy profesionales y su especialidad son las estrategias de marketing para emprendedores. Ayudaron a robustecer la marca de nuestra firma de Abogados :) Sin duda hay mucho amor, trabajo y conocimiento detrás de todo su equipo.',
+    rating: 5,
+    datePublished: Date.now() / 1000,
+    profile_photo_url: LogoAguilar,
+    tag: ["all"]
+  },
+  {
     author_name: 'Luis Pinilla',
     text: 'Es un equipo que se concentra en entender muy bien los requerimientos del producto/servicio que necesitas, te proponen nuevas ideas y te ayudan cuando no estas seguro de cómo se debe ver el resultado final. Muy Profesionales.',
     rating: 5,
@@ -55,12 +63,4 @@ export const mockGoogleReviews: GoogleReview[] = [
     profile_photo_url: "",
     tag: ["all"]
   },
-  {
-    author_name: 'Daniela Rodriguez',
-    text: 'En Shine trabajan con el corazón. Son muy profesionales y su especialidad son las estrategias de marketing para emprendedores. Ayudaron a robustecer la marca de nuestra firma de Abogados :) Sin duda hay mucho amor, trabajo y conocimiento detrás de todo su equipo.',
-    rating: 5,
-    datePublished: Date.now() / 1000,
-    profile_photo_url: "",
-    tag: ["all"]
-  }
 ];
