@@ -6,6 +6,7 @@ import GlobalHero from "@/components/global/GlobalHero.astro";
 import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
 import ServicesStepsProcess from "@/components/section/ourServices/ServicesStepsProcess.astro";
+import ProcessSteps from "@/components/section/ourServices/ProcessSteps.astro";
 import ServiceProblemSection from "@/components/section/ourServices/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolutionSection.astro";
 import AstroVsWordpressTable from "@/components/section/ourServices/AstroVsWordpressTable.astro";
@@ -63,24 +64,28 @@ if (!service) {
   <AstroVsWordpressTable />
 
   <!-- Our process -->
-  <ServicesStepsProcess
-    titleLine1="De la primera llamada a tu sitio en vivo:"
+  <!-- <ServicesStepsProcess
+    titleLine1="De la primera llamada a tu sitio web en vivo:"
     titleLine2="así funciona trabajar con Shine"
     service={service}
-  />
+  /> -->
+  <ProcessSteps service={service} />
+
   <!-- Social proof -->
   <SocialProof
     titleLine1="La voz de quienes ya confiaron en Shine"
     titleLine2="para su presencia digital"
     filterTag="diseño web"
   />
+
+    
   <!-- FAQ -->
   <FAQ faqs={disenoWebFAQs} />
   <!-- CTA -->
   <div class="px-2">
     <CTABanner
-      title="Tu sitio web puede estar listo en 5 semanas"
-      description="Sin WordPress. Sin plugins que se rompen. El diagnóstico es gratuito y dura 30 minutos. Salís de esa llamada sabiendo exactamente qué necesitas."
+      title="Tu sitio web puede estar listo en 2 semanas"
+      description="Sin WordPress. Sin plugins que se rompen. El diagnóstico es gratuito y dura 30 minutos. Sales de la llamada sabiendo exactamente qué necesitas."
       buttonText="Agenda tu Diagnóstico Web Gratuito"
       buttonHref="/contacto/"
       variant="default"

@@ -1,0 +1,119 @@
+---
+import type { Service } from "@/config/services";
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+const panelAccents = [
+  { label: "accentGold", border: "border-l-accentGold", text: "text-accentGold", line: "bg-accentGold" },
+  { label: "sandRose", border: "border-l-sandRose", text: "text-sandRose", line: "bg-sandRose" },
+  { label: "salviaGreen", border: "border-l-salviaGreen", text: "text-salviaGreen", line: "bg-salviaGreen" },
+  { label: "accentGold", border: "border-l-accentGold", text: "text-accentGold", line: "bg-accentGold" },
+] as const;
+
+const animationClasses = ["green", "orange", "purple", "blue"] as const;
+---
+
+<section id="process" class="relative w-full">
+  <div
+    class="description flex flex-col items-center justify-center w-full bg-smokyBlack px-6 py-16 lg:py-20 lg:min-h-screen lg:px-10"
+  >
+    <p class="panel-label text-sm uppercase tracking-widest text-accentGold/70 mb-4">
+      Nuestro proceso
+    </p>
+    <h2
+      class="panel-title text-softWhite text-center text-4xl md:text-5xl lg:text-6xl leading-tight max-w-4xl"
+    >
+      <span class="block">De la primera llamada</span>
+      <span class="block">a tu sitio web en vivo</span>
+    </h2>
+    <p class="panel-sub mt-6 text-lg text-softBeige/70 max-w-xl text-center leading-relaxed">
+      Sin sorpresas. Sin cambios de alcance a mitad del proyecto. Te decimos exactamente qué pasa en cada etapa y qué recibes.
+    </p>
+  </div>
+
+  <!-- Mobile/tablet: normal scroll flow, each step stacked -->
+  <div class="lg:hidden" id="mobile-steps">
+    {
+      service.process.map((step, index) => {
+        const accent = panelAccents[index];
+        const stepNum = String(index + 1).padStart(2, "0");
+
+        return (
+          <article class="mobile-step bg-smokyBlack px-6 py-14 md:py-20 flex items-center justify-center">
+            <div class="w-full max-w-lg mx-auto">
+              <div class={`border-l-2 ${accent.border} pl-6`}>
+                <p class={`text-xs uppercase tracking-widest ${accent.text} mb-4 font-semibold`}>
+                  Paso {stepNum}
+                </p>
+
+                <h2 class="text-softWhite text-3xl font-bold leading-tight mb-6">
+                  {step.title}
+                </h2>
+
+                <p class="text-softBeige/80 text-base max-w-xl leading-relaxed">
+                  {step.description}
+                </p>
+
+                <div class={`mt-8 h-px w-24 ${accent.line} opacity-60`}></div>
+              </div>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+
+  <!-- Desktop: pinned slide-in panels -->
+  <div
+    id="panel-container"
+    class="hidden lg:block relative mx-auto h-screen w-full overflow-hidden"
+  >
+    {
+      service.process.map((step, index) => {
+        const accent = panelAccents[index];
+        const animClass = animationClasses[index];
+        const stepNum = String(index + 1).padStart(2, "0");
+
+        return (
+          <section
+            class={`panel ${animClass} absolute inset-0 flex items-center justify-center bg-smokyBlack will-change-transform`}
+          >
+            <div class="relative z-10 w-full max-w-5xl mx-auto px-6 lg:px-16">
+              <div class="hidden lg:block absolute -top-40 -left-8 select-none pointer-events-none">
+                <span class={`panel-label text-watermark font-bold leading-none ${accent.text} opacity-5`}>
+                  {stepNum}
+                </span>
+              </div>
+
+              <div class={`border-l-2 lg:border-l-4 ${accent.border} pl-6 lg:pl-10`}>
+                <p class={`panel-label text-xs uppercase tracking-widest ${accent.text} mb-4 font-semibold`}>
+                  Paso {stepNum}
+                </p>
+
+                <h2 class="panel-title text-softWhite text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                  {step.title}
+                </h2>
+
+                <p class="panel-sub text-softBeige/80 text-base lg:text-lg max-w-2xl leading-relaxed">
+                  {step.description}
+                </p>
+
+                <div class={`mt-8 h-px w-24 lg:w-32 ${accent.line} opacity-60`}></div>
+              </div>
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
+</section>
+
+<script>
+  import { pinSlideInAnimation } from "@/utils/scripts/perPageAnimations/servicesAnimations/servicesStepsProcessAnimation2.js";
+
+  pinSlideInAnimation();
+</script>
