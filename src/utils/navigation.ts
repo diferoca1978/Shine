@@ -6,7 +6,7 @@ export const navBarLinksConst = [
 ] as const;
 
 export const servicesLinksConst = [
-  { name: "Estrategia de Marca", path: "/servicios/marca-personal/" },
   { name: "Diseño Web", path: "/servicios/diseno-web-estrategico/" },
-  { name: "Rediseño web", path: "/servicios/rediseno-web-estrategico/" },
+  { name: "Publicidad Digital", path: "/servicios/publicidad-digital/" },
+  { name: "Ecommerce", path: "/servicios/ecommerce/" },
 ]

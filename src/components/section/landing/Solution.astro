@@ -12,21 +12,14 @@ const { className } = Astro.props;
   <div class="max-w-6xl mx-auto flex flex-col items-center gap-4">
     <div class="solution-content text-center max-w-4xl">
       <p
-        class="text-[min(7vw,30px)] font-medium bg-slate tracking-tight mb-6"
-        style="color: oklch(96.8% 0.007 247.896);"
+        class="text-[min(7vw,30px)] font-medium tracking-tight mb-6 text-smokyBlack dark:text-softWhite"
       >
-        Eres un <span class="italic font-bold">experto</span> en lo que haces. Has
-        construido un negocio a base de
-        <span class="italic font-bold">esfuerzo</span> y <span
-          class="italic font-bold">excelencia</span
-        >. ¿Pero sientes que falta estrategia? En Shine, no te damos trucos de <span
-          class="italic font-bold">marketing</span
-        >. Te entregamos la estrategia y la tecnología para que tu negocio
-        refleje la <span class="italic font-bold">calidad de tu trabajo</span>,
-        atraiga un flujo constante de <span class="italic font-bold"
-          >clientes ideales</span
-        > y te posicione como el
-        <span class="italic font-bold">referente</span> que estás destinado a ser.
+        Tu negocio merece <span class="italic font-bold">brillar</span>.
+        Pero si tu web no convierte, no aparece en Google y no tienes una
+        estrategia digital clara, estás perdiendo clientes todos los días.
+        En <span class="italic font-bold">Shine</span>, te entregamos la
+        estrategia y la tecnología para que atraigas un flujo constante de
+        <span class="italic font-bold">clientes ideales</span>.
       </p>
     </div>
     <!-- SVG decorativo -->
@@ -56,6 +49,8 @@ const { className } = Astro.props;
 
 <script>
   import { solutionsAnimation } from "@/utils/scripts/perPageAnimations/home/solutionsAnimation.js";
-  document.removeEventListener("DOMContentLoaded", solutionsAnimation);
-  document.addEventListener("DOMContentLoaded", solutionsAnimation);
+
+  solutionsAnimation();
 </script>
+
+

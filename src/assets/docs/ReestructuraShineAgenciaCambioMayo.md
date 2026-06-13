@@ -1,5 +1,3 @@
-HOME
-
 # **HOME**
 
 H1: Diseño web con Astro, Google Ads y ecommerce para negocios colombianos que quieren vender más

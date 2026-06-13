@@ -9,6 +9,13 @@ import {
   COMPANY_INFO,
 } from "@/config/seo";
 import type { Service } from "@/config/services";
+import { getFAQsByCategory } from "@/config/faqs";
+
+const slugToCategory: Record<string, string> = {
+  "diseno-web-estrategico": "diseno-web",
+  "publicidad-digital": "publicidad-digital",
+  "ecommerce": "ecommerce",
+};
 
 interface Props {
   service: Service;
@@ -28,8 +35,8 @@ const breadcrumbs = [
 
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 
-// Generate FAQ schema if service has FAQs
-const faqSchema = service.faqs ? generateFAQSchema(service.faqs) : null;
+const serviceFaqs = getFAQsByCategory(slugToCategory[service.slug] ?? "");
+const faqSchema = serviceFaqs.length ? generateFAQSchema(serviceFaqs) : null;
 
 // Include REVIEWS_SCHEMA since all service pages display SocialProof component
 const schemas = [breadcrumbSchema, schema, REVIEWS_SCHEMA, ...(faqSchema ? [faqSchema] : [])];

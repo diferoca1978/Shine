@@ -93,5 +93,8 @@
   --color-sandRose: oklch(0.7638 0.0655 28.26);
   --color-deepplum: oklch(0.3911 0.0534 7.52);
 
+  --text-watermark: 22rem;
+  --text-watermark--line-height: 1;
+
   /* --breakpoint-md: 769px; */
 }

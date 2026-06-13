@@ -1,0 +1,71 @@
+---
+import type { Service } from "@/config/services";
+
+interface Props {
+  titleLine1: string;
+  titleLine2?: string;
+  description?: string;
+  service: Service;
+}
+
+const { titleLine1, titleLine2, description, service } = Astro.props;
+---
+
+<section class="py-l6 mx-auto w-full px-6 lg:px-16 lg:py-24">
+  <div class="mx-auto max-w-7xl">
+    <!-- Kicker -->
+    <div class="approach-kicker mb-12 flex items-center gap-3">
+      <div class="bg-gray-lavender/50 h-px w-8 shrink-0"></div>
+      <span
+        class="font-openSans text-smokyBlack dark:text-softWhite text-xs font-semibold tracking-widest uppercase"
+      >
+        Nuestro proceso
+      </span>
+    </div>
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-5">
+      <!-- Left side heading -->
+      <div class="col-span-2 lg:sticky lg:top-24 lg:self-start">
+        <h1
+          class="text-smokyBlack dark:text-softWhite text-4xl font-bold uppercase"
+        >
+          {titleLine1}
+          {titleLine2 && <span class="block">{titleLine2}</span>}
+        </h1>
+        {description && (
+          <p class="text-smokyBlack dark:text-softWhite mt-6 text-lg">
+            {description}
+          </p>
+        )}
+      </div>
+      <!-- Right side content -->
+      <div class="line-sections col-span-3">
+        {
+          service.process.map((step, index) => (
+            <div class="line-section border-accentGold flex items-center border-y p-8">
+              <div class="text-smokyBlack dark:text-softWhite text-4xl font-bold lg:text-9xl">
+                {index + 1}
+              </div>
+              <div class="line-holder bg-soft-lavender/20 h-36 w-5 overflow-hidden rounded-xl">
+                <div class="line bg-accentGold h-24 w-full rounded-xl" />
+              </div>
+              <div class="ml-8 max-w-lg">
+                <h2 class="text-smokyBlack dark:text-softWhite text-2xl font-bold">
+                  {step.title}
+                </h2>
+                <p class="text-smokyBlack dark:text-softWhite mt-2 text-lg">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { eticPillarsAnimation } from "@/utils/scripts/perPageAnimations/servicesAnimations/servicesStepsProcessAnimation2";
+
+  eticPillarsAnimation();
+</script>

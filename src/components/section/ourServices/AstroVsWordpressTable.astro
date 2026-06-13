@@ -1,0 +1,102 @@
+---
+import CheckIcon from "@/assets/icons/check.svg";
+import CloseIcon from "@/assets/icons/closeIcon.svg";
+
+const rows: [string, string, string, boolean][] = [
+  ["Velocidad de carga",    "3–6 segundos promedio",        "Menos de 1 segundo",              true],
+  ["PageSpeed Score",       "40–70 típico",                 "95–100 garantizado",              true],
+  ["Plugins necesarios",    "20–40 plugins",                "Cero plugins",                    true],
+  ["Riesgo de hackeo",      "Alto (blanco frecuente)",      "Mínimo",                          true],
+  ["Costo de hosting",      "Servidor PHP necesario",       "Hosting estático gratis/económico",      true],
+  ["Mantenimiento",         "Actualizaciones constantes",   "Promedio 3 a 6 meses",            true],
+  ["Indexación en Google",  "Renderizado por servidor",     "HTML puro, indexación inmediata", true],
+];
+
+const firstRow = 0;
+const lastRow = rows.length - 1;
+---
+
+<section class="w-full">
+  <div class="max-w-5xl mx-auto px-4 pt-10 pb-6 lg:pt-24 lg:pb-8">
+
+    <!-- Header: Title and description only -->
+    <div class="mb-8 lg:mb-10">
+      <h2 class="text-[min(10vw,56px)] leading-[1.05] font-bold tracking-tight text-smokyBlack dark:text-softWhite">
+        ¿Por qué Astro y no WordPress?
+      </h2>
+      <p class="mt-4 text-[min(5vw,17px)] leading-relaxed text-smokyBlack/60 dark:text-softWhite/60 max-w-xl">
+        La mayoría de agencias en Colombia entregan WordPress. Nosotros no. Esto es lo que eso significa para tu negocio:
+      </p>
+    </div>
+
+    <!-- Mobile Column Labels (above table on small screens) -->
+    <div class="flex lg:hidden gap-3 mb-6">
+      <div class="flex-1 rounded-2xl bg-accentGreen/10 dark:bg-accentGreen/10 py-4 text-center">
+        <span class="block text-base font-semibold text-smokyBlack dark:text-softWhite">Astro</span>
+        <span class="block text-xs text-smokyBlack/50 dark:text-softWhite/50 mt-0.5">Shine</span>
+      </div>
+      <div class="flex-1 rounded-2xl bg-sandRose/10 dark:bg-sandRose/10 py-4 text-center">
+        <span class="block text-base font-semibold text-smokyBlack dark:text-softWhite">WordPress</span>
+        <span class="block text-xs text-smokyBlack/50 dark:text-softWhite/50 mt-0.5">Lo común</span>
+      </div>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse">
+
+        <!-- Column headers inside thead so they align perfectly with data columns -->
+        <thead class="hidden lg:table-header-group">
+          <tr>
+            <th class="text-left pb-4"></th>
+            <th class="pb-4 text-center align-bottom">
+              <span class="block text-lg font-semibold text-smokyBlack dark:text-softWhite">Astro</span>
+              <span class="block text-sm text-smokyBlack/50 dark:text-softWhite/50 mt-1">Shine</span>
+            </th>
+            <th class="pb-4 text-center align-bottom">
+              <span class="block text-lg font-semibold text-smokyBlack dark:text-softWhite">WordPress</span>
+              <span class="block text-sm text-smokyBlack/50 dark:text-softWhite/50 mt-1">Lo común</span>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {rows.map(([feature, wp, astro], index) => (
+            <tr class="border-b border-smokyBlack/10 dark:border-softWhite/10 last:border-b-0">
+              <td class="py-5 lg:py-6 pr-4 lg:pr-10 align-middle w-full lg:w-auto">
+                <span class="block text-[min(4vw,16px)] font-semibold text-smokyBlack dark:text-softWhite leading-snug">
+                  {feature}
+                </span>
+              </td>
+
+              <td class={`py-5 lg:py-6 px-3 lg:px-6 text-center align-middle bg-accentGreen/10 dark:bg-accentGreen/10 ${index === firstRow ? 'rounded-t-2xl' : ''} ${index === lastRow ? 'rounded-b-2xl' : ''}`}>
+                <div class="flex flex-col items-center gap-1.5">
+                  <CheckIcon class="w-5 h-5 shrink-0 text-accentGreen" />
+                  <span class="hidden lg:block text-xs text-accentGreen font-semibold leading-tight">
+                    {astro}
+                  </span>
+                </div>
+              </td>
+
+              <td class={`py-5 lg:py-6 px-3 lg:px-6 text-center align-middle bg-sandRose/10 dark:bg-sandRose/10 ${index === firstRow ? 'rounded-t-2xl' : ''} ${index === lastRow ? 'rounded-b-2xl' : ''}`}>
+                <div class="flex flex-col items-center gap-1.5">
+                  <CloseIcon class="w-5 h-5 shrink-0 text-sandRose" />
+                  <span class="hidden lg:block text-xs text-smokyBlack/50 dark:text-softWhite/50 font-medium leading-tight">
+                    {wp}
+                  </span>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="mt-10 lg:mt-14 text-[min(5vw,15px)] text-smokyBlack/60 dark:text-softWhite/60 max-w-2xl italic leading-relaxed">
+      <strong>Eso no es solo una mejora técnica. Es la diferencia entre aparecer en la primera página de Google o no aparecer.</strong>
+      Un sitio en Astro no depende de plugins de terceros que acumulan vulnerabilidades — en 2024 se reportaron 7,966 fallas en el ecosistema WordPress, el 96% en plugins.
+El resultado es el mismo: HTML limpio entregado directamente al navegador. Google lo ama. Tus visitantes también.
+    </p>
+
+  </div>
+</section>

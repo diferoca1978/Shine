@@ -1,14 +1,16 @@
 ---
-import ServiceLayout from "@/layouts/ServiceLayout.astro";
 import { getServiceBySlug } from "@/config/services";
+import { disenoWebFAQs } from "@/config/faqs";
+import ServiceLayout from "@/layouts/ServiceLayout.astro";
 import CTABanner from "@/components/ui/CTABanner.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
 import ServicesStepsProcess from "@/components/section/ourServices/ServicesStepsProcess.astro";
+import ProcessSteps from "@/components/section/ourServices/ProcessSteps.astro";
 import ServiceProblemSection from "@/components/section/ourServices/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolutionSection.astro";
-import ServiceTechStack from "@/components/section/ourServices/serviceTechStack.astro";
+import AstroVsWordpressTable from "@/components/section/ourServices/AstroVsWordpressTable.astro";
 import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
 
@@ -22,12 +24,13 @@ if (!service) {
 <ServiceLayout service={service}>
   <!-- Hero -->
   <GlobalHero
-    titleLine1="Es el momento de crear"
-    titleLine2="la web que tu visión de negocio merece"
-    subtitleBefore="Diseñamos y construimos tu activo digital desde cero"
-    subtitleHighlight="con Astro Framework"
-    subtitleAfter="ultrarrápido, seguro y eficiente"
-    descriptionLine1="Creamos sitios web ultrarrápidos, seguros y optimizados para empresas/emprendedores que necesitan una presencia digital sólida desde cero."
+    titleLine1="Diseño web con Astro en Colombia:"
+    titleLine2="sitios que cargan en menos de 1 segundo"
+    subtitleBefore="Construimos tu sitio web desde cero con Astro Framework —"
+    subtitleHighlight="la tecnología que supera a WordPress"
+    subtitleAfter="en velocidad, seguridad y posicionamiento en Google."
+    descriptionLine1="Creamos sitios web ultrarrápidos, seguros y optimizados para empresas y emprendedores"
+    descriptionLine2="en Colombia que necesitan una presencia digital que sí vende."
   >
     <Button
       slot="cta"
@@ -58,28 +61,31 @@ if (!service) {
     checkmarks={service.checkMarks!}
   />
 
-  <ServiceTechStack />
+  <AstroVsWordpressTable />
 
   <!-- Our process -->
-  <ServicesStepsProcess
-    titleLine1="De la visión al lanzamiento:"
-    titleLine2="Así creamos tu activo digital desde cero"
+  <!-- <ServicesStepsProcess
+    titleLine1="De la primera llamada a tu sitio web en vivo:"
+    titleLine2="así funciona trabajar con Shine"
     service={service}
-  />
+  /> -->
+  <ProcessSteps service={service} />
+
   <!-- Social proof -->
   <SocialProof
-    titleLine1="La voz de líderes que confiaron en Shine"
-    titleLine2="para su base digital"
+    titleLine1="La voz de quienes ya confiaron en Shine"
+    titleLine2="para su presencia digital"
     filterTag="diseño web"
   />
+
   <!-- FAQ -->
-  {service.faqs && <FAQ faqs={service.faqs} />}
+  <FAQ faqs={disenoWebFAQs} />
   <!-- CTA -->
   <div class="px-2">
     <CTABanner
-      title="No te conformes con menos. Tu negocio merece una web extraordinaria."
-      description={`Tu primera gran impresión digital es crucial.`}
-      buttonText="Empecemos a construir tu futuro digital"
+      title="Tu sitio web puede estar listo en 2 semanas"
+      description="Sin WordPress. Sin plugins que se rompen. El diagnóstico es gratuito y dura 30 minutos. Sales de la llamada sabiendo exactamente qué necesitas."
+      buttonText="Agenda tu Diagnóstico Web Gratuito"
       buttonHref="/contacto/"
       variant="default"
       className="max-w-6xl mx-auto"

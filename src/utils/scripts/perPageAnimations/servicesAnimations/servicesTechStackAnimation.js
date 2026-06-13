@@ -4,68 +4,85 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export const servicesTechStackAnimation = () => {
-
-
   const container = document.querySelector(".techStack-section .tech-rotator");
   const hero = document.querySelector(".techStack-section .stack-hero");
 
   if (!container || !hero) return;
 
-  gsap.set(hero, { autoAlpha: 1 });
+  const mm = gsap.matchMedia();
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".techStack-section",
-      start: "top 80%",
-      end: "bottom 20%",
-      markers: false,
+  mm.add(
+    {
+      reducedMotion: "(prefers-reduced-motion: reduce)",
+      fullMotion: "(prefers-reduced-motion: no-preference)",
     },
-  })
+    (context) => {
+      const { reducedMotion } = context.conditions;
 
-  .to(hero, {yPercent: -20, duration: 1, ease: "power2.out" });
+      gsap.set(hero, { autoAlpha: 1 });
 
-  const stackItems = Array.from(container.querySelectorAll(":scope > a"));
+      if (reducedMotion) {
+        const stackItems = Array.from(container.querySelectorAll(":scope > a"));
+        container.classList.add("loaded");
+        gsap.set(stackItems, { autoAlpha: 1, yPercent: 0, clearProps: "all" });
+        return;
+      }
 
-  if (stackItems.length < 2) {
-    container.classList.add("loaded");
-    gsap.set(stackItems, { autoAlpha: 1, yPercent: 0 });
-    return;
-  }
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".techStack-section",
+          start: "top 80%",
+          end: "bottom 20%",
+          markers: false,
+        },
+      });
 
-  const firstClone = stackItems[0].cloneNode(true);
-  container.appendChild(firstClone);
+      tl.to(hero, { yPercent: -20, duration: 1, ease: "power2.out" });
 
-  const items = Array.from(container.querySelectorAll(":scope > a"));
+      const stackItems = Array.from(container.querySelectorAll(":scope > a"));
 
-  container.classList.add("loaded");
+      if (stackItems.length < 2) {
+        container.classList.add("loaded");
+        gsap.set(stackItems, { autoAlpha: 1, yPercent: 0 });
+        return;
+      }
 
-  gsap.set(items, {
-    position: "absolute",
-    autoAlpha: 0,
-    yPercent: 100
-  });
+      const firstClone = stackItems[0].cloneNode(true);
+      container.appendChild(firstClone);
 
-  gsap.set(items[0], { autoAlpha: 1, yPercent: 0 });
+      const items = Array.from(container.querySelectorAll(":scope > a"));
 
-  const rotatorTimeline = gsap.timeline({
-    repeat: -1,
-    defaults: { duration: 1, ease: "power2.out" }
-  }).timeScale(0.5);
+      container.classList.add("loaded");
 
-  for (let i = 0; i < items.length - 1; i++) {
-    const current = items[i];
-    const next = items[i + 1];
+      gsap.set(items, {
+        position: "absolute",
+        autoAlpha: 0,
+        yPercent: 100,
+      });
 
-    rotatorTimeline.fromTo(next,
-      { yPercent: 100, autoAlpha: 0 },
-      { yPercent: 0, autoAlpha: 1 }
-    );
+      gsap.set(items[0], { autoAlpha: 1, yPercent: 0 });
 
-    rotatorTimeline.to(current,
-      { yPercent: -100, autoAlpha: 0 },
-      "<0.0"
-    );
-  }
-}
+      const rotatorTimeline = gsap.timeline({
+        repeat: -1,
+        defaults: { duration: 1, ease: "power2.out" },
+      }).timeScale(0.5);
 
-  
+      for (let i = 0; i < items.length - 1; i++) {
+        const current = items[i];
+        const next = items[i + 1];
+
+        rotatorTimeline.fromTo(next,
+          { yPercent: 100, autoAlpha: 0 },
+          { yPercent: 0, autoAlpha: 1 }
+        );
+
+        rotatorTimeline.to(current,
+          { yPercent: -100, autoAlpha: 0 },
+          "<0.0"
+        );
+      }
+    }
+  );
+
+  return () => mm.revert();
+};

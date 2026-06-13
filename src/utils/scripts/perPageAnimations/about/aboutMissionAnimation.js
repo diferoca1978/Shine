@@ -9,41 +9,62 @@ export const aboutMissionAnimation = () => {
   const text = document.querySelector(".mission-text");
   const image = document.querySelector(".mission-image");
 
-  gsap.set([title, subtitle, text, image], { autoAlpha: 0, xPercent: -100 })
+  const elements = [title, subtitle, text, image].filter(Boolean);
 
-  if (!title || !subtitle || !text || !image) return;
+  if (!elements.length) return;
 
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: ".mission-section",
-      start: "top 80%",
-      end: "bottom 20%",
-      markers: false,
-      toggleActions: "play none none reverse"
+  const mm = gsap.matchMedia();
+
+  mm.add(
+    {
+      reducedMotion: "(prefers-reduced-motion: reduce)",
+      fullMotion: "(prefers-reduced-motion: no-preference)",
+    },
+    (context) => {
+      const { reducedMotion } = context.conditions;
+
+      if (reducedMotion) {
+        gsap.set(elements, { autoAlpha: 1, clearProps: "all" });
+        return;
+      }
+
+      gsap.set(elements, { autoAlpha: 0, xPercent: -100 });
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".mission-section",
+          start: "top 80%",
+          end: "bottom 20%",
+          markers: false,
+          toggleActions: "play none none reverse",
+        },
+      })
+        .to(title, {
+          autoAlpha: 1,
+          xPercent: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        })
+        .to(subtitle, {
+          autoAlpha: 1,
+          xPercent: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        }, "-=0.4")
+        .to(text, {
+          autoAlpha: 1,
+          xPercent: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        }, "-=0.4")
+        .to(image, {
+          autoAlpha: 1,
+          xPercent: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        }, "-=0.4");
     }
-  })
-  .to(title, {
-    autoAlpha: 1,
-    xPercent: 0,
-    duration: 0.8,
-    ease: "power2.out"
-  })
-  .to(subtitle, {
-    autoAlpha: 1,
-    xPercent: 0,
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=0.4")
-  .to(text, {
-    autoAlpha: 1,
-    xPercent: 0,
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=0.4")
-  .to(image, {
-    autoAlpha: 1,
-    xPercent: 0,
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=0.4");
-}
+  );
+
+  return () => mm.revert();
+};

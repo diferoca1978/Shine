@@ -1,0 +1,72 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  Icon: any;
+  cardBg: string;
+  blobColor: string;
+  iconColor: string;
+  rotate: string;
+  offset?: string;
+}
+
+const { title, text, Icon, cardBg, blobColor, iconColor, rotate, offset = "" } = Astro.props;
+---
+
+<div class={`foundation-card-wrap ${rotate} ${offset} invisible`}>
+  <div class={`blob ${blobColor} relative w-12 h-12 rounded-full -mb-5 ml-auto mr-6 z-10`} aria-hidden="true"></div>
+  <div class={`card-body ${cardBg} relative p-7 transition duration-300 hover:-translate-y-1`}>
+    <div class={`icon-wrap ${iconColor} inline-flex items-center justify-center w-11 h-11`}>
+      <Icon class="h-8 w-8" aria-hidden="true" />
+    </div>
+    <h3 class="text-base lg:text-lg font-semibold text-smokyBlack leading-snug mt-3 mb-2">
+      {title}
+    </h3>
+    <p class="text-xs lg:text-sm leading-relaxed text-smokyBlack/60">
+      {text}
+    </p>
+  </div>
+</div>
+
+<style>
+  /* Card rotations */
+  .card-rotate-left  { transform: rotate(-2.5deg); }
+  .card-rotate-right { transform: rotate(2deg); }
+
+  /* Card base */
+  .card-body {
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 24px 0 oklch(0 0 0 / 0.08);
+  }
+  .card-body:hover {
+    box-shadow: 0 10px 40px 0 oklch(0 0 0 / 0.14);
+  }
+
+  .card-beige    { background-color: oklch(0.9643 0.007 88.64 / 0.9); }
+  .card-lavender { background-color: oklch(0.93 0.025 291.7); border: 1px solid oklch(0.8166 0.0659 291.7 / 0.35); }
+  .card-rose     { background-color: oklch(0.92 0.03 28.26); }
+
+  /* Blob sphere */
+  .blob {
+    box-shadow: inset -6px -6px 12px oklch(0 0 0 / 0.15), inset 4px 4px 8px oklch(1 0 0 / 0.35);
+  }
+
+  .blob-gold { background: radial-gradient(circle at 35% 35%, oklch(0.95 0.15 87.54), oklch(0.8 0.13 75)); }
+  .blob-plum { background: radial-gradient(circle at 35% 35%, oklch(0.65 0.12 291.7), oklch(0.42 0.09 280)); }
+  .blob-rose { background: radial-gradient(circle at 35% 35%, oklch(0.85 0.1 28.26), oklch(0.68 0.09 20)); }
+
+  /* Icon wrapper */
+  .icon-wrap { border-radius: 0.625rem; }
+
+  .icon-gold { background-color: oklch(0.8987 0.119 87.54 / 0.2); color: oklch(0.65 0.13 75); }
+  .icon-plum { background-color: oklch(0.8166 0.0659 291.7 / 0.25); color: oklch(0.42 0.09 280); }
+  .icon-rose { background-color: oklch(0.7638 0.0655 28.26 / 0.2); color: oklch(0.55 0.1 20); }
+
+  /* Dark mode */
+  :global(.dark) .card-beige    { background-color: oklch(0.25 0.008 88.64); }
+  :global(.dark) .card-lavender { background-color: oklch(0.22 0.02 291.7); border-color: oklch(0.8166 0.0659 291.7 / 0.15); }
+  :global(.dark) .card-rose     { background-color: oklch(0.23 0.02 28.26); }
+
+  :global(.dark) .card-body h3 { color: oklch(0.997 0 0); }
+  :global(.dark) .card-body p  { color: oklch(0.997 0 0 / 0.55); }
+</style>

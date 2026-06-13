@@ -1,40 +1,53 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import HeroAbout from "@/components/section/perPage/HeroAbout.astro";
-import AboutFoundations from "@/components/section/perPage/AboutFoundations.astro";
+import AboutFoundationsAlt from "@/components/section/perPage/AboutFoundationsAlt.astro";
 import AboutMission from "@/components/section/perPage/AboutMission.astro";
+import AboutStats from "@/components/section/perPage/AboutStats.astro";
 import AboutBio from "@/components/section/perPage/AboutBio.astro";
+import AboutServiceLinks from "@/components/section/perPage/AboutServiceLinks.astro";
 import CTABanner from "@/components/ui/CTABanner.astro";
-import { generateBreadcrumbSchema, generatePageSEO, generateAllAuthorsSchemas, COMPANY_INFO } from "@/config/seo";
+import {
+  generateBreadcrumbSchema,
+  generatePageSEO,
+  generateAllAuthorsSchemas,
+  COMPANY_INFO,
+} from "@/config/seo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-    { name: "Nosotros", url: `${COMPANY_INFO.url}/nosotros/` },
+  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+  { name: "Nosotros", url: `${COMPANY_INFO.url}/nosotros/` },
 ]);
 
 const authorSchemas = generateAllAuthorsSchemas();
 
 const nosotrosSEO = generatePageSEO({
-    title: "Rocío Parra y Diego Rodríguez | Equipo Shine Agencia Colombia",
-    description:
-        "Conoce al equipo detrás de Shine: nuestra misión, valores y experiencia transformando presencias digitales con autenticidad, estrategia y propósito en Colombia.",
-    path: "/nosotros",
+  title: "Rocío Parra y Diego Rodríguez | Equipo Shine Agencia Colombia",
+  description:
+    "Rocío y Diego fundadores Shine Agencia: más de 10 años en marketing digital, desarrollo web con Astro y tiendas online con Tienda Nube en Bogotá, Colombia.",
+  path: "/nosotros",
 });
-
-nosotrosSEO.openGraph!.basic.type = "profile";
 ---
 
-<MainLayout seoProps={nosotrosSEO} aditionalSchemas={[breadcrumbSchema, ...authorSchemas]}>
-    <HeroAbout />
-    <AboutMission />
-    <AboutFoundations />
-    <AboutBio />
-    <CTABanner
-        title="Listo para brillar con Propósito?"
-        description="Descubre cómo Shine puede ayudarte a crecer con autenticidad."
-        buttonText="Agenda tu diagnóstico estratégico"
-        buttonHref="/contacto/"
-        variant="default"
-        className="max-w-6xl mx-auto"
-    />
+<MainLayout
+  seoProps={nosotrosSEO}
+  aditionalSchemas={[breadcrumbSchema, ...authorSchemas]}
+>
+  <HeroAbout />
+  <AboutMission />
+  <AboutStats />
+  <AboutFoundationsAlt />
+  <AboutBio />
+  <AboutServiceLinks />
+  <CTABanner
+    title="¿Listo para trabajar con un equipo
+que entiende tu negocio?"
+    description="El primer paso es una conversación de 30 minutos.
+Cuéntanos tu proyecto y te decimos con honestidad
+si podemos ayudarte."
+    buttonText="Agenda tu diagnóstico estratégico"
+    buttonHref="/contacto/"
+    variant="default"
+    className="max-w-6xl mx-auto"
+  />
 </MainLayout>

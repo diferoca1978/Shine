@@ -1,0 +1,80 @@
+---
+import CheckIcon from "@/assets/icons/check.svg";
+import AstroIcon from "@/assets/icons/astroA.svg";
+import MegaphoneIcon from "@/assets/icons/megaphone.svg";
+import FoundationCard from "@/components/ui/FoundationCard.astro";
+
+const foundations = [
+  {
+    title: "Resultados antes que promesas",
+    text: "No arrancamos a ejecutar hasta entender qué problema estamos resolviendo. Cada proyecto empieza con un diagnóstico — no con una propuesta de venta.",
+    Icon: CheckIcon,
+    cardBg: "card-beige",
+    blobColor: "blob-gold",
+    iconColor: "icon-gold",
+    rotate: "card-rotate-left",
+  },
+  {
+    title: "Tecnología que funciona, no que impresiona",
+    text: "Usamos Astro porque genera los sitios más rápidos y seguros. Usamos Tienda Nube porque es la plataforma líder en Colombia. No por moda — por resultados.",
+    Icon: AstroIcon,
+    cardBg: "card-lavender",
+    blobColor: "blob-plum",
+    iconColor: "icon-plum",
+    rotate: "card-rotate-right",
+  },
+  {
+    title: "Comunicación sin letra pequeña",
+    text: "Precios claros desde el inicio. Alcance definido antes de empezar. Sin cobros sorpresa al final del proyecto.",
+    Icon: MegaphoneIcon,
+    cardBg: "card-rose",
+    blobColor: "blob-rose",
+    iconColor: "icon-rose",
+    rotate: "card-rotate-left",
+  },
+];
+---
+
+<section
+  class="foundations-alt-section w-full py-10 lg:py-16 px-4 overflow-visible"
+>
+  <!-- Heading -->
+  <div class="max-w-3xl mx-auto text-center mb-8 lg:mb-12">
+    <h2
+      class="text-[min(10vw,56px)] text-smokyBlack dark:text-softWhite tracking-tight leading-tight invisible"
+    >
+      Nuestros <em class="not-italic text-accentGold">Principios</em>
+    </h2>
+    <p
+      class="mt-3 text-sm lg:text-base text-smokyBlack/60 dark:text-softWhite/55 max-w-xl mx-auto leading-relaxed"
+    >
+      Lo que nos guía en cada proyecto, con cada cliente, en cada decisión.
+    </p>
+  </div>
+
+  <!-- Card grid -->
+  <div
+    class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 lg:gap-6 items-start"
+  >
+    {
+      foundations.map((f, i) => (
+        <FoundationCard
+          title={f.title}
+          text={f.text}
+          Icon={f.Icon}
+          cardBg={f.cardBg}
+          blobColor={f.blobColor}
+          iconColor={f.iconColor}
+          rotate={f.rotate}
+          offset={i === 1 ? "md:mt-8" : ""}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import { foundationAltAnimation } from "@/utils/scripts/perPageAnimations/about/aboutFoundationAltAnimation";
+
+  foundationAltAnimation();
+</script>
