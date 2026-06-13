@@ -1,36 +1,38 @@
 import type { ImageMetadata } from 'astro';
 
 import SocialContent from '@/assets/images/redessociales.webp';
-import InvisibilityProblem from '@/assets/images/invisibility.webp';
+import Invisibility from '@/assets/images/invisibility.webp';
+import AddsLoss from '@/assets/images/addsloss2.webp';
+import SoldLoss from '@/assets/images/soldloss2.webp';
 import WebDesign from '@/assets/images/diseñoWebAltoRen.webp';
 import Audit from '@/assets/images/diseñoyrediseñoweb.webp';
 
 export interface Service {
-    slug: string;
+  slug: string;
+  title: string;
+  subtitle?: string;
+  introText?: string;
+  tags?: string[];
+  problem?: string;
+  content: string;
+  benefitsTitle?: string;
+  benefitsIntro?: string;
+  audienceTitle?: string;
+  audienceIntro?: string;
+  benefits: string[];
+  checkMarks: string[];
+  hurts: string[];
+  process: {
     title: string;
-    subtitle?: string;
-    introText?: string;
-    tags?: string[];
-    problem?: string;
-    content: string;
-    benefitsTitle?: string;
-    benefitsIntro?: string;
-    audienceTitle?: string;
-    audienceIntro?: string;
-    benefits: string[];
-    checkMarks: string[];
-    hurts: string[];
-    process: {
-      title: string;
-      description: string;
-    }[];
-    image: ImageMetadata;
-    secondaryImage: ImageMetadata;
-    alt: string;
-    // SEO fields
-    seoDescription: string;
-    seoKeywords: string[]; // Primary keywords for meta tags
-    secondaryKeywords?: string[]; // Secondary/long-tail keywords for content optimization
+    description: string;
+  }[];
+  image: ImageMetadata;
+  secondaryImage: ImageMetadata;
+  alt: string;
+  // SEO fields
+  seoDescription: string;
+  seoKeywords: string[]; // Primary keywords for meta tags
+  secondaryKeywords?: string[]; // Secondary/long-tail keywords for content optimization
 }
 
 export const services: Service[] = [
@@ -84,9 +86,9 @@ export const services: Service[] = [
       }
     ],
     image: WebDesign,
-    secondaryImage: InvisibilityProblem,
+    secondaryImage: Invisibility,
     alt: "Diseño Web con Astro Framework - Shine Agencia Colombia",
-    seoDescription: "Creamos sitios web ultrarrápidos con Astro Framework para empresas y emprendedores en Colombia. Sin WordPress. Sin plugins. PageSpeed 95–100 garantizado. Agenda tu diagnóstico gratuito.",
+    seoDescription: "Sitios web ultrarrápidos con Astro en Colombia. Sin WordPress. PageSpeed 95–100 garantizado. SEO técnico integrado. Agenda tu diagnóstico gratuito.",
     seoKeywords: [
       "diseño web con Astro Colombia",
       "diseño web profesional Bogotá",
@@ -158,7 +160,7 @@ export const services: Service[] = [
       }
     ],
     image: SocialContent,
-    secondaryImage: InvisibilityProblem,
+    secondaryImage: AddsLoss,
     alt: "Google Ads y Facebook Ads en Colombia - Shine Agencia",
     seoDescription: "Gestionamos tus campañas en Google Ads y Facebook Ads para que cada peso invertido genere clientes reales. Bogotá, Colombia. Agenda tu diagnóstico gratuito.",
     seoKeywords: [
@@ -230,9 +232,9 @@ export const services: Service[] = [
       }
     ],
     image: Audit,
-    secondaryImage: InvisibilityProblem,
+    secondaryImage: SoldLoss,
     alt: "Ecommerce con Tienda Nube en Colombia - Shine Agencia",
-    seoDescription: "Creamos tu tienda online con Tienda Nube: diseño personalizado, medios de pago colombianos y listo para vender desde el primer día. Agenda tu diagnóstico gratuito.",
+    seoDescription: "Tienda online con Tienda Nube: diseño personalizado, medios de pago colombianos y lista para vender desde el día uno. Agenda tu diagnóstico gratuito.",
     seoKeywords: [
       "ecommerce Colombia",
       "tienda online Tienda Nube Colombia",

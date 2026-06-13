@@ -6,10 +6,11 @@ description: "Desarrollo web y estrategia SEO para Delta Irat"
 image: "./img/deltairat.webp"
 link: "https://delta-irat.pro"
 stack: ["Astro", "TypeScript", "TailwindCSS", "SEO"]
-tags: ["Desarrollo Web", "Optimización SEO"]
+tags: ["Desarrollo Web", "Optimización SEO", "Migración de sitio Google Sites a Astro"]
 ---
 
 # Key project features:
 
+- Migración del sitio web de Google Sites a Astro
 - Desarrollo de sitio web corporativo profesional
 - Estrategia e implementación de posicionamiento SEO

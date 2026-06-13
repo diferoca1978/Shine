@@ -19,7 +19,43 @@ const rows: [string, string, string][] = [
       </p>
     </div>
 
-    <div class="overflow-x-auto rounded-2xl border border-smokyBlack/10 dark:border-softWhite/10">
+    <!-- Mobile: stacked feature cards -->
+    <div class="md:hidden space-y-3">
+      <!-- Column headers -->
+      <div class="grid grid-cols-2 gap-2 mb-4">
+        <div class="rounded-xl px-4 py-3 bg-deepplum/8 dark:bg-deepplum/20 flex flex-col gap-1">
+          <span class="text-[10px] font-semibold tracking-widest uppercase bg-smokyBlack/70 dark:bg-softWhite/20 text-softWhite rounded-full px-2 py-0.5 w-fit">
+            Demanda existente
+          </span>
+          <span class="text-sm font-semibold text-smokyBlack dark:text-softWhite mt-1">Google Ads</span>
+        </div>
+        <div class="rounded-xl px-4 py-3 bg-accentGold/10 flex flex-col gap-1">
+          <span class="text-[10px] font-semibold tracking-widest uppercase bg-accentGold/80 text-smokyBlack rounded-full px-2 py-0.5 w-fit">
+            Demanda nueva
+          </span>
+          <span class="text-sm font-semibold text-smokyBlack dark:text-accentGold mt-1">FB & Instagram Ads</span>
+        </div>
+      </div>
+
+      {rows.map(([feature, google, meta]) => (
+        <div class="rounded-xl border border-smokyBlack/10 dark:border-softWhite/10 overflow-hidden">
+          <div class="px-4 py-2 bg-smokyBlack/5 dark:bg-softWhite/5 text-xs font-semibold uppercase tracking-wider text-smokyBlack/60 dark:text-softWhite/60">
+            {feature}
+          </div>
+          <div class="grid grid-cols-2 divide-x divide-smokyBlack/10 dark:divide-softWhite/10">
+            <div class="px-4 py-3 bg-deepplum/3 dark:bg-deepplum/10 text-sm text-smokyBlack/70 dark:text-softWhite/70 leading-snug">
+              {google}
+            </div>
+            <div class="px-4 py-3 bg-accentGold/5 text-sm text-smokyBlack/70 dark:text-softWhite/70 leading-snug">
+              {meta}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Desktop: full table -->
+    <div class="hidden md:block overflow-x-auto rounded-2xl border border-smokyBlack/10 dark:border-softWhite/10">
       <table class="w-full border-collapse">
         <thead>
           <tr class="border-b border-smokyBlack/10 dark:border-softWhite/10">

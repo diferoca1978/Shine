@@ -38,27 +38,28 @@ export function gsapProblemAnimation() {
       tl.to(".problem-heading", {
         autoAlpha: 1,
         yPercent: -20,
-        duration: 1,
+        duration: 0.5,
         ease: "power2.out",
       });
 
       tl.to("#problem-image", {
         autoAlpha: 1,
         yPercent: 5,
-        duration: 1,
+        duration: 0.5,
         ease: "back",
-      }, "+=0.5");
+      }, "+=0.2");
 
       tl.to("#problem-hurts h4", {
         autoAlpha: 1,
-        duration: 1,
+        duration: 0.4,
         ease: "power2.out",
-      }, ">+=0.2");
+      }, ">+=0.1");
 
       listItems.forEach((li) => {
         tl.to(li, {
           autoAlpha: 1,
-          stagger: 0.02,
+          duration: 0.3,
+          stagger: 0.05,
           ease: "power2.out",
         });
       });

@@ -5,7 +5,7 @@ import CTABanner from "@/components/ui/CTABanner.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
-import ServicesStepsProcess from "@/components/section/ourServices/ServicesStepsProcess.astro";
+import ServicesStepsProcessAlt from "@/components/section/ourServices/ServicesStepsProcessAlt.astro";
 import ServiceProblemSection from "@/components/section/ourServices/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolutionSection.astro";
 import AdsComparisonTable from "@/components/section/ourServices/AdsComparisonTable.astro";
@@ -63,9 +63,10 @@ if (!service) {
   <AdsComparisonTable />
 
   <!-- Our process -->
-  <ServicesStepsProcess
+  <ServicesStepsProcessAlt
     titleLine1="Así gestionamos"
     titleLine2="tus campañas"
+    description="Sin adivinanzas. Sin presupuesto que se evapora sin saber en qué. Te mostramos exactamente qué hacemos en cada etapa para que tu pauta genere clientes reales no solo clics."
     service={service}
   />
   <!-- Social proof -->

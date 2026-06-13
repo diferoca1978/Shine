@@ -1,6 +1,7 @@
 ---
-import ServiceLayout from "@/layouts/ServiceLayout.astro";
 import { getServiceBySlug } from "@/config/services";
+import { disenoWebFAQs } from "@/config/faqs";
+import ServiceLayout from "@/layouts/ServiceLayout.astro";
 import CTABanner from "@/components/ui/CTABanner.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 import Button from "@/components/ui/button.astro";
@@ -12,7 +13,6 @@ import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolu
 import AstroVsWordpressTable from "@/components/section/ourServices/AstroVsWordpressTable.astro";
 import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
-import { disenoWebFAQs } from "@/config/faqs";
 
 const service = getServiceBySlug("diseno-web-estrategico");
 
@@ -78,7 +78,6 @@ if (!service) {
     filterTag="diseño web"
   />
 
-    
   <!-- FAQ -->
   <FAQ faqs={disenoWebFAQs} />
   <!-- CTA -->
