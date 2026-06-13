@@ -5,7 +5,7 @@ import CTABanner from "@/components/ui/CTABanner.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
 import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
-import ServicesStepsProcess from "@/components/section/ourServices/ServicesStepsProcess.astro";
+import ServicesStepsProcessAlt from "@/components/section/ourServices/ServicesStepsProcessAlt.astro";
 import ServiceProblemSection from "@/components/section/ourServices/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolutionSection.astro";
 import EcommerceComparisonTable from "@/components/section/ourServices/EcommerceComparisonTable.astro";
@@ -63,9 +63,10 @@ if (!service) {
   <EcommerceComparisonTable />
 
   <!-- Our process -->
-  <ServicesStepsProcess
+  <ServicesStepsProcessAlt
     titleLine1="De cero a tu tienda"
     titleLine2="lista para vender"
+    description="Sin sorpresas ni tecnicismos. Nos encargamos de todo — del diseño a los medios de pago — para que tu tienda esté lista para vender desde el primer día, y tú sepas exactamente cómo operarla."
     service={service}
   />
   <!-- Social proof -->

@@ -1,36 +1,38 @@
 import type { ImageMetadata } from 'astro';
 
 import SocialContent from '@/assets/images/redessociales.webp';
-import InvisibilityProblem from '@/assets/images/invisibility.webp';
+import Invisibility from '@/assets/images/invisibility.webp';
+import AddsLoss from '@/assets/images/addsloss2.webp';
+import SoldLoss from '@/assets/images/soldloss2.webp';
 import WebDesign from '@/assets/images/diseñoWebAltoRen.webp';
 import Audit from '@/assets/images/diseñoyrediseñoweb.webp';
 
 export interface Service {
-    slug: string;
+  slug: string;
+  title: string;
+  subtitle?: string;
+  introText?: string;
+  tags?: string[];
+  problem?: string;
+  content: string;
+  benefitsTitle?: string;
+  benefitsIntro?: string;
+  audienceTitle?: string;
+  audienceIntro?: string;
+  benefits: string[];
+  checkMarks: string[];
+  hurts: string[];
+  process: {
     title: string;
-    subtitle?: string;
-    introText?: string;
-    tags?: string[];
-    problem?: string;
-    content: string;
-    benefitsTitle?: string;
-    benefitsIntro?: string;
-    audienceTitle?: string;
-    audienceIntro?: string;
-    benefits: string[];
-    checkMarks: string[];
-    hurts: string[];
-    process: {
-      title: string;
-      description: string;
-    }[];
-    image: ImageMetadata;
-    secondaryImage: ImageMetadata;
-    alt: string;
-    // SEO fields
-    seoDescription: string;
-    seoKeywords: string[]; // Primary keywords for meta tags
-    secondaryKeywords?: string[]; // Secondary/long-tail keywords for content optimization
+    description: string;
+  }[];
+  image: ImageMetadata;
+  secondaryImage: ImageMetadata;
+  alt: string;
+  // SEO fields
+  seoDescription: string;
+  seoKeywords: string[]; // Primary keywords for meta tags
+  secondaryKeywords?: string[]; // Secondary/long-tail keywords for content optimization
 }
 
 export const services: Service[] = [
@@ -68,25 +70,25 @@ export const services: Service[] = [
     process: [
       {
         title: 'Estrategia y Arquitectura',
-        description: 'Antes de diseñar una sola pantalla, entendemos tu negocio: quién es tu cliente ideal, qué lo hace decidir, qué hace tu competencia y cómo tu sitio puede diferenciarte. Definimos la arquitectura completa: páginas, estructura de URLs, jerarquía de contenido y mapa de conversión. Entregable: blueprint del sitio aprobado por ti antes de escribir una línea de código.'
+        description: 'Antes de diseñar una sola pantalla, entendemos tu negocio: quién es tu cliente ideal, qué lo hace decidir, qué hace tu competencia y cómo tu sitio puede diferenciarte. Definimos la arquitectura completa: páginas, estructura, jerarquía de contenido y mapa de conversión. Entregable: blueprint del sitio aprobado por ti antes de escribir una línea de código.'
       },
       {
         title: 'Desarrollo con Astro',
-        description: 'Construimos el sitio con Astro Framework — sin templates genéricos, sin código copiado. Cada componente se desarrolla a medida, pensando en velocidad de carga, accesibilidad y estructura semántica que Google puede leer perfectamente. Sin base de datos. Sin plugins. Sin puntos de falla.'
+        description: 'Construimos el sitio con Astro Framework — sin templates genéricos. Cada componente se desarrolla a medida, pensando en velocidad de carga, accesibilidad y estructura semántica que Google puede leer perfectamente. Sin plugins. Sin puntos de falla.'
       },
       {
         title: 'Diseño UX/UI y Contenido',
-        description: 'Aplicamos tu identidad visual y optimizamos cada sección para que el visitante entienda qué haces, por qué tú y qué tiene que hacer a continuación. Probamos en móvil, tablet y escritorio — Chrome, Safari y Firefox — antes de mostrarte nada.'
+        description: 'Aplicamos tu identidad visual y optimizamos cada sección para que el visitante entienda qué haces, por qué tú y qué tiene que hacer a continuación. Probamos en móvil, tablet y escritorio, tu sitio totalmente responsive.'
       },
       {
         title: 'SEO, Pruebas y Lanzamiento',
-        description: 'Configuramos meta tags, schema markup, sitemap XML, Google Search Console y Analytics. Corremos el checklist de lanzamiento completo y medimos velocidad (objetivo: 95+ en Google PageSpeed). Te entregamos el sitio con una capacitación de 1 hora para que puedas actualizar contenido tú mismo, sin depender de nosotros para cada cambio.'
+        description: 'Configuramos meta tags, schema markup, sitemap XML, Google Search Console y Analytics. Corremos el checklist de lanzamiento completo y medimos velocidad (objetivo: 90+ en Google PageSpeed).'
       }
     ],
     image: WebDesign,
-    secondaryImage: InvisibilityProblem,
+    secondaryImage: Invisibility,
     alt: "Diseño Web con Astro Framework - Shine Agencia Colombia",
-    seoDescription: "Creamos sitios web ultrarrápidos con Astro Framework para empresas y emprendedores en Colombia. Sin WordPress. Sin plugins. PageSpeed 95–100 garantizado. Agenda tu diagnóstico gratuito.",
+    seoDescription: "Sitios web ultrarrápidos con Astro en Colombia. Sin WordPress. PageSpeed 95–100 garantizado. SEO técnico integrado. Agenda tu diagnóstico gratuito.",
     seoKeywords: [
       "diseño web con Astro Colombia",
       "diseño web profesional Bogotá",
@@ -158,7 +160,7 @@ export const services: Service[] = [
       }
     ],
     image: SocialContent,
-    secondaryImage: InvisibilityProblem,
+    secondaryImage: AddsLoss,
     alt: "Google Ads y Facebook Ads en Colombia - Shine Agencia",
     seoDescription: "Gestionamos tus campañas en Google Ads y Facebook Ads para que cada peso invertido genere clientes reales. Bogotá, Colombia. Agenda tu diagnóstico gratuito.",
     seoKeywords: [
@@ -230,9 +232,9 @@ export const services: Service[] = [
       }
     ],
     image: Audit,
-    secondaryImage: InvisibilityProblem,
+    secondaryImage: SoldLoss,
     alt: "Ecommerce con Tienda Nube en Colombia - Shine Agencia",
-    seoDescription: "Creamos tu tienda online con Tienda Nube: diseño personalizado, medios de pago colombianos y listo para vender desde el primer día. Agenda tu diagnóstico gratuito.",
+    seoDescription: "Tienda online con Tienda Nube: diseño personalizado, medios de pago colombianos y lista para vender desde el día uno. Agenda tu diagnóstico gratuito.",
     seoKeywords: [
       "ecommerce Colombia",
       "tienda online Tienda Nube Colombia",

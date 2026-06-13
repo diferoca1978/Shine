@@ -13,22 +13,25 @@ const { reviewerLogo: Logo, reviewerName, review, rating, tag } = Astro.props;
 ---
 
 <div
-  class="review-card h-full dark:bg-softWhite dark:p-2 dark:rounded-lg dark:shadow-xl dark:shadow-softWhite/20"
+  class="review-card h-full dark:p-2"
 >
   <div class="reviewer-info flex flex-col items-center gap-4 h-full">
-    <div class="reviewer-logo shrink-0">
+    <div class="reviewer-logo shrink-0 h-16 w-full max-w-50 flex items-center justify-center">
       {
         Logo ? (
-          <Image src={Logo} alt={reviewerName} width={120} height={120} />
+          <Image
+            src={Logo}
+            alt={reviewerName}
+            width={Logo.width}
+            height={Logo.height}
+            class="object-contain max-h-full max-w-full h-auto w-auto"
+          />
         ) : (
-          <div class="reviewer-logo shrink-0">
-            <Image
-              src={defaultAvatar}
-              alt={reviewerName}
-              width={30}
-              height={60}
-            />
-          </div>
+          <Image
+            src={defaultAvatar}
+            alt={reviewerName}
+            class="object-contain max-h-full max-w-full h-auto w-auto"
+          />
         )
       }
     </div>
@@ -36,19 +39,19 @@ const { reviewerLogo: Logo, reviewerName, review, rating, tag } = Astro.props;
       class="review relative flex flex-col items-center gap-6 flex-1 justify-center max-w-2xl"
     >
       <p
-        class="review-text text-base text-center lg:max-h-[100px] hover:lg:max-h-[200px] overflow-hidden transition-all duration-500 ease-in-out"
+        class="review-text text-base text-smokyBlack dark:text-softWhite text-center lg:max-h-25 hover:lg:max-h-50 overflow-hidden transition-all duration-500 ease-in-out"
       >
-        <span class="text-smokyBlack font-bold">"</span>
+        <span class="dark:text-softWhite text-smokyBlack font-bold">"</span>
         {review}
-        <span class="text-smokyBlack font-bold">"</span>
+        <span class="dark:text-softWhite text-smokyBlack font-bold">"</span>
       </p>
       <p class="flex items-center gap-2">
-        <span class="text-smokyBlack font-bold">{rating}</span>
+        
         <span>⭐⭐⭐⭐⭐</span>
       </p>
     </div>
     <div class="reviewer-name shrink-0">
-      <p class="text-smokyBlack">{reviewerName}</p>
+      <p class="text-smokyBlack dark:text-softWhite">{reviewerName}</p>
     </div>
   </div>
 </div>

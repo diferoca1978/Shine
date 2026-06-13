@@ -39,6 +39,7 @@
         // toggle() returns true if class was added, false if removed
         const isDark = document.documentElement.classList.toggle("dark");
         localStorage.theme = isDark ? "dark" : "light";
+        window.dispatchEvent(new CustomEvent("themechange"));
       }
     });
     window.__themeToggleInit = true;

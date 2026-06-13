@@ -1,4 +1,4 @@
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(SplitText);
@@ -8,7 +8,13 @@ export const globalHeroAnimation = () => {
   const heroSubtitle = document.querySelector(".hero-subtitle");
   const heroDescription = document.querySelector(".description-text");
 
+  const elements = [heroTitle, heroSubtitle, heroDescription].filter(Boolean);
+
+  // Create matchMedia instance
   const mm = gsap.matchMedia();
+
+  // Store split instances for cleanup
+  let splitInstances = [];
 
   mm.add(
     {
@@ -18,54 +24,79 @@ export const globalHeroAnimation = () => {
     (context) => {
       const { reducedMotion } = context.conditions;
 
-      // Always reveal elements — they start invisible in HTML
-      gsap.set([heroTitle, heroSubtitle, heroDescription], { autoAlpha: 1 });
+      if (reducedMotion) {
+        // No animation — just make elements visible immediately
+        gsap.set(elements, { autoAlpha: 1, clearProps: "all" });
+        return;
+      }
 
-      if (reducedMotion) return;
+      // Full motion: prevent FOUC then animate
+      gsap.set(elements, { autoAlpha: 1 });
 
-      const tl = gsap.timeline({
-        defaults: { duration: 1, ease: "power3.out" },
-      });
+      if (heroTitle) {
+        const splitTitle = SplitText.create(heroTitle, { type: "words, chars" });
+        splitInstances.push(splitTitle);
 
-      // Each onSplit fires synchronously, so tweens are added to tl in order.
-      // "-=0.7" overlaps the next animation with the previous one for a fluid feel.
-      SplitText.create(heroTitle, {
-        type: "chars",
-        autoSplit: true,
-        aria: false,
-        charsClass: "inline-block overflow-hidden pb-1",
-        onSplit(self) {
-          tl.from(self.chars, { autoAlpha: 0, yPercent: 100, stagger: 0.05 });
-        },
-      });
+        gsap.from(splitTitle.chars, {
+          yPercent: "random(-100, 100)",
+          rotation: "random(-30, 30)",
+          ease: "back.out(2)",
+          autoAlpha: 0,
+          stagger: {
+            amount: 0.7,
+            from: "random",
+          },
+        });
+      }
 
-      SplitText.create(heroSubtitle, {
-        type: "words",
-        autoSplit: true,
-        aria: false,
-        wordsClass: "inline-block overflow-hidden pb-1",
-        onSplit(self) {
-          tl.from(
-            self.words,
-            { autoAlpha: 0, yPercent: 100, stagger: 0.04 },
-            "-=0.7",
-          );
-        },
-      });
+      if (heroSubtitle) {
+        const splitSubtitle = SplitText.create(heroSubtitle, { type: "words, chars" });
+        splitInstances.push(splitSubtitle);
 
-      SplitText.create(heroDescription, {
-        type: "words,chars",
-        autoSplit: true,
-        aria: false,
-        wordsClass: "inline-block overflow-hidden pb-1",
-        onSplit(self) {
-          tl.from(
-            self.words,
-            { autoAlpha: 0, yPercent: 100, stagger: 0.02 },
-            "-=1.2",
-          );
-        },
-      });
-    },
+        gsap.from(splitSubtitle.chars, {
+          yPercent: "random(-100, 100)",
+          rotation: "random(-30, 30)",
+          ease: "back.out(2)",
+          autoAlpha: 0,
+          delay: 0.3,
+          stagger: {
+            amount: 0.7,
+            from: "random",
+          },
+        });
+      }
+
+      if (heroDescription) {
+        const splitDescription = SplitText.create(heroDescription, { type: "words, chars" });
+        splitInstances.push(splitDescription);
+
+        gsap.from(splitDescription.chars, {
+          yPercent: "random(-100, 100)",
+          rotation: "random(-30, 30)",
+          ease: "back.out(2)",
+          autoAlpha: 0,
+          delay: 0.6,
+          stagger: {
+            amount: 0.7,
+            from: "random",
+          },
+        });
+      }
+
+      // Cleanup: revert all split text instances when media query no longer matches
+      return () => {
+        splitInstances.forEach((split) => {
+          if (split && split.revert) {
+            split.revert();
+          }
+        });
+        splitInstances = [];
+      };
+    }
   );
+
+  // Return cleanup function to revert matchMedia on component unmount
+  return () => {
+    mm.revert();
+  };
 };

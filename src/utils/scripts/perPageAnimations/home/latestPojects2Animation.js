@@ -26,112 +26,133 @@ export const cursorTrackingImgPreview = () => {
 
   const total = projectItems.length;
 
-  // --- Initial state ---
-  gsap.set(previewImages, { autoAlpha: 0, scale: 1.08 });
-  gsap.set(idleEl, { autoAlpha: 1 });
+  const mm = gsap.matchMedia();
 
-  // --- PIN: start when the section top hits the viewport top, end when the
-  // project list bottom hits the viewport bottom — this keeps the card pinned
-  // exactly for the duration of the list and releases it before the CTA enters.
-  ScrollTrigger.create({
-    trigger: projectList,
-    endTrigger: projectList,
-    start: "top top",
-    end: "bottom bottom",
-    pin: previewColumn,
-    pinSpacing: false,
-    markers: false,
-  });
+  mm.add(
+    {
+      reducedMotion: "(prefers-reduced-motion: reduce)",
+      fullMotion: "(prefers-reduced-motion: no-preference)",
+    },
+    (context) => {
+      const { reducedMotion } = context.conditions;
 
-  // --- Crossfade state ---
-  let activeIndex = -1;
+      if (reducedMotion) {
+        gsap.set(previewImages, { autoAlpha: 0, scale: 1, clearProps: "all" });
+        gsap.set(idleEl, { autoAlpha: 1, clearProps: "all" });
+        // Kill any ScrollTrigger pin on the preview column for reduced motion
+        ScrollTrigger.getAll().forEach((st) => {
+          if (st.trigger === projectList || st.trigger === previewColumn) {
+            st.kill();
+          }
+        });
+        return;
+      }
 
-  const showImage = (i) => {
-    // Kill any in-flight tweens on the idle element and all images to avoid conflicts
-    gsap.killTweensOf(idleEl);
-    gsap.to(idleEl, { autoAlpha: 0, duration: 0.25 });
+      // Full motion: set initial state
+      gsap.set(previewImages, { autoAlpha: 0, scale: 1.08 });
+      gsap.set(idleEl, { autoAlpha: 1 });
 
-    if (activeIndex !== -1 && activeIndex !== i) {
-      gsap.killTweensOf(previewImages[activeIndex]);
-      gsap.to(previewImages[activeIndex], {
-        autoAlpha: 0,
-        scale: 1.06,
-        duration: 0.4,
-        ease: "power2.in",
+      // PIN: start when the section top hits the viewport top
+      ScrollTrigger.create({
+        trigger: projectList,
+        endTrigger: projectList,
+        start: "top top",
+        end: "bottom bottom",
+        pin: previewColumn,
+        pinSpacing: false,
+        markers: false,
       });
+
+      // Crossfade state
+      let activeIndex = -1;
+
+      const showImage = (i) => {
+        gsap.killTweensOf(idleEl);
+        gsap.to(idleEl, { autoAlpha: 0, duration: 0.25 });
+
+        if (activeIndex !== -1 && activeIndex !== i) {
+          gsap.killTweensOf(previewImages[activeIndex]);
+          gsap.to(previewImages[activeIndex], {
+            autoAlpha: 0,
+            scale: 1.06,
+            duration: 0.4,
+            ease: "power2.in",
+          });
+        }
+
+        gsap.killTweensOf(previewImages[i]);
+        gsap.to(previewImages[i], {
+          autoAlpha: 1,
+          scale: 1,
+          duration: 0.55,
+          ease: "power3.out",
+        });
+
+        if (counterEl) {
+          counterEl.textContent = `${String(i + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+        }
+
+        activeIndex = i;
+      };
+
+      const resetToIdle = () => {
+        gsap.killTweensOf(idleEl);
+        previewImages.forEach((img) => {
+          gsap.killTweensOf(img);
+          gsap.to(img, {
+            autoAlpha: 0,
+            scale: 1.06,
+            duration: 0.35,
+            ease: "power2.in",
+          });
+        });
+        gsap.to(idleEl, { autoAlpha: 1, duration: 0.35, delay: 0.1 });
+        if (counterEl)
+          counterEl.textContent = `— / ${String(total).padStart(2, "0")}`;
+        activeIndex = -1;
+      };
+
+      // Hover: image crossfade + row micro-animations
+      projectItems.forEach((item, i) => {
+        const numberEl = item.querySelector("[data-project-number]");
+        const titleEl = item.querySelector("[data-project-title]");
+        const arrowEl = item.querySelector("[data-project-arrow]");
+
+        item.addEventListener("mouseenter", () => {
+          showImage(i);
+          gsap.to(numberEl, {
+            color: "var(--hover-text)",
+            opacity: 1,
+            duration: 0.25,
+          });
+          gsap.to(titleEl, { x: 12, duration: 0.35, ease: "power2.out" });
+          gsap.to(arrowEl, {
+            x: 5,
+            color: "var(--color-accentGold)",
+            opacity: 1,
+            duration: 0.3,
+          });
+        });
+
+        item.addEventListener("mouseleave", () => {
+          gsap.to(numberEl, {
+            color: "var(--hover-text)",
+            opacity: 0.25,
+            duration: 0.3,
+          });
+          gsap.to(titleEl, { x: 0, duration: 0.35, ease: "power2.out" });
+          gsap.to(arrowEl, {
+            x: 0,
+            color: "var(--hover-text)",
+            opacity: 0.4,
+            duration: 0.3,
+          });
+        });
+      });
+
+      section.addEventListener("mouseleave", resetToIdle);
     }
+  );
 
-    gsap.killTweensOf(previewImages[i]);
-    gsap.to(previewImages[i], {
-      autoAlpha: 1,
-      scale: 1,
-      duration: 0.55,
-      ease: "power3.out",
-    });
-
-    if (counterEl) {
-      counterEl.textContent = `${String(i + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
-    }
-
-    activeIndex = i;
-  };
-
-  const resetToIdle = () => {
-    gsap.killTweensOf(idleEl);
-    // Fade ALL images out — rapid hover leaves intermediate images mid-tween
-    previewImages.forEach((img) => {
-      gsap.killTweensOf(img);
-      gsap.to(img, {
-        autoAlpha: 0,
-        scale: 1.06,
-        duration: 0.35,
-        ease: "power2.in",
-      });
-    });
-    gsap.to(idleEl, { autoAlpha: 1, duration: 0.35, delay: 0.1 });
-    if (counterEl)
-      counterEl.textContent = `— / ${String(total).padStart(2, "0")}`;
-    activeIndex = -1;
-  };
-
-  // --- Hover: image crossfade + row micro-animations ---
-  projectItems.forEach((item, i) => {
-    const numberEl = item.querySelector("[data-project-number]");
-    const titleEl = item.querySelector("[data-project-title]");
-    const arrowEl = item.querySelector("[data-project-arrow]");
-
-    item.addEventListener("mouseenter", () => {
-      showImage(i);
-      gsap.to(numberEl, {
-        color: "var(--color-softBeige)",
-        opacity: 1,
-        duration: 0.25,
-      });
-      gsap.to(titleEl, { x: 12, duration: 0.35, ease: "power2.out" });
-      gsap.to(arrowEl, {
-        x: 5,
-        color: "var(--color-accentGold)",
-        opacity: 1,
-        duration: 0.3,
-      });
-    });
-
-    item.addEventListener("mouseleave", () => {
-      gsap.to(numberEl, {
-        color: "var(--color-softBeige)",
-        opacity: 0.25,
-        duration: 0.3,
-      });
-      gsap.to(titleEl, { x: 0, duration: 0.35, ease: "power2.out" });
-      gsap.to(arrowEl, {
-        x: 0,
-        color: "var(--color-softBeige)",
-        opacity: 0.4,
-        duration: 0.3,
-      });
-    });
-  });
-
-  // Reset when the cursor leaves the section entirely
-  section.addEventListener("mouseleave", resetToIdle);
+  return () => mm.revert();
 };

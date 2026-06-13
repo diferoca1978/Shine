@@ -1,5 +1,3 @@
-HOME
-
 # **HOME**
 
 H1: Diseño web con Astro, Google Ads y ecommerce para negocios colombianos que quieren vender más
@@ -8,20 +6,20 @@ Subtitulo: Construimos sitios en Astro que cargan en menos de 1 segundo, gestion
 
 ## **Diagnóstico SEO técnico**
 
-| **Elemento**               | **Estado**                                      | **Veredicto**        |
-| -------------------------- | ----------------------------------------------- | -------------------- | ------ |
-| Title tag                  | Agencia de Marketing Digital y Diseño Web       | Shine Agencia        | ✓ Bien |
-| Meta description           | Menciona Astro, Colombia, propósito             | ✓ Bien               |
-| H1                         | Haz que tu luz brille                           | ✗ Sin keyword        |
-| H2 servicios               | No existe como sección                          | ✗ Falta              |
-| Word count                 | **416 palabras**                                | ⚠ Bajo para homepage |
-| Schema Organization        | Completo con founders, geo, horario             | ✓ Muy bien           |
-| Schema AggregateRating     | 5.0 / 6 reseñas                                 | ✓ Bien               |
-| Schema hasOfferCatalog     | **Servicios viejos** (marca-personal, rediseno) | ✗ Desactualizado     |
-| Schema knowsAbout          | Sin Google Ads, Facebook Ads, Tienda Nube       | ✗ Desactualizado     |
-| FAQ schema                 | **No existe en homepage**                       | ✗ Falta              |
-| Primera imagen hero        | alt="" vacío                                    | ✗ Falta alt text     |
-| Links internos a servicios | Solo 1 link genérico a /servicios/              | ✗ Débil              |
+| **Elemento** | **Estado** | **Veredicto** |
+| --- | --- | --- |
+| Title tag | Agencia de Marketing Digital y Diseño Web | Shine Agencia | ✓ Bien |
+| Meta description | Menciona Astro, Colombia, propósito | ✓ Bien |
+| H1 | Haz que tu luz brille | ✗ Sin keyword |
+| H2 servicios | No existe como sección | ✗ Falta |
+| Word count | **416 palabras** | ⚠ Bajo para homepage |
+| Schema Organization | Completo con founders, geo, horario | ✓ Muy bien |
+| Schema AggregateRating | 5.0 / 6 reseñas | ✓ Bien |
+| Schema hasOfferCatalog | **Servicios viejos** (marca-personal, rediseno) | ✗ Desactualizado |
+| Schema knowsAbout | Sin Google Ads, Facebook Ads, Tienda Nube | ✗ Desactualizado |
+| FAQ schema | **No existe en homepage** | ✗ Falta |
+| Primera imagen hero | alt="" vacío | ✗ Falta alt text |
+| Links internos a servicios | Solo 1 link genérico a /servicios/ | ✗ Débil |
 
 ## **Los 3 cambios que harían YA**
 
@@ -133,7 +131,7 @@ sencilla sin necesitar un técnico cada vez.
 
 3 Servicios especializados
 
-_(O el número real de proyectos que tengas — lo importante es que el número sea verificable)_
+*(O el número real de proyectos que tengas — lo importante es que el número sea verificable)*
 
 ### **Sección de proyectos — agregar descripción breve a cada uno**
 
@@ -165,7 +163,7 @@ Branding · Desarrollo web · SEO · 2026
 
 desactualizada por un activo digital que genera leads.
 
-_(Ajusta con los resultados reales de cada proyecto)_
+*(Ajusta con los resultados reales de cada proyecto)*
 
 ### **Sección FAQ — NUEVA (agregar antes del footer)**
 
@@ -357,14 +355,14 @@ URL recomendada:
 
 ## **H2: Google Ads o Facebook Ads — ¿cuál necesitas?**
 
-## _(Esta sección es diferenciadora y posiciona en búsquedas comparativas)_
+## *(Esta sección es diferenciadora y posiciona en búsquedas comparativas)*
 
-|                      | **Google Ads**                                     | **Facebook e Instagram Ads**               |
-| -------------------- | -------------------------------------------------- | ------------------------------------------ |
-| **Ideal para**       | Capturar demanda existente                         | Generar demanda nueva                      |
-| **Cómo funciona**    | Apareces cuando alguien busca lo que vendes        | Le muestras tu oferta a tu audiencia ideal |
-| **Resultado típico** | Leads más rápidos, intención de compra alta        | Marca, reconocimiento, remarketing         |
-| **Mejor para**       | Servicios, negocios locales, búsquedas específicas | Ecommerce, lanzamientos, audiencias frías  |
+|  | **Google Ads** | **Facebook e Instagram Ads** |
+| --- | --- | --- |
+| **Ideal para** | Capturar demanda existente | Generar demanda nueva |
+| **Cómo funciona** | Apareces cuando alguien busca lo que vendes | Le muestras tu oferta a tu audiencia ideal |
+| **Resultado típico** | Leads más rápidos, intención de compra alta | Marca, reconocimiento, remarketing |
+| **Mejor para** | Servicios, negocios locales, búsquedas específicas | Ecommerce, lanzamientos, audiencias frías |
 
 ## Muchos negocios necesitan los dos trabajando juntos. En el diagnóstico te decimos cuál tiene más sentido para tu etapa.
 
@@ -372,7 +370,7 @@ URL recomendada:
 
 ## **H2: Así gestionamos tus campañas**
 
-## _(Sigue el patrón de 4 pasos numerados que usan en la página de diseño web)_
+## *(Sigue el patrón de 4 pasos numerados que usan en la página de diseño web)*
 
 ## **001 — Diagnóstico y estrategia**
 
@@ -394,13 +392,13 @@ URL recomendada:
 
 ## **H2: La voz de quienes ya confiaron en Shine**
 
-## _(Misma sección de testimonios que tienen en las otras páginas — reutilizar los 3 testimonios actuales)_
+## *(Misma sección de testimonios que tienen en las otras páginas — reutilizar los 3 testimonios actuales)*
 
 ##
 
 ## **H2: Preguntas frecuentes**
 
-## _(Las 8 preguntas que ya escribimos arriba — van acá con el componente de acordeón que ya usan)_
+## *(Las 8 preguntas que ya escribimos arriba — van acá con el componente de acordeón que ya usan)*
 
 ##
 
@@ -814,16 +812,16 @@ Tienda nube
 
 ## **H2: ¿Por qué Tienda Nube y no Shopify o WooCommerce?**
 
-## _(Esta sección posiciona en búsquedas comparativas como "Tienda Nube vs Shopify Colombia")_
+## *(Esta sección posiciona en búsquedas comparativas como "Tienda Nube vs Shopify Colombia")*
 
-|                        | **Tienda Nube**            | **Shopify**      | **WooCommerce** |
-| ---------------------- | -------------------------- | ---------------- | --------------- |
-| **Hecho para LATAM**   | ✓ Sí                       | ✗ No             | ✗ No            |
-| **PSE integrado**      | ✓ Sí                       | ✗ No nativo      | ✗ No nativo     |
-| **Soporte en español** | ✓ Sí                       | Limitado         | Comunidad       |
-| **Comisión por venta** | ✗ Sin comisión (plan pago) | ✓ Cobra comisión | ✗ Sin comisión  |
-| **Facilidad de uso**   | Muy fácil                  | Fácil            | Técnico         |
-| **Costo mensual**      | Accesible para LATAM       | En USD           | Hosting aparte  |
+|  | **Tienda Nube** | **Shopify** | **WooCommerce** |
+| --- | --- | --- | --- |
+| **Hecho para LATAM** | ✓ Sí | ✗ No | ✗ No |
+| **PSE integrado** | ✓ Sí | ✗ No nativo | ✗ No nativo |
+| **Soporte en español** | ✓ Sí | Limitado | Comunidad |
+| **Comisión por venta** | ✗ Sin comisión (plan pago) | ✓ Cobra comisión | ✗ Sin comisión |
+| **Facilidad de uso** | Muy fácil | Fácil | Técnico |
+| **Costo mensual** | Accesible para LATAM | En USD | Hosting aparte |
 
 ## Shopify es excelente para el mercado anglosajón. Para vender en Colombia, Tienda Nube gana en integración local, precio y soporte.
 
@@ -849,7 +847,7 @@ Tienda nube
 
 ## **H2: De cero a tu tienda lista para vender**
 
-## _(4 pasos con el mismo formato numerado 001–004)_
+## *(4 pasos con el mismo formato numerado 001–004)*
 
 ## **001 — Diagnóstico y estrategia**
 
@@ -871,13 +869,13 @@ Tienda nube
 
 ## **H2: La voz de quienes ya confiaron en Shine**
 
-## _(Reutilizar los 3 testimonios actuales)_
+## *(Reutilizar los 3 testimonios actuales)*
 
 ##
 
 ## **H2: Preguntas frecuentes**
 
-## _(Las 8 preguntas de la sección FAQ Ecommerce — van con el componente de acordeón)_
+## *(Las 8 preguntas de la sección FAQ Ecommerce — van con el componente de acordeón)*
 
 ## ¿Qué es Tienda Nube y por qué la recomiendan?
 
@@ -1003,15 +1001,15 @@ Nosotros no. Esto es lo que eso significa para tu negocio:
 
 **Tabla comparativa:**
 
-|                      | **WordPress**              | **Astro (Shine)**               |
-| -------------------- | -------------------------- | ------------------------------- |
-| Velocidad de carga   | 3–6 segundos promedio      | Menos de 1 segundo              |
-| PageSpeed Score      | 40–70 típico               | 95–100 garantizado              |
-| Plugins necesarios   | 20–40 plugins              | Cero plugins                    |
-| Riesgo de hackeo     | Alto (blanco frecuente)    | Mínimo                          |
-| Costo de hosting     | Servidor PHP necesario     | Hosting estático económico      |
-| Mantenimiento        | Actualizaciones constantes | Sin mantenimiento técnico       |
-| Indexación en Google | Renderizado por servidor   | HTML puro, indexación inmediata |
+|  | **WordPress** | **Astro (Shine)** |
+| --- | --- | --- |
+| Velocidad de carga | 3–6 segundos promedio | Menos de 1 segundo |
+| PageSpeed Score | 40–70 típico | 95–100 garantizado |
+| Plugins necesarios | 20–40 plugins | Cero plugins |
+| Riesgo de hackeo | Alto (blanco frecuente) | Mínimo |
+| Costo de hosting | Servidor PHP necesario | Hosting estático económico |
+| Mantenimiento | Actualizaciones constantes | Sin mantenimiento técnico |
+| Indexación en Google | Renderizado por servidor | HTML puro, indexación inmediata |
 
 **Párrafo de cierre:**
 
@@ -1037,7 +1035,7 @@ Sin sorpresas. Sin cambios de alcance a mitad del proyecto.
 
 Te decimos exactamente qué pasa en cada etapa y qué recibes.
 
-**001 — Estrategia y Arquitectura** _(Semana 1)_
+**001 — Estrategia y Arquitectura** *(Semana 1)*
 
 Antes de diseñar una sola pantalla, entendemos tu negocio:
 
@@ -1053,7 +1051,7 @@ Entregable: blueprint del sitio aprobado por ti antes de
 
 escribir una línea de código.
 
-**002 — Desarrollo con Astro** _(Semanas 2–3)_
+**002 — Desarrollo con Astro** *(Semanas 2–3)*
 
 Construimos el sitio con Astro Framework — sin templates
 
@@ -1065,7 +1063,7 @@ estructura semántica que Google puede leer perfectamente.
 
 Sin base de datos. Sin plugins. Sin puntos de falla.
 
-**003 — Diseño UX/UI y Contenido** _(Semanas 3–4)_
+**003 — Diseño UX/UI y Contenido** *(Semanas 3–4)*
 
 Aplicamos tu identidad visual y optimizamos cada sección
 
@@ -1077,7 +1075,7 @@ Probamos en móvil, tablet y escritorio — Chrome, Safari
 
 y Firefox — antes de mostrarte nada.
 
-**004 — SEO, Pruebas y Lanzamiento** _(Semana 4–5)_
+**004 — SEO, Pruebas y Lanzamiento** *(Semana 4–5)*
 
 Configuramos meta tags, schema markup, sitemap XML,
 
@@ -1248,23 +1246,23 @@ Only 2 values shown (Excelencia, Integridad) but they seem truncated. The snapsh
 
 From the full text I can see:
 
-- Excelencia: "Obsesión por el detalle, desde la estrategia hasta el último clic."
-- Integridad: "Claridad y honestidad radical, siempre."
+* Excelencia: "Obsesión por el detalle, desde la estrategia hasta el último clic."
+* Integridad: "Claridad y honestidad radical, siempre."
 
 That's only 2 values with very short descriptions.
 
 **Footer:**
 
-- Same as other pages — email, phone, social links, policies
-- No CTA
-- Gmail email
+* Same as other pages — email, phone, social links, policies
+* No CTA
+* Gmail email
 
 **What's actually good:**
 
-- Person schema for both Rocio and Diego ✓
-- BreadcrumbList ✓
-- The schema for each person has jobTitle, knowsAbout, worksFor ✓
-- The founding story angle (emprendedores, padres, esposos) is emotionally smart — it's a differentiator, just poorly executed
+* Person schema for both Rocio and Diego ✓
+* BreadcrumbList ✓
+* The schema for each person has jobTitle, knowsAbout, worksFor ✓
+* The founding story angle (emprendedores, padres, esposos) is emotionally smart — it's a differentiator, just poorly executed
 
 **The 3 biggest conversion problems:**
 
@@ -1293,7 +1291,7 @@ Tengo todo. Esta página tiene problemas más graves que las de servicios. Acá 
 
 El H1 dice: **"No somos una agencia más"**
 
-Esa es literalmente la frase más usada en el marketing en español. Cada agencia de Colombia, México, Argentina y España tiene esa frase en algún lugar de su sitio. El visitante la lee y piensa exactamente lo contrario de lo que se busca: _"eso dice todo el mundo."_
+Esa es literalmente la frase más usada en el marketing en español. Cada agencia de Colombia, México, Argentina y España tiene esa frase en algún lugar de su sitio. El visitante la lee y piensa exactamente lo contrario de lo que se busca: *"eso dice todo el mundo."*
 
 No dice qué hacen, para quién, ni por qué son distintos. El visitante nuevo no sabe si está mirando una agencia de diseño, de contenido, de pauta, o las tres.
 
@@ -1331,26 +1329,26 @@ Diego construye con Astro, Tienda Nube y herramientas específicas. Esas palabra
 
 Mismo footer que el resto del sitio:
 
-- Email, teléfono, redes sociales ✓
-- Política de Privacidad y Términos ✓
-- **Sin CTA** ✗
-- **Email Gmail** ✗
-- **Sin ninguna mención de servicios** ✗
+* Email, teléfono, redes sociales ✓
+* Política de Privacidad y Términos ✓
+* **Sin CTA** ✗
+* **Email Gmail** ✗
+* **Sin ninguna mención de servicios** ✗
 
 ## **Problemas de SEO técnico**
 
-| **Elemento**           | **Estado**                                      | **Problema**                              |
-| ---------------------- | ----------------------------------------------- | ----------------------------------------- | ------------------- |
-| Title tag              | Rocío Parra y Diego Rodríguez                   | Equipo Shine Agencia Colombia             | Bien estructurado ✓ |
-| Meta description       | Genérica, sin keywords de servicios             | Mejorable                                 |
-| H1                     | No somos una agencia más!                       | Sin keyword, cliché, con !                |
-| Word count             | **256 palabras**                                | Thin content — no rankea                  |
-| CTA                    | **Ninguno**                                     | Página sin salida                         |
-| Schema Person          | Rocío y Diego tienen schema propio              | Bien ✓                                    |
-| Schema hasOfferCatalog | Servicios viejos (marca-personal, rediseno)     | Desactualizado                            |
-| og:type                | profile                                         | Debería ser website para una página About |
-| Alt text imagen        | Primera imagen del cohete: alt=""               | Vacío — accesibilidad y SEO               |
-| Links internos         | **Sin ningún link a servicios en el contenido** | Desperdicia autoridad de página           |
+| **Elemento** | **Estado** | **Problema** |
+| --- | --- | --- |
+| Title tag | Rocío Parra y Diego Rodríguez | Equipo Shine Agencia Colombia | Bien estructurado ✓ |
+| Meta description | Genérica, sin keywords de servicios | Mejorable |
+| H1 | No somos una agencia más! | Sin keyword, cliché, con ! |
+| Word count | **256 palabras** | Thin content — no rankea |
+| CTA | **Ninguno** | Página sin salida |
+| Schema Person | Rocío y Diego tienen schema propio | Bien ✓ |
+| Schema hasOfferCatalog | Servicios viejos (marca-personal, rediseno) | Desactualizado |
+| og:type | profile | Debería ser website para una página About |
+| Alt text imagen | Primera imagen del cohete: alt="" | Vacío — accesibilidad y SEO |
+| Links internos | **Sin ningún link a servicios en el contenido** | Desperdicia autoridad de página |
 
 ## **Los 3 cambios que harían YA**
 
@@ -1458,7 +1456,7 @@ En números
 
 [3] Servicios: diseño web, publicidad digital, ecommerce
 
-_(Ajusta los números a los reales — lo importante es que existan)_
+*(Ajusta los números a los reales — lo importante es que existan)*
 
 ### **Valores — reemplazar con versión con prueba**
 
@@ -1626,17 +1624,17 @@ Reemplazar los 3 servicios viejos en el JSON-LD:
 
 ## **Resumen de cambios por prioridad**
 
-| **Prioridad**  | **Cambio**                                                  | **Impacto**                                      |
-| -------------- | ----------------------------------------------------------- | ------------------------------------------------ |
-| 🔴 Ya          | Agregar CTA al final de la página                           | Conversión — la página es un callejón sin salida |
-| 🔴 Ya          | Reemplazar H1 por uno con keyword                           | SEO + claridad                                   |
-| 🔴 Ya          | Expandir contenido a 600+ palabras con los textos de arriba | SEO — thin content no rankea                     |
-| 🟡 Esta semana | Agregar sección de números concretos                        | Credibilidad                                     |
-| 🟡 Esta semana | Reemplazar valores genéricos por valores con prueba         | Confianza                                        |
-| 🟡 Esta semana | Agregar links internos a las 3 páginas de servicios         | SEO + navegación                                 |
-| 🟡 Esta semana | Cambiar og:type de "profile" a "website"                    | SEO técnico                                      |
-| 🟡 Esta semana | Agregar alt text a imagen del cohete                        | Accesibilidad + SEO                              |
-| 🟢 Este mes    | Actualizar schema hasOfferCatalog con nuevos 3 servicios    | SEO estructurado                                 |
-| 🟢 Este mes    | Cambiar email Gmail por dominio propio en schema y footer   | Credibilidad                                     |
+| **Prioridad** | **Cambio** | **Impacto** |
+| --- | --- | --- |
+| 🔴 Ya | Agregar CTA al final de la página | Conversión — la página es un callejón sin salida |
+| 🔴 Ya | Reemplazar H1 por uno con keyword | SEO + claridad |
+| 🔴 Ya | Expandir contenido a 600+ palabras con los textos de arriba | SEO — thin content no rankea |
+| 🟡 Esta semana | Agregar sección de números concretos | Credibilidad |
+| 🟡 Esta semana | Reemplazar valores genéricos por valores con prueba | Confianza |
+| 🟡 Esta semana | Agregar links internos a las 3 páginas de servicios | SEO + navegación |
+| 🟡 Esta semana | Cambiar og:type de "profile" a "website" | SEO técnico |
+| 🟡 Esta semana | Agregar alt text a imagen del cohete | Accesibilidad + SEO |
+| 🟢 Este mes | Actualizar schema hasOfferCatalog con nuevos 3 servicios | SEO estructurado |
+| 🟢 Este mes | Cambiar email Gmail por dominio propio en schema y footer | Credibilidad |
 
 Pagina de proyectos

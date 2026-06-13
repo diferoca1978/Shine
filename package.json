@@ -10,10 +10,10 @@
     "test:email": "npx playwright test tests/contact-form.spec.ts --project=chromium"
   },
   "dependencies": {
-    "@astrojs/netlify": "^7.0.7",
-    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/netlify": "^7.0.13",
+    "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.2.4",
-    "astro": "^6.1.8",
+    "astro": "^6.4.6",
     "astro-seo": "^1.1.0",
     "gsap": "^3.15.0",
     "highlight.js": "^11.11.1",

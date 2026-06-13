@@ -25,7 +25,51 @@ const rows: [string, Cell, Cell, Cell][] = [
       </p>
     </div>
 
-    <div class="overflow-x-auto rounded-2xl border border-smokyBlack/10 dark:border-softWhite/10">
+    <!-- Mobile: stacked feature cards -->
+    <div class="md:hidden space-y-3">
+      <!-- Column headers -->
+      <div class="rounded-xl border border-smokyBlack/10 dark:border-softWhite/10 overflow-hidden mb-4">
+        <div class="px-4 py-3 bg-deepplum/8 dark:bg-accentGold/10 flex items-center gap-2">
+          <span class="text-[10px] font-semibold tracking-widest uppercase bg-deepplum dark:bg-accentGold text-softWhite dark:text-smokyBlack rounded-full px-2 py-0.5">
+            Recomendado
+          </span>
+          <span class="text-sm font-semibold text-deepplum dark:text-accentGold">Tienda Nube</span>
+        </div>
+        <div class="grid grid-cols-2 divide-x divide-smokyBlack/10 dark:divide-softWhite/10 border-t border-smokyBlack/10 dark:border-softWhite/10">
+          <div class="px-4 py-2 text-xs font-medium text-smokyBlack/40 dark:text-softWhite/40">Shopify</div>
+          <div class="px-4 py-2 text-xs font-medium text-smokyBlack/40 dark:text-softWhite/40">WooCommerce</div>
+        </div>
+      </div>
+
+      {rows.map(([feature, tiendaNube, shopify, woo]) => (
+        <div class="rounded-xl border border-smokyBlack/10 dark:border-softWhite/10 overflow-hidden">
+          <div class="px-4 py-2 bg-smokyBlack/5 dark:bg-softWhite/5 text-xs font-semibold uppercase tracking-wider text-smokyBlack/60 dark:text-softWhite/60">
+            {feature}
+          </div>
+          <!-- Tienda Nube: full width, highlighted -->
+          <div class="px-4 py-3 bg-deepplum/5 dark:bg-accentGold/10 flex items-center gap-2 border-b border-smokyBlack/10 dark:border-softWhite/10">
+            {tiendaNube.positive && <CheckIcon class="w-4 h-4 shrink-0 text-deepplum dark:text-accentGold" />}
+            <span class="text-sm font-semibold text-deepplum dark:text-accentGold leading-snug">
+              {tiendaNube.text}
+            </span>
+          </div>
+          <!-- Shopify | WooCommerce -->
+          <div class="grid grid-cols-2 divide-x divide-smokyBlack/10 dark:divide-softWhite/10">
+            <div class="px-4 py-3 flex items-center gap-1.5 text-sm text-smokyBlack/50 dark:text-softWhite/40 leading-snug">
+              {shopify.negative && <CloseIcon class="w-3.5 h-3.5 shrink-0 text-smokyBlack/30 dark:text-softWhite/30" />}
+              <span>{shopify.text}</span>
+            </div>
+            <div class="px-4 py-3 flex items-center gap-1.5 text-sm text-smokyBlack/50 dark:text-softWhite/40 leading-snug">
+              {woo.negative && <CloseIcon class="w-3.5 h-3.5 shrink-0 text-smokyBlack/30 dark:text-softWhite/30" />}
+              <span>{woo.text}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Desktop: full table -->
+    <div class="hidden md:block overflow-x-auto rounded-2xl border border-smokyBlack/10 dark:border-softWhite/10">
       <table class="w-full border-collapse">
         <thead>
           <tr class="border-b border-smokyBlack/10 dark:border-softWhite/10">

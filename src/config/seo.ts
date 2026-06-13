@@ -12,7 +12,7 @@ export type JSONLDSchema = Record<string, any>;
 export const COMPANY_INFO = {
   name: "Shine Agencia",
   description:
-    "Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.",
+    "Diseño web con Astro, campañas Google Ads y Facebook Ads y ecommerce con Tienda Nube para empresas en Colombia. Bogotá. Agenda tu diagnóstico gratuito hoy.",
   url: "https://shineagencia.com", // Replace with your current domain
   phone: "+57-3162560670", // Replace with actual phone
   email: "rocio.shineagencia@gmail.com", // Replace with actual email
@@ -40,11 +40,11 @@ export const COMPANY_INFO = {
 export const DEFAULT_SEO: SEOProps = {
   title: "Shine | Agencia de Marketing Digital y Diseño Web en Colombia",
   description:
-    "En Shine, unimos estrategia de marketing y tecnología web de punta para ayudar a líderes y empresas en Colombia a brillar con propósito.",
+    "Diseño web con Astro, Google Ads, Facebook Ads y ecommerce con Tienda Nube para empresas en Colombia. Bogotá. Agenda tu diagnóstico gratuito hoy.",
   canonical: COMPANY_INFO.url,
   openGraph: {
     basic: {
-      title: "Shine | Transformamos tu presencia digital con propósito",
+      title: "Shine | Agencia de Marketing Digital y Diseño Web en Colombia",
       type: "website",
       image: COMPANY_INFO.url + COMPANY_INFO.image,
       url: COMPANY_INFO.url,
@@ -59,7 +59,7 @@ export const DEFAULT_SEO: SEOProps = {
     card: "summary_large_image",
     site: "@shine_agencia",
     creator: "@shine_agencia",
-    title: "Shine | Transformamos tu presencia digital con propósito",
+    title: "Shine | Agencia de Marketing Digital y Diseño Web en Colombia",
     description: COMPANY_INFO.description,
     image: COMPANY_INFO.url + COMPANY_INFO.image,
   },
@@ -86,7 +86,7 @@ export const ORGANIZATION_SCHEMA = {
   "@id": COMPANY_INFO.url + "#organization",
   name: COMPANY_INFO.name,
   alternateName:
-    "Shine Agencia | Transformamos tu presencia digital con propósito",
+    "Shine Agencia | Diseño web, publicidad digital y ecommerce en Colombia",
   description: COMPANY_INFO.description,
   url: COMPANY_INFO.url,
   logo: COMPANY_INFO.url + COMPANY_INFO.logo,
@@ -128,7 +128,7 @@ export const ORGANIZATION_SCHEMA = {
   knowsAbout: [
     ...new Set(services.flatMap((s) => s.seoKeywords)),
   ],
-  slogan: "No necesitas gritar para ser escuchado",
+  slogan: "Resultados medibles, no promesas vacías",
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -137,9 +137,9 @@ export const ORGANIZATION_SCHEMA = {
   },
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "Servicios de Transformación Digital Auténtica",
+    name: "Servicios de Marketing Digital y Diseño Web",
     description:
-      "Servicios especializados en diseño web estratégico y marketing digital para profesionales y empresas que buscan crecer con autenticidad",
+      "Diseño web con Astro, Google Ads y Facebook Ads, y ecommerce con Tienda Nube para empresas y emprendedores en Colombia",
     itemListElement: services.map((service) => ({
       "@type": "Offer",
       itemOffered: {
@@ -163,7 +163,7 @@ export const WEBSITE_SCHEMA = {
   "@id": COMPANY_INFO.url + "#website",
   name: COMPANY_INFO.name,
   alternateName:
-    "Shine Agencia | Transformamos tu presencia digital con propósito",
+    "Shine Agencia | Diseño web, publicidad digital y ecommerce en Colombia",
   description: COMPANY_INFO.description,
   url: COMPANY_INFO.url,
   inLanguage: "es-CO",
@@ -197,7 +197,7 @@ export function generateBlogSchema(
     "@id": COMPANY_INFO.url + "/blog#blog",
     name: "Blog - " + COMPANY_INFO.name,
     description:
-      "Guías prácticas, reflexiones honestas y consejos estratégicos para construir tu presencia digital con paz y propósito",
+      "Consejos prácticos sobre diseño web, publicidad digital y ecommerce para empresas y emprendedores en Colombia",
     url: COMPANY_INFO.url + "/blog",
     inLanguage: "es-CO",
     author: {
@@ -249,29 +249,29 @@ export function generateBlogPostSchema(post: {
   // Build author schema - uses Person with @id if found in registry, falls back to Organization
   const authorSchema = post.author
     ? {
-        "@type": "Person",
-        "@id": `${COMPANY_INFO.url}/nosotros#${(fullAuthor?.name ?? post.author.name).toLowerCase().replace(/\s+/g, "-")}`,
-        name: fullAuthor?.name ?? post.author.name,
-        ...((fullAuthor?.role ?? post.author.role) && {
-          jobTitle: fullAuthor?.role ?? post.author.role,
-        }),
-        ...(fullAuthor?.bio && { description: fullAuthor.bio }),
-        ...(fullAuthor?.image && {
-          image: COMPANY_INFO.url + fullAuthor.image,
-        }),
-        ...((fullAuthor?.url ?? post.author.url) && {
-          url: COMPANY_INFO.url + (fullAuthor?.url ?? post.author.url),
-        }),
-        ...((fullAuthor?.credentials ?? post.author.credentials) && {
-          knowsAbout: fullAuthor?.credentials ?? post.author.credentials,
-        }),
-        worksFor: {
-          "@id": COMPANY_INFO.url + "#organization",
-        },
-      }
-    : {
+      "@type": "Person",
+      "@id": `${COMPANY_INFO.url}/nosotros#${(fullAuthor?.name ?? post.author.name).toLowerCase().replace(/\s+/g, "-")}`,
+      name: fullAuthor?.name ?? post.author.name,
+      ...((fullAuthor?.role ?? post.author.role) && {
+        jobTitle: fullAuthor?.role ?? post.author.role,
+      }),
+      ...(fullAuthor?.bio && { description: fullAuthor.bio }),
+      ...(fullAuthor?.image && {
+        image: COMPANY_INFO.url + fullAuthor.image,
+      }),
+      ...((fullAuthor?.url ?? post.author.url) && {
+        url: COMPANY_INFO.url + (fullAuthor?.url ?? post.author.url),
+      }),
+      ...((fullAuthor?.credentials ?? post.author.credentials) && {
+        knowsAbout: fullAuthor?.credentials ?? post.author.credentials,
+      }),
+      worksFor: {
         "@id": COMPANY_INFO.url + "#organization",
-      };
+      },
+    }
+    : {
+      "@id": COMPANY_INFO.url + "#organization",
+    };
 
   return {
     "@context": "https://schema.org",

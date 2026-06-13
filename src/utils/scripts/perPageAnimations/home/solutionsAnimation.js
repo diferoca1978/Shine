@@ -7,135 +7,171 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, DrawSVGPlugin, SplitText);
 
 export const solutionsAnimation = () => {
-  // Define colors for both themes
-  const colors = {
-    light: {
-      default: "oklch(96.8% 0.007 247.896)",      // softWhite
-      divHighlight: "oklch(0.3052 0 0)",          // smokyBlack
-      spanHighlight: "oklch(0.3911 0.0534 7.52)", // deepplum
-    },
-    dark: {
-      default: "oklch(0.3052 0 0)",                // smokyBlack
-      divHighlight: "oklch(96.8% 0.007 247.896)",  // softWhite
-      spanHighlight: "oklch(0.8987 0.119 87.54)",    // accentGold
-    }
-  };
-
-  // Function to get current theme colors
-  const getCurrentColors = () => {
-    const isDark = document.documentElement.classList.contains('dark');
-    return isDark ? colors.dark : colors.light;
-  };
-
-  let currentColors = getCurrentColors();
-
-  // Initial setup to svg animation
   const linePath = document.querySelector("#path");
+  const arrow = document.querySelector("#arrow");
+  const solutionContent = document.querySelector(".solution-content p");
 
-  gsap.set(linePath, { drawSVG: "0%" });
+  if (!linePath) return;
 
+  const mm = gsap.matchMedia();
 
-  const svgTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".solution-way",
-      start: "center bottom",
-      end: "bottom bottom",
-      scrub: 2,
-      markers: false,
+  mm.add(
+    {
+      reducedMotion: "(prefers-reduced-motion: reduce)",
+      fullMotion: "(prefers-reduced-motion: no-preference)",
     },
-  })
+    (context) => {
+      const { reducedMotion } = context.conditions;
 
-  svgTimeline.to(linePath, {
-    drawSVG: "100%",
-  }, "<");
+      // Define colors for both themes
+      const colors = {
+        light: {
+          default: "oklch(96.8% 0.007 247.896)",
+          divHighlight: "oklch(0.3052 0 0)",
+          spanHighlight: "oklch(0.3911 0.0534 7.52)",
+        },
+        dark: {
+          default: "oklch(0.3052 0 0)",
+          divHighlight: "oklch(96.8% 0.007 247.896)",
+          spanHighlight: "oklch(0.8987 0.119 87.54)",
+        }
+      };
 
-  svgTimeline.to("#arrow", {
-    autoAlpha: 1,
-    duration: 0.1,
-  }, "<");
+      const getCurrentColors = () => {
+        const isDark = document.documentElement.classList.contains("dark");
+        return isDark ? colors.dark : colors.light;
+      };
 
-  svgTimeline.to("#arrow", {
-    motionPath: {
-      path: "#path",
-      align: "#path",
-      alignOrigin: [0.5, 0.5],
-      autoRotate: -5,
-    },
-  }, 0);
-  // End svg animation
+      let currentColors = getCurrentColors();
 
-  // Content animation setup with theme-aware colors
-  const quoteSplit = SplitText.create(".solution-content p", { type: "words", aria: false });
+      if (reducedMotion) {
+        gsap.set(linePath, { drawSVG: "100%", clearProps: "all" });
+        if (arrow) gsap.set(arrow, { autoAlpha: 1, clearProps: "all" });
 
-  // IMMEDIATELY set initial state to prevent flicker with theme-appropriate color
-  gsap.set(quoteSplit.words, { color: currentColors.default });
+        if (solutionContent) {
+          const quoteSplit = SplitText.create(".solution-content p", { type: "words", aria: false });
+          gsap.set(quoteSplit.words, {
+            color: currentColors.divHighlight,
+            clearProps: "all",
+          });
+        }
 
-  // Quote animation function - defined BEFORE timeline creation
-  function animateWord(word) {
+        // Theme change listener (non-motion, always needed)
+        window.addEventListener("themechange", () => {
+          currentColors = getCurrentColors();
+          if (solutionContent) {
+            const quoteSplit = SplitText.create(".solution-content p", { type: "words", aria: false });
+            quoteSplit.words.forEach((word) => {
+              if (word.parentElement.nodeName === "P") {
+                gsap.set(word, { color: currentColors.divHighlight });
+              } else {
+                gsap.set(word, { color: currentColors.spanHighlight });
+              }
+            });
+          }
+        });
 
-    if (st.direction == 1) {
-      if (word.parentElement.nodeName == "P") {
-        gsap.to(word, { color: currentColors.divHighlight });
-      } else {
-        gsap.to(word, { color: currentColors.spanHighlight });
+        return () => {
+          // Cleanup on media query change
+        };
       }
-    } else {
-      gsap.to(word, { color: currentColors.default });
-    }
-  }
 
-  const tl = gsap.timeline();
+      // Full motion animation
+      gsap.set(linePath, { drawSVG: "0%" });
 
-  // Apply timeline logic for first and last words only
-  quoteSplit.words.forEach((word, index) => {
-    tl.call(animateWord, [word], (index * 1) + 0.01)
-  })
+      const svgTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".solution-way",
+          start: "center bottom",
+          end: "bottom bottom",
+          scrub: 2,
+          markers: false,
+        },
+      });
 
-  tl.set({}, {}, "+=0.05");
+      svgTimeline.to(linePath, {
+        drawSVG: "100%",
+      }, "<");
 
-  // Create ScrollTrigger for quote animation - defined AFTER timeline
-  const st = ScrollTrigger.create({
-    trigger: ".solution-content",
-    start: "top 70%",
-    end: "bottom 80%",
-    scrub: true,
-    animation: tl,
-    onRefresh: () => {
-      // Ensure initial state is maintained on refresh
+      if (arrow) {
+        svgTimeline.to("#arrow", {
+          autoAlpha: 1,
+          duration: 0.1,
+        }, "<");
+      }
+
+      if (arrow) {
+        svgTimeline.to("#arrow", {
+          motionPath: {
+            path: "#path",
+            align: "#path",
+            alignOrigin: [0.5, 0.5],
+            autoRotate: -5,
+          },
+        }, 0);
+      }
+
+      const quoteSplit = SplitText.create(".solution-content p", { type: "words", aria: false });
+
       gsap.set(quoteSplit.words, { color: currentColors.default });
-    }
-  });
 
-  // Immediate refresh without delay to prevent flicker
-  ScrollTrigger.refresh();
-
-  // Listen for theme changes and update all word colors
-  window.addEventListener("themechange", () => {
-    currentColors = getCurrentColors();
-
-    // Update all words based on current scroll position
-    quoteSplit.words.forEach((word) => {
-      if (word.parentElement.nodeName == "P") {
-        gsap.to(word, { color: currentColors.divHighlight, duration: 0.3 });
-      } else {
-        gsap.to(word, { color: currentColors.spanHighlight, duration: 0.3 });
+      function animateWord(word) {
+        if (st.direction === 1) {
+          if (word.parentElement.nodeName === "P") {
+            gsap.to(word, { color: currentColors.divHighlight });
+          } else {
+            gsap.to(word, { color: currentColors.spanHighlight });
+          }
+        } else {
+          gsap.to(word, { color: currentColors.default });
+        }
       }
-    });
-  });
 
-  // Soft transition to next section
-  // gsap.to(".to-smokyBlack-section", {
-  //   scrollTrigger: {
-  //     trigger: ".solution-section",
-  //     start: "bottom bottom",
-  //     end: "bottom 70%",
-  //     scrub: 0.5,
-  //     markers: false,
-  //     immediateRender: false,
-  //   },
-  //   ease: "none",
-  //   backgroundColor: "#2f2f2f",
-  //   text: "#fefefe", // softLavender
-  // })
+      const tl = gsap.timeline();
 
+      quoteSplit.words.forEach((word, index) => {
+        tl.call(animateWord, [word], (index * 1) + 0.01);
+      });
+
+      tl.set({}, {}, "+=0.05");
+
+      function applyWordColors(progress, animate = false) {
+        const maxTime = tl.duration();
+        quoteSplit.words.forEach((word, index) => {
+          const wordTime = (index * 1) + 0.01;
+          const wordProgress = maxTime > 0 ? wordTime / maxTime : 0;
+          const isRevealed = progress >= wordProgress;
+          const isSpan = word.parentElement.nodeName !== "P";
+          const targetColor = isSpan
+            ? (isRevealed ? currentColors.spanHighlight : currentColors.default)
+            : (isRevealed ? currentColors.divHighlight : currentColors.default);
+          if (animate) {
+            gsap.to(word, { color: targetColor, duration: 0.2, overwrite: "auto" });
+          } else {
+            gsap.set(word, { color: targetColor });
+          }
+        });
+      }
+
+      const st = ScrollTrigger.create({
+        trigger: ".solution-content",
+        start: "top 70%",
+        end: "bottom 80%",
+        scrub: true,
+        animation: tl,
+        onRefresh: () => {
+          applyWordColors(st.progress);
+        },
+      });
+
+      ScrollTrigger.refresh();
+
+      window.addEventListener("themechange", () => {
+        currentColors = getCurrentColors();
+        applyWordColors(st.progress, true);
+      });
+    }
+  );
+
+  return () => mm.revert();
 };
