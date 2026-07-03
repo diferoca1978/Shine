@@ -11,6 +11,9 @@ importers:
       '@astrojs/netlify':
         specifier: ^7.0.13
         version: 7.0.13(@types/node@25.7.0)(astro@6.4.6(@netlify/blobs@10.7.5)(@types/node@25.7.0)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3)(yaml@2.9.0))(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3)(yaml@2.9.0)
+      '@astrojs/partytown':
+        specifier: ^2.1.7
+        version: 2.1.7
       '@astrojs/sitemap':
         specifier: ^3.7.3
         version: 3.7.3
@@ -23,6 +26,9 @@ importers:
       astro-seo:
         specifier: ^1.1.0
         version: 1.1.0(prettier@3.8.4)(typescript@5.9.3)
+      astro-webmcp:
+        specifier: ^0.3.0
+        version: 0.3.0(astro@6.4.6(@netlify/blobs@10.7.5)(@types/node@25.7.0)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3)(yaml@2.9.0))
       gsap:
         specifier: ^3.15.0
         version: 3.15.0
@@ -109,6 +115,9 @@ packages:
     resolution: {integrity: sha512-bUca2tikWFGh0YGsXWiPt/OO3RBSkJpi+kg5nsmdfLNSt7I3801JhyvYvBGhiSCBgbUHm77kVHIlUjaVkPDPpg==}
     peerDependencies:
       astro: ^6.0.0
+
+  '@astrojs/partytown@2.1.7':
+    resolution: {integrity: sha512-dbffmNmJ+sAJ0/aXSaLX4aI04EZS/2C6Mm/+fmd4ikqWO7hV6nIi0sug8Z3c+yqedJNi1swFvpwluWmGjLHNzw==}
 
   '@astrojs/prism@4.0.2':
     resolution: {integrity: sha512-KTivpmnz6lDsC6o9H4+DNm2SrE/GHzw8cNAvEJwAvUT+eoaEnn/4NtbDNfRRaxaJHdp15gf+tfHAWiXR4wB3BA==}
@@ -999,6 +1008,11 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  '@qwik.dev/partytown@0.13.2':
+    resolution: {integrity: sha512-Umls4bSkuzqLVcGvf8OgwIn/OldproSAbaQ/iYGe8VPYBpl2CaOSxabWwkeC72LDFqxVL0b0q8XlI8MuChDyzg==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
   '@rollup/pluginutils@5.3.0':
     resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
     engines: {node: '>=14.0.0'}
@@ -1545,6 +1559,11 @@ packages:
 
   astro-seo@1.1.0:
     resolution: {integrity: sha512-G6LDNDyga30o+52v58jU7C35n3cORUzk7RSuY+xf/ZRbW6JiNplyaOO1VoYVKO+xzYNaBcxqNln2RFRR/wgJNQ==}
+
+  astro-webmcp@0.3.0:
+    resolution: {integrity: sha512-RbR29okHR6oNeL4DPo8G0CpBjtzeSbvynZlHdnXET2gwp2uo3XubYQQTg2MRBLXCqBVXU2WKTeAi1R55MN5O6Q==}
+    peerDependencies:
+      astro: ^6.0.0 || ^7.0.0
 
   astro@6.4.6:
     resolution: {integrity: sha512-48OBTBKR9ctbf+DQxpOuxGl8ebfn59zTuNQMBzptmG/Mi/H8IdfMSbJgGuX1I/4U6g9yazG1p4BHlf4+2hWU4Q==}
@@ -4504,6 +4523,11 @@ snapshots:
       - uploadthing
       - yaml
 
+  '@astrojs/partytown@2.1.7':
+    dependencies:
+      '@qwik.dev/partytown': 0.13.2
+      mrmime: 2.0.1
+
   '@astrojs/prism@4.0.2':
     dependencies:
       prismjs: 1.30.0
@@ -5399,6 +5423,10 @@ snapshots:
     dependencies:
       playwright: 1.60.0
 
+  '@qwik.dev/partytown@0.13.2':
+    dependencies:
+      dotenv: 16.6.1
+
   '@rollup/pluginutils@5.3.0(rollup@4.60.3)':
     dependencies:
       '@types/estree': 1.0.9
@@ -5963,6 +5991,10 @@ snapshots:
       - prettier
       - prettier-plugin-astro
       - typescript
+
+  astro-webmcp@0.3.0(astro@6.4.6(@netlify/blobs@10.7.5)(@types/node@25.7.0)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3)(yaml@2.9.0)):
+    dependencies:
+      astro: 6.4.6(@netlify/blobs@10.7.5)(@types/node@25.7.0)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3)(yaml@2.9.0)
 
   astro@6.4.6(@netlify/blobs@10.7.5)(@types/node@25.7.0)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3)(yaml@2.9.0):
     dependencies:

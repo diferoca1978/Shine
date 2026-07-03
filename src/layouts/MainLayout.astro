@@ -64,7 +64,7 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
     <SEOHead seoProps={finalSeoProps} schemas={allSchemas} />
 
     <!-- Google Tag Manager - Must be as high as possible in <head> -->
-    <script is:inline>
+    <script type="text/partytown">
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
