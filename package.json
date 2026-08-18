@@ -7,6 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check": "astro check",
+    "verify": "bash ./init.sh",
+    "lint:client": "bash ./harness/lint-customization.sh",
     "test:email": "npx playwright test tests/contact-form.spec.ts --project=chromium"
   },
   "dependencies": {
