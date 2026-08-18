@@ -24,8 +24,7 @@ pnpm-debug.log*
 .idea/
 
 #Claude code
-.claude
-CLAUDE.md
+.claude/settings.local.json
 todo.md
 .agents
 
