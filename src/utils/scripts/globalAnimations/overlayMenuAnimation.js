@@ -1,54 +1,24 @@
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
-
-export const nabBarAltAnimation = () => {
+export const overlayMenuAnimation = () => {
   const btnOpenClose = document.querySelector("#btn-open-close");
-  const logoContainer = document.querySelector("#logo-container");
-  const visibleMenu = document.querySelector("#visible-menu");
-  const overlayMenu = document.querySelector(".overlay-menu");
-  const navContainer = document.querySelector(".nav-container");
+  const overlayMenu = document.querySelector("#nav-overlay");
 
-  if (!btnOpenClose || !logoContainer || !visibleMenu || !overlayMenu || !navContainer) {
-    return;
-  }
+  if (!btnOpenClose || !overlayMenu) return;
 
   // Live reference — checked at call time inside event handlers so it reflects
   // any runtime change the user makes in their OS accessibility settings.
   const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  // Initial state - button hidden, logo and menu visible
-  gsap.set(btnOpenClose, { autoAlpha: 0 });
-  gsap.set(logoContainer, { autoAlpha: 1 });
-  gsap.set(visibleMenu, { autoAlpha: 1 });
-
-  // Initial state for overlay menu
   const overlayContent = overlayMenu.querySelector(".overlay-content");
   const navItems = overlayMenu.querySelectorAll("li");
   gsap.set(overlayContent, { x: "-100%", autoAlpha: 0 });
   gsap.set(navItems, { x: -50, autoAlpha: 0 });
 
-  // Scroll-driven fade duration: instant for reduced motion users
-  const fadeDur = () => (reducedMotionQuery.matches ? 0 : 0.2);
-
-  const hideLogoMenu = gsap.to([logoContainer, visibleMenu], {
-    autoAlpha: 0,
-    paused: true,
-    duration: fadeDur(),
-    ease: "power2.out",
-  });
-
-  const showButton = gsap.to(btnOpenClose, {
-    autoAlpha: 1,
-    paused: true,
-    duration: fadeDur(),
-    ease: "power2.out",
-  });
-
   // Overlay open: slide-in for full motion, instant reveal for reduced motion
   const openOverlay = () => {
     overlayMenu.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
 
     if (reducedMotionQuery.matches) {
       gsap.set(overlayContent, { x: "0%", autoAlpha: 1 });
@@ -69,6 +39,8 @@ export const nabBarAltAnimation = () => {
   const closeOverlay = () => {
     const items = overlayMenu.querySelectorAll("li");
     const content = overlayMenu.querySelector(".overlay-content");
+
+    document.body.style.overflow = "";
 
     if (reducedMotionQuery.matches) {
       overlayMenu.classList.add("hidden");
@@ -120,20 +92,4 @@ export const nabBarAltAnimation = () => {
       closeOverlay();
     });
   }
-
-  ScrollTrigger.create({
-    start: "1px top",
-    end: "max",
-    onUpdate: (self) => {
-      if (self.scroll() > 1) {
-        hideLogoMenu.play();
-        showButton.play();
-        navContainer.classList.remove("dark:bg-smokyBlack");
-      } else {
-        hideLogoMenu.reverse();
-        showButton.reverse();
-        navContainer.classList.add("dark:bg-smokyBlack");
-      }
-    },
-  });
 };
