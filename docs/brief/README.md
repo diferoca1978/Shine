@@ -8,7 +8,7 @@
 > feature work should go straight through `feature_list.json` (see
 > `AGENTS.md` § "The harness"), not through this ingestion flow.
 
-Put the client brief here, then tell Claude Code: **"ingiere el brief"**.
+Put the client brief here, then tell Claude Code: **"ingest the brief"**.
 
 ## What goes here
 

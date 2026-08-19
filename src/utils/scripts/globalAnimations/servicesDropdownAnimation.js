@@ -2,7 +2,7 @@
  * Sets up an accessible dropdown: click/keyboard toggle, aria-expanded,
  * close-on-outside-click, Escape key, and arrow-key focus management.
  */
-function setupDropdown(triggerId, dropdownId) {
+export function setupDropdown(triggerId, dropdownId) {
   const trigger = document.getElementById(triggerId);
   const dropdown = document.getElementById(dropdownId);
 
@@ -85,11 +85,6 @@ function setupDropdown(triggerId, dropdownId) {
     }
   });
 }
-
-export const servicesDropdownAnimation = () => {
-  setupDropdown("services-linkToggle", "services-dropdown");
-  setupDropdown("services-overlayMenu", "services-dropdown-overlayMenu");
-};
 
 export const footerServicesDropdownAnimation = () => {
   setupDropdown("footer-services", "footer-services-dropdown");
