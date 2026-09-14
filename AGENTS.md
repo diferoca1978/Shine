@@ -223,10 +223,54 @@ not via `docs/brief/` ingestion. Consequences:
 time) while building, route it to the right builder skill (below), mark
 `"done"` and commit when finished. `pnpm verify` is on-demand — see Commands.
 
+### Development workflow — full lane vs. light lane
+
+As of the `spec` / `spec-impl` / `adapt-harness` skills and the
+`spec-verifier` subagent being added to this repo, all work now goes through
+one of two lanes — see `specs/README.md` for the full mechanics. The routing
+question is mechanical, not a judgment call:
+
+**Is the answer already written in an approved document (a brief, client-
+supplied content, an approved audit)?**
+
+- **Yes → light lane.** Add/update a `feature_list.json` entry carrying
+  `source` (the document + section/line range the answer comes from) and
+  `acceptance` (verifiable criteria) — both required before the entry may
+  move to `"in_progress"`. Implement with `/spec-impl feature <id>`.
+- **No → full lane.** There's a decision to make that no document answers
+  (new architecture, an invented client-facing claim, a scaffold-level
+  change — see "Evolving the scaffold" below). Write `specs/NN-slug.md` with
+  `/spec` → `Status: Draft`. Only a human may flip it to `Approved`; a Draft
+  is not authorization to implement. Then `/spec-impl NN`.
+
+Both lanes converge from there: implementation pauses for review, then
+`spec-verifier` checks every acceptance criterion for real against the build
+(including, for the light lane, confirming the cited `source` text actually
+landed) — no agent marks a spec `Approved` or a feature `"done"` itself, only
+a human does, after verification passes.
+
+**Source documents currently available for the light lane:**
+`docs/Auditoria_SEO_AEO_ShineAgencia.md` (SEO/AEO audit, 2026-07-30) — usable
+as `source` for entries that are pure content/config fixes it identifies
+(meta text, anchor text, schema field corrections). Structural or
+architectural responses to its findings (e.g. deciding how a broken route
+gets rebuilt, not just what text changes) are still a **decision**, not a
+transcription — those go through the full lane even though the audit
+document is what surfaced the need.
+
+The 15 entries already in `feature_list.json` predate this workflow and have
+no `source`/`acceptance` fields (see "The harness" above) — they are left
+as-is, not retrofitted. Only entries added from here forward carry the new
+fields.
+
 ### Where state & memory live (no `progress/` files)
 
 - **`feature_list.json`** — the in-repo build _state_ for anything not yet
   finished. The authoritative queue for new work; travels with the repo.
+- **`specs/`** — the full lane's pre-change sign-off record (one file per
+  decision, written once, never deleted or marked "done" — the commit that
+  implements it is the completion record). Not a task list, not overlapping
+  with `feature_list.json` — see `specs/README.md` § "What this is not".
 - **git history** — the durable _completion log_. `git log` answers "what was
   built, when."
 - **Engram** (agent memory) — the cross-session _narrative_: decisions, why an
@@ -300,6 +344,7 @@ Delegation is **not free**: every subagent starts cold and re-derives context
 | bug fix, CSS/Tailwind tweak, isolated component, new feature, visual work (no image)  | `coder`      | sonnet |
 | multi-file refactor, PR/code review, architecture decisions                           | `reviewer`   | sonnet |
 | web research, external documentation (Context7), browsing with agent-browser          | `research`   | sonnet |
+| verify a spec's or feature's acceptance criteria against the real build               | `spec-verifier` | haiku |
 
 ### Non-negotiables
 
