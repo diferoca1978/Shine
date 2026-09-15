@@ -1,4 +1,4 @@
-import { COMPANY_INFO } from "./seo";
+import { COMPANY_INFO } from "./companyInfo";
 import { services } from "./services";
 
 export const SITE_CONFIG = {
