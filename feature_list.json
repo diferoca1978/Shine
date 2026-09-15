@@ -132,7 +132,7 @@
     },
     {
       "id": "add-contact-page-nap",
-      "status": "pending",
+      "status": "done",
       "builders": ["front-end-astro", "seo-guide-lines"],
       "source": ".claude/skills/seo-guide-lines/seo-guide-line.md Pattern 5 (Contact Page) + Contact Page checklist (visible phone/email links, office hours, map) — src/pages/contacto.astro currently renders only GlobalHero + ContactForm; COMPANY_INFO already has phone/email/address (src/config/seo.ts), but no component on the page renders it as visible tel:/mailto: content, hours, or a map — only the invisible CONTACT_PAGE_SCHEMA JSON-LD and the site-wide Footer.astro carry any of this.",
       "acceptance": [
