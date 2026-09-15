@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function gsapProblemAnimation() {
   const listItems = gsap.utils.toArray("#problem-hurts ul li");
   const allElements = gsap.utils.toArray(
-    ".problem-heading, #problem-image, #problem-hurts h4"
+    ".problem-heading, #problem-image, #problem-hurts h3"
   ).concat(listItems);
 
   if (!allElements.length) return;
@@ -49,7 +49,7 @@ export function gsapProblemAnimation() {
         ease: "back",
       }, "+=0.2");
 
-      tl.to("#problem-hurts h4", {
+      tl.to("#problem-hurts h3", {
         autoAlpha: 1,
         duration: 0.4,
         ease: "power2.out",

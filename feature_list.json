@@ -120,7 +120,7 @@
     },
     {
       "id": "fix-heading-skip-service-pages",
-      "status": "pending",
+      "status": "done",
       "builders": ["front-end-astro", "seo-guide-lines"],
       "source": ".claude/skills/seo-guide-lines/SKILL.md optimization checklist (\"Heading hierarchy is logical (H1 → H2 → H3), never skipped\") — src/components/section/ourServices/ServiceProblemSection.astro:44 renders an <h2>, then :90 renders `introText` as an <h4> with no intervening <h3>, on a component used by all 3 services in src/config/services.ts.",
       "acceptance": [
