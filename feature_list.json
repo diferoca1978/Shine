@@ -96,7 +96,7 @@
     },
     {
       "id": "fix-seo-title-double-brand",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": ".claude/skills/seo-guide-lines/SKILL.md optimization checklist (\"Unique meta title, 50-60 characters\") + seo-guide-line.md Meta Title section — `generatePageSEO()` at src/config/seo.ts:292 unconditionally appends ` | ${COMPANY_INFO.name}` even when the caller's `title` already ends with a brand fragment, producing duplicated-brand titles outside the 50-60 char range on src/pages/nosotros.astro:25 (77 chars), politicadeprivacidad.astro:12, terminosycondiciones.astro:11, and 404.astro:9.",
       "acceptance": [
