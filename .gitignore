@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# Worktrees
+.worktrees/
+
 # dependencies
 node_modules/
 
@@ -27,11 +30,6 @@ pnpm-debug.log*
 .claude/settings.local.json
 todo.md
 .agents
-
-#Opencode
-.opencode/
-
-
 
 # Local Netlify folder
 .netlify
