@@ -108,7 +108,7 @@
     },
     {
       "id": "fix-legal-canonical-mismatch",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": ".claude/skills/seo-guide-lines/seo-guide-line.md URL Structure section (\"canonical must match the exact URL shown in the browser\") — src/pages/politicadeprivacidad.astro:6-9,15 sets canonical/breadcrumb path to the non-existent `/politica-de-privacidad` while the real route is `/politicadeprivacidad` (confirmed via Footer.astro:208); src/pages/terminosycondiciones.astro:6-7,14 has the same mismatch (`/terminos-y-condiciones` vs real route `/terminosycondiciones`). Both pages' breadcrumb items also use relative URLs (`/`, `/politica-de-privacidad`) instead of the absolute `${COMPANY_INFO.url}/...` pattern used everywhere else (see contacto.astro:9-10, nosotros.astro:18-19).",
       "acceptance": [

@@ -1,17 +1,18 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
+import { COMPANY_INFO } from "@/config/companyInfo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: "/" },
-  { name: "Términos y Condiciones", url: "/terminos-y-condiciones" },
+  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+  { name: "Términos y Condiciones", url: `${COMPANY_INFO.url}/terminosycondiciones/` },
 ]);
 
 const terminosSEO = generatePageSEO({
   title: "Términos y Condiciones de Servicio",
   description:
     "Consulta los términos y condiciones de Shine. Políticas claras sobre contratación, entregables y responsabilidades en nuestros servicios digitales en Colombia.",
-  path: "/terminos-y-condiciones",
+  path: "/terminosycondiciones",
   noindex: true,
 });
 ---
