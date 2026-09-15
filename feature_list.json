@@ -137,11 +137,10 @@
       "source": ".claude/skills/seo-guide-lines/seo-guide-line.md Pattern 5 (Contact Page) + Contact Page checklist (visible phone/email links, office hours, map) — src/pages/contacto.astro currently renders only GlobalHero + ContactForm; COMPANY_INFO already has phone/email/address (src/config/seo.ts), but no component on the page renders it as visible tel:/mailto: content, hours, or a map — only the invisible CONTACT_PAGE_SCHEMA JSON-LD and the site-wide Footer.astro carry any of this.",
       "acceptance": [
         "contacto.astro renders a visible block with COMPANY_INFO.phone as a tel: link and COMPANY_INFO.email as a mailto: link.",
-        "Business hours are visible on the page (source the hours from COMPANY_INFO if a field exists, otherwise flag as a follow-up gap rather than inventing hours).",
         "No new client-facing fact is invented — every value rendered comes from the existing COMPANY_INFO config.",
         "pnpm build passes; NAP on the page matches Footer.astro and CONTACT_PAGE_SCHEMA exactly (no drift)."
       ],
-      "nota": "Surfaced by the seo-guide-lines compliance review, 2026-09-15. If COMPANY_INFO has no hours field, this entry's scope narrows to phone/email/map only — confirm at implementation time."
+      "nota": "Surfaced by the seo-guide-lines compliance review, 2026-09-15. COMPANY_INFO has no hours field, so the business-hours criterion was dropped by explicit user decision on 2026-09-15 rather than showing a hours-pending placeholder; scope narrowed to phone/email/location. Map was already out of scope (only mentioned in source prose, not acceptance)."
     },
     {
       "id": "fix-legal-freshness-dates",

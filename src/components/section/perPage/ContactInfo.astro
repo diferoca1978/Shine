@@ -2,14 +2,13 @@
 import { COMPANY_INFO } from "@/config/companyInfo";
 import PhoneIcon from "@/assets/icons/phone.svg";
 import MailIcon from "@/assets/icons/mail.svg";
-import ClockIcon from "@/assets/icons/clock.svg";
 import MapPinIcon from "@/assets/icons/mapPin.svg";
 ---
 
 <section class="contact-info-section w-full mx-auto">
   <div class="max-w-6xl mx-auto px-4 pb-10 lg:pb-16">
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-smokyBlack/10 bg-smokyBlack/10 dark:border-softWhite/12 dark:bg-softWhite/12"
+      class="grid grid-cols-1 sm:grid-cols-3 gap-px overflow-hidden rounded-2xl border border-smokyBlack/10 bg-smokyBlack/10 dark:border-softWhite/12 dark:bg-softWhite/12"
     >
       <a
         href={`tel:${COMPANY_INFO.phone}`}
@@ -62,21 +61,6 @@ import MapPinIcon from "@/assets/icons/mapPin.svg";
           </h3>
           <p class="mt-1 text-lg text-smokyBlack dark:text-softWhite">
             {COMPANY_INFO.address.city}, {COMPANY_INFO.address.country}
-          </p>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-3 bg-softWhite dark:bg-smokyBlack p-6">
-        <ClockIcon
-          class="h-6 w-6 text-deepplum dark:text-accentGold"
-          aria-hidden="true"
-        />
-        <div>
-          <h3 class="text-sm font-medium text-smokyBlack/50 dark:text-softWhite/50">
-            Horario
-          </h3>
-          <p class="mt-1 text-sm leading-snug text-smokyBlack/60 dark:text-softWhite/60">
-            Por confirmar — escríbenos y te respondemos en 24 horas.
           </p>
         </div>
       </div>
