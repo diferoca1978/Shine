@@ -84,9 +84,15 @@
     },
     {
       "id": "cleanup-legacy-gradient-syntax",
-      "status": "pending",
+      "status": "done",
       "builders": ["front-end-astro"],
-      "nota": "src/components/ui/CTABanner.astro and src/components/section/landing/LatestProjects.2.astro still use Tailwind v3 `bg-gradient-to-*` instead of v4 `bg-linear-to-*`. Still renders (v4 keeps the alias) — low priority, fix opportunistically if either file is touched."
+      "source": "Tailwind CSS v4 upgrade guide — `bg-gradient-to-*` utilities were renamed to `bg-linear-to-*` (v3 names kept only as a deprecated compatibility alias). Verified in-repo 2026-09-15: src/components/ui/CTABanner.astro:40 still uses `bg-gradient-to-r`; src/components/section/landing/LatestProjects.2.astro:57 was already migrated to `bg-linear-to-t` in a prior change, so that file is out of scope despite the nota.",
+      "acceptance": [
+      "src/components/ui/CTABanner.astro:40 uses `bg-linear-to-r` instead of `bg-gradient-to-r`, with the same direction and color stops (from-salviaGreen to-accentGreen) unchanged.",
+      "`grep -rn \"bg-gradient-to\" src` returns no matches anywhere in the codebase.",
+      "pnpm build passes; the CTA banner gradient renders visually identical (spot-check the homepage CTA section)."
+      ],
+      "nota": "CTABanner.astro uses Tailwind v3 bg-gradient-to-r; migrate to v4 bg-linear-to-r. LatestProjects.2.astro was already migrated separately — confirmed clean on 2026-09-15."
     },
     {
       "id": "fix-seo-title-double-brand",
