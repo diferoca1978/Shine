@@ -142,11 +142,13 @@ PascalCase component files.
 
 ### Config — `src/config/` (the single source of truth for content)
 
-- `seo.ts` — `COMPANY_INFO` (name, phone, email, founders, social links, real
-  domain `https://shineagencia.com`), `DEFAULT_SEO`, `generatePageSEO()`, and
-  the JSON-LD generator functions (`generateServiceSchema`,
-  `generateFAQSchema`, `generateHowToSchema`, `generateBreadcrumbSchema`, plus
-  Organization/Person schema helpers).
+- `companyInfo.ts` — `COMPANY_INFO` (name, phone, email, founders, social
+  links, `geo` coordinates, real domain `https://shineagencia.com`), typed via
+  a `CompanyInfo` interface.
+- `seo.ts` — imports `COMPANY_INFO` from `./companyInfo`; owns `DEFAULT_SEO`,
+  `generatePageSEO()`, and the JSON-LD generator functions
+  (`generateServiceSchema`, `generateFAQSchema`, `generateHowToSchema`,
+  `generateBreadcrumbSchema`, plus Organization/Person schema helpers).
 - `services.ts` — the 3 active services, typed `Service[]`: **Diseño Web con
   Astro**, **Google Ads & Facebook Ads (Publicidad Digital)**, **Ecommerce con
   Tienda Nube**. Each entry has content fields (`title`, `subtitle`,
@@ -189,7 +191,7 @@ Tailwind 4 Vite plugin, not PostCSS.
 | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Colors (visual tokens)                         | `src/styles/global.css` → `@theme` (only)                                                                                                                                                       |
 | Fonts                                          | Astro Fonts API, 3 files: `astro.config.mjs` `fonts[]` (Playfair Display, Open Sans, both via `fontProviders.fontsource()`) · `global.css` `@theme` `--font-*` · `MainLayout.astro` `<Font cssVariable>` |
-| Company data (name, phone, email, social, url) | `src/config/seo.ts` → `COMPANY_INFO`                                                                                                                                                             |
+| Company data (name, phone, email, social, url, geo) | `src/config/companyInfo.ts` → `COMPANY_INFO`                                                                                                                                                        |
 | Services                                       | `src/config/services.ts`                                                                                                                                                                        |
 | FAQs                                           | `src/config/faqs.ts`                                                                                                                                                                             |
 | Author / credentials                           | `src/config/authors.ts`                                                                                                                                                                          |
