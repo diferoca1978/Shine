@@ -4,15 +4,15 @@ import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
 import { COMPANY_INFO } from "@/config/companyInfo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: "/" },
-  { name: "Política de Privacidad", url: "/politica-de-privacidad" },
+  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+  { name: "Política de Privacidad", url: `${COMPANY_INFO.url}/politicadeprivacidad/` },
 ]);
 
 const privacySEO = generatePageSEO({
   title: "Política de Privacidad en Colombia",
   description:
     "Conoce cómo Shine protege tu información personal. Transparencia total sobre uso de datos, cookies y tus derechos de privacidad según la normativa colombiana.",
-  path: "/politica-de-privacidad",
+  path: "/politicadeprivacidad",
   noindex: true,
 });
 ---
