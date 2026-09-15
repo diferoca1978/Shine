@@ -5,7 +5,6 @@ import {
   generateServiceSEO,
   generateServiceSchema,
   generateFAQSchema,
-  REVIEWS_SCHEMA,
 } from "@/config/seo";
 import { COMPANY_INFO } from "@/config/companyInfo";
 import type { Service } from "@/config/services";
@@ -38,8 +37,7 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 const serviceFaqs = getFAQsByCategory(slugToCategory[service.slug] ?? "");
 const faqSchema = serviceFaqs.length ? generateFAQSchema(serviceFaqs) : null;
 
-// Include REVIEWS_SCHEMA since all service pages display SocialProof component
-const schemas = [breadcrumbSchema, schema, REVIEWS_SCHEMA, ...(faqSchema ? [faqSchema] : [])];
+const schemas = [breadcrumbSchema, schema, ...(faqSchema ? [faqSchema] : [])];
 ---
 
 <MainLayout seoProps={seo} aditionalSchemas={schemas}>

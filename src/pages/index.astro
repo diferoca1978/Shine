@@ -12,7 +12,6 @@ import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
 import { generalFAQs } from "@/config/faqs";
 import {
-  REVIEWS_SCHEMA,
   generatePageSEO,
   generateBreadcrumbSchema,
   generateFAQSchema,
@@ -36,7 +35,7 @@ const faqSchema = generateFAQSchema(generalFAQs);
 
 <MainLayout
   seoProps={homeSEO}
-  aditionalSchemas={[REVIEWS_SCHEMA, breadcrumbSchema, faqSchema]}
+  aditionalSchemas={[breadcrumbSchema, faqSchema]}
 >
   <GlobalHero
     titleLine1="Diseño web, publicidad digital y"
