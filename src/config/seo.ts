@@ -2,7 +2,6 @@ import type { SEOProps } from "astro-seo";
 import type { ImageMetadata } from "astro";
 import type { Service } from "./services";
 import { services } from "./services";
-import { mockGoogleReviews } from "@/data/mockGoogleReviews";
 import { AUTHORS } from "./authors";
 import type { Author } from "./authors";
 import { COMPANY_INFO } from "./companyInfo";
@@ -507,12 +506,6 @@ export function generateGoogleReviewsSchema(
 
   return generateReviewsSchema(formattedReviews);
 }
-
-/**
- * Pre-generated reviews schema using mockGoogleReviews data.
- * Use this constant in layouts/pages that include SocialProof component.
- */
-export const REVIEWS_SCHEMA = generateGoogleReviewsSchema(mockGoogleReviews);
 
 // Removed LOCAL_BUSINESS_SCHEMA - merged into ORGANIZATION_SCHEMA as @type: ["ProfessionalService", "LocalBusiness"]
 

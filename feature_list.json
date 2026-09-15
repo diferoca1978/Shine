@@ -89,10 +89,77 @@
       "nota": "src/components/ui/CTABanner.astro and src/components/section/landing/LatestProjects.2.astro still use Tailwind v3 `bg-gradient-to-*` instead of v4 `bg-linear-to-*`. Still renders (v4 keeps the alias) — low priority, fix opportunistically if either file is touched."
     },
     {
-      "id": "fix-mockGoogleReviews-types",
+      "id": "fix-seo-title-double-brand",
       "status": "pending",
-      "builders": [],
-      "nota": "`pnpm check` reports 3 pre-existing TS errors in src/data/mockGoogleReviews.ts: profile_photo_url: \"\" is not assignable to type ImageMetadata (lines 47, 55, 63). Found while wiring pnpm verify — not caused by this harness migration, needs its own fix (either type the field as string | ImageMetadata or supply a real ImageMetadata import)."
+      "builders": ["seo-guide-lines"],
+      "source": ".claude/skills/seo-guide-lines/SKILL.md optimization checklist (\"Unique meta title, 50-60 characters\") + seo-guide-line.md Meta Title section — `generatePageSEO()` at src/config/seo.ts:292 unconditionally appends ` | ${COMPANY_INFO.name}` even when the caller's `title` already ends with a brand fragment, producing duplicated-brand titles outside the 50-60 char range on src/pages/nosotros.astro:25 (77 chars), politicadeprivacidad.astro:12, terminosycondiciones.astro:11, and 404.astro:9.",
+      "acceptance": [
+        "generatePageSEO() strips any trailing brand fragment from options.title (or callers stop including the brand) before appending COMPANY_INFO.name, so the brand appears exactly once in the final title.",
+        "Rendered <title> on /nosotros, /politicadeprivacidad, /terminosycondiciones, and /404 each contain the brand name exactly once and fall within (or close to) 50-60 characters.",
+        "pnpm build passes; no other page's title regresses (spot-check homepage and one service page title unchanged)."
+      ],
+      "nota": "Surfaced by the seo-guide-lines compliance review, 2026-09-15."
+    },
+    {
+      "id": "fix-legal-canonical-mismatch",
+      "status": "pending",
+      "builders": ["seo-guide-lines"],
+      "source": ".claude/skills/seo-guide-lines/seo-guide-line.md URL Structure section (\"canonical must match the exact URL shown in the browser\") — src/pages/politicadeprivacidad.astro:6-9,15 sets canonical/breadcrumb path to the non-existent `/politica-de-privacidad` while the real route is `/politicadeprivacidad` (confirmed via Footer.astro:208); src/pages/terminosycondiciones.astro:6-7,14 has the same mismatch (`/terminos-y-condiciones` vs real route `/terminosycondiciones`). Both pages' breadcrumb items also use relative URLs (`/`, `/politica-de-privacidad`) instead of the absolute `${COMPANY_INFO.url}/...` pattern used everywhere else (see contacto.astro:9-10, nosotros.astro:18-19).",
+      "acceptance": [
+        "generatePageSEO({ path: ... }) on both legal pages uses the real route (/politicadeprivacidad, /terminosycondiciones) matching the actual file/URL.",
+        "Both pages' breadcrumb schema items use absolute URLs built from COMPANY_INFO.url, consistent with contacto.astro and nosotros.astro.",
+        "pnpm build passes; view-source canonical link on both pages matches the URL the page is actually served at."
+      ],
+      "nota": "Surfaced by the seo-guide-lines compliance review, 2026-09-15."
+    },
+    {
+      "id": "fix-heading-skip-service-pages",
+      "status": "pending",
+      "builders": ["front-end-astro", "seo-guide-lines"],
+      "source": ".claude/skills/seo-guide-lines/SKILL.md optimization checklist (\"Heading hierarchy is logical (H1 → H2 → H3), never skipped\") — src/components/section/ourServices/ServiceProblemSection.astro:44 renders an <h2>, then :90 renders `introText` as an <h4> with no intervening <h3>, on a component used by all 3 services in src/config/services.ts.",
+      "acceptance": [
+        "ServiceProblemSection.astro no longer skips a heading level: the <h4> at line 90 becomes an <h3>, or introText is rendered as a <p> if it isn't structurally a heading.",
+        "All 3 service pages (diseno-web-estrategico, publicidad-digital, ecommerce) show a clean H1→H2→H3 outline with no skipped levels (verify in built HTML).",
+        "pnpm build passes; visual layout/styling of the introText element is unchanged (heading tag change only, not a redesign)."
+      ],
+      "nota": "Surfaced by the seo-guide-lines compliance review, 2026-09-15."
+    },
+    {
+      "id": "add-contact-page-nap",
+      "status": "pending",
+      "builders": ["front-end-astro", "seo-guide-lines"],
+      "source": ".claude/skills/seo-guide-lines/seo-guide-line.md Pattern 5 (Contact Page) + Contact Page checklist (visible phone/email links, office hours, map) — src/pages/contacto.astro currently renders only GlobalHero + ContactForm; COMPANY_INFO already has phone/email/address (src/config/seo.ts), but no component on the page renders it as visible tel:/mailto: content, hours, or a map — only the invisible CONTACT_PAGE_SCHEMA JSON-LD and the site-wide Footer.astro carry any of this.",
+      "acceptance": [
+        "contacto.astro renders a visible block with COMPANY_INFO.phone as a tel: link and COMPANY_INFO.email as a mailto: link.",
+        "Business hours are visible on the page (source the hours from COMPANY_INFO if a field exists, otherwise flag as a follow-up gap rather than inventing hours).",
+        "No new client-facing fact is invented — every value rendered comes from the existing COMPANY_INFO config.",
+        "pnpm build passes; NAP on the page matches Footer.astro and CONTACT_PAGE_SCHEMA exactly (no drift)."
+      ],
+      "nota": "Surfaced by the seo-guide-lines compliance review, 2026-09-15. If COMPANY_INFO has no hours field, this entry's scope narrows to phone/email/map only — confirm at implementation time."
+    },
+    {
+      "id": "fix-legal-freshness-dates",
+      "status": "pending",
+      "builders": ["seo-guide-lines"],
+      "source": ".claude/skills/seo-guide-lines/seo-guide-line.md Content Freshness section (freshness signals must be real, not fabricated) — src/pages/politicadeprivacidad.astro:32 and src/pages/terminosycondiciones.astro:31 render `Última actualización: {new Date().toLocaleDateString()}`, which always shows today's build date rather than the actual last-edit date of the legal text, silently \"refreshing\" on every rebuild.",
+      "acceptance": [
+        "Both legal pages render a static last-updated date sourced from the actual last content edit (e.g. a frontmatter/const date updated only when the legal text itself changes), not `new Date()` evaluated at build/render time.",
+        "The displayed date does not change on a rebuild unless the legal text itself was edited in that same change.",
+        "pnpm build passes."
+      ],
+      "nota": "Surfaced by the seo-guide-lines compliance review, 2026-09-15. Use git history (`git log --follow -- <file>`) to pick the true last-edit date for the initial value."
+    },
+    {
+      "id": "restore-blog-updated-date-ui",
+      "status": "pending",
+      "builders": ["front-end-astro"],
+      "source": ".claude/skills/seo-guide-lines/seo-guide-line.md Content Freshness section (\"note last update date\" must be visible, not only in schema) — src/pages/blog/[slug].astro:114-118 has the visible \"Actualizado: {date}\" UI element commented out, even though `modifiedDate` is already correctly wired into generateBlogPostSchema via src/layouts/PostLayout.astro:47 (invisible JSON-LD only).",
+      "acceptance": [
+        "The commented-out \"Actualizado\" block in blog/[slug].astro is re-enabled and renders modifiedDate visibly on every blog post.",
+        "The visible date matches the modifiedDate already used in the post's BlogPosting JSON-LD (no drift between the two).",
+        "pnpm build passes; spot-check one blog post's rendered HTML shows the visible updated date."
+      ],
+      "nota": "Surfaced by the seo-guide-lines compliance review, 2026-09-15. Does not cover actually refreshing the 4 stale posts' content/modifiedDate (all 124-248 days past the guide's 90-day rule) — that requires real content revisions from the client/writer and isn't a mechanical fix; track separately once updated copy exists."
     }
   ]
 }
