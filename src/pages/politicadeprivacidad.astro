@@ -15,6 +15,8 @@ const privacySEO = generatePageSEO({
   path: "/politicadeprivacidad",
   noindex: true,
 });
+
+const lastUpdated = new Date(2025, 8, 11).toLocaleDateString();
 ---
 
 <MainLayout seoProps={privacySEO} aditionalSchemas={[breadcrumbSchema]}>
@@ -29,7 +31,7 @@ const privacySEO = generatePageSEO({
         </h1>
         <p class="text-lg text-smokyBlack/50 dark:text-softWhite">
           <strong
-            >Última actualización: {new Date().toLocaleDateString()}</strong
+            >Última actualización: {lastUpdated}</strong
           >
         </p>
       </header>

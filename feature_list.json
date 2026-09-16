@@ -144,7 +144,7 @@
     },
     {
       "id": "fix-legal-freshness-dates",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": ".claude/skills/seo-guide-lines/seo-guide-line.md Content Freshness section (freshness signals must be real, not fabricated) — src/pages/politicadeprivacidad.astro:32 and src/pages/terminosycondiciones.astro:31 render `Última actualización: {new Date().toLocaleDateString()}`, which always shows today's build date rather than the actual last-edit date of the legal text, silently \"refreshing\" on every rebuild.",
       "acceptance": [
