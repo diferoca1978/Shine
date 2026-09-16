@@ -156,7 +156,7 @@
     },
     {
       "id": "restore-blog-updated-date-ui",
-      "status": "pending",
+      "status": "in_progress",
       "builders": ["front-end-astro"],
       "source": ".claude/skills/seo-guide-lines/seo-guide-line.md Content Freshness section (\"note last update date\" must be visible, not only in schema) — src/pages/blog/[slug].astro:114-118 has the visible \"Actualizado: {date}\" UI element commented out, even though `modifiedDate` is already correctly wired into generateBlogPostSchema via src/layouts/PostLayout.astro:47 (invisible JSON-LD only).",
       "acceptance": [

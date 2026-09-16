@@ -36,6 +36,7 @@ const formatDate = (date: Date): string =>
     day: "numeric",
     month: "short",
     year: "numeric",
+    timeZone: "UTC",
   });
 ---
 
@@ -111,11 +112,12 @@ const formatDate = (date: Date): string =>
             class="text-sm text-deepdark-500 dark:text-softWhite/80 sm:text-right shrink-0"
           >
             <p>Publicado el: {formatDate(post.data.pubDate)}</p>
-            <!-- {
-              post.lastUpdate && post.lastUpdate !== post.pubDate && (
-                <p>Actualizado: {formatDate(post.lastUpdate)}</p>
-              )
-            } -->
+            {
+              post.data.modifiedDate &&
+                post.data.modifiedDate.getTime() !== post.data.pubDate.getTime() && (
+                  <p>Actualizado: {formatDate(post.data.modifiedDate)}</p>
+                )
+            }
             <p class="text-deepdark dark:text-softWhite/70">{readingTime}</p>
           </div>
         </div>
