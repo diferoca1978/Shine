@@ -17,7 +17,7 @@ faqs:
 draft: false
 ---
 
-# Seguridad Web: Protege tu Negocio y la Confianza de tus Clientes
+## Seguridad Web: Protege tu Negocio y la Confianza de tus Clientes
 
 Tu sitio web es la carta de presentación de tu negocio en el mundo digital. Pero ¿qué pasaría si mañana un hacker lo utiliza para robar datos de tus clientes? **La seguridad web ya no es opcional—es tan importante como cerrar con llave tu local físico.**
 
