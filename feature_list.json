@@ -165,6 +165,20 @@
         "pnpm build passes; spot-check one blog post's rendered HTML shows the visible updated date."
       ],
       "nota": "Surfaced by the seo-guide-lines compliance review, 2026-09-15. Does not cover actually refreshing the 4 stale posts' content/modifiedDate (all 124-248 days past the guide's 90-day rule) — that requires real content revisions from the client/writer and isn't a mechanical fix; track separately once updated copy exists."
+    },
+    {
+      "id": "fix-blog-duplicate-h1",
+      "status": "done",
+      "builders": ["seo-guide-lines"],
+      "source": "docs/Auditoria_SEO_AEO_ShineAgencia.md:188 (\"H1 duplicado en 3 de 4 posts del blog … al escribir, el primer encabezado del cuerpo debe ser '##', nunca '#'\"), corroborated at :85-:87 — src/pages/blog/[slug].astro:76 already renders post.data.title as the page <h1>, and the bodies of src/content/blog/ventajas-astro-framework-2026.md:13, seguridad-web-astro-framework.md:20 and marca-personal-ai.md:13 each open with a second '# ' heading, so those 3 posts emit two <h1> elements. marketing-digital-para-abogados.md is already correct (body starts at '##') and must not be touched.",
+      "acceptance": [
+        "The leading '# ' body heading in each of the 3 affected posts is demoted to '## '; the heading text itself is unchanged.",
+        "Built HTML for all 4 posts under dist/blog/*/index.html contains exactly one <h1> each.",
+        "No heading-level skip is introduced (H1 → H2 → H3, never skipped) in any of the 3 edited posts.",
+        "Post <title> and og:title are unchanged and still come from the frontmatter title, not the slug.",
+        "pnpm build passes."
+      ],
+      "nota": "Surfaced 2026-09-16 while verifying docs/fix-title-tag-astro-blog.md, which turned out to be a false positive — <title>/og:title are correct in production and in dist/, because PostLayout.astro:22 already feeds post.data.title into generatePageSEO. Side effect of this fix: marca-personal-ai's body is all H3, so the demoted heading becomes its only H2 parent, which also resolves the audit's separate 'salto de jerarquía H1 → H3, sin H2' finding at :190 for that post. Also note the Índice in blog/[slug].astro renders only depth === 2, so each demoted heading will now appear as the first TOC entry on its post — intentional."
     }
   ]
 }
