@@ -1,0 +1,73 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import GlobalHero from "@/components/global/GlobalHero.astro";
+import ServiceCard from "@/components/ui/ServiceCard.astro";
+import { services } from "@/config/services";
+import {
+  generateBreadcrumbSchema,
+  generatePageSEO,
+  type JSONLDSchema,
+} from "@/config/seo";
+import { COMPANY_INFO } from "@/config/companyInfo";
+
+const servicesSEO = generatePageSEO({
+  title: "Servicios: Diseño Web, Ads y Ecommerce",
+  description:
+    "Diseño web con Astro, campañas de Google Ads y Facebook Ads, y ecommerce con Tienda Nube: tres servicios digitales en un solo equipo para negocios en Colombia.",
+  path: "/servicios",
+});
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+  { name: "Servicios", url: `${COMPANY_INFO.url}/servicios/` },
+]);
+
+const collectionSchema: JSONLDSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": COMPANY_INFO.url + "/servicios",
+  name: "Servicios",
+  description: servicesSEO.description,
+  url: COMPANY_INFO.url + "/servicios",
+  isPartOf: { "@id": COMPANY_INFO.url + "#website" },
+  about: { "@id": COMPANY_INFO.url + "#organization" },
+  hasPart: services.map((service) => ({
+    "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+  })),
+};
+---
+
+<MainLayout
+  seoProps={servicesSEO}
+  aditionalSchemas={[breadcrumbSchema, collectionSchema]}
+>
+  <GlobalHero
+    titleLine1="Tres servicios. Un solo equipo."
+    titleLine2="Resultados medibles."
+    subtitleBefore="Diseño web con Astro, publicidad en Google y Meta, y"
+    subtitleHighlight="tiendas online con Tienda Nube"
+    subtitleAfter="— todo en el mismo equipo."
+    descriptionLine1="Elige el servicio que tu negocio necesita hoy. Sin humo, con resultados medibles."
+  />
+
+  <section class="services-list-wrapper w-full mx-auto">
+    <div class="max-w-7xl mx-auto px-4 pb-16 md:pb-20">
+      <div
+        class="services-grid grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
+      >
+        {
+          services.map((service) => (
+            <ServiceCard
+              slug={service.slug}
+              image={service.image}
+              alt={service.alt}
+              title={service.title}
+              description={service.subtitle || ""}
+              tags={service.tags || []}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</MainLayout>

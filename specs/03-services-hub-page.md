@@ -1,6 +1,6 @@
 # 03 — services hub page
 
-**Status:** Draft <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Implemented <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
