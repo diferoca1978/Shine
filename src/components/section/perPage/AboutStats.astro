@@ -1,5 +1,4 @@
 ---
-import GoogleLogo from "@/assets/icons/googleLogo.svg";
 import CalendarIcon from "@/assets/icons/calendarProject.svg";
 import { services } from "@/config/services";
 import { getCollection } from "astro:content";
@@ -13,32 +12,6 @@ const projectCount = works.length;
     <div
       class="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-sm sm:max-w-xl lg:max-w-3xl mx-auto"
     >
-      <!-- Google Review Card -->
-      <div
-        class="about-stat invisible flex flex-col items-center justify-center rounded-2xl border border-smokyBlack/10 dark:border-softWhite/12 bg-softBeige dark:bg-smokyBlack p-3 sm:p-7 lg:p-5 shadow-sm"
-      >
-        <div class="flex items-center gap-3">
-          <span
-            class="font-playfair text-[min(14vw,72px)] leading-none font-bold text-smokyBlack dark:text-softWhite"
-            aria-label="Calificación 5 estrellas"
-          >
-            <span class="stat-count" data-count-to="5">5</span>
-          </span>
-          <span class="text-base flex flex-col items-center gap-2">
-            ⭐⭐⭐⭐⭐
-            <GoogleLogo
-              class="h-4 lg:h-5 w-auto opacity-90"
-              aria-label="Google"
-            />
-          </span>
-        </div>
-        <p
-          class="text-center text-[min(3vw,13px)] leading-snug text-smokyBlack/60 dark:text-softWhite/55 max-w-28"
-        >
-          Calificación en Google
-        </p>
-      </div>
-
       <!-- 10+ Floating -->
       <div
         class="about-stat invisible flex flex-col items-start justify-center gap-2 pl-2 sm:pl-4"

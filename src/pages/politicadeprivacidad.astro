@@ -1,20 +1,22 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
-import { COMPANY_INFO } from "@/config/seo";
+import { COMPANY_INFO } from "@/config/companyInfo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: "/" },
-  { name: "Política de Privacidad", url: "/politica-de-privacidad" },
+  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+  { name: "Política de Privacidad", url: `${COMPANY_INFO.url}/politicadeprivacidad/` },
 ]);
 
 const privacySEO = generatePageSEO({
-  title: "Política de Privacidad en Colombia | Shine",
+  title: "Política de Privacidad en Colombia",
   description:
     "Conoce cómo Shine protege tu información personal. Transparencia total sobre uso de datos, cookies y tus derechos de privacidad según la normativa colombiana.",
-  path: "/politica-de-privacidad",
+  path: "/politicadeprivacidad",
   noindex: true,
 });
+
+const lastUpdated = new Date(2025, 8, 11).toLocaleDateString();
 ---
 
 <MainLayout seoProps={privacySEO} aditionalSchemas={[breadcrumbSchema]}>
@@ -29,7 +31,7 @@ const privacySEO = generatePageSEO({
         </h1>
         <p class="text-lg text-smokyBlack/50 dark:text-softWhite">
           <strong
-            >Última actualización: {new Date().toLocaleDateString()}</strong
+            >Última actualización: {lastUpdated}</strong
           >
         </p>
       </header>

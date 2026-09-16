@@ -12,12 +12,11 @@ import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
 import { generalFAQs } from "@/config/faqs";
 import {
-  REVIEWS_SCHEMA,
   generatePageSEO,
   generateBreadcrumbSchema,
   generateFAQSchema,
-  COMPANY_INFO,
 } from "@/config/seo";
+import { COMPANY_INFO } from "@/config/companyInfo";
 
 const homeSEO = generatePageSEO({
   title: "Agencia de Marketing Digital y Diseño Web",
@@ -36,7 +35,7 @@ const faqSchema = generateFAQSchema(generalFAQs);
 
 <MainLayout
   seoProps={homeSEO}
-  aditionalSchemas={[REVIEWS_SCHEMA, breadcrumbSchema, faqSchema]}
+  aditionalSchemas={[breadcrumbSchema, faqSchema]}
 >
   <GlobalHero
     titleLine1="Diseño web, publicidad digital y"

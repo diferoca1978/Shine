@@ -1,19 +1,22 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
 import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
+import { COMPANY_INFO } from "@/config/companyInfo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: "/" },
-  { name: "Términos y Condiciones", url: "/terminos-y-condiciones" },
+  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+  { name: "Términos y Condiciones", url: `${COMPANY_INFO.url}/terminosycondiciones/` },
 ]);
 
 const terminosSEO = generatePageSEO({
-  title: "Términos y Condiciones de Servicio | Shine",
+  title: "Términos y Condiciones de Servicio",
   description:
     "Consulta los términos y condiciones de Shine. Políticas claras sobre contratación, entregables y responsabilidades en nuestros servicios digitales en Colombia.",
-  path: "/terminos-y-condiciones",
+  path: "/terminosycondiciones",
   noindex: true,
 });
+
+const lastUpdated = new Date(2025, 10, 24).toLocaleDateString();
 ---
 
 <MainLayout seoProps={terminosSEO} aditionalSchemas={[breadcrumbSchema]}>
@@ -28,7 +31,7 @@ const terminosSEO = generatePageSEO({
         </h1>
         <p class="text-lg text-smokyBlack/50 dark:text-softWhite/50">
           <strong
-            >Última actualización: {new Date().toLocaleDateString()}</strong
+            >Última actualización: {lastUpdated}</strong
           >
         </p>
       </header>

@@ -1,6 +1,5 @@
 ---
 import { mockGoogleReviews } from "../../data/mockGoogleReviews";
-import GoogleLogo from "@/assets/icons/googleLogo.svg";
 import StarIcon from "@/assets/icons/star40x40.svg";
 import CalendarIcon from "@/assets/icons/calendarProject.svg";
 import ReviewCard from "../ui/ReviewCard.astro";
@@ -63,32 +62,6 @@ const currentPath = Astro.url.pathname;
         <div
           class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
         >
-          <!-- Google Review Card -->
-          <div
-            class="about-stat invisible flex flex-col items-center justify-center rounded-2xl border border-smokyBlack/10 dark:border-softWhite/12 bg-softBeige dark:bg-smokyBlack p-3 shadow-sm"
-          >
-            <div class="flex items-center gap-3">
-              <span
-                class="font-playfair text-[min(14vw,72px)] leading-none font-bold text-smokyBlack dark:text-softWhite"
-                aria-label="Calificación 5 estrellas"
-              >
-                <span class="stat-count text-deepplum dark:text-softWhite " data-count-to="5">5</span>
-              </span>
-              <span class="text-base flex flex-col items-center gap-2">
-                ⭐⭐⭐⭐⭐
-                <GoogleLogo
-                  class="h-4 lg:h-5 w-auto opacity-90"
-                  aria-label="Google"
-                />
-              </span>
-            </div>
-            <p
-              class="text-center text-[min(3vw,13px)] leading-snug text-smokyBlack/60 dark:text-softWhite/55 max-w-28"
-            >
-              Calificación en Google
-            </p>
-          </div>
-
           <!-- 3 Servicios Card -->
           <div
             class="about-stat invisible flex flex-col items-center justify-center gap-2 p-3 sm:p-5 rounded-2xl border border-smokyBlack/10 dark:border-softWhite/12 bg-softBeige dark:bg-smokyBlack shadow-sm"

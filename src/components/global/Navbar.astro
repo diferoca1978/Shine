@@ -1,0 +1,263 @@
+---
+import { Image } from "astro:assets";
+import WhiteLogo from "@/assets/images/logoshinewhitecharacters.svg";
+import MenuIcon from "@/assets/icons/menuIcon.svg";
+import CloseIcon from "@/assets/icons/closeIcon.svg";
+import DropdownIcon from "@/assets/icons/dropdown.svg";
+import DiagonalArrow from "@/assets/icons/diagonalArrow.svg";
+import Star from "@/assets/icons/star40x40.svg";
+import Rocket from "@/assets/images/rocket.webp";
+import ThemeToggle from "@/components/ui/ThemeToggle.astro";
+import { services } from "@/config/services";
+
+import { navBarLinksConst } from "@/utils/navigation";
+
+const primaryNav = navBarLinksConst.filter((item) => item.path !== "/contacto/");
+const ctaHref = "/contacto/";
+const currentPathRaw = decodeURIComponent(Astro.url.pathname);
+const currentPath = currentPathRaw !== "/" ? currentPathRaw : "/";
+---
+
+<header
+  class="bg-smokyBlack/90 border-b border-accentGold/15 fixed inset-x-0 top-0 z-50 backdrop-blur-sm"
+  id="site-nav"
+>
+  <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 xl:px-10">
+    <!-- Brand logo -->
+    <a href="/" aria-label="Inicio">
+      <WhiteLogo class="h-14 w-auto object-contain md:h-16 md:w-56" />
+    </a>
+
+    <!-- Desktop navigation -->
+    <nav class="hidden items-center gap-10 lg:flex" aria-label="Navegación principal">
+      {
+        primaryNav.map(({ name, path }) => (
+          <a
+            href={path}
+            class:list={[
+              "tracking-wide",
+              path === currentPath
+                ? "text-accentGold"
+                : "text-softWhite/70 hover:text-softWhite",
+            ]}
+            aria-current={path === currentPath ? "page" : undefined}
+          >
+            {name}
+          </a>
+        ))
+      }
+
+      <!-- Services dropdown -->
+      <div class="relative" id="dd-root">
+        <button
+          id="dd-trigger"
+          type="button"
+          class="flex items-center gap-1.5 tracking-wide text-softWhite/70 hover:text-softWhite focus:outline-none"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="dd-panel"
+        >
+          Servicios
+          <DropdownIcon class="h-4 w-4" aria-hidden="true" />
+        </button>
+
+        <!-- Dropdown panel -->
+        <div id="dd-panel" class="absolute top-full left-0 z-50 hidden pt-5" role="menu" aria-label="Servicios">
+          <div class="flex overflow-hidden rounded-2xl border border-accentGold/10 bg-smokyBlack shadow-2xl">
+            <!-- Left: service list -->
+            <ul class="w-64 py-3" role="none">
+              {
+                services.map((service, i) => (
+                  <li role="none">
+                    <a
+                      href={`/servicios/${service.slug}/`}
+                      class="dd-svc-link group flex items-center gap-2 border-l-2 border-transparent px-5 py-4 hover:border-accentGold hover:bg-smokyBlack/50 data-[state=active]:border-accentGold data-[state=active]:bg-smokyBlack/50 focus:outline-none"
+                      data-idx={i}
+                      data-state={i === 0 ? "active" : undefined}
+                      role="menuitem"
+                    >
+                      <span class="line-clamp-2 flex-1 text-sm leading-snug text-softWhite/60 group-hover:text-softWhite group-data-[state=active]:text-softWhite">
+                        {service.title}
+                      </span>
+                      <DiagonalArrow
+                        class="h-3.5 w-3.5 shrink-0 text-accentGold opacity-0 group-hover:opacity-100 group-data-[state=active]:opacity-100"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <!-- Right: description aside -->
+            <aside class="flex w-80 flex-col border-l border-accentGold/10 bg-smokyBlack/50 p-6">
+              {
+                services.map((service, i) => (
+                  <div
+                    class:list={["dd-desc-panel flex h-full flex-col gap-4", i !== 0 && "hidden"]}
+                    data-panel={i}
+                  >
+                    <div class="h-px w-8 bg-accentGold" />
+                    <h3 class="text-base leading-snug text-softWhite">{service.title}</h3>
+                    <p class="flex-1 text-xs leading-relaxed text-softWhite/50">{service.subtitle}</p>
+                    <a
+                      href={`/servicios/${service.slug}/`}
+                      class="mt-auto inline-flex items-center gap-1.5 text-xs tracking-wide text-accentGold"
+                      tabindex="-1"
+                    >
+                      Ver servicio
+                      <DiagonalArrow class="h-3 w-3" aria-hidden="true" />
+                    </a>
+                  </div>
+                ))
+              }
+            </aside>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Desktop CTA + theme toggle -->
+    <div class="hidden items-center gap-4 lg:flex">
+      <a
+        href={ctaHref}
+        class="rounded-lg bg-accentGold px-5 py-2.5 text-sm font-medium tracking-wide text-smokyBlack hover:opacity-90"
+      >
+        Contacto
+      </a>
+      <ThemeToggle />
+    </div>
+
+    <!-- Mobile/tablet theme toggle + overlay-menu trigger -->
+    <div class="flex items-center gap-2 lg:hidden">
+      <ThemeToggle />
+      <button
+        type="button"
+        id="btn-open-close"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-overlay"
+        class="cursor-pointer p-2 text-softWhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGold focus-visible:ring-offset-2 rounded-sm"
+      >
+        <MenuIcon id="icon-open" class="h-6 w-6" stroke-width="2" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full-screen overlay menu (mobile/tablet) — rendered outside <header> because -->
+<!-- its backdrop-blur creates a new containing block that would otherwise clip -->
+<!-- this fixed, inset-0 overlay to the header's own box. -->
+<div
+  id="nav-overlay"
+  class="overlay-menu fixed inset-0 z-100 hidden bg-deepplum lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+>
+    <div class="overlay-content relative w-full h-full">
+      <!-- Header -->
+      <div class="overlay-header flex items-center max-w-6xl mx-auto justify-between p-8">
+        <WhiteLogo class="h-14 w-auto object-contain md:h-16 md:w-56" />
+        <button
+          type="button"
+          id="btn-close"
+          aria-label="Cerrar menú"
+          class="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-softWhite focus-visible:ring-offset-2 focus-visible:ring-offset-deepplum rounded-sm"
+        >
+          <CloseIcon id="icon-close" class="h-10 w-10" stroke-width="2" />
+        </button>
+      </div>
+      <!-- Content -->
+      <div class="flex items-center justify-between max-w-6xl mx-auto py-16">
+        <div class="relative items-center justify-center w-1/2 hidden md:flex">
+          <!-- Random positioned stars -->
+          <Star class="absolute top-16 left-20 animate-pulse" aria-hidden="true" />
+          <Star class="absolute top-32 right-16 animate-pulse delay-300" aria-hidden="true" />
+          <Star class="absolute bottom-24 left-12 animate-pulse delay-700" aria-hidden="true" />
+          <Star class="absolute bottom-16 right-24 animate-pulse delay-500" aria-hidden="true" />
+          <Star class="absolute bottom-32 right-12 animate-pulse delay-400" aria-hidden="true" />
+          <Star class="absolute bottom-42 left-24 animate-pulse delay-400" aria-hidden="true" />
+
+          <!-- Rocket -->
+          <Image
+            id="rocket"
+            src={Rocket}
+            alt=""
+            height={350}
+            width={350}
+            class="relative z-10"
+            aria-hidden="true"
+          />
+          <div id="rocket-path">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+              <path style="fill: none;" d="M 0 500 C 59.433 500 268.622 44.037 500 0"></path>
+            </svg>
+          </div>
+        </div>
+        <ul class="flex flex-col items-start w-full md:w-1/2 list-none space-y-5 pl-8 md:pl-12">
+          {
+            primaryNav.map(({ name, path }) => (
+              <li>
+                <a
+                  href={path}
+                  class={`text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200 ${path === currentPath ? "underline underline-offset-3" : ""}`}
+                  aria-current={path === currentPath ? "page" : undefined}
+                >
+                  {name}
+                </a>
+              </li>
+            ))
+          }
+          <li class="flex flex-col">
+            <a
+              href="/servicios/"
+              id="services-overlayMenu"
+              class="flex items-center space-x-2 text-softWhite text-4xl lg:text-6xl hover:text-accentGold transition-colors duration-200"
+              class:list={{ "underline underline-offset-3": currentPath === "/servicios/" }}
+              aria-current={currentPath === "/servicios/" ? "page" : undefined}
+            >
+              <span>Servicios</span>
+              <DropdownIcon aria-hidden="true" />
+            </a>
+            <div id="services-dropdown-overlayMenu" class="hidden mt-5">
+              <ul class="list-none space-y-2">
+                {
+                  services.map((service) => (
+                    <li>
+                      <a
+                        href={`/servicios/${service.slug}/`}
+                        class={`text-softWhite text-xl font-semibold ${`/servicios/${service.slug}/` === currentPath ? "underline underline-offset-3" : ""}`}
+                        aria-current={`/servicios/${service.slug}/` === currentPath ? "page" : undefined}
+                      >
+                        {service.title}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </li>
+          <li class="pt-4">
+            <a
+              href={ctaHref}
+              class="inline-block rounded-lg bg-accentGold px-8 py-4 text-2xl font-medium tracking-wide text-smokyBlack hover:opacity-90"
+            >
+              Contacto
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { navbarAnimation } from "@/utils/scripts/globalAnimations/navbarAnimation.js";
+  import { overlayMenuAnimation } from "@/utils/scripts/globalAnimations/overlayMenuAnimation.js";
+  import { setupDropdown } from "@/utils/scripts/globalAnimations/servicesDropdownAnimation.js";
+
+  navbarAnimation();
+  overlayMenuAnimation();
+  setupDropdown("services-overlayMenu", "services-dropdown-overlayMenu");
+</script>

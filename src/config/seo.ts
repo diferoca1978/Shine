@@ -2,39 +2,11 @@ import type { SEOProps } from "astro-seo";
 import type { ImageMetadata } from "astro";
 import type { Service } from "./services";
 import { services } from "./services";
-import { mockGoogleReviews } from "@/data/mockGoogleReviews";
 import { AUTHORS } from "./authors";
 import type { Author } from "./authors";
+import { COMPANY_INFO } from "./companyInfo";
 
 export type JSONLDSchema = Record<string, any>;
-
-// Company base information
-export const COMPANY_INFO = {
-  name: "Shine Agencia",
-  description:
-    "Diseño web con Astro, campañas Google Ads y Facebook Ads y ecommerce con Tienda Nube para empresas en Colombia. Bogotá. Agenda tu diagnóstico gratuito hoy.",
-  url: "https://shineagencia.com", // Replace with your current domain
-  phone: "+57-3162560670", // Replace with actual phone
-  email: "rocio.shineagencia@gmail.com", // Replace with actual email
-  address: {
-    street: "Bogotá, Colombia", // Replace with current address
-    city: "Bogotá",
-    region: "Cundinamarca",
-    postalCode: "110111", // Replace with current postal code
-    country: "Colombia",
-  },
-  logo: "/images/shine-logo.svg", // Replace with current logo path
-  image: "/images/shine-og-image.png", // Replace with current OG image path
-  foundingDate: "2025", // Replace with current founding date
-  founders: ["Rocio Parra", "Diego Rodriguez"],
-  socialMedia: {
-    instagram: "https://www.instagram.com/shine.agenciam/",
-    linkedin: "https://www.linkedin.com/company/shine-brilla-con-propósito",
-    tiktok: "https://www.tiktok.com/@shine.agenciam",
-    whatsapp:
-      "https://api.whatsapp.com/send?phone=573162560670&text=Hola%20buen%20d%C3%ADa%2C%0AEstoy%20interesado%2Fa%20en%20sus%20servicios",
-  },
-};
 
 // Default SEO configuration
 export const DEFAULT_SEO: SEOProps = {
@@ -108,8 +80,8 @@ export const ORGANIZATION_SCHEMA = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 4.7109886,
-    longitude: -74.072092,
+    latitude: COMPANY_INFO.geo.latitude,
+    longitude: COMPANY_INFO.geo.longitude,
   },
   founders: COMPANY_INFO.founders.map((founder) => ({
     "@type": "Person",
@@ -534,12 +506,6 @@ export function generateGoogleReviewsSchema(
 
   return generateReviewsSchema(formattedReviews);
 }
-
-/**
- * Pre-generated reviews schema using mockGoogleReviews data.
- * Use this constant in layouts/pages that include SocialProof component.
- */
-export const REVIEWS_SCHEMA = generateGoogleReviewsSchema(mockGoogleReviews);
 
 // Removed LOCAL_BUSINESS_SCHEMA - merged into ORGANIZATION_SCHEMA as @type: ["ProfessionalService", "LocalBusiness"]
 

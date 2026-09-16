@@ -11,8 +11,8 @@ import {
   generateBreadcrumbSchema,
   generatePageSEO,
   generateAllAuthorsSchemas,
-  COMPANY_INFO,
 } from "@/config/seo";
+import { COMPANY_INFO } from "@/config/companyInfo";
 
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Inicio", url: `${COMPANY_INFO.url}/` },
@@ -22,7 +22,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 const authorSchemas = generateAllAuthorsSchemas();
 
 const nosotrosSEO = generatePageSEO({
-  title: "Rocío Parra y Diego Rodríguez | Equipo Shine Agencia Colombia",
+  title: "Rocío Parra y Diego Rodríguez | Fundadores",
   description:
     "Rocío y Diego fundadores Shine Agencia: más de 10 años en marketing digital, desarrollo web con Astro y tiendas online con Tienda Nube en Bogotá, Colombia.",
   path: "/nosotros",

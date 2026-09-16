@@ -10,7 +10,7 @@ export interface GoogleReview {
   text: string;
   rating: number;
   datePublished: number;
-  profile_photo_url: ImageMetadata;
+  profile_photo_url?: ImageMetadata;
   tag: string[];
 }
 
@@ -44,7 +44,6 @@ export const mockGoogleReviews: GoogleReview[] = [
     text: 'Es un equipo que se concentra en entender muy bien los requerimientos del producto/servicio que necesitas, te proponen nuevas ideas y te ayudan cuando no estas seguro de cómo se debe ver el resultado final. Muy Profesionales.',
     rating: 5,
     datePublished: Date.now() / 1000,
-    profile_photo_url: "",
     tag: ["diseño web", "all"]
   },
   {
@@ -52,7 +51,6 @@ export const mockGoogleReviews: GoogleReview[] = [
     text: 'Super recomendados, excelentes profesionales',
     rating: 5,
     datePublished: Date.now() / 1000,
-    profile_photo_url: "",
     tag: ["all"]
   },
   {
@@ -60,7 +58,6 @@ export const mockGoogleReviews: GoogleReview[] = [
     text: 'Es una empresa altamente comprometida con el crecimiento de los emprendedores. Su enfoque estratégico en marketing digital, acompañado de un acompañamiento cercano y personalizado, permite que cada negocio fortalezca su presencia en línea y logre resultados medibles. Destaco el profesionalismo de Leidy y Diego y su creatividad y capacidad para adaptar las estrategias a las necesidades específicas de cada cliente.',
     rating: 5,
     datePublished: Date.now() / 1000,
-    profile_photo_url: "",
     tag: ["all"]
   },
 ];
