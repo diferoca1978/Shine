@@ -10,7 +10,7 @@ tags: ["Desarrollo Web", "Core Web Vitals", "Optimización Web", "Astro Framewor
 draft: false
 ---
 
-# Astro Framework: Por qué es la mejor opción para tu web en 2026
+## Astro Framework: Por qué es la mejor opción para tu web en 2026
 
 La principal ventaja de usar **Astro Framework** frente a competidores como React, Next.js o WordPress es su arquitectura de **"Cero JavaScript por defecto"**. A diferencia de otros frameworks que envían grandes bloques de código al navegador ralentizando la carga, Astro entrega HTML puro y ligero, cargando la interactividad solo cuando es estrictamente necesario. Esto resulta en sitios web significativamente más rápidos y una mejor puntuación en métricas vitales como INP y LCP.
 
