@@ -17,6 +17,7 @@ const works = defineCollection({
       link: z.string(),
       stack: z.array(z.string()).optional(),
       tags: z.array(z.string()).optional(),
+      featured: z.boolean().optional().default(false),
     }),
 });
 
