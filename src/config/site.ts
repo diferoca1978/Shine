@@ -19,6 +19,6 @@ export const getServicesForLlms = () => {
   return services.map(s => ({
     title: s.title,
     description: s.seoDescription,
-    url: `${COMPANY_INFO.url}/servicios/${s.slug}`,
+    url: `${COMPANY_INFO.url}/servicios/${s.slug}/`,
   }));
 }

@@ -15,7 +15,7 @@ draft: false
 La principal ventaja de usar **Astro Framework** frente a competidores como React, Next.js o WordPress es su arquitectura de **"Cero JavaScript por defecto"**. A diferencia de otros frameworks que envían grandes bloques de código al navegador ralentizando la carga, Astro entrega HTML puro y ligero, cargando la interactividad solo cuando es estrictamente necesario. Esto resulta en sitios web significativamente más rápidos y una mejor puntuación en métricas vitales como INP y LCP.
 
 ¿Buscas velocidad extrema para tu próximo proyecto?  
-🎯 **[Agenda tu diagnostico estategico hoy mismo](/contacto).**
+🎯 **[Agenda tu diagnostico estategico hoy mismo](/contacto/).**
 
 ## ¿Qué hace a Astro diferente?
 
@@ -69,6 +69,6 @@ En 2026, la velocidad no es un lujo, es el requisito mínimo. Astro ofrece la me
 
 No dejes que una tecnología obsoleta frene el crecimiento de tu marca. En **Shine Agencia**, combinamos la precisión técnica con la estrategia de visibilidad moderna.
 
-🎯 **[Contactanos y moderniza tu presencia digital hoy.](/contacto)**
+🎯 **[Contactanos y moderniza tu presencia digital hoy.](/contacto/)**
 
 ---

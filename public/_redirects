@@ -1,0 +1,28 @@
+# Netlify redirect rules — see specs/04-trailing-slash-and-legacy-redirects.md
+#
+# Syntax: <source> <destination> <status>
+# Netlify's CDN normalizes trailing slashes before matching, so each source
+# below matches both with and without its trailing slash. Do NOT add rules
+# that only add or remove a trailing slash — those loop infinitely.
+# Special characters must be percent-encoded on both sides of a rule.
+
+# --- May 2026 service restructure: deleted services -------------------------
+# "Optimización y Rediseño Web" and "Estrategia de Marca Personal" were
+# discontinued, not renamed. They go to the services hub so the visitor sees
+# the current catalogue, rather than asserting a continuity that no longer
+# exists. See docs/ReestructuraShineAgenciaCambioMayo.md.
+/servicios/rediseno-web-estrategico/       /servicios/                                301
+/servicios/redise%C3%B1o-web-estrategico/  /servicios/                                301
+/servicios/marca-personal/                 /servicios/                                301
+
+# --- Renamed legal-page slugs (same page, old URL) --------------------------
+/terminos-y-condiciones                    /terminosycondiciones/                     301
+/politica-de-privacidad                    /politicadeprivacidad/                     301
+
+# --- Legacy landing pages ---------------------------------------------------
+# /lawz/ was a legal-sector landing page; the blog post is the closest live
+# content on the same topic.
+/lawz/                                     /blog/marketing-digital-para-abogados/     301
+
+# Pagination that no longer exists — src/pages/blog/index.astro does not paginate.
+/blog/2/                                   /blog/                                     301
