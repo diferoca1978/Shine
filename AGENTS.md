@@ -405,6 +405,7 @@ Delegation is **not free**: every subagent starts cold and re-derives context
 | Add/rename a config file in `src/config/`             | **Config** section · **Knobs map**                                                                                       |
 | Add a new font slot                                   | the 3 font files (see Knobs map)                                                                                         |
 | Change folder conventions                             | **Components** section · the structure note in `front-end-astro` SKILL.md                                               |
+| Add/change a deploy-level redirect                    | `public/_redirects` · verify `dist/_redirects` after build (Netlify only applies the file if it reaches the publish directory) |
 
 ### Scaffold-level vs per-client
 

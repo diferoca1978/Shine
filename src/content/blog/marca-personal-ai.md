@@ -46,7 +46,7 @@ No basta con decir quién eres; debes probarlo. Incluye biografías de autor det
 La autoridad se forja en todo el ecosistema digital. Participar en discusiones en plataformas como Reddit o LinkedIn genera señales de confianza que IAs como Perplexity valoran para validar tu expertise.
 
 *¿Sientes que tu huella digital está dispersa?*   
- 🎯*[Agenda tu diagnostico estrategico](/contacto) para unificar tu presencia ante la IA.*
+ 🎯*[Agenda tu diagnostico estrategico](/contacto/) para unificar tu presencia ante la IA.*
 
 #### 3. Aportar Datos Propios y Experiencia Real
 La IA puede procesar datos, pero no puede generar *nuevos* datos empíricos. Publicar estudios de caso, datos originales e investigación propia es extremadamente valioso para que los motores te citen como fuente primaria.
@@ -70,6 +70,6 @@ En 2026, medir el éxito por clics es medir la historia; los líderes medirán l
 
 **¿Estás listo para estructurar tu autoridad digital?**  
 No dejes que la IA adivine quién eres. Permítenos diseñar tu arquitectura de contenido AEO y asegurar tu posición como líder en tu nicho.  
-🎯*[Agenda tu diagnostico estrategico Aquí](/contacto)*
+🎯*[Agenda tu diagnostico estrategico Aquí](/contacto/)*
 
 ---

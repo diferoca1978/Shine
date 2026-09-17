@@ -119,7 +119,7 @@ export const ORGANIZATION_SCHEMA = {
         "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
         name: service.title,
         description: service.seoDescription,
-        url: `${COMPANY_INFO.url}/servicios/${service.slug}`,
+        url: `${COMPANY_INFO.url}/servicios/${service.slug}/`,
         provider: {
           "@id": COMPANY_INFO.url + "#organization",
         },
@@ -170,7 +170,7 @@ export function generateBlogSchema(
     name: "Blog - " + COMPANY_INFO.name,
     description:
       "Consejos prácticos sobre diseño web, publicidad digital y ecommerce para empresas y emprendedores en Colombia",
-    url: COMPANY_INFO.url + "/blog",
+    url: COMPANY_INFO.url + "/blog/",
     inLanguage: "es-CO",
     author: {
       "@id": COMPANY_INFO.url + "#organization",
@@ -183,7 +183,7 @@ export function generateBlogSchema(
       "@id": `${COMPANY_INFO.url}/blog/${post.id}#article`,
       headline: post.title,
       description: post.description,
-      url: `${COMPANY_INFO.url}/blog/${post.id}`,
+      url: `${COMPANY_INFO.url}/blog/${post.id}/`,
       datePublished: post.publishDate.toISOString(),
       image: post.image
         ? COMPANY_INFO.url + post.image
@@ -251,7 +251,7 @@ export function generateBlogPostSchema(post: {
     "@id": `${COMPANY_INFO.url}/blog/${post.id}#article`,
     headline: post.title,
     description: post.description,
-    url: `${COMPANY_INFO.url}/blog/${post.id}`,
+    url: `${COMPANY_INFO.url}/blog/${post.id}/`,
     datePublished: post.publishDate.toISOString(),
     ...(post.modifiedDate && { dateModified: post.modifiedDate.toISOString() }),
     author: authorSchema,
@@ -425,7 +425,7 @@ export const CONTACT_PAGE_SCHEMA: JSONLDSchema = {
   "@id": COMPANY_INFO.url + "/contacto#contactpage",
   name: "Contacto — " + COMPANY_INFO.name,
   description: "Agenda tu sesión de diagnóstico digital gratuita con el equipo de Shine Agencia. Respuesta garantizada en 24 horas.",
-  url: COMPANY_INFO.url + "/contacto",
+  url: COMPANY_INFO.url + "/contacto/",
   isPartOf: { "@id": COMPANY_INFO.url + "#website" },
   about: { "@id": COMPANY_INFO.url + "#organization" },
   contactOption: "https://schema.org/TollFree",
