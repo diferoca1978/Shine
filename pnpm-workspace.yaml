@@ -2,3 +2,6 @@ allowBuilds:
   '@parcel/watcher': true
   esbuild: true
   sharp: true
+minimumReleaseAgeExclude:
+  - '@astrojs/netlify@8.2.6'
+  - astro@7.3.3
