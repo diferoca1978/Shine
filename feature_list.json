@@ -62,7 +62,7 @@
       "id": "content-works-portfolio",
       "status": "done",
       "builders": ["seo-guide-lines"],
-      "nota": "src/content/works — 10 portfolio entries, rendered on the homepage LatestProjects sections."
+      "nota": "src/content/works — 13 portfolio entries, rendered on the homepage LatestProjects sections."
     },
     {
       "id": "seo-schema-machinery",
