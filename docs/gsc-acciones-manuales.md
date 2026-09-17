@@ -24,13 +24,13 @@ A 16/9/2026, `main` va 36 commits por detrás de `dev` y producción sigue
 devolviendo 404 en `/servicios/`. Nada de lo que sigue tiene sentido antes
 de esto.
 
-- [ ] Despliegue en producción, incluyendo el spec 03 (hub `/servicios/`)
+- [x] Despliegue en producción, incluyendo el spec 03 (hub `/servicios/`)
       y el spec 04 (barra final + `_redirects`).
 
 ### 2. Solicitar indexación de `/servicios/ecommerce/`
 
 **Prioridad alta.** Es una de las tres páginas de servicio y GSC la reporta
-como *Descubierta: actualmente sin indexar* con fecha de rastreo **N/D** —
+como _Descubierta: actualmente sin indexar_ con fecha de rastreo **N/D** —
 Google la conoce pero **nunca la ha visitado**.
 
 Verificado el 16/9/2026: responde 200, canonical correcto
@@ -39,7 +39,7 @@ y está en el sitemap. No hay defecto técnico que corregir; es presupuesto
 de rastreo desperdiciado en las variantes con 301 y los 404 legacy — que es
 justo lo que arregla el spec 04.
 
-- [ ] Inspección de URLs → pegar `https://shineagencia.com/servicios/ecommerce/`
+- [x] Inspección de URLs → pegar `https://shineagencia.com/servicios/ecommerce/`
       → **Solicitar indexación**.
 
 ### 3. Validar correcciones del informe 404
@@ -50,22 +50,22 @@ validación falla entera.
 
 Tras el despliegue, de las 11 URLs del bucket 404:
 
-| URL | Estado esperado tras el deploy |
-| --- | --- |
-| `/servicios/` | 200 (spec 03) |
-| `/servicios/rediseno-web-estrategico/` | 301 → `/servicios/` |
-| `/servicios/rediseño-web-estrategico/` | 301 → `/servicios/` |
-| `/servicios/marca-personal/` | 301 → `/servicios/` |
-| `/terminos-y-condiciones` | 301 → `/terminosycondiciones/` |
-| `/politica-de-privacidad` | 301 → `/politicadeprivacidad/` |
-| `/blog/2/` | 301 → `/blog/` |
-| `/servicios/*` | Sigue en 404 — ver "Ruido" |
-| `/politicadeprivacidad*` | Sigue en 404 — ver "Ruido" |
-| `/404*` | Sigue en 404 — ver "Ruido" |
-| `/~partytown/` | Sigue en 404 — correcto |
+| URL                                    | Estado esperado tras el deploy |
+| -------------------------------------- | ------------------------------ |
+| `/servicios/`                          | 200 (spec 03)                  |
+| `/servicios/rediseno-web-estrategico/` | 301 → `/servicios/`            |
+| `/servicios/rediseño-web-estrategico/` | 301 → `/servicios/`            |
+| `/servicios/marca-personal/`           | 301 → `/servicios/`            |
+| `/terminos-y-condiciones`              | 301 → `/terminosycondiciones/` |
+| `/politica-de-privacidad`              | 301 → `/politicadeprivacidad/` |
+| `/blog/2/`                             | 301 → `/blog/`                 |
+| `/servicios/*`                         | Sigue en 404 — ver "Ruido"     |
+| `/politicadeprivacidad*`               | Sigue en 404 — ver "Ruido"     |
+| `/404*`                                | Sigue en 404 — ver "Ruido"     |
+| `/~partytown/`                         | Sigue en 404 — correcto        |
 
-- [ ] Confirmar con `curl -sI` las 7 primeras filas antes de validar.
-- [ ] Pulsar **VALIDAR CORRECCIÓN** en el informe 404.
+- [x] Confirmar con `curl -sI` las 7 primeras filas antes de validar.
+- [x] Pulsar **VALIDAR CORRECCIÓN** en el informe 404.
 
 ### 4. Reenviar el sitemap (opcional, bajo impacto)
 
@@ -74,7 +74,7 @@ como URL nueva en el sitemap. Google relee los sitemaps por su cuenta; esto
 solo acelera un poco. **No sirve para resolver los 404 ni los 301** — ese
 fue el malentendido inicial que originó esta revisión.
 
-- [ ] Sitemaps → reenviar `https://shineagencia.com/sitemap-index.xml`.
+- [x] Sitemaps → reenviar `https://shineagencia.com/sitemap-index.xml`.
 
 ---
 
@@ -97,10 +97,10 @@ a título informativo. No validar, no "arreglar", no volver a revisar.
   correcto.
 - **Variantes `http://` y `www.` (3)** — normalización automática de la
   plataforma, ya resuelta con 301.
-- **`/blog`** (bucket *Error de redirección*) — último rastreo 14/5/2026.
+- **`/blog`** (bucket _Error de redirección_) — último rastreo 14/5/2026.
   Verificado el 16/9/2026: devuelve `301 → /blog/` correctamente. Dato
   obsoleto, se limpia en el siguiente rastreo.
-- **`/lawz/`** (bucket *Rastreada: sin indexar*) — landing antigua que ya
+- **`/lawz/`** (bucket _Rastreada: sin indexar_) — landing antigua que ya
   no existe. El spec 04 le pone un 301; entretanto GSC la reclasificará
   sola.
 
@@ -108,8 +108,8 @@ a título informativo. No validar, no "arreglar", no volver a revisar.
 
 ## Pendiente, fuera de este ciclo
 
-- **`/blog/marketing-digital-para-abogados/`** — *Rastreada: actualmente
-  sin indexar*, rastreada el 3/9/2026. Técnicamente impecable: 200,
+- **`/blog/marketing-digital-para-abogados/`** — _Rastreada: actualmente
+  sin indexar_, rastreada el 3/9/2026. Técnicamente impecable: 200,
   canonical correcto, `index, follow`. Google decidió no indexarla por
   calidad/autoridad. No se arregla con nada técnico ni con solicitar
   indexación: necesita contenido, señales E-E-A-T y enlaces internos desde

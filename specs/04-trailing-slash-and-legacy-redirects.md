@@ -1,6 +1,6 @@
 # 04 — trailing slash and legacy redirects
 
-**Status:** Approved <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Implemented <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
@@ -251,6 +251,7 @@ all `@id` values slashless and internally consistent. Scope, plan step 3,
       **Revised criterion:** `pnpm check` reports no errors *other than* the 2
       pre-existing `LatestProjectsAlt.astro` `ts(18048)` errors, i.e. this
       branch introduces no new type errors.
+
 - [x] AGENTS.md's "If you change X → update Y" table has a row covering
       `public/_redirects`.
 - [x] Built HTML spot-check: `grep -o 'href="/blog/[^"]*"' dist/blog/index.html`
@@ -259,9 +260,9 @@ all `@id` values slashless and internally consistent. Scope, plan step 3,
 **Post-deploy** (verifiable only once the change is live in production —
 not a gate for merging):
 
-- [ ] `curl -sI https://shineagencia.com/terminos-y-condiciones` returns
+- [x] `curl -sI https://shineagencia.com/terminos-y-condiciones` returns
       `301` with `location: /terminosycondiciones/`.
-- [ ] The same holds for the other 6 rules, and no rule 301s into a 404
+- [x] The same holds for the other 6 rules, and no rule 301s into a 404
       (in particular the three `/servicios/` targets, which require the
       spec 03 hub page to be live).
 

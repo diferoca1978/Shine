@@ -182,7 +182,7 @@
     },
     {
       "id": "fix-works-stack-optional-type",
-      "status": "pending",
+      "status": "done",
       "builders": ["front-end-astro"],
       "source": "`pnpm check` output on branch feature/04-trailing-slash-and-legacy-redirects, 2026-09-16: 2 errors, both `ts(18048): 'project.data.stack' is possibly 'undefined'` at src/components/section/landing/LatestProjectsAlt.astro:57 and :108. Root cause is in-repo and determinate: src/content.config.ts:18 declares the works collection's `stack` as `z.array(z.string()).optional()`, so `project.data.stack` is typed `string[] | undefined`, while both call sites invoke `.map()` on it without a guard. Not a regression — the component, src/content.config.ts and src/content/works/* are byte-identical to dev. `pnpm build` passes because Astro does not type-check at build time; only `astro check` does, so dev has been red on `pnpm check` independently of any recent work.",
       "acceptance": [

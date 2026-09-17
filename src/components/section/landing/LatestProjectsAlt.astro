@@ -54,7 +54,7 @@ const sortedWorks = allworks.sort(
                 </span>
               </div>
               <div class="flex flex-wrap gap-2 mb-4">
-                {project.data.stack.map((tech) => (
+                {project.data.stack?.map((tech) => (
                   <span class="tags rounded-2xl bg-accentGold px-2 text-sm">
                     {tech}
                   </span>
@@ -105,7 +105,7 @@ const sortedWorks = allworks.sort(
             >
               <ProjectCardAlt project={project} className="flex-shrink-0" />
               <div class="flex gap-4 mb-4">
-                {project.data.stack.map((tech) => (
+                {project.data.stack?.map((tech) => (
                   <span class="tags rounded-2xl bg-accentGold/70 px-2 py-1 text-sm text-center">
                     {tech}
                   </span>
