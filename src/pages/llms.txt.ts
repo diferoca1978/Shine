@@ -27,8 +27,8 @@ export const GET: APIRoute = async () => {
     items: postsToLlmsItems(posts, formatLlmsUrl),
     services: servicesToLlmsItems(),
     optional: [
-      { title: "About", link: "/nosotros", description: "Conoce al equipo detrás de Shine" },
-      { title: "Contact", link: "/contacto", description: "Agenda una consulta gratuita" },
+      { title: "About", link: "/nosotros/", description: "Conoce al equipo detrás de Shine" },
+      { title: "Contact", link: "/contacto/", description: "Agenda una consulta gratuita" },
     ],
   });
 };

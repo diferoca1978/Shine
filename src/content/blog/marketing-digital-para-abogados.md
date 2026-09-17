@@ -220,10 +220,10 @@ El marketing de Aguilar & Abogados no interrumpe — educa. Y esa educación gen
 
 Tienes el conocimiento, la experiencia y el propósito. Lo que puede estar faltando es la estrategia digital que permita que las personas correctas te encuentren — en el momento exacto en que más te necesitan.
 
-Eso es exactamente lo que hacemos en Shine Agencia: [ayudamos a firmas jurídicas y profesionales talentosos a construir su presencia digital](/contacto) con autenticidad, estrategia y propósito.
+Eso es exactamente lo que hacemos en Shine Agencia: [ayudamos a firmas jurídicas y profesionales talentosos a construir su presencia digital](/contacto/) con autenticidad, estrategia y propósito.
 
 El caso de Aguilar & Abogados Asociados es la prueba de que es posible. Y tu firma puede ser la siguiente historia de éxito.
 
 **¿Listo para mostrar tu luz al mundo con estrategia y propósito?**
 
-🎯 [Agenda hoy mismo tu diagnóstico gratuito](/contacto) y empecemos a diseñar el camino hacia la visibilidad, el crecimiento y los clientes que tu despacho merece.
+🎯 [Agenda hoy mismo tu diagnóstico gratuito](/contacto/) y empecemos a diseñar el camino hacia la visibilidad, el crecimiento y los clientes que tu despacho merece.

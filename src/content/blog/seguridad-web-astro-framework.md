@@ -24,7 +24,7 @@ Tu sitio web es la carta de presentación de tu negocio en el mundo digital. Per
 La buena noticia: con la tecnología adecuada, proteger tu sitio es más sencillo de lo que crees.
 
 ¿Te preocupa la seguridad de tu sitio actual?
-🎯 **[Agenda tu diagnóstico gratuito hoy](/contacto).**
+🎯 **[Agenda tu diagnóstico gratuito hoy](/contacto/).**
 
 ---
 
@@ -159,6 +159,6 @@ Tu sitio web representa tu negocio las 24 horas del día, los 7 días de la sema
 **¿Listo para un sitio web que trabaje para ti sin ponerte en riesgo?**
 En **Shine Agencia** combinamos diseño atractivo con tecnología de vanguardia para crear sitios web que impresionan y protegen.
 
-🎯 **[Agenda tu diagnóstico gratuito aquí](/contacto)**
+🎯 **[Agenda tu diagnóstico gratuito aquí](/contacto/)**
 
 ---

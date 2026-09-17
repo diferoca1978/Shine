@@ -179,6 +179,19 @@
         "pnpm build passes."
       ],
       "nota": "Surfaced 2026-09-16 while verifying docs/fix-title-tag-astro-blog.md, which turned out to be a false positive — <title>/og:title are correct in production and in dist/, because PostLayout.astro:22 already feeds post.data.title into generatePageSEO. Side effect of this fix: marca-personal-ai's body is all H3, so the demoted heading becomes its only H2 parent, which also resolves the audit's separate 'salto de jerarquía H1 → H3, sin H2' finding at :190 for that post. Also note the Índice in blog/[slug].astro renders only depth === 2, so each demoted heading will now appear as the first TOC entry on its post — intentional."
+    },
+    {
+      "id": "fix-works-stack-optional-type",
+      "status": "pending",
+      "builders": ["front-end-astro"],
+      "source": "`pnpm check` output on branch feature/04-trailing-slash-and-legacy-redirects, 2026-09-16: 2 errors, both `ts(18048): 'project.data.stack' is possibly 'undefined'` at src/components/section/landing/LatestProjectsAlt.astro:57 and :108. Root cause is in-repo and determinate: src/content.config.ts:18 declares the works collection's `stack` as `z.array(z.string()).optional()`, so `project.data.stack` is typed `string[] | undefined`, while both call sites invoke `.map()` on it without a guard. Not a regression — the component, src/content.config.ts and src/content/works/* are byte-identical to dev. `pnpm build` passes because Astro does not type-check at build time; only `astro check` does, so dev has been red on `pnpm check` independently of any recent work.",
+      "acceptance": [
+        "Both call sites in LatestProjectsAlt.astro (:57, :108) guard the optional array — `project.data.stack?.map(...)` or `(project.data.stack ?? []).map(...)` — rather than making `stack` required in content.config.ts (that is a content-schema change with a wider blast radius, and would need all 10 works entries audited first).",
+        "`pnpm check` reports 0 errors across the repo.",
+        "`pnpm build` still passes and the two LatestProjects variants render identically for works entries that DO define `stack` (spot-check the homepage).",
+        "A works entry with no `stack` field renders the surrounding card without throwing, instead of crashing the map."
+      ],
+      "nota": "Surfaced 2026-09-16 during spec 04 step 7. Fixing it was deliberately declined on that branch to keep it scoped to trailing slashes and redirects — see the amended acceptance criterion 5 in specs/04-trailing-slash-and-legacy-redirects.md, which records `pnpm check` as blocked by this pre-existing defect rather than passing."
     }
   ]
 }

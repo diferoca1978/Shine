@@ -28,7 +28,7 @@ const collectionSchema: JSONLDSchema = {
   "@id": COMPANY_INFO.url + "/servicios",
   name: "Servicios",
   description: servicesSEO.description,
-  url: COMPANY_INFO.url + "/servicios",
+  url: COMPANY_INFO.url + "/servicios/",
   isPartOf: { "@id": COMPANY_INFO.url + "#website" },
   about: { "@id": COMPANY_INFO.url + "#organization" },
   hasPart: services.map((service) => ({
