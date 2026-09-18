@@ -3,9 +3,22 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 
 const allWorks: CollectionEntry<"works">[] = await getCollection("works");
-const projects = allWorks
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-  .slice(0, 5)
+
+const featuredWorks = allWorks.filter((work) => work.data.featured);
+const pinnedWork = featuredWorks.length
+  ? featuredWorks.reduce((latest, work) =>
+      work.data.pubDate.getTime() > latest.data.pubDate.getTime() ? work : latest,
+    )
+  : undefined;
+
+const restSortedByDate = allWorks
+  .filter((work) => work !== pinnedWork)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const orderedWorks = pinnedWork ? [pinnedWork, ...restSortedByDate] : restSortedByDate;
+
+const projects = orderedWorks
+  .slice(0, 6)
   .map((work, i) => ({
     number: String(i + 1).padStart(2, "0"),
     title: work.data.title,

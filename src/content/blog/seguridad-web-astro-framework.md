@@ -19,7 +19,7 @@ draft: false
 
 ## Seguridad Web: Protege tu Negocio y la Confianza de tus Clientes
 
-Tu sitio web es la carta de presentación de tu negocio en el mundo digital. Pero ¿qué pasaría si mañana un hacker lo utiliza para robar datos de tus clientes? **La seguridad web ya no es opcional—es tan importante como cerrar con llave tu local físico.**
+Tu sitio web es la carta de presentación de tu negocio en el mundo digital. Pero ¿qué pasaría si mañana un hacker lo utiliza para robar datos de tus clientes? **La seguridad web ya no es opcional, es tan importante como cerrar con llave tu local físico.**
 
 La buena noticia: con la tecnología adecuada, proteger tu sitio es más sencillo de lo que crees.
 
@@ -40,7 +40,7 @@ Peor aún: si tu sitio es usado para estafas de phishing, podrías enfrentar pro
 
 ### Las amenazas más comunes (explicadas de forma simple)
 
-Los hackers no necesitan ser genios. Usan herramientas automatizadas que buscan sitios vulnerables—como ladrones probando puertas sin llave.
+Los hackers no necesitan ser genios. Usan herramientas automatizadas que buscan sitios vulnerables, como ladrones probando puertas sin llave.
 
 Las vulnerabilidades más explotadas incluyen formularios sin protección, contraseñas débiles, software desactualizado, y tecnologías que exponen demasiada información al navegador.
 
@@ -54,7 +54,7 @@ Astro es más seguro porque funciona de manera fundamentalmente diferente a plat
 
 Piensa en las tecnologías web tradicionales como un edificio de oficinas con muchas puertas, ventanas y accesos. Cada puerta necesita seguridad propia.
 
-**WordPress y plataformas similares** son ese edificio complejo. Tienen plugins, temas, usuarios, bases de datos—cada uno es una puerta potencial para intrusos.
+**WordPress y plataformas similares** son ese edificio complejo. Tienen plugins, temas, usuarios, bases de datos, cada uno es una puerta potencial para intrusos.
 
 **Astro** es más como una casa con pocas ventanas y puertas sólidas. Al tener menos puntos de acceso, es naturalmente más difícil de vulnerar.
 

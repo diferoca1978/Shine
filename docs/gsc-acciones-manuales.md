@@ -110,10 +110,16 @@ a título informativo. No validar, no "arreglar", no volver a revisar.
 
 - **`/blog/marketing-digital-para-abogados/`** — _Rastreada: actualmente
   sin indexar_, rastreada el 3/9/2026. Técnicamente impecable: 200,
-  canonical correcto, `index, follow`. Google decidió no indexarla por
-  calidad/autoridad. No se arregla con nada técnico ni con solicitar
-  indexación: necesita contenido, señales E-E-A-T y enlaces internos desde
-  páginas que sí posicionen. Merece su propio spec.
+  canonical correcto, `index, follow`. No se arregla con nada técnico ni con
+  solicitar indexación.
+
+  **Diagnosticada el 17/9/2026 — ver
+  [`diagnostico-blog-abogados-sin-indexar.md`](./diagnostico-blog-abogados-sin-indexar.md).**
+  La hipótesis que se dejó aquí ("necesita contenido") resultó incorrecta: el
+  artículo tiene 2067 palabras y estructura correcta. Las causas reales son
+  orfandad total de enlaces internos (ninguna página del sitio lo enlaza),
+  cero citas externas para sus estadísticas, y dos defectos en el `Person`
+  schema. El spec que merece es de topología de enlaces, no de contenido.
 
 ## Cómo quedará la cuenta
 
