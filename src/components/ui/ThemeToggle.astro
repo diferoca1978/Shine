@@ -6,7 +6,8 @@
 <button
   type="button"
   aria-label="Toggle dark mode"
-  class="theme-toggle-btn p-3 rounded-full hover:scale-110 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-salviaGreen focus-visible:ring-offset-2"
+  aria-pressed="false"
+  class="theme-toggle-btn p-3 rounded-full hover:scale-110 transition-all duration-200 motion-reduce:hover:scale-100 motion-reduce:transition-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-salviaGreen focus-visible:ring-offset-2"
 >
   <!-- Sun Icon (visible in dark mode - click to switch to light) -->
   <svg fill="none" stroke="currentColor" class="hidden dark:block w-6 h-6 text-accentGold " viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0"/></svg>
@@ -16,14 +17,37 @@
 </button>
 
 <script is:inline>
+  function syncThemeTogglePressedState(isDark) {
+    document.querySelectorAll(".theme-toggle-btn").forEach((btn) => {
+      btn.setAttribute("aria-pressed", String(isDark));
+    });
+  }
+
+  function switchTheme() {
+    // toggle() returns true if class was added, false if removed
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.theme = isDark ? "dark" : "light";
+    syncThemeTogglePressedState(isDark);
+    window.dispatchEvent(new CustomEvent("themechange"));
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    syncThemeTogglePressedState(document.documentElement.classList.contains("dark"));
+  });
+
   // Event delegation: single listener handles all toggle buttons
   if (!window.__themeToggleInit) {
     document.addEventListener("click", (e) => {
       if (e.target.closest(".theme-toggle-btn")) {
-        // toggle() returns true if class was added, false if removed
-        const isDark = document.documentElement.classList.toggle("dark");
-        localStorage.theme = isDark ? "dark" : "light";
-        window.dispatchEvent(new CustomEvent("themechange"));
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        if (!document.startViewTransition || prefersReducedMotion) {
+          switchTheme();
+        } else {
+          document.startViewTransition(switchTheme);
+        }
       }
     });
     window.__themeToggleInit = true;
