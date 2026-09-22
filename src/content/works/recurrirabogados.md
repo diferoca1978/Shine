@@ -1,7 +1,7 @@
 ---
 pubDate: 2026-05-15
 updatedDate: 2026-05-15
-title: Recurrira Bogados
+title: Recurrir Abogados
 description: "Desarrollo web y estrategia SEO para Recurrira Bogados"
 image: "./img/recurrirabogados.webp"
 link: "https://recurrirabogados.com/"
