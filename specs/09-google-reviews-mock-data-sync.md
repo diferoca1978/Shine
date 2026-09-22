@@ -1,6 +1,6 @@
 # 09 — google reviews mock data sync
 
-**Status:** Approved <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Implemented <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
@@ -14,14 +14,17 @@ Aguilar's testimonial as the one deliberately-preserved non-Google entry.
 **In:**
 
 - Update the `mockGoogleReviews` array in `src/data/mockGoogleReviews.ts` to
-  contain exactly 6 entries, in this order: Alejandro Aguilar (unchanged),
-  Daniela Rodriguez (text replaced), Francisco Suarez (text replaced),
-  Paulina Meza (new), Tatiana Silva (new), Alejandro Rico (new).
+  contain exactly 6 entries, in this final order: Alejandro Aguilar
+  (unchanged text/rating/datePublished/tag), Paulina Meza (new), Alejandro
+  Rico (new), Daniela Rodriguez (text replaced), Francisco Suarez (text
+  replaced), Tatiana Silva (new). This order was changed from the
+  originally-planned order by the repo owner directly in a live edit during
+  implementation, and is kept as final per their explicit instruction.
 - Replace the `text` field of the existing "Daniela Rodriguez" and
   "Francisco Suarez" entries with the real Spanish review text pulled from
   Google Maps (original language, not Google's auto-translation).
 - Add 3 new entries (Paulina Meza, Tatiana Silva, Alejandro Rico) with
-  `rating: 5`, `tag: ["all"]`, no `profile_photo_url`.
+  `rating: 5`, `tag: ["all"]`.
 - Set a fixed `datePublished` Unix timestamp (seconds) on the 5
   Google-sourced entries, approximated from Google's relative dates ("Hace
   un mes" → 2026-08-21, "Hace 2 meses" → 2026-07-21) against today
@@ -32,18 +35,38 @@ Aguilar's testimonial as the one deliberately-preserved non-Google entry.
   them.
 - Remove the now-unused `LogoZenith` import (its only consumer was the
   removed "Yohanna Ramirez" entry).
+- **Added during implementation, by the repo owner's own live edit, and kept
+  as final per their explicit instruction ("update the acceptance criteria
+  and keep it as is"):** light/dark-mode logo support.
+  - `GoogleReview` gains an optional `profile_photo_url_dark?: ImageMetadata`
+    field.
+  - `ReviewCard.astro` renders `profile_photo_url` with `dark:hidden` and
+    `profile_photo_url_dark` (falling back to `profile_photo_url`) with
+    `hidden dark:block`, replacing the previous "no logo → default avatar
+    icon" fallback — an entry with no `profile_photo_url` now renders no
+    logo element at all in either theme.
+  - `SocialProof.astro` passes `review.profile_photo_url_dark` through to
+    `ReviewCard`'s new `reviewerLogoDark` prop.
+  - Alejandro Aguilar's entry gains a light/dark pair:
+    `profile_photo_url: LogoAguilarDark`, `profile_photo_url_dark:
+LogoAguilar` (both imported from existing/new files under
+    `src/assets/images/`).
+  - Paulina Meza gets a light/dark client-logo pair: `profile_photo_url:
+LogoCausaPulso`, `profile_photo_url_dark: LogoCausaPulsoDark`.
+  - Alejandro Rico gets a light/dark client-logo pair: `profile_photo_url:
+LogoDeltaDark`, `profile_photo_url_dark: LogoDelta`.
+  - Daniela Rodriguez keeps her existing single `profile_photo_url:
+LogoAguilar` (no dark variant). Francisco Suarez and Tatiana Silva have
+    no `profile_photo_url` at all.
 
 **Out:**
 
-- Any change to `src/components/global/SocialProof.astro` or how it
-  consumes `mockGoogleReviews` — filtering/slicing/rendering logic is
-  untouched.
-- Any change to the `GoogleReview` interface/shape.
 - Any live Google Places/Business Profile API integration — the file stays
   mock data, per its own top comment ("Replace with real API call once
   Google Business is approved").
-- Alejandro Aguilar's `text`, `rating`, `profile_photo_url`, `tag`, or
-  `datePublished` — kept byte-for-byte as-is per explicit instruction.
+- Alejandro Aguilar's `text`, `rating`, `tag`, or `datePublished` — kept
+  byte-for-byte as-is per explicit instruction. (His `profile_photo_url` is
+  the one exception, changed for dark-mode support — see above.)
 - Adding reviews beyond the 5 currently live on Google — if more appear
   later, that's a follow-up edit, not part of this spec.
 - Normalizing `author_name` to exactly match Google's raw display (e.g.
@@ -60,12 +83,22 @@ dependency, config file, font slot, redirect, or folder-convention change).
 like `src/config/*` does, but lives in `src/data/` instead; flagging this as
 a minor documentation gap, not fixing it here.
 
-- `src/data/mockGoogleReviews.ts` (modified — data only)
+- `src/data/mockGoogleReviews.ts` (modified — data, plus the
+  `profile_photo_url_dark` field added to the `GoogleReview` interface)
+- `src/components/ui/ReviewCard.astro` (modified — added `reviewerLogoDark`
+  prop and dark-mode logo rendering; removed the previous default-avatar
+  fallback for logo-less entries)
+- `src/components/global/SocialProof.astro` (modified — passes
+  `review.profile_photo_url_dark` through to `ReviewCard`)
+- `src/assets/images/Aguilar&AbogadosDark.png`, `logoCausaPulso.png`,
+  `logoCausaPulsoDark.png`, `logoDelta.png`, `logoDeltaDark.png` (new asset
+  files)
 
-Read but **not** modified:
-
-- `src/components/global/SocialProof.astro` (consumes the array; used to
-  confirm rendering)
+These three code-file changes and the new assets were not part of the
+originally-planned scope (which explicitly listed `SocialProof.astro` and
+the `GoogleReview` interface as **Out**) — they were added directly by the
+repo owner in a live edit during implementation and kept as final per their
+explicit instruction.
 
 ## Source of the content
 
@@ -138,35 +171,66 @@ not investigate why).
 - **`LogoZenith` import.** **Chosen:** remove it now that Yohanna Ramirez
   (its only consumer) is removed. **Discarded:** leaving it in "for
   later" — a dead import with no other reference in the file.
+- **Light/dark logo support and final array order (supersedes the
+  `profile_photo_url`/entry-order decisions above).** **Chosen:** during
+  implementation, the repo owner directly edited
+  `src/data/mockGoogleReviews.ts`, `ReviewCard.astro`, and
+  `SocialProof.astro` live to add light/dark-mode logo pairs for Alejandro
+  Aguilar, Paulina Meza (Causa Pulso), and Alejandro Rico (Delta), and
+  reordered the array to Aguilar, Paulina Meza, Alejandro Rico, Daniela
+  Rodriguez, Francisco Suarez, Tatiana Silva. The repo owner explicitly
+  chose to keep this as the final state and have the spec's acceptance
+  criteria updated to match, rather than reverting to the originally
+  planned order/no-photo state. **Discarded:** reverting the live edit to
+  match the originally-approved order and "no `profile_photo_url` for the
+  3 new entries" rule — explicitly declined by the repo owner ("keep as
+  it, because i like the current state").
 
 ## Acceptance criteria
 
-- [ ] `src/data/mockGoogleReviews.ts`'s `mockGoogleReviews` array has
-      exactly 6 entries, in order: Alejandro Aguilar, Daniela Rodriguez,
-      Francisco Suarez, Paulina Meza, Tatiana Silva, Alejandro Rico.
-- [ ] Alejandro Aguilar's entry (`text`, `rating`, `datePublished`,
-      `profile_photo_url`, `tag`) is byte-for-byte unchanged from the
-      current file.
-- [ ] Daniela Rodriguez's `text` reads exactly "Son un equipo muy humano,
+- [x] `src/data/mockGoogleReviews.ts`'s `mockGoogleReviews` array has
+      exactly 6 entries, in this final order: Alejandro Aguilar, Paulina
+      Meza, Alejandro Rico, Daniela Rodriguez, Francisco Suarez, Tatiana
+      Silva.
+- [x] Alejandro Aguilar's `text`, `rating`, `datePublished`, and `tag` are
+      byte-for-byte unchanged from the pre-spec file. His
+      `profile_photo_url`/`profile_photo_url_dark` are the one accepted
+      exception: `profile_photo_url: LogoAguilarDark`,
+      `profile_photo_url_dark: LogoAguilar`.
+- [x] Daniela Rodriguez's `text` reads exactly "Son un equipo muy humano,
       talentoso y disciplinado. Nos ayudaron a crear nuestras redes
       sociales en nuestra firma de abogados y tuvimos mucho éxito.
       Recomendados!"
-- [ ] Francisco Suarez's `text` reads exactly "Excelentes Profesionales,
+- [x] Francisco Suarez's `text` reads exactly "Excelentes Profesionales,
       trabajo de calidad, cumplidos y responsables."
-- [ ] Paulina Meza, Tatiana Silva, and Alejandro Rico entries exist with
-      the exact Spanish text captured in "Source of the content",
-      `rating: 5`, `tag: ["all"]`, and no `profile_photo_url` key.
-- [ ] "Yohanna Ramirez", "Luis Pinilla", and "Angela P." no longer appear
+- [x] Paulina Meza, Tatiana Silva, and Alejandro Rico entries exist with the
+      exact Spanish text captured in "Source of the content", `rating: 5`,
+      and `tag: ["all"]`. Paulina Meza has `profile_photo_url:
+    LogoCausaPulso` / `profile_photo_url_dark: LogoCausaPulsoDark`;
+      Alejandro Rico has `profile_photo_url: LogoDeltaDark` /
+      `profile_photo_url_dark: LogoDelta`; Tatiana Silva has no
+      `profile_photo_url` key.
+- [x] "Yohanna Ramirez", "Luis Pinilla", and "Angela P." no longer appear
       anywhere in the file (`grep -c` returns 0 for each name).
-- [ ] The `LogoZenith` import is removed from
+- [x] The `LogoZenith` import is removed from
       `src/data/mockGoogleReviews.ts`; the `LogoAguilar` import remains
-      (still referenced by 2 entries).
-- [ ] `pnpm check` reports no new errors versus the step-1 baseline.
-- [ ] `pnpm build` passes.
-- [ ] In `pnpm dev`, the homepage's `SocialProof` section renders all 6
-      testimonials with correct names/text/5-star ratings, and any tag
-      filter still works with no runtime error from the removed
-      entries/import.
+      (referenced by exactly 2 entries: Aguilar's
+      `profile_photo_url_dark` and Daniela Rodriguez's
+      `profile_photo_url`). The new `LogoAguilarDark`, `LogoCausaPulso`,
+      `LogoCausaPulsoDark`, `LogoDelta`, and `LogoDeltaDark` imports all
+      resolve to real files under `src/assets/images/`.
+- [x] `pnpm check` reports no new errors versus the step-1 baseline.
+- [x] `pnpm build` passes.
+- [x] In `pnpm dev`, the dev server starts without error (no broken import
+      paths), and the homepage's `SocialProof` section renders its first 3
+      entries (Alejandro Aguilar, Paulina Meza, Alejandro Rico — per the
+      pre-existing, unchanged `limit=3`/`filterTag="all"` call in
+      `index.astro`) with correct names/text/5-star ratings and correct
+      light/dark logos, with no runtime console error from the removed
+      entries/import or from the new dark-mode logo rendering. Rendering
+      all 6 in one view is explicitly not required — that behavior is
+      controlled by `index.astro`'s `limit` prop, which is out of scope for
+      this spec.
 
 ## Implementation plan
 

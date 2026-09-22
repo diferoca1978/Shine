@@ -3,7 +3,11 @@
 
 import type { ImageMetadata } from "astro";
 import LogoAguilar from "@/assets/images/Aguilar&Abogados.png";
-import LogoZenith from "@/assets/images/logozenith.svg";
+import LogoAguilarDark from "@/assets/images/Aguilar&AbogadosDark.png";
+import LogoCausaPulso from "@/assets/images/logoCausaPulso.png"
+import LogoCausaPulsoDark from "@/assets/images/logoCausaPulsoDark.png"
+import LogoDelta from "@/assets/images/logoDelta.png"
+import LogoDeltaDark from "@/assets/images/logoDeltaDark.png"
 
 export interface GoogleReview {
   author_name: string;
@@ -11,6 +15,7 @@ export interface GoogleReview {
   rating: number;
   datePublished: number;
   profile_photo_url?: ImageMetadata;
+  profile_photo_url_dark?: ImageMetadata;
   tag: string[];
 }
 
@@ -20,44 +25,48 @@ export const mockGoogleReviews: GoogleReview[] = [
     text: 'Nos apoyaron con nuestro proyecto, nos posicionaron en la primera página de Google con SEO. Iniciaron nuestras redes sociales desde cero y han tenido un crecimiento orgánico muy interesante y valioso. Rocio es muy apasionada por su trabajo y tiene una visión de negocio que aporta mucho valor ! Súper recomendados',
     rating: 5,
     datePublished: Date.now() / 1000,
-    profile_photo_url: LogoAguilar,
+    profile_photo_url: LogoAguilarDark,
+    profile_photo_url_dark: LogoAguilar,
     tag: ["marca personal", "diseño web", "rediseño web", "all"]
   },
   {
-    author_name: 'Yohanna Ramirez',
-    text: 'Un gran apoyo para el diseño y construcción de nuestro sitio web. Su fortaleza es lograr conectar con cada empresa desde las necesidades funcionales y la forma en la que interactúan con sus clientes, comunicando su propuesta de valor de una forma efectiva',
+    author_name: 'Paulina Meza',
+    text: 'Nos atendió ROCIO y wowwww que excelente servicio, demasiado atenta y dispuesta en cada paso que dimos.',
     rating: 5,
-    datePublished: Date.now() / 1000,
-    profile_photo_url: LogoZenith,
-    tag: ["diseño web", "all"]
+    datePublished: 1787313600,
+    profile_photo_url: LogoCausaPulso,
+    profile_photo_url_dark: LogoCausaPulsoDark,
+    tag: ["all"]
+  },
+  {
+    author_name: 'Alejandro Rico',
+    text: 'Trabajo profesional, dedicado y muy amables en su atención. Quedamos satisfechos con la entrega, a tiempo, cumpliendo la expectativa y con respuesta rápida de soporte pos entrega.',
+    rating: 5,
+    profile_photo_url: LogoDeltaDark,
+    profile_photo_url_dark: LogoDelta,
+    datePublished: 1784635200,
+    tag: ["all"]
   },
   {
     author_name: 'Daniela Rodriguez',
-    text: 'En Shine trabajan con el corazón. Son muy profesionales y su especialidad son las estrategias de marketing para emprendedores. Ayudaron a robustecer la marca de nuestra firma de Abogados :) Sin duda hay mucho amor, trabajo y conocimiento detrás de todo su equipo.',
+    text: 'Son un equipo muy humano, talentoso y disciplinado. Nos ayudaron a crear nuestras redes sociales en nuestra firma de abogados y tuvimos mucho éxito. Recomendados!',
     rating: 5,
-    datePublished: Date.now() / 1000,
+    datePublished: 1784635200,
     profile_photo_url: LogoAguilar,
     tag: ["all"]
   },
   {
-    author_name: 'Luis Pinilla',
-    text: 'Es un equipo que se concentra en entender muy bien los requerimientos del producto/servicio que necesitas, te proponen nuevas ideas y te ayudan cuando no estas seguro de cómo se debe ver el resultado final. Muy Profesionales.',
-    rating: 5,
-    datePublished: Date.now() / 1000,
-    tag: ["diseño web", "all"]
-  },
-  {
     author_name: 'Francisco Suarez',
-    text: 'Super recomendados, excelentes profesionales',
+    text: 'Excelentes Profesionales, trabajo de calidad, cumplidos y responsables.',
     rating: 5,
-    datePublished: Date.now() / 1000,
+    datePublished: 1784635200,
     tag: ["all"]
   },
   {
-    author_name: 'Angela P.',
-    text: 'Es una empresa altamente comprometida con el crecimiento de los emprendedores. Su enfoque estratégico en marketing digital, acompañado de un acompañamiento cercano y personalizado, permite que cada negocio fortalezca su presencia en línea y logre resultados medibles. Destaco el profesionalismo de Leidy y Diego y su creatividad y capacidad para adaptar las estrategias a las necesidades específicas de cada cliente.',
+    author_name: 'Tatiana Silva',
+    text: 'Muy amables y profesionales.',
     rating: 5,
-    datePublished: Date.now() / 1000,
+    datePublished: 1787313600,
     tag: ["all"]
   },
 ];
