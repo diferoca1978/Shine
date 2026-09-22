@@ -47,6 +47,7 @@ const currentPath = Astro.url.pathname;
           filteredReviews.map((review) => (
             <ReviewCard
               reviewerLogo={review.profile_photo_url}
+              reviewerLogoDark={review.profile_photo_url_dark}
               reviewerName={review.author_name}
               review={review.text}
               rating={review.rating}
