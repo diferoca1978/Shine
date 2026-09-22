@@ -1,15 +1,15 @@
 ---
 import Image from "astro/components/Image.astro";
-import defaultAvatar from "@/assets/icons/defaultAvatar.svg";
 interface Props {
   reviewerLogo?: ImageMetadata;
+  reviewerLogoDark?: ImageMetadata,
   reviewerName: string;
   review: string;
   rating: number;
   tag: string[];
 }
 
-const { reviewerLogo: Logo, reviewerName, review, rating, tag } = Astro.props;
+const { reviewerLogo: Logo, reviewerLogoDark: LogoDark  , reviewerName, review, rating, tag } = Astro.props;
 ---
 
 <div
@@ -18,19 +18,19 @@ const { reviewerLogo: Logo, reviewerName, review, rating, tag } = Astro.props;
   <div class="reviewer-info flex flex-col items-center gap-4 h-full">
     <div class="reviewer-logo shrink-0 h-16 w-full max-w-50 flex items-center justify-center">
       {
-        Logo ? (
+        Logo  && (
           <Image
             src={Logo}
             alt={reviewerName}
             width={Logo.width}
             height={Logo.height}
-            class="object-contain max-h-full max-w-full h-auto w-auto"
+            class="dark:hidden object-contain max-h-full max-w-full h-auto w-auto"
           />
-        ) : (
           <Image
-            src={defaultAvatar}
-            alt={reviewerName}
-            class="object-contain max-h-full max-w-full h-auto w-auto"
+          src={LogoDark ?? Logo}
+          alt={reviewerName}
+          height={Logo.height}
+          class="hidden dark:block object-contain max-h-full max-w-full h-auto w-auto"
           />
         )
       }
