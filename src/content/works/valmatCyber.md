@@ -7,11 +7,13 @@ description: "Desarrollo de sitio web corporativo para Valmat Cyber"
 image: "./img/valmatcyber.webp"
 link: "https://valmatcyber.com"
 industry: tecnologia
-result: "Ganó un sitio corporativo con estrategia SEO e internacionalización, pensado para su expansión más allá del mercado local."
-stack: ["Astro", "TypeScript", "TailwindCSS", "SEO"]
+result: "Sitio corporativo con estrategia SEO e internacionalización, pensado para su expansión más allá del mercado local."
+stack: ["Astro", "TypeScript", "TailwindCSS"]
 tags: ["Desarrollo Web", "Optimización SEO", "Internacionalización"]
 ---
 
 # Key project features:
 
 - Desarrollo de sitio web corporativo
+- Estrategia e implementación de posicionamiento SEO
+- Internacionalización del sitio web

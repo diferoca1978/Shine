@@ -7,12 +7,13 @@ description: "Desarrollo web, branding y estrategia SEO para el despacho jurídi
 image: "./img/montcrest.webp"
 link: "https://montcrestpartners.com/"
 industry: legal
-result: "Ganó identidad de marca y un sitio corporativo pensado para su práctica en derecho empresarial, con estrategia SEO propia."
-stack: ["Branding", "Astro", "TypeScript", "TailwindCSS", "SEO"]
-tags: ["Branding", "Desarrollo Web", "Optimización SEO"]
+result: "Optimización de marca y un sitio corporativo pensado para su práctica en derecho empresarial, con estrategia SEO propia."
+stack: ["Astro", "TypeScript", "TailwindCSS"]
+tags: ["Optimización De Marca", "Desarrollo Web", "Optimización SEO"]
 ---
 
 # Key project features:
+
 - Desarrollo de sitio web corporativo profesional para despacho jurídico empresarial
 - Diseño de identidad de marca (branding)
 - Estrategia e implementación de posicionamiento SEO

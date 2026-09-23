@@ -7,9 +7,9 @@ description: "Branding, desarrollo web y estrategia SEO para el despacho jurídi
 image: "./img/perezaraujo.webp"
 link: "https://perezaraujoabogados.com"
 industry: legal
-result: "Ganó identidad de marca y un sitio corporativo profesional para su despacho de abogados, con estrategia SEO propia."
-stack: ["Branding", "Astro", "TypeScript", "TailwindCSS", "SEO"]
-tags: ["Branding", "Desarrollo Web", "Optimización SEO"]
+result: "Optimización de marca y un sitio corporativo profesional para su despacho de abogados, con estrategia SEO propia."
+stack: ["Astro", "TypeScript", "TailwindCSS"]
+tags: ["Optimización De Marca", "Desarrollo Web", "Optimización SEO"]
 ---
 
 # Key project features:

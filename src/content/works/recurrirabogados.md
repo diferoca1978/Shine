@@ -7,9 +7,9 @@ description: "Desarrollo web y estrategia SEO para Recurrira Bogados"
 image: "./img/recurrirabogados.webp"
 link: "https://recurrirabogados.com/"
 industry: legal
-result: "Ganó identidad de marca y un sitio corporativo profesional, con estrategia SEO pensada para su despacho."
-stack: ["Astro", "TypeScript", "TailwindCSS", "SEO"]
-tags: ["Branding", "Desarrollo Web", "Optimización SEO"]
+result: "Optimización de marca y un sitio corporativo profesional, con estrategia SEO pensada para su despacho."
+stack: ["Astro", "TypeScript", "TailwindCSS"]
+tags: ["Optimización De Marca", "Desarrollo Web", "Optimización SEO"]
 ---
 
 # Key project features:

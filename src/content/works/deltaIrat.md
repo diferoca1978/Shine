@@ -8,7 +8,7 @@ image: "./img/deltairat.webp"
 link: "https://delta-irat.pro"
 industry: legal
 result: "Migró de Google Sites con marca renovada y un sitio corporativo profesional, respaldado por estrategia SEO."
-stack: ["Astro", "TypeScript", "TailwindCSS", "SEO"]
+stack: ["Astro", "TypeScript", "TailwindCSS"]
 tags: ["Desarrollo Web", "Optimización SEO", "Migración de sitio Google Sites a Astro"]
 ---
 
