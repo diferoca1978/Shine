@@ -1,7 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import MainLayout from "@/layouts/MainLayout.astro";
-import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
+import {
+  generateBreadcrumbSchema,
+  generatePageSEO,
+  generateProjectSchema,
+} from "@/config/seo";
 import { COMPANY_INFO } from "@/config/companyInfo";
 import { getIndustriesWithProjects } from "@/utils/projects";
 import ProjectsHero from "@/components/section/perPage/ProjectsHero.astro";
@@ -36,9 +40,14 @@ const breadcrumbSchema = generateBreadcrumbSchema([
     url: `${COMPANY_INFO.url}/proyectos/${project.data.slug}/`,
   },
 ]);
+
+const projectSchema = generateProjectSchema(project);
 ---
 
-<MainLayout seoProps={projectSEO} aditionalSchemas={[breadcrumbSchema]}>
+<MainLayout
+  seoProps={projectSEO}
+  aditionalSchemas={[breadcrumbSchema, projectSchema]}
+>
   <ProjectsHero />
   <section class="w-full bg-softBeige dark:bg-smokyBlack">
     <div class="mx-auto flex max-w-7xl flex-col gap-10 px-6 pb-16 lg:flex-row lg:gap-18 lg:px-12 lg:pb-24">

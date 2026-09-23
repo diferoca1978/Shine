@@ -402,6 +402,59 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
   };
 }
 
+// CollectionPage schema generator — for index pages listing sub-items (services, projects, etc.)
+export function generateCollectionPageSchema(options: {
+  name: string;
+  path: string;
+  description?: string;
+  hasPart: Array<{ id: string }>;
+}): JSONLDSchema {
+  const normalizedPath = options.path.endsWith("/")
+    ? options.path.slice(0, -1)
+    : options.path;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": COMPANY_INFO.url + normalizedPath,
+    name: options.name,
+    description: options.description,
+    url: COMPANY_INFO.url + normalizedPath + "/",
+    isPartOf: { "@id": COMPANY_INFO.url + "#website" },
+    about: { "@id": COMPANY_INFO.url + "#organization" },
+    hasPart: options.hasPart.map((item) => ({ "@id": item.id })),
+  };
+}
+
+// CreativeWork schema generator — for individual project/case-study detail pages
+export function generateProjectSchema(project: {
+  data: {
+    slug: string;
+    title: string;
+    description: string;
+    result?: string;
+    image: ImageMetadata;
+    pubDate: Date;
+    updatedDate: Date;
+    tags?: string[];
+  };
+}): JSONLDSchema {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": `${COMPANY_INFO.url}/proyectos/${project.data.slug}#project`,
+    name: project.data.title,
+    description: project.data.result ?? project.data.description,
+    url: `${COMPANY_INFO.url}/proyectos/${project.data.slug}/`,
+    image: COMPANY_INFO.url + project.data.image.src,
+    datePublished: project.data.pubDate.toISOString(),
+    dateModified: project.data.updatedDate.toISOString(),
+    creator: { "@id": COMPANY_INFO.url + "#organization" },
+    isPartOf: { "@id": COMPANY_INFO.url + "/proyectos" },
+    ...(project.data.tags && { keywords: project.data.tags.join(", ") }),
+  };
+}
+
 // Breadcrumb schema generator
 export function generateBreadcrumbSchema(
   breadcrumbs: Array<{ name: string; url: string }>,

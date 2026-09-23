@@ -3,8 +3,8 @@ import { getCollection } from "astro:content";
 import MainLayout from "@/layouts/MainLayout.astro";
 import {
   generateBreadcrumbSchema,
+  generateCollectionPageSchema,
   generatePageSEO,
-  type JSONLDSchema,
 } from "@/config/seo";
 import { COMPANY_INFO } from "@/config/companyInfo";
 import { getIndustriesWithProjects, getSitewideDefaultProject } from "@/utils/projects";
@@ -28,19 +28,14 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Proyectos", url: `${COMPANY_INFO.url}/proyectos/` },
 ]);
 
-const collectionSchema: JSONLDSchema = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "@id": COMPANY_INFO.url + "/proyectos",
+const collectionSchema = generateCollectionPageSchema({
   name: "Proyectos",
+  path: "/proyectos",
   description: projectsSEO.description,
-  url: COMPANY_INFO.url + "/proyectos/",
-  isPartOf: { "@id": COMPANY_INFO.url + "#website" },
-  about: { "@id": COMPANY_INFO.url + "#organization" },
   hasPart: allProjects.map((project) => ({
-    "@id": `${COMPANY_INFO.url}/proyectos/${project.data.slug}#project`,
+    id: `${COMPANY_INFO.url}/proyectos/${project.data.slug}#project`,
   })),
-};
+});
 ---
 
 <MainLayout

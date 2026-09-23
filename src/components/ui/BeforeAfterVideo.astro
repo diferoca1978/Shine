@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import PlayIcon from "@/assets/icons/play.svg";
 
 interface Props {
   mp4: string;
@@ -34,12 +35,12 @@ const { mp4, webm, poster, alt } = Astro.props;
   />
 
   <div
-    class="absolute top-3 left-3 rounded-full bg-smokyBlack px-3 py-1 text-[10px] font-bold tracking-[0.14em] text-softWhite uppercase"
+    class="absolute top-3 left-3 rounded-full bg-smokyBlack px-3 py-1 text-xs font-bold tracking-widest text-softWhite uppercase"
   >
     Antes
   </div>
   <div
-    class="absolute top-3 right-3 rounded-full bg-accentGreen px-3 py-1 text-[10px] font-bold tracking-[0.14em] text-softWhite uppercase"
+    class="absolute top-3 right-3 rounded-full bg-accentGreen px-3 py-1 text-xs font-bold tracking-widest text-softWhite uppercase"
   >
     Después
   </div>
@@ -53,11 +54,9 @@ const { mp4, webm, poster, alt } = Astro.props;
       data-video-toggle
       class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-softWhite/40 bg-smokyBlack/50 text-softWhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGreen focus-visible:ring-offset-2"
     >
-      <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
-        <path d="M8 5v14l11-7z" />
-      </svg>
+      <PlayIcon class="h-3.5 w-3.5" aria-hidden="true" />
     </button>
-    <div class="relative h-[3px] flex-1 rounded-full bg-softWhite/30">
+    <div class="relative h-1 flex-1 rounded-full bg-softWhite/30">
       <div class="absolute inset-y-0 left-0 w-0 rounded-full bg-accentGreen" data-video-progress>
       </div>
     </div>
