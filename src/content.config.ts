@@ -12,11 +12,26 @@ const works = defineCollection({
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date(),
       title: z.string(),
+      slug: z.string(),
       description: z.string(),
       image: image(),
       link: z.string(),
+      industry: z.enum(["legal", "salud", "tecnologia"]),
+      result: z.string().optional(),
       stack: z.array(z.string()).optional(),
       tags: z.array(z.string()).optional(),
+      media: z
+        .object({
+          video: z
+            .object({
+              mp4: z.string(),
+              webm: z.string(),
+            })
+            .optional(),
+          poster: image().optional(),
+          before: image().optional(),
+        })
+        .optional(),
       featured: z.boolean().optional().default(false),
     }),
 });

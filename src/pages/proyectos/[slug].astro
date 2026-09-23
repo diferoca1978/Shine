@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "@/layouts/MainLayout.astro";
+import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
+import { COMPANY_INFO } from "@/config/companyInfo";
+import { getIndustriesWithProjects } from "@/utils/projects";
+import ProjectsHero from "@/components/section/perPage/ProjectsHero.astro";
+import ProjectsAccordion from "@/components/section/perPage/ProjectsAccordion.astro";
+import ProjectDetail from "@/components/section/perPage/ProjectDetail.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("works");
+  return projects.map((project) => ({
+    params: { slug: project.data.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+
+const allProjects = await getCollection("works");
+const industries = await getIndustriesWithProjects();
+
+const projectSEO = generatePageSEO({
+  title: project.data.title,
+  description: project.data.result ?? project.data.description,
+  path: `/proyectos/${project.data.slug}`,
+  image: project.data.image.src,
+});
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+  { name: "Proyectos", url: `${COMPANY_INFO.url}/proyectos/` },
+  {
+    name: project.data.title,
+    url: `${COMPANY_INFO.url}/proyectos/${project.data.slug}/`,
+  },
+]);
+---
+
+<MainLayout seoProps={projectSEO} aditionalSchemas={[breadcrumbSchema]}>
+  <ProjectsHero />
+  <section class="w-full bg-softBeige dark:bg-smokyBlack">
+    <div class="mx-auto flex max-w-7xl flex-col gap-10 px-6 pb-16 lg:flex-row lg:gap-18 lg:px-12 lg:pb-24">
+      <ProjectsAccordion industries={industries} activeSlug={project.data.slug} />
+      <ProjectDetail projects={allProjects} activeSlug={project.data.slug} />
+    </div>
+  </section>
+</MainLayout>

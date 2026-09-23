@@ -1,6 +1,6 @@
 # 08 — projects page
 
-**Status:** Draft <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Approved <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
@@ -66,7 +66,7 @@ update Y" table (it lists dependency/font/redirect/folder-convention
 changes, none of which this is). The `works` collection schema change in
 `src/content.config.ts` isn't clearly placed in AGENTS.md's Invariant/
 Variable table (it lists `src/content/*` under Variable but doesn't
-separately call out collection *schemas*) — flagging this as a real gap
+separately call out collection _schemas_) — flagging this as a real gap
 worth a future AGENTS.md row, not fixing it unilaterally here.
 
 New:
@@ -322,7 +322,7 @@ This spec introduces client-facing copy in two places:
    - `projectsHeroAnimation.js` — simple text reveal.
 
 9. **`src/utils/navigation.ts`.** Insert `{ name: "Proyectos", path:
-   "/proyectos/" }` after "Nosotros", before "Contacto"/"Blog".
+"/proyectos/" }` after "Nosotros", before "Contacto"/"Blog".
 
 10. **`LatestProjects.2.astro`.** Add the "Ver los 13 proyectos →" link
     after the existing list; no change to its pinned/sort/slice logic or

@@ -1,0 +1,74 @@
+---
+import { getCollection } from "astro:content";
+import { INDUSTRY_LABELS, INDUSTRY_ORDER } from "@/utils/projects";
+import DiagonalArrow from "@/assets/icons/diagonalArrow.svg";
+
+const allProjects = await getCollection("works");
+const years = allProjects.map((project) => project.data.pubDate.getFullYear());
+const minYear = Math.min(...years);
+const maxYear = Math.max(...years);
+const yearRange = minYear === maxYear ? String(minYear) : `${minYear} — ${maxYear}`;
+const industryLabels = INDUSTRY_ORDER.map((industry) => INDUSTRY_LABELS[industry]).join(" · ");
+---
+
+<section class="w-full bg-softBeige dark:bg-smokyBlack">
+  <div class="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
+    <p
+      data-hero-reveal
+      class="invisible text-xs font-bold uppercase tracking-[0.24em] text-smokyBlack dark:text-softWhite"
+    >
+      Proyectos
+    </p>
+
+    <h1
+      data-hero-reveal
+      class="invisible mt-8 max-w-3xl text-5xl leading-[1.15] tracking-tight text-smokyBlack dark:text-softWhite lg:text-7xl"
+    >
+      Cada pr<span class="text-smokyBlack/30 dark:text-softBeige/30">o</span>yect<span
+        class="text-smokyBlack/30 dark:text-softBeige/30">o</span
+      > empieza c<span class="text-smokyBlack/30 dark:text-softBeige/30">o</span>n un
+      negoci<span class="text-smokyBlack/30 dark:text-softBeige/30">o</span> que nadie
+      enc<span class="text-smokyBlack/30 dark:text-softBeige/30">o</span>ntraba
+    </h1>
+
+    <p
+      data-hero-reveal
+      class="invisible mt-6 max-w-xl text-lg leading-relaxed text-smokyBlack/50 dark:text-softBeige/50"
+    >
+      Antes y después de {allProjects.length} negocios colombianos: qué encontramos roto,
+      qué construimos y qué cambió en su tráfico.
+    </p>
+
+    <div data-hero-reveal class="invisible mt-8 flex flex-wrap items-center gap-7">
+      <a
+        href="/contacto/"
+        class="inline-flex items-center gap-3 rounded-full bg-accentGreen px-8 py-3.5 text-sm font-bold text-softWhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGreen focus-visible:ring-offset-2"
+      >
+        Agenda tu diagnóstico
+        <DiagonalArrow class="h-4 w-4" aria-hidden="true" />
+      </a>
+      <a
+        href="/servicios/"
+        class="text-sm text-smokyBlack underline underline-offset-4 dark:text-softWhite"
+      >
+        Ver servicios
+      </a>
+    </div>
+
+    <div
+      data-hero-reveal
+      class="invisible mt-14 flex flex-wrap items-center gap-3 text-xs text-smokyBlack/50 dark:text-softBeige/50"
+    >
+      <span>{allProjects.length} proyectos</span>
+      <span aria-hidden="true">·</span>
+      <span>{yearRange}</span>
+      <span aria-hidden="true">·</span>
+      <span>{industryLabels}</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { projectsHeroAnimation } from "@/utils/scripts/perPageAnimations/proyectos/projectsHeroAnimation.js";
+  projectsHeroAnimation();
+</script>

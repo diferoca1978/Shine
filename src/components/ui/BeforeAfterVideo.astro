@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  mp4: string;
+  webm: string;
+  poster: ImageMetadata;
+  alt: string;
+}
+
+const { mp4, webm, poster, alt } = Astro.props;
+---
+
+<div class="relative h-full w-full" data-before-after-video>
+  <video
+    class="h-full w-full object-cover"
+    muted
+    loop
+    playsinline
+    preload="none"
+    poster={poster.src}
+    data-video
+  >
+    <source src={webm} type="video/webm" />
+    <source src={mp4} type="video/mp4" />
+  </video>
+
+  <Image
+    src={poster}
+    alt={alt}
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover data-[playing]:hidden"
+    data-video-poster
+  />
+
+  <div
+    class="absolute top-3 left-3 rounded-full bg-smokyBlack px-3 py-1 text-[10px] font-bold tracking-[0.14em] text-softWhite uppercase"
+  >
+    Antes
+  </div>
+  <div
+    class="absolute top-3 right-3 rounded-full bg-accentGreen px-3 py-1 text-[10px] font-bold tracking-[0.14em] text-softWhite uppercase"
+  >
+    Después
+  </div>
+
+  <div
+    class="absolute inset-x-0 bottom-0 flex items-center gap-3 bg-linear-to-t from-smokyBlack/70 to-transparent px-3 pt-8 pb-3"
+  >
+    <button
+      type="button"
+      aria-label="Reproducir video"
+      data-video-toggle
+      class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-softWhite/40 bg-smokyBlack/50 text-softWhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGreen focus-visible:ring-offset-2"
+    >
+      <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+    </button>
+    <div class="relative h-[3px] flex-1 rounded-full bg-softWhite/30">
+      <div class="absolute inset-y-0 left-0 w-0 rounded-full bg-accentGreen" data-video-progress>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { beforeAfterVideoAnimation } from "@/utils/scripts/perPageAnimations/proyectos/beforeAfterVideoAnimation.js";
+  beforeAfterVideoAnimation();
+</script>

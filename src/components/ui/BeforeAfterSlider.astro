@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  before: ImageMetadata;
+  after: ImageMetadata;
+  alt: string;
+}
+
+const { before, after, alt } = Astro.props;
+---
+
+<div class="relative h-full w-full select-none" data-before-after-slider>
+  <Image src={after} alt={alt} class="absolute inset-0 h-full w-full object-cover" />
+
+  <div
+    class="absolute inset-y-0 left-0 w-1/2 overflow-hidden border-r-2 border-softWhite"
+    data-slider-clip
+  >
+    <Image
+      src={before}
+      alt={`${alt} — antes`}
+      class="absolute inset-0 h-full w-full max-w-none object-cover"
+      data-slider-before-image
+    />
+  </div>
+
+  <div
+    class="absolute top-3 left-3 rounded-full bg-smokyBlack px-3 py-1 text-[10px] font-bold tracking-[0.14em] text-softWhite uppercase"
+  >
+    Antes
+  </div>
+  <div
+    class="absolute top-3 right-3 rounded-full bg-accentGreen px-3 py-1 text-[10px] font-bold tracking-[0.14em] text-softWhite uppercase"
+  >
+    Después
+  </div>
+
+  <input
+    type="range"
+    min="0"
+    max="100"
+    value="50"
+    aria-label="Arrastra para comparar antes y después"
+    data-slider-input
+    class="absolute inset-x-6 bottom-4 accent-accentGreen focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGreen focus-visible:ring-offset-2"
+  />
+</div>
+
+<script>
+  import { beforeAfterSliderAnimation } from "@/utils/scripts/perPageAnimations/proyectos/beforeAfterSliderAnimation.js";
+  beforeAfterSliderAnimation();
+</script>

@@ -1,0 +1,117 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { INDUSTRY_LABELS } from "@/utils/projects";
+import BeforeAfterVideo from "@/components/ui/BeforeAfterVideo.astro";
+import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider.astro";
+import DiagonalArrow from "@/assets/icons/diagonalArrow.svg";
+
+interface Props {
+  projects: CollectionEntry<"works">[];
+  activeSlug: string;
+}
+
+const { projects, activeSlug } = Astro.props;
+---
+
+<div class="relative min-w-0 flex-1" data-project-detail data-page-slug={activeSlug}>
+  {
+    projects.map((project) => {
+      const isActive = project.data.slug === activeSlug;
+      const tier = project.data.media?.video ? "A" : project.data.media?.before ? "B" : "C";
+
+      return (
+        <article
+          id={`project-${project.data.slug}`}
+          data-project-card
+          data-slug={project.data.slug}
+          aria-hidden={isActive ? "false" : "true"}
+          class:list={["flex flex-col gap-8", !isActive && "hidden"]}
+        >
+          <div
+            class="relative w-full overflow-hidden rounded-2xl border border-smokyBlack/10 dark:border-softBeige/10"
+            style="aspect-ratio: 16 / 9;"
+          >
+            {tier === "A" && project.data.media?.video && (
+              <BeforeAfterVideo
+                mp4={project.data.media.video.mp4}
+                webm={project.data.media.video.webm}
+                poster={project.data.media.poster ?? project.data.image}
+                alt={`Antes y después de ${project.data.title}`}
+              />
+            )}
+            {tier === "B" && project.data.media?.before && (
+              <BeforeAfterSlider
+                before={project.data.media.before}
+                after={project.data.image}
+                alt={`Antes y después de ${project.data.title}`}
+              />
+            )}
+            {tier === "C" && (
+              <Image
+                src={project.data.image}
+                alt={`Sitio web de ${project.data.title}`}
+                class="h-full w-full object-cover"
+              />
+            )}
+          </div>
+
+          <div class="flex flex-col items-start justify-between gap-6 sm:flex-row">
+            <div class="min-w-0">
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-smokyBlack/50 dark:text-softBeige/50">
+                {INDUSTRY_LABELS[project.data.industry]} · {project.data.pubDate.getFullYear()}
+              </p>
+              <h2 class="mt-3 text-3xl leading-tight text-smokyBlack dark:text-softWhite lg:text-4xl">
+                {project.data.title}
+              </h2>
+              {project.data.result && (
+                <p class="mt-3 max-w-xl text-base leading-relaxed text-smokyBlack/70 dark:text-softBeige/70">
+                  {project.data.result}
+                </p>
+              )}
+            </div>
+            <a
+              href={project.data.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex shrink-0 items-center gap-2 rounded-full border border-smokyBlack/20 px-6 py-3 text-sm font-bold whitespace-nowrap text-smokyBlack focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGreen focus-visible:ring-offset-2 dark:border-softBeige/20 dark:text-softWhite"
+            >
+              Ver sitio
+              <DiagonalArrow class="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+          </div>
+
+          <div class="h-px bg-smokyBlack/10 dark:bg-softBeige/10" />
+
+          <div class="grid grid-cols-1 gap-10 sm:grid-cols-2">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-smokyBlack/50 dark:text-softBeige/50">
+                Qué hicimos
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                {(project.data.tags ?? []).map((tag) => (
+                  <span class="rounded-full border border-smokyBlack/10 bg-softWhite px-4 py-1.5 text-xs text-smokyBlack dark:border-softBeige/10 dark:bg-softWhite/5 dark:text-softWhite">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.2em] text-smokyBlack/50 dark:text-softBeige/50">
+                Con qué
+              </p>
+              <p class="mt-3 text-sm text-smokyBlack/70 dark:text-softBeige/70">
+                {(project.data.stack ?? []).join(" · ")}
+              </p>
+            </div>
+          </div>
+        </article>
+      );
+    })
+  }
+</div>
+
+<script>
+  import { projectDetailAnimation } from "@/utils/scripts/perPageAnimations/proyectos/projectDetailAnimation.js";
+  projectDetailAnimation();
+</script>

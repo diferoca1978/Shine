@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "@/layouts/MainLayout.astro";
+import {
+  generateBreadcrumbSchema,
+  generatePageSEO,
+  type JSONLDSchema,
+} from "@/config/seo";
+import { COMPANY_INFO } from "@/config/companyInfo";
+import { getIndustriesWithProjects, getSitewideDefaultProject } from "@/utils/projects";
+import ProjectsHero from "@/components/section/perPage/ProjectsHero.astro";
+import ProjectsAccordion from "@/components/section/perPage/ProjectsAccordion.astro";
+import ProjectDetail from "@/components/section/perPage/ProjectDetail.astro";
+
+const allProjects = await getCollection("works");
+const industries = await getIndustriesWithProjects();
+const defaultProject = await getSitewideDefaultProject();
+
+const projectsSEO = generatePageSEO({
+  title: "Proyectos: 13 casos de éxito en Colombia",
+  description:
+    "Antes y después de 13 negocios colombianos: qué encontramos roto, qué construimos y qué cambió en su tráfico. Casos reales de diseño web, branding y SEO.",
+  path: "/proyectos",
+});
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
+  { name: "Proyectos", url: `${COMPANY_INFO.url}/proyectos/` },
+]);
+
+const collectionSchema: JSONLDSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": COMPANY_INFO.url + "/proyectos",
+  name: "Proyectos",
+  description: projectsSEO.description,
+  url: COMPANY_INFO.url + "/proyectos/",
+  isPartOf: { "@id": COMPANY_INFO.url + "#website" },
+  about: { "@id": COMPANY_INFO.url + "#organization" },
+  hasPart: allProjects.map((project) => ({
+    "@id": `${COMPANY_INFO.url}/proyectos/${project.data.slug}#project`,
+  })),
+};
+---
+
+<MainLayout
+  seoProps={projectsSEO}
+  aditionalSchemas={[breadcrumbSchema, collectionSchema]}
+>
+  <ProjectsHero />
+  <section class="w-full bg-softBeige dark:bg-smokyBlack">
+    <div class="mx-auto flex max-w-7xl flex-col gap-10 px-6 pb-16 lg:flex-row lg:gap-18 lg:px-12 lg:pb-24">
+      <ProjectsAccordion industries={industries} activeSlug={defaultProject.data.slug} />
+      <ProjectDetail projects={allProjects} activeSlug={defaultProject.data.slug} />
+    </div>
+  </section>
+</MainLayout>
