@@ -251,6 +251,10 @@ Both lanes converge from there: implementation pauses for review, then
 landed) — no agent marks a spec `Approved` or a feature `"done"` itself, only
 a human does, after verification passes.
 
+In both lanes `/spec-impl` executes every code step via the `coder` subagent
+(one step per call) and stays the orchestrator — branch, per-step pauses,
+diff review, ambiguities.
+
 **Source documents currently available for the light lane:**
 `docs/Auditoria_SEO_AEO_ShineAgencia.md` (SEO/AEO audit, 2026-07-30) — usable
 as `source` for entries that are pure content/config fixes it identifies
@@ -406,6 +410,7 @@ Delegation is **not free**: every subagent starts cold and re-derives context
 | Add a new font slot                                   | the 3 font files (see Knobs map)                                                                                         |
 | Change folder conventions                             | **Components** section · the structure note in `front-end-astro` SKILL.md                                               |
 | Add/change a deploy-level redirect                    | `public/_redirects` · verify `dist/_redirects` after build (Netlify only applies the file if it reaches the publish directory) |
+| Change a workflow skill or agent (`.claude/skills/spec*`, `.claude/agents/*`) | **Development workflow** / **Orchestration model** above · `specs/README.md` § "Workflow"                  |
 
 ### Scaffold-level vs per-client
 
