@@ -45,13 +45,13 @@ export default defineConfig({
 
   fonts: [
     {
-      name: "Playfair Display",
-      cssVariable: "--font-playfair",
+      name: "Quicksand",
+      cssVariable: "--font-quickSand",
       provider: fontProviders.fontsource(),
     },
     {
-      name: "Open Sans",
-      cssVariable: "--font-openSans",
+      name: "Spline Sans",
+      cssVariable: "--font-spline",
       provider: fontProviders.fontsource(),
     },
   ],

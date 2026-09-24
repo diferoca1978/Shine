@@ -25,7 +25,7 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-playfair);
+    font-family: var(--font-quickSand);
   }
 
   p,
@@ -34,7 +34,7 @@
   button,
   input,
   textarea {
-    font-family: var(--font-openSans);
+    font-family: var(--font-spline);
   }
 
   /* Prevent browser autofill from overriding custom styles */
@@ -80,8 +80,8 @@
 }
 
 @theme inline {
-  --font-playfair: "Playfair Display", sans-serif;
-  --font-openSans: "Open Sans", sans-serif;
+  --font-quickSand: "Quicksand", sans-serif;
+  --font-spline: "Spline Sans", sans-serif;
 
   --color-softWhite: oklch(0.997 0 0);
   --color-softBeige: oklch(0.9643 0.007 88.64);

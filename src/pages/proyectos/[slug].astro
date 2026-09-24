@@ -11,6 +11,8 @@ import { getIndustriesWithProjects } from "@/utils/projects";
 import ProjectsHero from "@/components/section/perPage/ProjectsHero.astro";
 import ProjectsAccordion from "@/components/section/perPage/ProjectsAccordion.astro";
 import ProjectDetail from "@/components/section/perPage/ProjectDetail.astro";
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
 
 export async function getStaticPaths() {
   const projects = await getCollection("works");
@@ -48,7 +50,17 @@ const projectSchema = generateProjectSchema(project);
   seoProps={projectSEO}
   aditionalSchemas={[breadcrumbSchema, projectSchema]}
 >
-  <ProjectsHero />
+  <ProjectsHero>
+    <Button
+      slot="cta"
+      href="/contacto/"
+      variant="primary"
+      animation={true}
+      className="w-fit"
+    >
+      Agenda tu diagnóstico <StarIcon />
+    </Button>
+  </ProjectsHero>
   <section class="w-full bg-softBeige dark:bg-smokyBlack">
     <div class="mx-auto flex max-w-7xl flex-col gap-10 px-6 pb-16 lg:flex-row lg:gap-18 lg:px-12 lg:pb-24">
       <ProjectsAccordion industries={industries} activeSlug={project.data.slug} />
