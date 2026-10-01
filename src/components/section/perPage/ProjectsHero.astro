@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import { INDUSTRY_LABELS, INDUSTRY_ORDER } from "@/utils/projects";
+
+const allProjects = await getCollection("works");
+---
+
+<section class="w-full dark:bg-smokyBlack">
+  <div class="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
+
+    <h1
+      data-hero-reveal
+      class="invisible mt-8 max-w-5xl text-5xl leading-tighter tracking-tight text-smokyBlack dark:text-softWhite lg:text-6xl"
+    >
+      De marcas invisibles a marcas que <span class="italic text-deepplum dark:text-accentGold">Google</span> y la <span class="italic text-deepplum dark:text-accentGold">IA</span> encuentran
+    </h1>
+
+    <p
+      data-hero-reveal
+      class="invisible mt-6 max-w-xl text-lg leading-relaxed text-smokyBlack/50 dark:text-softBeige/50"
+    >
+      La anatomía de {allProjects.length} transformaciones digitales en Colombia: problemas
+      estructurales y desarrollo a medida.
+    </p>
+
+    <div data-hero-reveal class="invisible flex flex-wrap my-6">
+      <slot name="cta" />
+    </div>
+    <div class="w-full h-px bg-accentGold"></div>
+  </div>
+</section>
+
+<script>
+  import { projectsHeroAnimation } from "@/utils/scripts/perPageAnimations/proyectos/projectsHeroAnimation.js";
+  projectsHeroAnimation();
+</script>

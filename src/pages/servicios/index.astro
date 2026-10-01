@@ -5,8 +5,8 @@ import ServiceCard from "@/components/ui/ServiceCard.astro";
 import { services } from "@/config/services";
 import {
   generateBreadcrumbSchema,
+  generateCollectionPageSchema,
   generatePageSEO,
-  type JSONLDSchema,
 } from "@/config/seo";
 import { COMPANY_INFO } from "@/config/companyInfo";
 
@@ -22,19 +22,14 @@ const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Servicios", url: `${COMPANY_INFO.url}/servicios/` },
 ]);
 
-const collectionSchema: JSONLDSchema = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "@id": COMPANY_INFO.url + "/servicios",
+const collectionSchema = generateCollectionPageSchema({
   name: "Servicios",
+  path: "/servicios",
   description: servicesSEO.description,
-  url: COMPANY_INFO.url + "/servicios/",
-  isPartOf: { "@id": COMPANY_INFO.url + "#website" },
-  about: { "@id": COMPANY_INFO.url + "#organization" },
   hasPart: services.map((service) => ({
-    "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+    id: `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
   })),
-};
+});
 ---
 
 <MainLayout

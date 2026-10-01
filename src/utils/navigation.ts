@@ -1,6 +1,7 @@
 export const navBarLinksConst = [
   { name: "Inicio", path: "/" },
   { name: "Nosotros", path: "/nosotros/" },
+  { name: "Proyectos", path: "/proyectos/" },
   { name: "Contacto", path: "/contacto/" },
   { name: "Blog", path: "/blog/" },
 ] as const;
