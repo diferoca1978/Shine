@@ -115,8 +115,8 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
 
-    <Font cssVariable="--font-playfair" />
-    <Font cssVariable="--font-openSans" />
+    <Font cssVariable="--font-quickSand" />
+    <Font cssVariable="--font-spline" />
 
     <!-- Speculation Rules API for instant navigations (LCP optimization) -->
     <script type="speculationrules">
@@ -154,6 +154,18 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
               ]
             },
             "eagerness": "moderate"
+          },
+          {
+            "where": {
+              "and": [
+                { "href_matches": "/proyectos/*" },
+                { "not": { "href_matches": "/contacto/*" } },
+                { "not": { "href_matches": "/politicadeprivacidad*" } },
+                { "not": { "href_matches": "/terminosycondiciones*" } },
+                { "not": { "href_matches": "/404*" } }
+              ]
+            },
+            "eagerness": "moderate"
           }
         ]
       }
@@ -164,7 +176,7 @@ const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
       import "@/utils/scripts/lenis/lenisSmooth.js";
     </script>
   </head>
-  <body class="w-full p-0 m-0 overflow-x-hidden dark:bg-smokyBlack">
+  <body class="w-full p-0 m-0 overflow-x-hidden bg-softBeige dark:bg-smokyBlack">
     <a
       href="#main-content"
       class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-9999 focus-visible:rounded-md focus-visible:bg-softBeige focus-visible:px-4 focus-visible:py-2 focus-visible:text-smokyBlack focus-visible:font-semibold focus-visible:shadow-lg"

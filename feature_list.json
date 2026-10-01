@@ -192,6 +192,19 @@
         "A works entry with no `stack` field renders the surrounding card without throwing, instead of crashing the map."
       ],
       "nota": "Surfaced 2026-09-16 during spec 04 step 7. Fixing it was deliberately declined on that branch to keep it scoped to trailing slashes and redirects — see the amended acceptance criterion 5 in specs/04-trailing-slash-and-legacy-redirects.md, which records `pnpm check` as blocked by this pre-existing defect rather than passing."
+    },
+    {
+      "id": "blog-astro-vs-wordpress",
+      "status": "done",
+      "builders": ["seo-guide-lines"],
+      "source": "Contenido proporcionado por el usuario sobre la evolución de WordPress, webs estáticas, Astro, seguridad, mantenimiento, rendimiento y el papel de la IA.",
+      "acceptance": [
+        "Se crea una entrada Markdown válida en src/content/blog/ con frontmatter compatible con la colección blog.",
+        "El artículo compara únicamente Astro y WordPress cuando contrasta una web estática moderna con un CMS tradicional; no presenta Next.js como alternativa.",
+        "El artículo explica rendimiento, mantenimiento, seguridad, gestión de cambios y los escenarios en los que WordPress sigue siendo adecuado, con un tono claro y prudente.",
+        "El artículo tiene un solo H1 generado por la plantilla, encabezados H2 como preguntas y una llamada a la acción hacia /contacto/."
+      ],
+      "nota": "Nuevo artículo SEO/AEO sobre cuándo conviene migrar de WordPress a Astro, con las cifras contextualizadas y sin afirmar que Astro sea invulnerable."
     }
   ]
 }

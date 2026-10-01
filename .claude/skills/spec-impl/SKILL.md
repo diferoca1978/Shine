@@ -3,7 +3,7 @@ name: spec-impl
 description: Implements an approved spec, or a feature_list.json entry (the SDD light lane). Spec mode validates that the state means "Approved" (in any language); feature mode validates that source and acceptance are both filled in. Either way it creates a git branch, switches to it, and starts the implementation step by step with pauses to review diffs.
 disable-model-invocation: true
 argument-hint: <NN-spec-name> | feature <id>
-allowed-tools: Read, Glob, Grep, Edit, Write, AskUserQuestion, Bash(git status:*), Bash(git branch:*), Bash(git checkout:*), Bash(git log:*), Bash(git diff:*), Bash(git stash:*), Bash(cat:*), Bash(ls:*)
+allowed-tools: Read, Glob, Grep, Edit, Write, AskUserQuestion, Agent, Bash(git status:*), Bash(git branch:*), Bash(git checkout:*), Bash(git log:*), Bash(git diff:*), Bash(git stash:*), Bash(cat:*), Bash(ls:*)
 ---
 
 # /spec-impl — Implementer of approved specs and light-lane features
@@ -311,13 +311,51 @@ Once confirmed, follow these rules during the entire implementation:
 
 **One rule above all:** implement what the source says. If something looks suboptimal to you, mention it as an observation but implement what was agreed — a spec's plan, or a feature's `source` + `acceptance`. Changes to the spec go into the spec, changes to what a feature should do go into its `feature_list.json` entry — never into the code by surprise.
 
+**Delegating steps to `coder`:**
+
+This session is the orchestrator — it owns the branch, the per-step pauses,
+the diff review, and ambiguity handling. The code itself is written by the
+`coder` subagent, so `coder.md`'s rules (the mandatory `front-end-astro`
+call before any markup, the `gsap-*` skill routing, its model) apply during
+this lane too.
+
+- **What gets dispatched.** Every step that creates or modifies code —
+  `src/components/**`, `src/pages/**`, `src/layouts/**`, `src/utils/**`,
+  `src/content/**`, styles, animations — goes to
+  `Agent(subagent_type: "coder")`, **one step per call**. Never hand
+  `coder` the whole plan in one call; that loses the per-step pause.
+- **What the prompt to `coder` carries:**
+  - Spec mode: the spec path, the step number and the step's text
+    **verbatim**, the spec's Scope In/Out, and the acceptance criteria
+    relevant to that step.
+  - Feature mode: the entry's `id`, and its `source`, `acceptance` and
+    `builders` verbatim (there is no numbered step).
+  - Both: the active branch, and these constraints — implement this step
+    (or this feature) only; do not commit; do not edit the spec or
+    `feature_list.json`; if something the spec or `source` doesn't resolve
+    comes up, stop and return the ambiguity with 2–3 concrete options
+    instead of deciding it.
+- **What stays inline** (not delegated): the `feature_list.json` status
+  flip, edits to the spec itself, one-line tweaks, and any work that depends
+  on an attached image — subagents can't receive one (`AGENTS.md` §
+  "Delegate vs. handle inline").
+- **When `coder` returns:**
+  1. Run `git diff --stat` yourself — don't rely only on `coder`'s report.
+  2. Summarize the files touched and the skills `coder` invoked — and, if it
+     skipped `front-end-astro` on a component task, the reason it gave.
+  3. If `coder` reported an ambiguity, surface it through the "If during the
+     implementation you find an ambiguity" rule below (stop / options /
+     wait) — don't resolve it yourself and re-dispatch.
+  4. Then do the usual pause from "Work rhythm" below.
+
 **Work rhythm:**
 
 - **Spec mode:** implement one step of the plan, show a summary of which
   files you touched and what you did, say `Step N completed. Could you
   review the diff and let me know if I continue with Step N+1?`, wait for
   confirmation before continuing.
-- **Feature mode:** build the feature per `source`, using the `builders`
+- **Feature mode:** dispatch the feature to `coder` per "Delegating steps
+  to `coder`" above; `coder` builds it per `source`, using the `builders`
   skill(s) in order (`front-end-astro` for sections, then
   `seo-guide-lines` if the feature closes a page — see `AGENTS.md` §
   "Skill routing"). Show a summary of which files you touched, then say
@@ -381,7 +419,8 @@ field.
   Phase 2  →  Reads the state → "Approved" (or "Aprobado", etc.) → ✅ continues
   Phase 3  →  git checkout -b feature/01-mvp-arkanoid → git checkout feature/01-mvp-arkanoid
               Shows objective, scope, plan and criteria
-  Phase 4  →  Implements step by step with pauses
+  Phase 4  →  Dispatches each code step to Agent(subagent_type: "coder"), one per call
+              Runs git diff --stat, reports files + skills coder used, pauses
               Ends by reminding to verify the acceptance criteria
 
 /spec-impl 02-powerups  (state: Draft / Borrador)
@@ -397,7 +436,7 @@ field.
   Phase 2  →  No other feature in_progress; source + acceptance present → ✅ continues
   Phase 3  →  Marks status: "in_progress" → git checkout -b feature/hero-home
               Shows source and acceptance checklist
-  Phase 4  →  Builds the feature per its builders, pauses for review
+  Phase 4  →  Dispatches the feature to coder (source + acceptance + builders), pauses for review
               Ends by pointing at spec-verifier (feature mode); does not set "done" itself
 
 /spec-impl feature contact-cta  (source or acceptance missing)

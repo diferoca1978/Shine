@@ -2,11 +2,14 @@
 pubDate: 2026-03-04
 updatedDate: 2026-03-04
 title: Muñoz Abogados Notariales
+slug: munoz-abogados-notariales
 description: "Branding, desarrollo web y estrategia SEO para el despacho jurídico notarial Muñoz Abogados Notariales"
 image: "./img/munosabogados.webp"
 link: "https://munozabogadosnotariales.com"
-stack: ["Branding", "Astro", "TypeScript", "TailwindCSS", "SEO"]
-tags: ["Branding", "Desarrollo Web", "Optimización SEO"]
+industry: legal
+result: "Optimización de marca y un sitio corporativo diseñado para su despacho notarial, con estrategia SEO propia."
+stack: ["Astro", "TypeScript", "TailwindCSS"]
+tags: ["Optimizacion De Marca", "Desarrollo Web", "Optimización SEO"]
 ---
 
 # Key project features:

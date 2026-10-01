@@ -39,6 +39,27 @@ Three.js for `StartsBackground.astro` only). Follow `AGENTS.md` to the letter:
 - The contact form goes through `src/actions/contact/getContact.ts` (Astro
   Action + Resend) — don't add a second contact-form path or bypass it.
 
+### Skill routing when building components (mandatory)
+
+**Before writing any markup**, invoke `front-end-astro` (with the `Skill`
+tool) whenever the task creates or visually reworks an `.astro` component,
+section, or page — new files under `src/components/**` or `src/pages/**`,
+porting a design/reference, or restructuring a component's HTML/Tailwind
+layout. This is not optional and not a per-request judgment call: the skill
+owns HTML structure, Tailwind, and aesthetics with the `global.css` tokens
+(see `AGENTS.md` § "Skill routing"). Invoke it once per section/component
+you build.
+
+- Skip it only for non-visual edits: logic/TS-only changes in `src/utils/`,
+  config/content data, a one-class Tailwind tweak, or a bug fix that doesn't
+  touch the component's structure.
+- `front-end-astro` builds the markup **without animation** — any GSAP goes
+  afterwards, following the animation routing below.
+- If the work is a whole page, close it with `seo-guide-lines` after all its
+  sections are built (meta, JSON-LD, one-`<h1>` rule).
+- If you skip `front-end-astro` on a component task, say why in your final
+  report to the orchestrator.
+
 ### Skill routing when building animations
 
 This client's animation strategy is **settled: GSAP** (see `AGENTS.md` §
@@ -65,3 +86,20 @@ Other techniques:
 When you finish a non-trivial change, run `pnpm check` if practical (fast
 type-check). Only run the full `pnpm verify` if the user explicitly asked
 for it this turn.
+
+### When invoked from `/spec-impl`
+
+`/spec-impl` dispatches you one plan step (spec mode) or one light-lane
+feature (feature mode) at a time; the orchestrating session keeps the branch,
+the per-step pauses and the diff review. In that case:
+
+- Implement **only** the step or feature you received. Read the spec (or the
+  `feature_list.json` entry) for context, but don't widen scope — later steps
+  and anything in Scope Out are not yours to do now.
+- Don't edit `specs/*.md` or `feature_list.json`, and don't commit.
+- If you hit an ambiguity the spec (or the entry's `source` + `acceptance`)
+  doesn't resolve, stop and return it with 2–3 concrete options — don't pick
+  one. In feature mode, never invent data `source` doesn't contain.
+- End with a final report: the files you touched, the skills you invoked
+  (and why you skipped `front-end-astro`, if you did on a component task),
+  and the `pnpm check` result.
