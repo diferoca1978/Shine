@@ -5,7 +5,7 @@ slug: marketing-digital-para-abogados
 description: "Estrategias de marketing digital para abogados en 2026: SEO, Google My Business y redes sociales para atraer clientes calificados a tu despacho jurídico."
 pubDate: 2026-04-30
 modifiedDate: 2026-05-14
-author: "Rocio Parra"
+author: "Rocío Parra"
 image: "images/ImagenBlogLegal.webp"
 imageAlt: "Marketing digital para abogados, estrategia SEO y redes sociales para firmas jurídicas"
 tags: ["Marketing Digital", "Abogados", "SEO", "Redes Sociales"]

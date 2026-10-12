@@ -2,7 +2,7 @@ import type { SEOProps } from "astro-seo";
 import type { ImageMetadata } from "astro";
 import type { Service } from "./services";
 import { services } from "./services";
-import { AUTHORS } from "./authors";
+import { AUTHORS, DEFAULT_AUTHOR } from "./authors";
 import type { Author } from "./authors";
 import { COMPANY_INFO } from "./companyInfo";
 
@@ -29,8 +29,6 @@ export const DEFAULT_SEO: SEOProps = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@shine_agencia",
-    creator: "@shine_agencia",
     title: "Shine | Agencia de Marketing Digital y Diseño Web en Colombia",
     description: COMPANY_INFO.description,
     image: COMPANY_INFO.url + COMPANY_INFO.image,
@@ -54,11 +52,9 @@ export const DEFAULT_SEO: SEOProps = {
 // JSON-LD Schema for Organization (merged ProfessionalService + LocalBusiness)
 export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
-  "@type": ["ProfessionalService", "LocalBusiness"],
+  "@type": "Organization",
   "@id": COMPANY_INFO.url + "#organization",
   name: COMPANY_INFO.name,
-  alternateName:
-    "Shine Agencia | Diseño web, publicidad digital y ecommerce en Colombia",
   description: COMPANY_INFO.description,
   url: COMPANY_INFO.url,
   logo: COMPANY_INFO.url + COMPANY_INFO.logo,
@@ -66,22 +62,11 @@ export const ORGANIZATION_SCHEMA = {
   foundingDate: COMPANY_INFO.foundingDate,
   telephone: COMPANY_INFO.phone,
   email: COMPANY_INFO.email,
-  priceRange: "$$",
   address: {
     "@type": "PostalAddress",
-    streetAddress: COMPANY_INFO.address.street,
     addressLocality: COMPANY_INFO.address.city,
     addressRegion: COMPANY_INFO.address.region,
-    postalCode: COMPANY_INFO.address.postalCode,
-    addressCountry: {
-      "@type": "Country",
-      name: "Colombia",
-    },
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: COMPANY_INFO.geo.latitude,
-    longitude: COMPANY_INFO.geo.longitude,
+    addressCountry: COMPANY_INFO.address.countryCode,
   },
   founders: COMPANY_INFO.founders.map((founder) => ({
     "@type": "Person",
@@ -97,16 +82,7 @@ export const ORGANIZATION_SCHEMA = {
     name: "Colombia",
     sameAs: "https://es.wikipedia.org/wiki/Colombia",
   },
-  knowsAbout: [
-    ...new Set(services.flatMap((s) => s.seoKeywords)),
-  ],
-  slogan: "Resultados medibles, no promesas vacías",
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "09:00",
-    closes: "18:00",
-  },
+  knowsAbout: services.map((s) => s.title),
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Servicios de Marketing Digital y Diseño Web",
@@ -134,8 +110,6 @@ export const WEBSITE_SCHEMA = {
   "@type": "WebSite",
   "@id": COMPANY_INFO.url + "#website",
   name: COMPANY_INFO.name,
-  alternateName:
-    "Shine Agencia | Diseño web, publicidad digital y ecommerce en Colombia",
   description: COMPANY_INFO.description,
   url: COMPANY_INFO.url,
   inLanguage: "es-CO",
@@ -217,12 +191,14 @@ export function generateBlogPostSchema(post: {
   const fullAuthor: Author | undefined = post.author?.name
     ? AUTHORS.find((a) => a.name === post.author!.name)
     : undefined;
+  const schemaAuthor = fullAuthor ?? DEFAULT_AUTHOR;
+  const sameAs = fullAuthor ? getAuthorSameAs(fullAuthor) : [];
 
   // Build author schema - uses Person with @id if found in registry, falls back to Organization
   const authorSchema = post.author
     ? {
       "@type": "Person",
-      "@id": `${COMPANY_INFO.url}/nosotros#${(fullAuthor?.name ?? post.author.name).toLowerCase().replace(/\s+/g, "-")}`,
+      "@id": `${COMPANY_INFO.url}/nosotros#${schemaAuthor.id}`,
       name: fullAuthor?.name ?? post.author.name,
       ...((fullAuthor?.role ?? post.author.role) && {
         jobTitle: fullAuthor?.role ?? post.author.role,
@@ -237,6 +213,7 @@ export function generateBlogPostSchema(post: {
       ...((fullAuthor?.credentials ?? post.author.credentials) && {
         knowsAbout: fullAuthor?.credentials ?? post.author.credentials,
       }),
+      ...(sameAs.length > 0 && { sameAs }),
       worksFor: {
         "@id": COMPANY_INFO.url + "#organization",
       },
@@ -310,8 +287,6 @@ export function generatePageSEO(options: {
     },
     twitter: {
       card: "summary_large_image",
-      site: "@shine_agencia",
-      creator: "@shine_agencia",
       title: fullTitle,
       description: options.description,
       image: COMPANY_INFO.url + (options.image || COMPANY_INFO.image),
@@ -343,8 +318,6 @@ export function generateServiceSEO(service: Service): SEOProps {
     },
     twitter: {
       card: "summary_large_image",
-      site: "@shine_agencia",
-      creator: "@shine_agencia",
       title: pageTitle,
       description: service.seoDescription,
       image: COMPANY_INFO.url + (service.image.src || COMPANY_INFO.image),
@@ -560,8 +533,6 @@ export function generateGoogleReviewsSchema(
   return generateReviewsSchema(formattedReviews);
 }
 
-// Removed LOCAL_BUSINESS_SCHEMA - merged into ORGANIZATION_SCHEMA as @type: ["ProfessionalService", "LocalBusiness"]
-
 // ============================================================================
 // FAQ Content Types - For AEO (Answer Engine Optimization)
 // ============================================================================
@@ -676,19 +647,24 @@ export function generateHowToSchemaWithPage(
 // Author / Person Schema - For E-E-A-T on /nosotros and blog posts
 // ============================================================================
 
+function getAuthorSameAs(author: Author): string[] {
+  const sameAs: string[] = [];
+  if (author.socialMedia?.linkedin) sameAs.push(author.socialMedia.linkedin);
+  if (author.socialMedia?.instagram) sameAs.push(author.socialMedia.instagram);
+  return sameAs;
+}
+
 /**
  * Generates a Person schema for a single author.
  * Use on /nosotros page to establish author authority as a named entity in Google's Knowledge Graph.
  */
 export function generateAuthorSchema(author: Author): JSONLDSchema {
-  const sameAs: string[] = [];
-  if (author.socialMedia?.linkedin) sameAs.push(author.socialMedia.linkedin);
-  if (author.socialMedia?.instagram) sameAs.push(author.socialMedia.instagram);
+  const sameAs = getAuthorSameAs(author);
 
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": `${COMPANY_INFO.url}/nosotros#${author.name.toLowerCase().replace(/\s+/g, "-")}`,
+    "@id": `${COMPANY_INFO.url}/nosotros#${author.id}`,
     name: author.name,
     description: author.bio,
     jobTitle: author.role,

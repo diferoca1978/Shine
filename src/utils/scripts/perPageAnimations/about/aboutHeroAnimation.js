@@ -27,7 +27,7 @@ export const aboutHeroAnimation = () => {
       const { reducedMotion } = context.conditions;
 
       if (reducedMotion) {
-        gsap.set(elements, { autoAlpha: 1, clearProps: "all" });
+        gsap.set(elements, { autoAlpha: 1 });
         return;
       }
 

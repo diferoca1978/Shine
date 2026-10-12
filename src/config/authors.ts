@@ -8,6 +8,8 @@
  */
 
 export interface Author {
+  /** Stable ASCII identifier used for the author's Person @id */
+  id: string;
   /** Author's full name */
   name: string;
   /** Role in the company */
@@ -35,7 +37,8 @@ export interface Author {
  */
 export const AUTHORS: Author[] = [
   {
-    name: "Rocio Parra",
+    id: "rocio-parra",
+    name: "Rocío Parra",
     role: "Co-fundadora & Estratega de Marca",
     bio: "Especialista en estrategia de marca personal y comunicación digital. Ayuda a profesionales y empresas a construir una presencia auténtica que conecta con su audiencia.",
     longBio:
@@ -51,7 +54,8 @@ export const AUTHORS: Author[] = [
     },
   },
   {
-    name: "Diego Rodriguez",
+    id: "diego-rodriguez",
+    name: "Diego Rodríguez",
     role: "Co-fundador & Desarrollador Web",
     bio: "Desarrollador web especializado en crear sitios de alto rendimiento con tecnologías modernas. Enfocado en experiencia de usuario y optimización para motores de búsqueda.",
     longBio:
@@ -68,6 +72,7 @@ export const AUTHORS: Author[] = [
 ];
 
 export const DEFAULT_AUTHOR: Author = {
+  id: "shine-agencia",
   name: "Shine Agencia",
   role: "Agencia de Marketing Digital y Diseño Web",
   bio: "Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.",
