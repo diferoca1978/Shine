@@ -36,6 +36,9 @@ const collectionSchema = generateCollectionPageSchema({
   description: projectsSEO.description,
   hasPart: allProjects.map((project) => ({
     id: `${COMPANY_INFO.url}/proyectos/${project.data.slug}#project`,
+    "@type": "CreativeWork",
+    name: project.data.title,
+    url: `${COMPANY_INFO.url}/proyectos/${project.data.slug}/`,
   })),
 });
 ---
