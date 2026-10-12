@@ -148,9 +148,11 @@ PascalCase component files.
 
 ### Config — `src/config/` (the single source of truth for content)
 
-- `companyInfo.ts` — `COMPANY_INFO` (name, phone, email, founders, social
-  links, `geo` coordinates, real domain `https://shineagencia.com`), typed via
-  a `CompanyInfo` interface.
+- `companyInfo.ts` — `COMPANY_INFO` (name, phone, email, founders, city,
+  region, country, social links, real domain `https://shineagencia.com`), typed
+  via a `CompanyInfo` interface. Shine is remote: its entity is an
+  `Organization`, never `LocalBusiness` or `ProfessionalService`, with no
+  street address, `geo` or opening hours.
 - `seo.ts` — imports `COMPANY_INFO` from `./companyInfo`; owns `DEFAULT_SEO`,
   `generatePageSEO()`, and the JSON-LD generator functions
   (`generateServiceSchema`, `generateHowToSchema`, `generateBreadcrumbSchema`,
@@ -197,7 +199,7 @@ Tailwind 4 Vite plugin, not PostCSS.
 | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Colors (visual tokens)                         | `src/styles/global.css` → `@theme` (only)                                                                                                                                                       |
 | Fonts                                          | Astro Fonts API, 3 files: `astro.config.mjs` `fonts[]` (Playfair Display, Open Sans, both via `fontProviders.fontsource()`) · `global.css` `@theme` `--font-*` · `MainLayout.astro` `<Font cssVariable>` |
-| Company data (name, phone, email, social, url, geo) | `src/config/companyInfo.ts` → `COMPANY_INFO`                                                                                                                                                        |
+| Company data (name, phone, email, social, url) | `src/config/companyInfo.ts` → `COMPANY_INFO`                                                                                                                                                        |
 | Services                                       | `src/config/services.ts`                                                                                                                                                                        |
 | FAQs                                           | `src/config/faqs.ts`                                                                                                                                                                             |
 | Author / credentials                           | `src/config/authors.ts`                                                                                                                                                                          |

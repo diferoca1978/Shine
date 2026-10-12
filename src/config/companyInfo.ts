@@ -5,15 +5,10 @@ export interface CompanyInfo {
   phone: string;
   email: string;
   address: {
-    street: string;
     city: string;
     region: string;
-    postalCode: string;
     country: string;
-  };
-  geo: {
-    latitude: number;
-    longitude: number;
+    countryCode: string;
   };
   logo: string;
   image: string;
@@ -32,24 +27,19 @@ export const COMPANY_INFO: CompanyInfo = {
   name: "Shine Agencia",
   description:
     "Diseño web con Astro, campañas Google Ads y Facebook Ads y ecommerce con Tienda Nube para empresas en Colombia. Bogotá. Agenda tu diagnóstico gratuito hoy.",
-  url: "https://shineagencia.com", // Replace with your current domain
-  phone: "+57-3162560670", // Replace with actual phone
-  email: "rocio.shineagencia@gmail.com", // Replace with actual email
+  url: "https://shineagencia.com",
+  phone: "+57-3162560670",
+  email: "rocio.shineagencia@gmail.com",
   address: {
-    street: "Bogotá, Colombia", // Replace with current address
     city: "Bogotá",
     region: "Cundinamarca",
-    postalCode: "110111", // Replace with current postal code
     country: "Colombia",
+    countryCode: "CO",
   },
-  geo: {
-    latitude: 4.7109886,
-    longitude: -74.072092,
-  },
-  logo: "/images/shine-logo.svg", // Replace with current logo path
-  image: "/images/shine-og-image.png", // Replace with current OG image path
-  foundingDate: "2025", // Replace with current founding date
-  founders: ["Rocio Parra", "Diego Rodriguez"],
+  logo: "/images/shine-logo.svg",
+  image: "/images/shine-og-image.png",
+  foundingDate: "2025",
+  founders: ["Rocío Parra", "Diego Rodríguez"],
   socialMedia: {
     instagram: "https://www.instagram.com/shine.agenciam/",
     linkedin: "https://www.linkedin.com/company/shine-brilla-con-propósito",

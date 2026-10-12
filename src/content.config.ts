@@ -48,7 +48,7 @@ const blog = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date(),
       modifiedDate: z.coerce.date().optional(),
-      author: z.enum(["Diego Rodriguez", "Rocio Parra"]),
+      author: z.enum(["Diego Rodríguez", "Rocío Parra"]),
       image: image(),
       imageAlt: z.string().optional(),
       tags: z.array(z.string()).optional(),

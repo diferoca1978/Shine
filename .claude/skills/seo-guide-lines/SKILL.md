@@ -200,7 +200,7 @@ Every page needs at least one JSON-LD schema:
 - **Homepage**: `ORGANIZATION_SCHEMA` + `WEBSITE_SCHEMA`
 - **Service Pages**: `generateServiceSchema()` + `generateBreadcrumbSchema()`
 - **About Page**: `generatePersonSchema()` + `generateBreadcrumbSchema()`
-- **Contact Page**: `LocalBusiness` schema + `generateBreadcrumbSchema()`
+- **Contact Page**: `LocalBusiness` schema + `generateBreadcrumbSchema()`; for Shine's remote `Organization` entity, follow `AGENTS.md` § "Config".
 
 **Repository policy:** This site does not emit `FAQPage` JSON-LD. Google stopped showing FAQ results on 2026-05-07, so keep visible Q&A as AEO content without generating that markup. See `AGENTS.md`; blog `faqs` frontmatter is rejected at build time.
 
@@ -258,6 +258,9 @@ Name, Address, Phone must be **identical** across:
 - Footer on all pages
 - Google Business Profile
 - All directory listings
+
+For Shine's remote `Organization` entity, follow `AGENTS.md` § "Config": no
+street address, `geo` or opening hours.
 
 Even small differences ("Suite 200" vs "Ste 200") hurt local rankings.
 

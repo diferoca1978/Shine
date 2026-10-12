@@ -4,7 +4,7 @@ slug: ventajas-astro-framework-2026
 description: "Descubre por qué Astro Framework supera a otros frameworks en 2026. Arquitectura 'Zero JS', carga ultrarrápida y optimización AEO para liderar en Google."
 pubDate: 2026-01-09
 modifiedDate: 2026-01-10
-author: Diego Rodriguez
+author: Diego Rodríguez
 image: "images/astrofast.webp"
 tags: ["Desarrollo Web", "Core Web Vitals", "Optimización Web", "Astro Framework"]
 draft: false
