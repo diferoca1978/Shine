@@ -28,6 +28,9 @@ const collectionSchema = generateCollectionPageSchema({
   description: servicesSEO.description,
   hasPart: services.map((service) => ({
     id: `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+    "@type": "Service",
+    name: service.title,
+    url: `${COMPANY_INFO.url}/servicios/${service.slug}/`,
   })),
 });
 ---

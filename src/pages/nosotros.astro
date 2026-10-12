@@ -11,6 +11,7 @@ import {
   generateBreadcrumbSchema,
   generatePageSEO,
   generateAllAuthorsSchemas,
+  ORGANIZATION_SCHEMA,
 } from "@/config/seo";
 import { COMPANY_INFO } from "@/config/companyInfo";
 
@@ -31,7 +32,7 @@ const nosotrosSEO = generatePageSEO({
 
 <MainLayout
   seoProps={nosotrosSEO}
-  aditionalSchemas={[breadcrumbSchema, ...authorSchemas]}
+  aditionalSchemas={[ORGANIZATION_SCHEMA, breadcrumbSchema, ...authorSchemas]}
 >
   <HeroAbout />
   <AboutMission />

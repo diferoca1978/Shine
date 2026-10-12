@@ -5,8 +5,8 @@ import SEOHead from "@/components/SEOHead.astro";
 import { Font } from "astro:assets";
 import {
   DEFAULT_SEO,
+  JSONLD_STUB_REGISTRY,
   ORGANIZATION_SCHEMA,
-  WEBSITE_SCHEMA,
   generatePageSEO,
   type JSONLDSchema,
 } from "@/config/seo";
@@ -51,8 +51,10 @@ const finalSeoProps = seoProps
       })
     : DEFAULT_SEO;
 
-// Base schemas that are always added to all pages
-const baseSchemas: JSONLDSchema[] = [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA];
+// Keep the reduced Organization available on every page; owning pages add the full node.
+const baseSchemas: JSONLDSchema[] = [
+  JSONLD_STUB_REGISTRY[ORGANIZATION_SCHEMA["@id"]],
+];
 const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
 ---
 

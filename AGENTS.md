@@ -113,11 +113,17 @@ MainLayout.astro          ← SEO (via SEOHead.astro), navbar, footer, animation
 └── PostLayout.astro      ← wraps MainLayout for individual posts
 ```
 
-`MainLayout` always injects Organization + Website JSON-LD schemas (via
-`SEOHead.astro`). Per-page schemas (Service, HowTo, BreadcrumbList,
-BlogPosting) are added by `SEOHead.astro` when props are passed. `<html lang>`
-is `es-CO` (Colombia) — not the harness default's generic `es-CO` placeholder,
-this is the real, final locale for this client; do not change it.
+Structured data is rendered as one self-contained JSON-LD `@graph` per page
+by `SEOHead.astro`. `MainLayout` supplies the reduced Organization node from
+`JSONLD_STUB_REGISTRY` on every page. The full Organization schema is added
+only on `/` and `/nosotros`; the full WebSite schema is added only on `/`.
+Per-page schemas (Service, HowTo, BreadcrumbList, BlogPosting) are combined
+into the same graph. The graph builder resolves references using the stub
+registry in `src/config/seo.ts` and fails the build with the page path and
+unresolved `@id` if a reference has no definition; add the missing node or
+extend that registry. `<html lang>` is `es-CO` (Colombia) — not the harness
+default's generic `es-CO` placeholder, this is the real, final locale for this
+client; do not change it.
 
 This site **does not emit `FAQPage` JSON-LD**. Google stopped showing FAQ
 results on **2026-05-07**, so the markup adds no benefit. Visible FAQ

@@ -8,6 +8,47 @@ import { COMPANY_INFO } from "./companyInfo";
 
 export type JSONLDSchema = Record<string, any>;
 
+const SITE_URL = `${COMPANY_INFO.url}/`;
+const ORGANIZATION_ID = `${COMPANY_INFO.url}#organization`;
+const WEBSITE_ID = `${COMPANY_INFO.url}#website`;
+const BLOG_ID = `${COMPANY_INFO.url}/blog#blog`;
+const SERVICES_ID = `${COMPANY_INFO.url}/servicios`;
+const PROJECTS_ID = `${COMPANY_INFO.url}/proyectos`;
+
+export const JSONLD_STUB_REGISTRY: Record<string, JSONLDSchema> = {
+  [ORGANIZATION_ID]: {
+    "@type": "Organization",
+    "@id": ORGANIZATION_ID,
+    name: COMPANY_INFO.name,
+    url: SITE_URL,
+    logo: COMPANY_INFO.url + COMPANY_INFO.logo,
+  },
+  [WEBSITE_ID]: {
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    name: COMPANY_INFO.name,
+    url: SITE_URL,
+  },
+  [BLOG_ID]: {
+    "@type": "Blog",
+    "@id": BLOG_ID,
+    name: "Blog - " + COMPANY_INFO.name,
+    url: `${COMPANY_INFO.url}/blog/`,
+  },
+  [SERVICES_ID]: {
+    "@type": "CollectionPage",
+    "@id": SERVICES_ID,
+    name: "Servicios",
+    url: `${COMPANY_INFO.url}/servicios/`,
+  },
+  [PROJECTS_ID]: {
+    "@type": "CollectionPage",
+    "@id": PROJECTS_ID,
+    name: "Proyectos",
+    url: `${COMPANY_INFO.url}/proyectos/`,
+  },
+};
+
 // Default SEO configuration
 export const DEFAULT_SEO: SEOProps = {
   title: "Shine | Agencia de Marketing Digital y Diseño Web en Colombia",
@@ -56,7 +97,7 @@ export const ORGANIZATION_SCHEMA = {
   "@id": COMPANY_INFO.url + "#organization",
   name: COMPANY_INFO.name,
   description: COMPANY_INFO.description,
-  url: COMPANY_INFO.url,
+  url: SITE_URL,
   logo: COMPANY_INFO.url + COMPANY_INFO.logo,
   image: COMPANY_INFO.url + COMPANY_INFO.image,
   foundingDate: COMPANY_INFO.foundingDate,
@@ -68,9 +109,10 @@ export const ORGANIZATION_SCHEMA = {
     addressRegion: COMPANY_INFO.address.region,
     addressCountry: COMPANY_INFO.address.countryCode,
   },
-  founders: COMPANY_INFO.founders.map((founder) => ({
+  founder: AUTHORS.map((author) => ({
     "@type": "Person",
-    name: founder,
+    "@id": `${COMPANY_INFO.url}/nosotros#${author.id}`,
+    name: author.name,
   })),
   sameAs: [
     COMPANY_INFO.socialMedia.instagram,
@@ -111,13 +153,10 @@ export const WEBSITE_SCHEMA = {
   "@id": COMPANY_INFO.url + "#website",
   name: COMPANY_INFO.name,
   description: COMPANY_INFO.description,
-  url: COMPANY_INFO.url,
+  url: SITE_URL,
   inLanguage: "es-CO",
   copyrightYear: new Date().getFullYear(),
-  copyrightHolder: {
-    "@type": "Organization",
-    name: COMPANY_INFO.name,
-  },
+  copyrightHolder: { "@id": ORGANIZATION_ID },
   publisher: {
     "@id": COMPANY_INFO.url + "#organization",
   },
@@ -380,7 +419,12 @@ export function generateCollectionPageSchema(options: {
   name: string;
   path: string;
   description?: string;
-  hasPart: Array<{ id: string }>;
+  hasPart: Array<{
+    id: string;
+    "@type": string;
+    name: string;
+    url: string;
+  }>;
 }): JSONLDSchema {
   const normalizedPath = options.path.endsWith("/")
     ? options.path.slice(0, -1)
@@ -395,7 +439,12 @@ export function generateCollectionPageSchema(options: {
     url: COMPANY_INFO.url + normalizedPath + "/",
     isPartOf: { "@id": COMPANY_INFO.url + "#website" },
     about: { "@id": COMPANY_INFO.url + "#organization" },
-    hasPart: options.hasPart.map((item) => ({ "@id": item.id })),
+    hasPart: options.hasPart.map((item) => ({
+      "@type": item["@type"],
+      "@id": item.id,
+      name: item.name,
+      url: item.url,
+    })),
   };
 }
 
