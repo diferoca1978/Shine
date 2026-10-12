@@ -43,7 +43,6 @@ src/config/seo.ts
     ├── BLOG_SCHEMA (available, not currently used)
     ├── generatePersonSchema()
     ├── generateBlogPostSchema() (available, not currently used)
-    ├── generateFAQSchema()
     ├── generateVideoSchema()
     ├── generateBreadcrumbSchema()
     └── generateServiceSchema()
@@ -418,14 +417,16 @@ Appear in featured snippets, answer boxes, "People Also Ask," and voice search r
 </article>
 ```
 
-#### 2. FAQ Schema for Featured Snippets
+#### 2. Visible FAQ Sections for AEO
 
-**Recommended implementation for service pages:**
+**Repository policy:** This site does not emit `FAQPage` JSON-LD. Google stopped showing FAQ results on 2026-05-07, so keep visible Q&A as AEO content without generating that markup. See `AGENTS.md`; blog `faqs` frontmatter is rejected at build time.
+
+**Recommended implementation for service pages:** Render Q&A for readers and answer engines; do not add it to the schemas array.
 
 ```astro
 ---
 // src/pages/services/[service-name].astro
-import { generateFAQSchema } from "@/config/seo";
+import FAQ from "@/components/section/FAQ.astro";
 
 const faqItems = [
   {
@@ -442,7 +443,7 @@ const faqItems = [
   }
 ];
 
-// Example for a consulting firm:
+// Example content for a consulting firm (use in place of faqItems):
 const consultingFAQ = [
   {
     question: "What qualifications do your consultants have?",
@@ -454,22 +455,9 @@ const consultingFAQ = [
   }
 ];
 
-const faqSchema = generateFAQSchema(faqItems);
-const schemas = [serviceSchema, faqSchema]; // Combine with service schema
 ---
 
-<SeoHead {seoProps} {schemas} />
-
-<!-- Display FAQ on page -->
-<section class="faq-section">
-  <h2>Frequently Asked Questions</h2>
-  {faqItems.map(item => (
-    <div class="faq-item">
-      <h3>{item.question}</h3>
-      <p>{item.answer}</p>
-    </div>
-  ))}
-</section>
+<FAQ faqs={faqItems} title="Frequently Asked Questions" />
 ```
 
 #### 3. Question Patterns for "People Also Ask"
@@ -910,7 +898,6 @@ import SeoHead from "@/components/SeoHead.astro";
 import {
   generateDynamicSEO,
   generateServiceSchema,
-  generateFAQSchema,
   generateBreadcrumbSchema
 } from "@/config/seo";
 
@@ -956,7 +943,7 @@ const serviceSchema = generateServiceSchema({
   ]
 });
 
-// FAQ Schema - Answer common customer questions
+// Visible FAQ content - Answer common customer questions
 const faqItems = [
   {
     question: "[Question in natural language format starting with What/How/Why/When]?",
@@ -987,7 +974,6 @@ const faqItems = [
     answer: "[50-100 word answer with range or factors.]"
   }
 ];
-const faqSchema = generateFAQSchema(faqItems);
 
 // Breadcrumb Schema - Update navigation path
 const breadcrumbs = [
@@ -997,7 +983,7 @@ const breadcrumbs = [
 ];
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 
-const schemas = [serviceSchema, faqSchema, breadcrumbSchema];
+const schemas = [serviceSchema, breadcrumbSchema];
 ---
 
 <MainLayout>
@@ -2374,7 +2360,7 @@ Choose the most specific `@type` for your business:
 #### Service Pages (`/services/*`)
 
 - [ ] Implements `generateServiceSchema()` for each service
-- [ ] Includes FAQ section with `generateFAQSchema()`
+- [ ] Includes a visible FAQ section with direct answers
 - [ ] Breadcrumb schema implemented
 - [ ] Direct answer in first 50-100 words
 - [ ] Lists and/or comparison tables included
@@ -2409,7 +2395,7 @@ Choose the most specific `@type` for your business:
 
 ### ✅ AEO (Answer Engine Optimization)
 
-- [ ] FAQ Schema implemented on relevant pages (especially services)
+- [ ] Visible FAQ sections on relevant pages (especially services)
 - [ ] Direct answers in first 50-100 words
 - [ ] Bulleted and numbered lists used
 - [ ] Comparison tables for complex data
@@ -2429,7 +2415,7 @@ Choose the most specific `@type` for your business:
 ### ✅ Schema Markup
 
 - [ ] **Homepage**: ORGANIZATION_SCHEMA + WEBSITE_SCHEMA
-- [ ] **Service Pages**: Service Schema + FAQ Schema + Breadcrumb Schema
+- [ ] **Service Pages**: Service Schema + Breadcrumb Schema
 - [ ] **About Page**: Person Schema (founder) + Breadcrumb Schema
 - [ ] **Contact Page**: LocalBusiness Schema + Breadcrumb Schema
 - [ ] **Projects Page**: Breadcrumb Schema (minimum)
@@ -2578,7 +2564,7 @@ Verify in `robots.txt` that these user-agents are allowed:
 
 6. **Google Rich Results Test** (https://search.google.com/test/rich-results):
    - Test specific pages for rich result eligibility
-   - Verify FAQ schema, Service schema, etc.
+   - Verify Service schema and other supported types
 
 ### 📅 Maintenance Calendar
 
@@ -2662,8 +2648,8 @@ Verify in `robots.txt` that these user-agents are allowed:
    - Use lists, tables, and short paragraphs
    - Break up walls of text
 
-3. **Missing FAQ Schema**: Not implementing schema on FAQ sections
-   - Always use `generateFAQSchema()` when you have Q&A content
+3. **Missing Visible FAQ Content**: Common customer questions have no answers on the page
+   - Render useful Q&A in HTML so readers and answer engines can access it
 
 ### ❌ GEO Errors
 
@@ -3206,7 +3192,7 @@ const schemas = [blogSchema, breadcrumbSchema];
 - [ ] Length: 1500-2500 words minimum
 - [ ] Modular paragraphs (self-contained chunks for GEO)
 - [ ] At least one list or table
-- [ ] FAQ section at the end (with FAQ schema)
+- [ ] Visible FAQ section at the end, written in the Markdown body rather than `faqs` frontmatter
 - [ ] Internal links to relevant service pages
 - [ ] External links to authoritative sources
 - [ ] Author bio (E-E-A-T)
@@ -3259,7 +3245,7 @@ const schemas = [blogSchema, breadcrumbSchema];
    });
    ```
 4. **Create appropriate schemas**:
-   - Service page: Service + FAQ + Breadcrumb
+   - Service page: Service + Breadcrumb
    - About page: Person + Breadcrumb
    - Contact page: LocalBusiness + Breadcrumb
    - Homepage: Organization + Website
@@ -3286,7 +3272,7 @@ const schemas = [blogSchema, breadcrumbSchema];
   - Technical performance
 
 - **Voice search and featured snippets?** → Focus on **AEO**
-  - FAQ schema
+  - Visible FAQ sections with useful answers
   - Direct answers in 50-100 words
   - Question-format headings
 

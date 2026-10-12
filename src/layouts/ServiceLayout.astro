@@ -4,17 +4,9 @@ import {
   generateBreadcrumbSchema,
   generateServiceSEO,
   generateServiceSchema,
-  generateFAQSchema,
 } from "@/config/seo";
 import { COMPANY_INFO } from "@/config/companyInfo";
 import type { Service } from "@/config/services";
-import { getFAQsByCategory } from "@/config/faqs";
-
-const slugToCategory: Record<string, string> = {
-  "diseno-web-estrategico": "diseno-web",
-  "publicidad-digital": "publicidad-digital",
-  "ecommerce": "ecommerce",
-};
 
 interface Props {
   service: Service;
@@ -34,10 +26,7 @@ const breadcrumbs = [
 
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 
-const serviceFaqs = getFAQsByCategory(slugToCategory[service.slug] ?? "");
-const faqSchema = serviceFaqs.length ? generateFAQSchema(serviceFaqs) : null;
-
-const schemas = [breadcrumbSchema, schema, ...(faqSchema ? [faqSchema] : [])];
+const schemas = [breadcrumbSchema, schema];
 ---
 
 <MainLayout seoProps={seo} aditionalSchemas={schemas}>

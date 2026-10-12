@@ -53,13 +53,11 @@ const blog = defineCollection({
       imageAlt: z.string().optional(),
       tags: z.array(z.string()).optional(),
       faqs: z
-        .array(
-          z.object({
-            question: z.string(),
-            answer: z.string(),
-          }),
-        )
-        .optional(),
+        .never({
+          error:
+            "Este sitio no emite FAQPage. Elimina el campo faqs del frontmatter y consulta AGENTS.md.",
+        })
+        .exactOptional(),
       draft: z.boolean().optional().default(false),
     }),
 });

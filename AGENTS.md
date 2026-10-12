@@ -114,10 +114,16 @@ MainLayout.astro          ← SEO (via SEOHead.astro), navbar, footer, animation
 ```
 
 `MainLayout` always injects Organization + Website JSON-LD schemas (via
-`SEOHead.astro`). Per-page schemas (Service, FAQ, HowTo, BreadcrumbList,
+`SEOHead.astro`). Per-page schemas (Service, HowTo, BreadcrumbList,
 BlogPosting) are added by `SEOHead.astro` when props are passed. `<html lang>`
 is `es-CO` (Colombia) — not the harness default's generic `es-CO` placeholder,
 this is the real, final locale for this client; do not change it.
+
+This site **does not emit `FAQPage` JSON-LD**. Google stopped showing FAQ
+results on **2026-05-07**, so the markup adds no benefit. Visible FAQ
+sections remain as content. The blog schema in `src/content.config.ts`
+enforces this rule by rejecting posts that set `faqs` in their frontmatter
+at build time, with an error pointing to this file.
 
 ### Components — `src/components/`
 
@@ -147,8 +153,8 @@ PascalCase component files.
   a `CompanyInfo` interface.
 - `seo.ts` — imports `COMPANY_INFO` from `./companyInfo`; owns `DEFAULT_SEO`,
   `generatePageSEO()`, and the JSON-LD generator functions
-  (`generateServiceSchema`, `generateFAQSchema`, `generateHowToSchema`,
-  `generateBreadcrumbSchema`, plus Organization/Person schema helpers).
+  (`generateServiceSchema`, `generateHowToSchema`, `generateBreadcrumbSchema`,
+  plus Organization/Person schema helpers).
 - `services.ts` — the 3 active services, typed `Service[]`: **Diseño Web con
   Astro**, **Google Ads & Facebook Ads (Publicidad Digital)**, **Ecommerce con
   Tienda Nube**. Each entry has content fields (`title`, `subtitle`,

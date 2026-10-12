@@ -563,66 +563,12 @@ export function generateGoogleReviewsSchema(
 // Removed LOCAL_BUSINESS_SCHEMA - merged into ORGANIZATION_SCHEMA as @type: ["ProfessionalService", "LocalBusiness"]
 
 // ============================================================================
-// FAQ Page Schema - For AEO (Answer Engine Optimization)
+// FAQ Content Types - For AEO (Answer Engine Optimization)
 // ============================================================================
 
 export interface FAQItem {
   question: string;
   answer: string;
-}
-
-/**
- * Generates FAQPage schema for rich snippets in Google and AI citation.
- * Use this on service pages, landing pages, or any page with Q&A content.
- *
- * @example
- * const faqSchema = generateFAQSchema([
- *   { question: '¿Qué incluye el diseño web?', answer: 'Incluye diseño, desarrollo...' },
- *   { question: '¿Cuánto tiempo toma?', answer: 'Entre 4-8 semanas...' }
- * ]);
- */
-export function generateFAQSchema(faqs: FAQItem[]): JSONLDSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
-}
-
-/**
- * Combines FAQPage schema with a specific page reference.
- * Useful for linking FAQs to a specific service or page.
- */
-export function generateFAQSchemaWithPage(
-  faqs: FAQItem[],
-  pageUrl: string,
-  pageName: string,
-): JSONLDSchema {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": `${pageUrl}#faq`,
-    name: `Preguntas Frecuentes - ${pageName}`,
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-    isPartOf: {
-      "@type": "WebPage",
-      "@id": pageUrl,
-    },
-  };
 }
 
 // ============================================================================
