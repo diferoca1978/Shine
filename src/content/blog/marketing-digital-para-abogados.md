@@ -9,17 +9,6 @@ author: "Rocio Parra"
 image: "images/ImagenBlogLegal.webp"
 imageAlt: "Marketing digital para abogados, estrategia SEO y redes sociales para firmas jurídicas"
 tags: ["Marketing Digital", "Abogados", "SEO", "Redes Sociales"]
-faqs:
-  - question: "¿Qué es el marketing digital para abogados?"
-    answer: "El marketing digital para abogados es el conjunto de estrategias online, SEO, redes sociales, Google My Business y contenido educativo, que permiten a una firma jurídica aumentar su visibilidad, atraer consultas calificadas y construir autoridad en su especialidad. No se trata de publicidad invasiva, sino de estar presente cuando el cliente potencial te está buscando activamente."
-  - question: "¿Cuánto tarda un abogado en ver resultados con marketing digital?"
-    answer: "Los resultados de SEO y posicionamiento orgánico se consolidan entre los 3 y 6 meses con estrategia consistente. Las redes sociales pueden generar consultas desde las primeras semanas si el contenido conecta con los dolores reales del cliente. La clave es la consistencia: el marketing digital es una inversión a largo plazo, no un gasto de resultado inmediato."
-  - question: "¿En qué red social deben estar los abogados en 2026?"
-    answer: "Depende de la especialidad. TikTok e Instagram funcionan muy bien para abogados que atienden personas naturales, derecho de familia, seguros, laboral, consumidor. LinkedIn es ideal para abogados corporativos y firmas B2B. La regla de oro: mejor excelente en dos plataformas que mediocre en cinco."
-  - question: "¿Por qué Google My Business es tan importante para un despacho jurídico?"
-    answer: "Porque el 72% de los clientes que buscan un abogado local hacen clic en los resultados del mapa de Google antes que en los orgánicos. Un perfil optimizado con reseñas, fotos profesionales, publicaciones y respuestas a preguntas frecuentes puede convertirse en la principal fuente de consultas de una firma, sin necesidad de inversión en publicidad pagada."
-  - question: "¿Puede un abogado hacer marketing digital sin violar la ética profesional?"
-    answer: "Sí, completamente. El marketing jurídico ético se basa en educar, informar y generar confianza, no en prometer resultados garantizados ni compararse de forma negativa con otros abogados. El contenido educativo es la estrategia más poderosa y es 100% compatible con la deontología profesional de cualquier colegio de abogados en Colombia."
 draft: false
 
 ---

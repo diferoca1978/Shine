@@ -14,7 +14,6 @@ import { generalFAQs } from "@/config/faqs";
 import {
   generatePageSEO,
   generateBreadcrumbSchema,
-  generateFAQSchema,
 } from "@/config/seo";
 import { COMPANY_INFO } from "@/config/companyInfo";
 
@@ -29,13 +28,11 @@ const homeSEO = generatePageSEO({
 const breadcrumbSchema = generateBreadcrumbSchema([
   { name: "Inicio", url: COMPANY_INFO.url },
 ]);
-
-const faqSchema = generateFAQSchema(generalFAQs);
 ---
 
 <MainLayout
   seoProps={homeSEO}
-  aditionalSchemas={[breadcrumbSchema, faqSchema]}
+  aditionalSchemas={[breadcrumbSchema]}
 >
   <GlobalHero
     titleLine1="Diseño web, publicidad digital y"

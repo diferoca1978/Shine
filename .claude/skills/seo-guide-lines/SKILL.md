@@ -42,7 +42,7 @@ Use this skill when the user asks to:
 - ✅ Optimize a page for SEO/search engines
 - ✅ Add or improve meta tags, Open Graph, Twitter cards
 - ✅ Implement schema markup (JSON-LD)
-- ✅ Create FAQ schemas for featured snippets
+- ✅ Add visible FAQ sections with direct answers for AEO
 - ✅ Improve content for AI citations (ChatGPT, Perplexity)
 - ✅ Structure content for E-E-A-T (Experience, Expertise, Authority, Trust)
 - ✅ Create service pages, about pages, or contact pages with SEO
@@ -114,7 +114,7 @@ Based on the user's request and the SEO guide patterns:
 1. Choose the correct pattern from the guide (Service, Homepage, About, Projects, Contact)
 2. Copy the template code
 3. Replace `[placeholders]` with actual company data from `COMPANY_INFO`
-4. Implement required schemas (Service, FAQ, Breadcrumb, etc.)
+4. Implement required schemas (Service, Breadcrumb, etc.)
 5. Structure content following GEO principles (self-contained chunks, natural language)
 
 **For Existing Pages:**
@@ -151,13 +151,13 @@ After making changes, verify:
 - [ ] H3s capture long-tail variants and consideration-stage queries (e.g. "how much does X cost?", "X vs Y differences")
 - [ ] Heading hierarchy is logical (H1 → H2 → H3), never skipped
 - [ ] Images have descriptive alt text
-- [ ] At least one schema (Organization, Service, FAQ, etc.)
+- [ ] At least one schema (Organization, Service, etc.)
 - [ ] Breadcrumb schema on non-homepage pages
 - [ ] Internal links with descriptive anchor text
 
 **AEO Checklist:**
 
-- [ ] FAQ schema implemented where applicable
+- [ ] Visible FAQ sections with useful answers where applicable
 - [ ] Questions formatted naturally ("What is...", "How does...")
 - [ ] Direct answers in first 50-100 words
 - [ ] Lists, tables, or structured data for easy extraction
@@ -198,9 +198,11 @@ import { COMPANY_INFO, MAIN_KEYWORDS } from "@/config/seo";
 Every page needs at least one JSON-LD schema:
 
 - **Homepage**: `ORGANIZATION_SCHEMA` + `WEBSITE_SCHEMA`
-- **Service Pages**: `generateServiceSchema()` + `generateFAQSchema()` + `generateBreadcrumbSchema()`
+- **Service Pages**: `generateServiceSchema()` + `generateBreadcrumbSchema()`
 - **About Page**: `generatePersonSchema()` + `generateBreadcrumbSchema()`
 - **Contact Page**: `LocalBusiness` schema + `generateBreadcrumbSchema()`
+
+**Repository policy:** This site does not emit `FAQPage` JSON-LD. Google stopped showing FAQ results on 2026-05-07, so keep visible Q&A as AEO content without generating that markup. See `AGENTS.md`; blog `faqs` frontmatter is rejected at build time.
 
 ### 3. E-E-A-T is Critical for GEO
 
@@ -285,13 +287,13 @@ Even small differences ("Suite 200" vs "Ste 200") hurt local rankings.
 3. Check NAP consistency
 4. Suggest improvements based on industry examples
 
-### Task: Implement FAQ Schema
+### Task: Add a Visible FAQ Section
 
 1. Identify relevant questions for the page topic
 2. Write 50-100 word answers with specifics
-3. Create FAQ schema using `generateFAQSchema()`
-4. Add FAQ section to page HTML
-5. Include schema in page schemas array
+3. For home and service pages, use Q&A content from `src/config/faqs.ts`; for blog posts, write Q&A in the Markdown body, not `faqs` frontmatter
+4. Render a visible FAQ section in page HTML; the existing `@/components/section/FAQ.astro` component takes `faqs`, with optional `title` and `subtitle` props
+5. Confirm questions and answers are present in raw HTML and accordion controls are keyboard-accessible
 
 ## Output Format
 

@@ -7,13 +7,6 @@ modifiedDate: 2026-01-15
 author: Diego Rodriguez
 image: "images/seguridad-web-astro.webp"
 tags: ["Seguridad Web", "Astro Framework", "Desarrollo Web", "Ciberseguridad"]
-faqs:
-  - question: "¿Mi sitio web puede ser hackeado?"
-    answer: "Cualquier sitio web puede ser vulnerable, pero la buena noticia es que elegir la tecnología correcta reduce enormemente el riesgo. Los sitios construidos con Astro tienen menos puntos de entrada para hackers comparados con WordPress o plataformas tradicionales."
-  - question: "¿Qué pasa si mi sitio es hackeado?"
-    answer: "Un sitio hackeado puede perder la confianza de tus clientes, ser penalizado por Google, y costarte miles en reparaciones. La prevención siempre es más económica que la recuperación. Por eso elegimos tecnologías seguras desde el inicio."
-  - question: "¿Necesito ser experto en seguridad para tener un sitio seguro?"
-    answer: "No. Al trabajar con una agencia que usa tecnologías modernas como Astro, la seguridad viene integrada. Nosotros nos encargamos de las actualizaciones y configuraciones técnicas para que tú te enfoques en tu negocio."
 draft: false
 ---
 
