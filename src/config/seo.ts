@@ -297,6 +297,7 @@ export function generatePageSEO(options: {
   title: string;
   description: string;
   path: string;
+  canonicalPath?: string;
   image?: string;
   noindex?: boolean;
 }): SEOProps {
@@ -304,12 +305,16 @@ export function generatePageSEO(options: {
     ? options.path
     : options.path + "/";
   const fullUrl = COMPANY_INFO.url + normalizedPath;
+  const canonicalPath = options.canonicalPath ?? options.path;
+  const normalizedCanonicalPath = canonicalPath.endsWith("/")
+    ? canonicalPath
+    : canonicalPath + "/";
   const fullTitle = `${options.title} | ${COMPANY_INFO.name}`;
 
   return {
     title: fullTitle,
     description: options.description,
-    canonical: fullUrl,
+    canonical: COMPANY_INFO.url + normalizedCanonicalPath,
     noindex: options.noindex || false,
     openGraph: {
       basic: {
@@ -419,12 +424,7 @@ export function generateCollectionPageSchema(options: {
   name: string;
   path: string;
   description?: string;
-  hasPart: Array<{
-    id: string;
-    "@type": string;
-    name: string;
-    url: string;
-  }>;
+  hasPart: JSONLDSchema[];
 }): JSONLDSchema {
   const normalizedPath = options.path.endsWith("/")
     ? options.path.slice(0, -1)
@@ -439,12 +439,7 @@ export function generateCollectionPageSchema(options: {
     url: COMPANY_INFO.url + normalizedPath + "/",
     isPartOf: { "@id": COMPANY_INFO.url + "#website" },
     about: { "@id": COMPANY_INFO.url + "#organization" },
-    hasPart: options.hasPart.map((item) => ({
-      "@type": item["@type"],
-      "@id": item.id,
-      name: item.name,
-      url: item.url,
-    })),
+    hasPart: options.hasPart,
   };
 }
 
@@ -455,6 +450,7 @@ export function generateProjectSchema(project: {
     title: string;
     description: string;
     result?: string;
+    link: string;
     image: ImageMetadata;
     pubDate: Date;
     updatedDate: Date;
@@ -462,12 +458,11 @@ export function generateProjectSchema(project: {
   };
 }): JSONLDSchema {
   return {
-    "@context": "https://schema.org",
     "@type": "CreativeWork",
     "@id": `${COMPANY_INFO.url}/proyectos/${project.data.slug}#project`,
     name: project.data.title,
     description: project.data.result ?? project.data.description,
-    url: `${COMPANY_INFO.url}/proyectos/${project.data.slug}/`,
+    url: project.data.link,
     image: COMPANY_INFO.url + project.data.image.src,
     datePublished: project.data.pubDate.toISOString(),
     dateModified: project.data.updatedDate.toISOString(),

@@ -1,4 +1,5 @@
 import { getCollection, type CollectionEntry } from "astro:content";
+import { generateCollectionPageSchema, generateProjectSchema } from "@/config/seo";
 
 export type Project = CollectionEntry<"works">;
 export type Industry = Project["data"]["industry"];
@@ -18,6 +19,22 @@ const mostRecent = (projects: Project[]) =>
   projects.reduce((latest, project) =>
     project.data.pubDate.getTime() > latest.data.pubDate.getTime() ? project : latest,
   );
+
+export const getProjectsIndexData = async () => {
+  const allProjects = await getCollection("works");
+  const count = allProjects.length;
+  const title = `Proyectos: ${count} casos de éxito en Colombia`;
+  const description =
+    `Antes y después de ${count} negocios colombianos: qué encontramos roto y qué construimos. Casos reales de diseño web, branding y SEO.`;
+  const collectionSchema = generateCollectionPageSchema({
+    name: "Proyectos",
+    path: "/proyectos",
+    description,
+    hasPart: allProjects.map(generateProjectSchema),
+  });
+
+  return { title, description, collectionSchema };
+};
 
 export const getIndustriesWithProjects = async () => {
   const allProjects = await getCollection("works");
