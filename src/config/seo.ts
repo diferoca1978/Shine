@@ -498,10 +498,6 @@ export const CONTACT_PAGE_SCHEMA: JSONLDSchema = {
   url: COMPANY_INFO.url + "/contacto/",
   isPartOf: { "@id": COMPANY_INFO.url + "#website" },
   about: { "@id": COMPANY_INFO.url + "#organization" },
-  contactOption: "https://schema.org/TollFree",
-  telephone: COMPANY_INFO.phone,
-  email: COMPANY_INFO.email,
-  areaServed: { "@type": "Country", name: "Colombia" },
 };
 
 // Internal helper for reviews schema generation
