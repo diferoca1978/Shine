@@ -10,6 +10,8 @@ import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
 import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
+import RelatedPosts from "@/components/section/RelatedPosts.astro";
+import { getRecentPosts } from "@/utils/posts";
 import { generalFAQs } from "@/config/faqs";
 import {
   generatePageSEO,
@@ -25,6 +27,7 @@ const homeSEO = generatePageSEO({
   image: "/images/shine-og-image.png",
 });
 
+const recentPosts = await getRecentPosts(3);
 ---
 
 <MainLayout

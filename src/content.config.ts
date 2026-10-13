@@ -1,6 +1,12 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { services } from "@/config/services";
+
+const serviceSlugs = services.map((service) => service.slug) as [
+  string,
+  ...string[],
+];
 
 const works = defineCollection({
   loader: glob({
@@ -52,6 +58,7 @@ const blog = defineCollection({
       image: image(),
       imageAlt: z.string().optional(),
       tags: z.array(z.string()).optional(),
+      services: z.array(z.enum(serviceSlugs)).optional(),
       faqs: z
         .never({
           error:

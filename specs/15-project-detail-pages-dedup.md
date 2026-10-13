@@ -1,6 +1,6 @@
 # 15 — project detail pages dedup
 
-**Status:** Approved <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Implemented <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
@@ -245,11 +245,11 @@ All `dist/` checks run after a fresh `pnpm build`.
 - [x] The JSON-LD of `dist/servicios/index.html` is byte-identical to the
       step-1 baseline.
 - [x] `dist/proyectos/index.html` has the `<title>` `Proyectos: 13 casos
-  de éxito en Colombia | <brand>` and the meta description `Antes y
-  después de 13 negocios colombianos: qué encontramos roto y qué
-  construimos. Casos reales de diseño web, branding y SEO.`
+de éxito en Colombia | <brand>` and the meta description `Antes y
+después de 13 negocios colombianos: qué encontramos roto y qué
+construimos. Casos reales de diseño web, branding y SEO.`
 - [x] `grep -nw "13" src/pages/proyectos/index.astro src/utils/projects.ts
-  src/components/section/landing/LatestProjects.2.astro` returns 0
+src/components/section/landing/LatestProjects.2.astro` returns 0
       matches. `dist/index.html` still contains `Ver los 13 proyectos`.
 - [x] `git diff --name-only dev` lists no file among
       `src/components/section/perPage/Projects*.astro`,

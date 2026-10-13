@@ -8,6 +8,9 @@ import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
 import ArrowUp from "@/assets/icons/arrowUp.svg";
 import { getReadingTime } from "@/utils/readinTime";
 import { AUTHORS, DEFAULT_AUTHOR } from "@/config/authors";
+import { getServiceBySlug } from "@/config/services";
+import RelatedPosts from "@/components/section/RelatedPosts.astro";
+import { getRelatedPosts } from "@/utils/posts";
 
 // Generate all possible paths
 export async function getStaticPaths() {
@@ -33,6 +36,15 @@ const { Content, headings } = await render(post);
 // Get author info from local config (enriches CMS data with bio, credentials, etc.)
 const author =
   AUTHORS.find((author) => author.name === post.data.author) || DEFAULT_AUTHOR;
+
+// Related content (services this post supports + sibling posts)
+const relatedServices = (post.data.services ?? []).flatMap((slug) => {
+  const service = getServiceBySlug(slug);
+  return service ? [service] : [];
+});
+const relatedPosts = await getRelatedPosts(post);
+const linkFocus =
+  "focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deepplum dark:focus-visible:outline-accentGold";
 
 // Add reading time
 const readingTime = post.body ? getReadingTime(post.body) : "";
@@ -132,6 +144,41 @@ const formatDate = (date: Date): string =>
       </Prose>
     </div>
   </article>
+  {
+    relatedServices.length > 0 && (
+      <aside
+        aria-labelledby="related-service-label"
+        class="w-full pb-4 md:pb-6"
+      >
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="rounded-xl border border-smokyBlack/10 dark:border-softWhite/10 bg-softWhite/50 dark:bg-smokyBlack/50 p-5">
+            <p
+              id="related-service-label"
+              class="text-sm font-semibold uppercase tracking-wide text-smokyBlack/80 dark:text-softWhite/80 mb-3"
+            >
+              Servicio relacionado
+            </p>
+            <ul class="flex flex-col gap-2">
+              {relatedServices.map((service) => (
+                <li>
+                  <a
+                    href={`/servicios/${service.slug}/`}
+                    class:list={[
+                      "text-lg font-semibold text-deepplum dark:text-accentGold hover:underline hover:underline-offset-2",
+                      linkFocus,
+                    ]}
+                  >
+                    {service.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </aside>
+    )
+  }
+  <RelatedPosts heading="Artículos relacionados" posts={relatedPosts} />
 </PostLayout>
 
 <script>

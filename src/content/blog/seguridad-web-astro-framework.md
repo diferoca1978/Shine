@@ -7,6 +7,7 @@ modifiedDate: 2026-01-15
 author: Diego Rodríguez
 image: "images/seguridad-web-astro.webp"
 tags: ["Seguridad Web", "Astro Framework", "Desarrollo Web", "Ciberseguridad"]
+services: ["diseno-web-estrategico"]
 draft: false
 ---
 

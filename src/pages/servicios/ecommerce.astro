@@ -11,6 +11,8 @@ import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolu
 import EcommerceComparisonTable from "@/components/section/ourServices/EcommerceComparisonTable.astro";
 import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
+import RelatedPosts from "@/components/section/RelatedPosts.astro";
+import { getPostsByService } from "@/utils/posts";
 import { ecommerceFAQs } from "@/config/faqs";
 
 const service = getServiceBySlug("ecommerce");
@@ -18,6 +20,8 @@ const service = getServiceBySlug("ecommerce");
 if (!service) {
   return Astro.redirect("/404");
 }
+
+const relatedPosts = await getPostsByService(service.slug);
 ---
 
 <ServiceLayout service={service}>
@@ -75,6 +79,8 @@ if (!service) {
     titleLine2="para su tienda online"
     filterTag="all"
   />
+  <RelatedPosts heading="Lecturas recomendadas" posts={relatedPosts} />
+
   <!-- FAQ -->
   <FAQ faqs={ecommerceFAQs} />
   <!-- CTA -->

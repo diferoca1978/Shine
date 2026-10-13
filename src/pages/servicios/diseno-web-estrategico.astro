@@ -13,12 +13,16 @@ import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolu
 import AstroVsWordpressTable from "@/components/section/ourServices/AstroVsWordpressTable.astro";
 import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
+import RelatedPosts from "@/components/section/RelatedPosts.astro";
+import { getPostsByService } from "@/utils/posts";
 
 const service = getServiceBySlug("diseno-web-estrategico");
 
 if (!service) {
   return Astro.redirect("/404");
 }
+
+const relatedPosts = await getPostsByService(service.slug);
 ---
 
 <ServiceLayout service={service}>
@@ -77,6 +81,8 @@ if (!service) {
     titleLine2="para su presencia digital"
     filterTag="diseño web"
   />
+
+  <RelatedPosts heading="Lecturas recomendadas" posts={relatedPosts} />
 
   <!-- FAQ -->
   <FAQ faqs={disenoWebFAQs} />
