@@ -383,7 +383,6 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
     "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
     name: service.title,
     description: service.seoDescription,
-    keywords: service.seoKeywords.join(", "),
     provider: {
       "@id": COMPANY_INFO.url + "#organization",
     },
@@ -395,8 +394,11 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
 
     availableChannel: {
       "@type": "ServiceChannel",
-      serviceUrl: `${COMPANY_INFO.url}/servicios/${service.slug}`,
-      servicePhone: COMPANY_INFO.phone,
+      serviceUrl: `${COMPANY_INFO.url}/servicios/${service.slug}/`,
+      servicePhone: {
+        "@type": "ContactPoint",
+        telephone: COMPANY_INFO.phone,
+      },
       serviceLocation: {
         "@type": "Place",
         address: {
@@ -405,16 +407,6 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
           addressCountry: "CO",
         },
       },
-    },
-
-    ...(service.benefits && {
-      serviceOutput: service.benefits.join(", "),
-    }),
-
-    isPartOf: {
-      "@type": "WebPage",
-      "@id": COMPANY_INFO.url + "/servicios",
-      name: "Servicios",
     },
   };
 }

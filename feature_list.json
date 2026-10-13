@@ -234,7 +234,7 @@
     },
     {
       "id": "fix-service-schema-props",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.3 (lines 141-178), finding M6 — generateServiceSchema (src/config/seo.ts:374-415) emits `keywords` (:381; not a Service property), a slashless availableChannel.serviceUrl (:393; differs from the canonical), a text servicePhone (:394; its range is ContactPoint), serviceOutput as the comma-joined benefits (:405-407; range Thing, and benefits are not outputs) and isPartOf (:409-413; not a Service property, and it types …/servicios as WebPage while /servicios/ types the same @id as CollectionPage).",
       "acceptance": [
