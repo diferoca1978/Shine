@@ -8,17 +8,10 @@ import AboutBio from "@/components/section/perPage/AboutBio.astro";
 import AboutServiceLinks from "@/components/section/perPage/AboutServiceLinks.astro";
 import CTABanner from "@/components/ui/CTABanner.astro";
 import {
-  generateBreadcrumbSchema,
   generatePageSEO,
   generateAllAuthorsSchemas,
   ORGANIZATION_SCHEMA,
 } from "@/config/seo";
-import { COMPANY_INFO } from "@/config/companyInfo";
-
-const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-  { name: "Nosotros", url: `${COMPANY_INFO.url}/nosotros/` },
-]);
 
 const authorSchemas = generateAllAuthorsSchemas();
 
@@ -32,7 +25,7 @@ const nosotrosSEO = generatePageSEO({
 
 <MainLayout
   seoProps={nosotrosSEO}
-  aditionalSchemas={[ORGANIZATION_SCHEMA, breadcrumbSchema, ...authorSchemas]}
+  aditionalSchemas={[ORGANIZATION_SCHEMA, ...authorSchemas]}
 >
   <HeroAbout />
   <AboutMission />

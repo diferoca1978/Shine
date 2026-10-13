@@ -152,7 +152,7 @@ After making changes, verify:
 - [ ] Heading hierarchy is logical (H1 → H2 → H3), never skipped
 - [ ] Images have descriptive alt text
 - [ ] At least one schema (Organization, Service, etc.)
-- [ ] Breadcrumb schema on non-homepage pages
+- [ ] `generateBreadcrumbSchema()` only where visible breadcrumbs render, from the same items array
 - [ ] Internal links with descriptive anchor text
 
 **AEO Checklist:**
@@ -198,9 +198,9 @@ import { COMPANY_INFO, MAIN_KEYWORDS } from "@/config/seo";
 Every page needs at least one JSON-LD schema:
 
 - **Homepage**: `ORGANIZATION_SCHEMA` + `WEBSITE_SCHEMA`
-- **Service Pages**: `generateServiceSchema()` + `generateBreadcrumbSchema()`
-- **About Page**: `generatePersonSchema()` + `generateBreadcrumbSchema()`
-- **Contact Page**: `LocalBusiness` schema + `generateBreadcrumbSchema()`; for Shine's remote `Organization` entity, follow `AGENTS.md` § "Config".
+- **Service Pages**: `generateServiceSchema()`; call `generateBreadcrumbSchema()` only when visible breadcrumbs render, from the same items array.
+- **About Page**: `generatePersonSchema()`
+- **Contact Page**: `LocalBusiness` schema; for Shine's remote `Organization` entity, follow `AGENTS.md` § "Config".
 
 **Repository policy:** This site does not emit `FAQPage` JSON-LD. Google stopped showing FAQ results on 2026-05-07, so keep visible Q&A as AEO content without generating that markup. See `AGENTS.md`; blog `faqs` frontmatter is rejected at build time.
 

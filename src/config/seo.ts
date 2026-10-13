@@ -479,7 +479,7 @@ export function generateProjectSchema(project: {
 
 // Breadcrumb schema generator
 export function generateBreadcrumbSchema(
-  breadcrumbs: Array<{ name: string; url: string }>,
+  breadcrumbs: Array<{ name: string; path: string }>,
 ): JSONLDSchema {
   return {
     "@context": "https://schema.org",
@@ -488,7 +488,7 @@ export function generateBreadcrumbSchema(
       "@type": "ListItem",
       position: index + 1,
       name: crumb.name,
-      item: crumb.url,
+      item: COMPANY_INFO.url + crumb.path,
     })),
   };
 }

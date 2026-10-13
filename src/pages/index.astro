@@ -13,11 +13,9 @@ import FAQ from "@/components/section/FAQ.astro";
 import { generalFAQs } from "@/config/faqs";
 import {
   generatePageSEO,
-  generateBreadcrumbSchema,
   ORGANIZATION_SCHEMA,
   WEBSITE_SCHEMA,
 } from "@/config/seo";
-import { COMPANY_INFO } from "@/config/companyInfo";
 
 const homeSEO = generatePageSEO({
   title: "Agencia de Marketing Digital y Diseño Web",
@@ -27,14 +25,11 @@ const homeSEO = generatePageSEO({
   image: "/images/shine-og-image.png",
 });
 
-const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: COMPANY_INFO.url },
-]);
 ---
 
 <MainLayout
   seoProps={homeSEO}
-  aditionalSchemas={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, breadcrumbSchema]}
+  aditionalSchemas={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]}
 >
   <GlobalHero
     titleLine1="Diseño web, publicidad digital y"

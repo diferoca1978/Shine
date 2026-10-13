@@ -1,12 +1,6 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import { generateBreadcrumbSchema, generatePageSEO } from "@/config/seo";
-import { COMPANY_INFO } from "@/config/companyInfo";
-
-const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-  { name: "Términos y Condiciones", url: `${COMPANY_INFO.url}/terminosycondiciones/` },
-]);
+import { generatePageSEO } from "@/config/seo";
 
 const terminosSEO = generatePageSEO({
   title: "Términos y Condiciones de Servicio",
@@ -19,7 +13,7 @@ const terminosSEO = generatePageSEO({
 const lastUpdated = new Date(2025, 10, 24).toLocaleDateString();
 ---
 
-<MainLayout seoProps={terminosSEO} aditionalSchemas={[breadcrumbSchema]}>
+<MainLayout seoProps={terminosSEO}>
   <section class="min-h-screen py-16 px-4">
     <div class="max-w-4xl mx-auto">
       <!-- Header -->

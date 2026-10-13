@@ -2,7 +2,6 @@
 import MainLayout from "@/layouts/MainLayout.astro";
 import {
     generateBlogSchema,
-    generateBreadcrumbSchema,
     generatePageSEO,
     type JSONLDSchema,
 } from "@/config/seo";
@@ -30,13 +29,6 @@ const blogSeoProps = generatePageSEO({
 });
 
 const aditionalSchemas: JSONLDSchema[] = [];
-
-const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Inicio", url: "/" },
-    { name: "Blog", url: "/blog" },
-]);
-
-aditionalSchemas.push(breadcrumbSchema);
 
 if (posts && posts.length > 0) {
     aditionalSchemas.push(generateBlogSchema(posts));

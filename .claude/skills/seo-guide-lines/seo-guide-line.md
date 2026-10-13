@@ -715,7 +715,7 @@ These schemas are pre-configured in `src/config/seo.ts` and include:
 
 #### Breadcrumb Schema
 
-**Use on all pages except homepage:**
+**Use `generateBreadcrumbSchema()` only when visible breadcrumbs render, from the same items array used by the breadcrumb UI:**
 
 ```astro
 ---
