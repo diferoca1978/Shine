@@ -303,6 +303,11 @@ gets rebuilt, not just what text changes) are still a **decision**, not a
 transcription — those go through the full lane even though the audit
 document is what surfaced the need.
 
+`docs/revision-infraestructura-seo-2026-10-12.md` (SEO infrastructure review,
+2026-10-12) — its § 3 is the `source` of 7 schema/meta/heading fixes. Its
+§ 2 maps every other finding to specs 11–16 or marks it as not routed (§ 4);
+an unrouted finding needs a decision first, so it goes through the full lane.
+
 The 15 entries already in `feature_list.json` predate this workflow and have
 no `source`/`acceptance` fields (see "The harness" above) — they are left
 as-is, not retrofitted. Only entries added from here forward carry the new
