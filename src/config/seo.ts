@@ -365,7 +365,6 @@ export function generateServiceSEO(service: Service): SEOProps {
     extend: {
       meta: [
         { name: "author", content: COMPANY_INFO.name },
-        { name: "robots", content: "index, follow" },
         { httpEquiv: "Content-Language", content: "es-CO" },
       ],
     },
