@@ -221,13 +221,13 @@
     },
     {
       "id": "fix-contactpage-schema-props",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.2 (lines 120-139), finding M5 — CONTACT_PAGE_SCHEMA (src/config/seo.ts:497-510) declares contactOption (TollFree), telephone, email and areaServed at :506-509. None of the 4 is a WebPage property, TollFree is false for a mobile number, and the Organization node already carries telephone, email and areaServed (:104, :105, :122).",
       "acceptance": [
         "The ContactPage node in the JSON-LD of dist/contacto/index.html has no contactOption, telephone, email or areaServed key, and `grep -rl TollFree dist` returns nothing.",
         "Apart from those 4 keys, the JSON-LD block of dist/contacto/index.html is identical to a build taken right before the change (same @type, @id, name, description, url, isPartOf and about).",
-        "The visible page is unchanged: `git diff --name-only` lists only src/config/seo.ts.",
+        "The visible page is unchanged: `git diff --name-only` lists only src/config/seo.ts and feature_list.json; feature_list.json changes are limited to this entry's required status flip and this acceptance-criterion clarification.",
         "`pnpm build` passes and `pnpm check` reports 0 errors."
       ],
       "nota": "From the 2026-10-12 SEO infra review. Delegated here by specs 12 and 13."
