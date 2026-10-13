@@ -263,7 +263,7 @@
     },
     {
       "id": "dedupe-service-robots-meta",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.5 (lines 214-229), finding M11 — the 3 dist/servicios/<slug>/index.html emit `<meta name=\"robots\" content=\"index, follow\">` twice while the other 27 HTML files in dist/ (404.html included) emit it once: astro-seo already emits it from `noindex: false` (src/config/seo.ts:344) and generateServiceSEO adds it again in extend.meta (:367).",
       "acceptance": [
