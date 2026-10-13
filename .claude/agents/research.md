@@ -1,7 +1,7 @@
 ---
 name: research
 description: Web/browser research — library/framework documentation lookups, external API references, and live browser interaction. Use when the request needs information outside this repo (framework docs, package versions, competitor sites, live browser interaction).
-model: claude-sonnet-5
+model: claude-sonnet-5-5
 tools: mcp__context7__resolve-library-id, mcp__context7__query-docs, WebSearch, WebFetch, Skill, Read
 ---
 
