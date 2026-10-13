@@ -1,11 +1,11 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
 import {
   generateBreadcrumbSchema,
   generateServiceSEO,
   generateServiceSchema,
 } from "@/config/seo";
-import { COMPANY_INFO } from "@/config/companyInfo";
 import type { Service } from "@/config/services";
 
 interface Props {
@@ -19,9 +19,9 @@ const seo = generateServiceSEO(service);
 const schema = generateServiceSchema(service);
 
 const breadcrumbs = [
-  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-  { name: "Servicios", url: `${COMPANY_INFO.url}/servicios/` },
-  { name: service.title, url: `${COMPANY_INFO.url}/servicios/${service.slug}/` },
+  { name: "Inicio", path: "/" },
+  { name: "Servicios", path: "/servicios/" },
+  { name: service.title, path: `/servicios/${service.slug}/` },
 ];
 
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
@@ -30,5 +30,8 @@ const schemas = [breadcrumbSchema, schema];
 ---
 
 <MainLayout seoProps={seo} aditionalSchemas={schemas}>
+  <div class="max-w-7xl mx-auto px-4 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
   <slot />
 </MainLayout>

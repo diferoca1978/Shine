@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import MainLayout from "@/layouts/MainLayout.astro";
 import {
-  generateBreadcrumbSchema,
   generateCollectionPageSchema,
   generatePageSEO,
 } from "@/config/seo";
@@ -25,11 +24,6 @@ const projectsSEO = generatePageSEO({
   path: "/proyectos",
 });
 
-const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-  { name: "Proyectos", url: `${COMPANY_INFO.url}/proyectos/` },
-]);
-
 const collectionSchema = generateCollectionPageSchema({
   name: "Proyectos",
   path: "/proyectos",
@@ -45,7 +39,7 @@ const collectionSchema = generateCollectionPageSchema({
 
 <MainLayout
   seoProps={projectsSEO}
-  aditionalSchemas={[breadcrumbSchema, collectionSchema]}
+  aditionalSchemas={[collectionSchema]}
 >
   <ProjectsHero>
     <Button

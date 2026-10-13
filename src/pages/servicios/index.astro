@@ -4,7 +4,6 @@ import GlobalHero from "@/components/global/GlobalHero.astro";
 import ServiceCard from "@/components/ui/ServiceCard.astro";
 import { services } from "@/config/services";
 import {
-  generateBreadcrumbSchema,
   generateCollectionPageSchema,
   generatePageSEO,
 } from "@/config/seo";
@@ -16,11 +15,6 @@ const servicesSEO = generatePageSEO({
     "Diseño web con Astro, campañas de Google Ads y Facebook Ads, y ecommerce con Tienda Nube: tres servicios digitales en un solo equipo para negocios en Colombia.",
   path: "/servicios",
 });
-
-const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-  { name: "Servicios", url: `${COMPANY_INFO.url}/servicios/` },
-]);
 
 const collectionSchema = generateCollectionPageSchema({
   name: "Servicios",
@@ -37,7 +31,7 @@ const collectionSchema = generateCollectionPageSchema({
 
 <MainLayout
   seoProps={servicesSEO}
-  aditionalSchemas={[breadcrumbSchema, collectionSchema]}
+  aditionalSchemas={[collectionSchema]}
 >
   <GlobalHero
     titleLine1="Tres servicios. Un solo equipo."

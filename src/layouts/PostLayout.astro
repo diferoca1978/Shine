@@ -6,15 +6,15 @@ import {
     generateBlogPostSchema,
     type JSONLDSchema,
 } from "@/config/seo";
-import { COMPANY_INFO } from "@/config/companyInfo";
 import { AUTHORS, DEFAULT_AUTHOR } from "@/config/authors";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
     post: CollectionEntry<"blog">;
+    breadcrumbs: { name: string; path: string }[];
 }
 
-const { post } = Astro.props;
+const { post, breadcrumbs } = Astro.props;
 
 // Extract post data for better readability
 const { data, id } = post;
@@ -54,11 +54,7 @@ const postSchema = generateBlogPostSchema({
     },
 });
 
-const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-    { name: "Blog", url: `${COMPANY_INFO.url}/blog/` },
-    { name: title, url: `${COMPANY_INFO.url}/blog/${sanitizedSlug}/` },
-]);
+const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 
 // Build schemas array
 const aditionalSchemas: JSONLDSchema[] = [
@@ -73,4 +69,3 @@ const aditionalSchemas: JSONLDSchema[] = [
 >
     <slot />
 </MainLayout>
-
