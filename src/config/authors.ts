@@ -43,6 +43,7 @@ export const AUTHORS: Author[] = [
     bio: "Especialista en estrategia de marca personal y comunicación digital. Ayuda a profesionales y empresas a construir una presencia auténtica que conecta con su audiencia.",
     longBio:
       "Rocío lleva más de 10 años desarrollando estrategias de marketing digital para empresas y emprendedores en Colombia. Se especializa en posicionamiento de marca, estrategia de contenido y publicidad digital en Google Ads y Meta Ads. Antes de fundar Shine trabajó con empresas de distintos sectores tecnologicos (Microsoft, Ieducando Colombia Google Partner)",
+    url: "/nosotros/",
     credentials: [
       "Estrategia de marca personal",
       "Marketing digital",
@@ -60,6 +61,7 @@ export const AUTHORS: Author[] = [
     bio: "Desarrollador web especializado en crear sitios de alto rendimiento con tecnologías modernas. Enfocado en experiencia de usuario y optimización para motores de búsqueda.",
     longBio:
       "Diego se especializa en desarrollo web con Astro Framework y creación de tiendas online con Tienda Nube. Cada sitio que construye pasa los Core Web Vitals de Google con puntajes de 90 a 100 en PageSpeed — no como objetivo, sino como estándar mínimo. Sitios escalables, mantenibles y optimizados para el SEO.",
+    url: "/nosotros/",
     credentials: [
       "Desarrollo web con Astro",
       "Optimización de rendimiento",

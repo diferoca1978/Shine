@@ -285,10 +285,6 @@ export function generateBlogPostSchema(post: {
     isPartOf: {
       "@id": COMPANY_INFO.url + "/blog#blog",
     },
-    about: {
-      "@type": "Thing",
-      name: "Marketing Digital Auténtico",
-    },
   };
 }
 

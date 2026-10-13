@@ -249,7 +249,7 @@
     },
     {
       "id": "fix-blogposting-about-author-url",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.4 (lines 180-212), finding M8 — generateBlogPostSchema (src/config/seo.ts:288-291) hardcodes `about: { \"@type\": \"Thing\", name: \"Marketing Digital Auténtico\" }` on all 5 posts. Neither AUTHORS entry (src/config/authors.ts:40, :57) fills the declared `url` field (:31), so BlogPosting.author and the /nosotros Person nodes have no url. Helpers report § 6.4 (lines 175, 178): author.url should point to a page that identifies the author; /nosotros/ shows both bios (AboutBio.astro).",
       "acceptance": [
