@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
+import ArrowUpRight from "@/assets/icons/diagonalArrow.svg"
 
 const allWorks: CollectionEntry<"works">[] = await getCollection("works");
 
@@ -162,12 +163,12 @@ const projects = orderedWorks
         </ul>
 
         <!-- Link to full projects page -->
-        <div class="mt-10 text-center lg:text-left">
+        <div class="group mt-10 text-center lg:text-left">
           <a
             href="/proyectos/"
-            class="inline-flex items-center gap-2 text-sm font-bold text-smokyBlack underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGreen focus-visible:ring-offset-2 dark:text-softWhite"
+            class="inline-flex items-center gap-2 text-sm font-bold text-smokyBlack underline underline-offset-4 dark:text-softWhite dark:hover:text-accentGold"
           >
-            Ver los {allWorks.length} proyectos →
+            Ver todos los proyectos <ArrowUpRight class="group-hover:rotate-45 duration-300 transition-transform w-4 h-4" />
           </a>
         </div>
       </div>

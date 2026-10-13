@@ -217,7 +217,7 @@ All `dist/` checks run after a fresh `pnpm build`.
 - [x] Setting `services: ["seo"]` on any post makes `pnpm build` fail.
       Revert after checking.
 - [x] `dist/index.html` has an `<h2>` `Del blog` placed after the `Ver
-  los` projects link and before the FAQ heading. Under it are links
+los` projects link and before the FAQ heading. Under it are links
       to `/blog/astro-vs-wordpress-web-estatica/`,
       `/blog/marketing-digital-para-abogados/` and
       `/blog/seguridad-web-astro-framework/`, in that order, plus a link
@@ -228,7 +228,7 @@ All `dist/` checks run after a fresh `pnpm build`.
       in that order. `dist/servicios/publicidad-digital/index.html` has
       it with only `marketing-digital-para-abogados`.
       `dist/servicios/ecommerce/index.html` doesn't contain `Lecturas
-  recomendadas`.
+recomendadas`.
 - [x] Each post's `Artículos relacionados` section links exactly these 3
       posts, in this order:
 
@@ -251,11 +251,11 @@ relacionado`.
 - [x] In `dist/blog/marketing-digital-para-abogados/index.html`, the
       `<article>` contains exactly these three anchors:
       `href="/servicios/diseno-web-estrategico/">un sitio web técnicamente
-  optimizado</a>`, `href="/blog/ventajas-astro-framework-2026/">las
-  métricas de Core Web Vitals</a>` and
+optimizado</a>`, `href="/blog/ventajas-astro-framework-2026/">las
+métricas de Core Web Vitals</a>` and
       `href="/servicios/publicidad-digital/">publicidad pagada</a>`.
 - [x] `grep -rl "marketing-digital-para-abogados" dist/servicios/
-  dist/index.html` returns 3 files.
+dist/index.html` returns 3 files.
 - [x] Each of the 5 post slugs appears in an `href` in at least one
       `dist/**/*.html` file other than `dist/blog/index.html` and the
       post's own page.
@@ -281,7 +281,7 @@ relacionado`.
       `src/pages/blog/index.astro`. The abogados post's `modifiedDate` is
       still `2026-05-14`.
 - [x] `AGENTS.md` names the `services` field and the shared-tags rule.
-- [ ] Manual check at 360 px and 1280 px, light and dark:
+- [x] Manual check at 360 px and 1280 px, light and dark:
   - the sections are readable, with no horizontal scroll;
   - every link is reachable with the keyboard and shows a focus ring.
 - [x] `pnpm build` passes. `pnpm check` reports no errors beyond the `dev`
