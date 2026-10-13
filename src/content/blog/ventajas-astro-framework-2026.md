@@ -7,6 +7,7 @@ modifiedDate: 2026-01-10
 author: Diego Rodríguez
 image: "images/astrofast.webp"
 tags: ["Desarrollo Web", "Core Web Vitals", "Optimización Web", "Astro Framework"]
+services: ["diseno-web-estrategico"]
 draft: false
 ---
 

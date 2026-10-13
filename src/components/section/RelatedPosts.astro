@@ -1,0 +1,66 @@
+---
+import type { BlogPost } from "@/utils/posts";
+import { Image } from "astro:assets";
+
+interface ViewAllLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  heading: string;
+  posts: BlogPost[];
+  viewAll?: ViewAllLink;
+
+}
+
+const { heading, posts, viewAll} = Astro.props;
+
+const linkFocus =
+  "focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deepplum dark:focus-visible:outline-accentGold";
+---
+
+{
+  posts.length > 0 && (
+    <section class="w-full py-12 md:py-16">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-smokyBlack dark:text-softWhite mb-6 md:mb-8">
+          {heading}
+        </h2>
+        <ul class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+          {posts.map((post) => (
+            <li class="flex flex-col gap-2 rounded-xl border border-smokyBlack/10 dark:border-softWhite/10 bg-softWhite/50 dark:bg-smokyBlack/50 p-5">
+              <div class="">
+                <Image src={post.data.image} alt={post.data.slug} class="object-cover rounded-xl"  />
+              </div>
+              <h3 class="text-lg font-semibold leading-tight text-smokyBlack dark:text-softWhite">
+                <a
+                  href={`/blog/${post.data.slug}/`}
+                  class:list={[
+                    "hover:text-deepplum dark:hover:text-accentGold hover:underline hover:underline-offset-2",
+                    linkFocus,
+                  ]}
+                >
+                  {post.data.title}
+                </a>
+              </h3>
+            </li>
+          ))}
+        </ul>
+        {viewAll && (
+          <p class="mt-6 md:mt-8">
+            <a
+              href={viewAll.href}
+              class:list={[
+                "text-sm font-semibold text-deepplum dark:text-accentGold hover:underline hover:underline-offset-2",
+                linkFocus,
+              ]}
+            >
+              {viewAll.label}
+            </a>
+          </p>
+        )}
+      </div>
+    </section>
+  )
+}

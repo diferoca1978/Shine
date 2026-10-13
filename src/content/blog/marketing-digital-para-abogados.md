@@ -9,6 +9,7 @@ author: "Rocío Parra"
 image: "images/ImagenBlogLegal.webp"
 imageAlt: "Marketing digital para abogados, estrategia SEO y redes sociales para firmas jurídicas"
 tags: ["Marketing Digital", "Abogados", "SEO", "Redes Sociales"]
+services: ["diseno-web-estrategico", "publicidad-digital"]
 draft: false
 
 ---
@@ -52,7 +53,7 @@ La buena noticia es que la mayoría de los despachos jurídicos todavía no ha a
 
 ## ¿Cómo posicionarse en Google si eres abogado?
 
-**Posicionarse en Google como abogado requiere un sitio web técnicamente optimizado, contenido que responda las preguntas reales de tus clientes potenciales y una estrategia de palabras clave orientada a la intención de búsqueda**, no solo al volumen de búsquedas.
+**Posicionarse en Google como abogado requiere [un sitio web técnicamente optimizado](/servicios/diseno-web-estrategico/), contenido que responda las preguntas reales de tus clientes potenciales y una estrategia de palabras clave orientada a la intención de búsqueda**, no solo al volumen de búsquedas.
 
 ### Paso 1: Define tus palabras clave con intención de cliente
 
@@ -72,7 +73,7 @@ Cada artículo de tu blog debería comenzar con una respuesta clara y concisa a 
 
 Un sitio lento no es un problema técnico, es un problema que cuesta clientes.
 
-Google penaliza los sitios lentos a través de las métricas de Core Web Vitals, que determinan si apareces antes o después que tu competencia en los resultados de búsqueda.
+Google penaliza los sitios lentos a través de [las métricas de Core Web Vitals](/blog/ventajas-astro-framework-2026/), que determinan si apareces antes o después que tu competencia en los resultados de búsqueda.
 
 ### Paso 4: Construye autoridad con reseñas y menciones
 
@@ -125,7 +126,7 @@ Tipos de contenido que funcionan:
 3. **Cierre accionable:** Dale al espectador un paso concreto que puede dar hoy mismo.
 4. **CTA suave:** Invita a la consulta gratuita o a seguirte para más contenido educativo.
 
-Este formato, aplicado con consistencia semana a semana, convierte a TikTok en un generador de consultas orgánicas, sin necesidad de invertir en publicidad pagada desde el inicio.
+Este formato, aplicado con consistencia semana a semana, convierte a TikTok en un generador de consultas orgánicas, sin necesidad de invertir en [publicidad pagada](/servicios/publicidad-digital/) desde el inicio.
 
 ---
 

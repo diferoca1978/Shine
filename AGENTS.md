@@ -75,8 +75,10 @@ a silent step before marking something done.
   as a scaffold placeholder.**
 - **Content collections** (`src/content.config.ts`, `astro:content` glob
   loader) — `works` (portfolio, `src/content/works/*.md`) and `blog`
-  (`src/content/blog/*.md`, `draft: true` excluded from production). Blog
-  posts use `marked` + `mdast-util-from-markdown`/`to-string` for reading-time
+  (`src/content/blog/*.md`, `draft: true` excluded from production). The
+  `blog` schema has an optional `services` field: an array of service slugs
+  taken from `src/config/services.ts`. An unknown slug fails `pnpm build`.
+  Blog posts use `marked` + `mdast-util-from-markdown`/`to-string` for reading-time
   estimation (`src/utils/readinTime.ts`), not for rendering — Astro renders
   the markdown natively via content collections.
 - **highlight.js** — code-block syntax highlighting in blog posts.
@@ -190,6 +192,18 @@ PascalCase component files.
 To add or change a service: update `src/config/services.ts`, then
 create/update `src/pages/servicios/<slug>.astro` using `ServiceLayout`; FAQs
 for each service live in `src/config/faqs.ts`.
+
+When publishing a blog post, set two frontmatter fields:
+
+- `services`: the slugs of the services the post supports. It decides which
+  service pages list the post under "Lecturas recomendadas", and which
+  services its "Servicio relacionado" block links to. Omit it when no active
+  service fits.
+- `tags`: related posts ("Artículos relacionados") are chosen by shared tags,
+  compared case-insensitively, with ties going to the most recent post. A
+  post with no tag in common with others only shows up as padding.
+
+The helpers live in `src/utils/posts.ts`, next to `getAllPosts()`.
 
 ### Styling
 
