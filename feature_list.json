@@ -298,7 +298,20 @@
         "Manual check at 360 px and 1280 px, light and dark: the process section looks the same as before.",
         "`pnpm build` passes and `pnpm check` reports 0 errors."
       ],
-      "nota": "From the 2026-10-12 SEO infra review. servicesStepsProcessAnimation2.js selects no heading tag, so the animation is unaffected."
+      "nota": "From the 2026-10-12 SEO infra review. servicesStepsProcessAnimation2.js selects no heading tag, so the animation is unaffected. Seen again on 2026-10-13 during spec 16 step 6. Spec 16's amended <h1> acceptance criterion records these two pages' dev baseline of two <h1> and points to this entry. It is not fixed on the spec-16 branch."
+    },
+    {
+      "id": "refactor-shared-focus-ring-classes",
+      "status": "pending",
+      "builders": ["front-end-astro"],
+      "source": "In-repo duplication, verified 2026-10-13 on feature/16-blog-internal-linking. The same focus-ring class list, `focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deepplum dark:focus-visible:outline-accentGold`, is written out three times. It is inline in src/components/ui/Breadcrumbs.astro:27. It is copied into a local `linkFocus` const in src/components/section/RelatedPosts.astro:18 and again in src/pages/blog/[slug].astro:47 (both added by spec 16, which reused the Breadcrumbs convention). A change to the site's focus ring would have to be made in three places by hand.",
+      "acceptance": [
+        "The focus-ring class list is defined in exactly one place. Breadcrumbs.astro, RelatedPosts.astro and blog/[slug].astro all consume it, so `grep -rn \"focus-visible:outline-deepplum\" src` matches only that definition.",
+        "The rendered focus behavior is unchanged: in dist/, the links in the breadcrumbs, the RelatedPosts cards and the post's 'Servicio relacionado' aside still get the same outline, offset, rounding and light/dark colors when focused (keyboard spot-check on one post page in light and dark).",
+        "No arbitrary `[...]` value or hardcoded color is introduced; only global.css tokens.",
+        "pnpm build passes; pnpm check reports no new errors."
+      ],
+      "nota": "Requested by the repo owner on 2026-10-13 during spec 16 step 7, as a refactor kept out of spec 16's scope. Moved here from the spec-16 branch so the two branches don't both append to this file. Blocked until spec 16 is merged into dev, because two of the three copies only exist on that branch. Not decided: how the class list is shared, either a Tailwind v4 `@utility` in global.css or an exported TS constant. If it is meant to become the site-wide focus-ring convention for every interactive element (not just these three files), that is a decision no document makes, so route it to /spec instead."
     }
   ]
 }
