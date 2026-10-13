@@ -11,6 +11,6 @@ export const GET: APIRoute = async () => {
     description: SITE_CONFIG.description,
     author: SITE_CONFIG.author,
     site: SITE_CONFIG.url,
-    items: postsToLlmsFullItems(posts, (slug) => `/${slug}`),
+    items: postsToLlmsFullItems(posts, (slug) => `/blog/${slug}/`),
   });
 };

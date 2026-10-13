@@ -16,6 +16,6 @@ export const GET = ({ props }: { props: { post: BlogPost } }) => {
   return llmsPost({
     post: props.post,
     site: SITE_CONFIG.url,
-    link: `/${props.post.data.slug}`,
+    link: `/blog/${props.post.data.slug}/`,
   });
 };

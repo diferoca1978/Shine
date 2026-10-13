@@ -208,7 +208,7 @@
     },
     {
       "id": "fix-llms-full-blog-urls",
-      "status": "pending",
+      "status": "in_progress",
       "builders": ["seo-guide-lines"],
       "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.1 (lines 99-118), finding M4 — src/pages/llms-full.txt.ts:14 and src/pages/llms/[slug].txt.ts:19 build each post link as `/${slug}`, so dist/llms-full.txt and the 5 dist/llms/<slug>.txt print `URL: https://shineagencia.com/<slug>`, a path with no page and no redirect (404). Posts live at /blog/<slug>/, which is their canonical.",
       "acceptance": [
