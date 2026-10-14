@@ -172,14 +172,17 @@ PascalCase component files.
 ### Config — `src/config/` (the single source of truth for content)
 
 - `companyInfo.ts` — `COMPANY_INFO` (name, phone, email, founders, city,
-  region, country, social links, real domain `https://shineagencia.com`), typed
-  via a `CompanyInfo` interface. Shine is remote: its entity is an
-  `Organization`, never `LocalBusiness` or `ProfessionalService`, with no
-  street address, `geo` or opening hours.
+  region, country, and social links), typed via a `CompanyInfo` interface.
+  `COMPANY_INFO.url` is derived from `siteUrl("/")` as an origin without a
+  trailing slash; do not maintain a second literal domain here. Shine is
+  remote: its entity is an `Organization`, never `LocalBusiness` or
+  `ProfessionalService`, with no street address, `geo` or opening hours.
 - `seo.ts` — imports `COMPANY_INFO` from `./companyInfo`; owns
   `generatePageSEO()` and the JSON-LD generator functions
   (`generateServiceSchema`, `generateBreadcrumbSchema`,
   plus Organization/Person schema helpers).
+- `src/utils/url.ts` — `siteUrl()` builds absolute same-origin page URLs from
+  Astro's configured `site`; `mediaUrl()` builds URLs for media fields.
 - `services.ts` — the 3 active services, typed `Service[]`: **Diseño Web con
   Astro**, **Google Ads & Facebook Ads (Publicidad Digital)**, **Ecommerce con
   Tienda Nube**. Each entry has content fields (`title`, `subtitle`,
@@ -233,7 +236,8 @@ Tailwind 4 Vite plugin, not PostCSS.
 | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Colors (visual tokens)                         | `src/styles/global.css` → `@theme` (only)                                                                                                                                                       |
 | Fonts                                          | Astro Fonts API, 3 files: `astro.config.mjs` `fonts[]` (Playfair Display, Open Sans, both via `fontProviders.fontsource()`) · `global.css` `@theme` `--font-*` · `MainLayout.astro` `<Font cssVariable>` |
-| Company data (name, phone, email, social, url) | `src/config/companyInfo.ts` → `COMPANY_INFO`                                                                                                                                                        |
+| Company data (name, phone, email, social)       | `src/config/companyInfo.ts` → `COMPANY_INFO`                                                                                                                                                        |
+| Site origin and URL generation                 | `astro.config.mjs` `site` is the only literal origin · `src/utils/url.ts` `siteUrl()` · `COMPANY_INFO.url` derives from `siteUrl("/")` without the final slash                                  |
 | Services                                       | `src/config/services.ts`                                                                                                                                                                        |
 | FAQs                                           | `src/config/faqs.ts`                                                                                                                                                                             |
 | Author / credentials                           | `src/config/authors.ts`                                                                                                                                                                          |

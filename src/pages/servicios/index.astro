@@ -8,6 +8,7 @@ import {
   generatePageSEO,
 } from "@/config/seo";
 import { COMPANY_INFO } from "@/config/companyInfo";
+import { siteUrl } from "@/utils/url";
 
 const servicesSEO = generatePageSEO({
   title: "Servicios: Diseño Web, Ads y Ecommerce",
@@ -24,7 +25,7 @@ const collectionSchema = generateCollectionPageSchema({
     "@type": "Service",
     "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
     name: service.title,
-    url: `${COMPANY_INFO.url}/servicios/${service.slug}/`,
+    url: siteUrl(`/servicios/${service.slug}`),
   })),
 });
 ---
