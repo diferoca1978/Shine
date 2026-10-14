@@ -15,9 +15,6 @@ interface Props {
 }
 
 const { heading, posts, viewAll} = Astro.props;
-
-const linkFocus =
-  "focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deepplum dark:focus-visible:outline-accentGold";
 ---
 
 {
@@ -38,7 +35,7 @@ const linkFocus =
                   href={`/blog/${post.data.slug}/`}
                   class:list={[
                     "hover:text-deepplum dark:hover:text-accentGold hover:underline hover:underline-offset-2",
-                    linkFocus,
+                    "focus-ring",
                   ]}
                 >
                   {post.data.title}
@@ -53,7 +50,7 @@ const linkFocus =
               href={viewAll.href}
               class:list={[
                 "text-sm font-semibold text-deepplum dark:text-accentGold hover:underline hover:underline-offset-2",
-                linkFocus,
+                "focus-ring",
               ]}
             >
               {viewAll.label}

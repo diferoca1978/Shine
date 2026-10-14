@@ -47,8 +47,6 @@ const relatedServices = (post.data.services ?? []).flatMap((slug) => {
   return service ? [service] : [];
 });
 const relatedPosts = await getRelatedPosts(post);
-const linkFocus =
-  "focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deepplum dark:focus-visible:outline-accentGold";
 
 // Add reading time
 const readingTime = post.body ? getReadingTime(post.body) : "";
@@ -169,7 +167,7 @@ const formatDate = (date: Date): string =>
                     href={`/servicios/${service.slug}/`}
                     class:list={[
                       "text-lg font-semibold text-deepplum dark:text-accentGold hover:underline hover:underline-offset-2",
-                      linkFocus,
+                      "focus-ring",
                     ]}
                   >
                     {service.title}
@@ -195,7 +193,6 @@ const formatDate = (date: Date): string =>
   });
 </script>
   
-
 
 
 
