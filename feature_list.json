@@ -302,7 +302,7 @@
     },
     {
       "id": "refactor-shared-focus-ring-classes",
-      "status": "pending",
+      "status": "done",
       "builders": ["front-end-astro"],
       "source": "In-repo duplication, verified 2026-10-13 on feature/16-blog-internal-linking. The same focus-ring class list, `focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deepplum dark:focus-visible:outline-accentGold`, is written out three times. It is inline in src/components/ui/Breadcrumbs.astro:27. It is copied into a local `linkFocus` const in src/components/section/RelatedPosts.astro:18 and again in src/pages/blog/[slug].astro:47 (both added by spec 16, which reused the Breadcrumbs convention). A change to the site's focus ring would have to be made in three places by hand.",
       "acceptance": [
