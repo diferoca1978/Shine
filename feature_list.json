@@ -275,7 +275,7 @@
     },
     {
       "id": "remove-dead-seo-generators",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.6 (lines 231-277), finding E3 — zero-caller code: src/config/seo.ts:512-583 (generateReviewsSchema, generateGoogleReviewsSchema), :594-693 (HowToStep, HowToOptions, generateHowToSchema, generateHowToSchemaWithPage), src/config/site.ts:12-15 (SITE_CONFIG.llms) and :18-24 (getServicesForLlms), src/config/authors.ts:86-88 (getAuthorByName). Unreachable fallbacks: DEFAULT_SEO (seo.ts:53-91, used only at MainLayout.astro:52, whose 12 callers all pass seoProps) and DEFAULT_AUTHOR (authors.ts:74-84, used at PostLayout.astro:27, src/pages/blog/[slug].astro:35, seo.ts:233 and authors.ts:87; the content.config.ts:51 enum makes it unreachable). Specs 11 (:66-69) and 12 (:100-103) delegated DEFAULT_SEO, DEFAULT_AUTHOR and SITE_CONFIG.llms here.",
       "acceptance": [

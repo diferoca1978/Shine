@@ -6,7 +6,7 @@ import {
     generateBlogPostSchema,
     type JSONLDSchema,
 } from "@/config/seo";
-import { AUTHORS, DEFAULT_AUTHOR } from "@/config/authors";
+import { AUTHORS } from "@/config/authors";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -23,8 +23,13 @@ const { title, slug, description, pubDate, modifiedDate, image } = data;
 // Sanitize slug: trim whitespace and ensure it's URL-safe
 const sanitizedSlug = slug.trim().replace(/\s+/g, "-").toLowerCase();
 
-// Resolve author from AUTHORS array or use default
-const author = AUTHORS.find((a) => a.name === data.author) ?? DEFAULT_AUTHOR;
+// Resolve author from AUTHORS array
+const author = AUTHORS.find((a) => a.name === data.author);
+if (!author) {
+    throw new Error(
+        `Author "${data.author}" on blog post "${id}" is not registered in AUTHORS (src/config/authors.ts).`,
+    );
+}
 
 //Generate page SEO
 const postSeoProps = generatePageSEO({
