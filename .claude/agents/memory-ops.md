@@ -1,7 +1,7 @@
 ---
 name: memory-ops
 description: Persistent memory operations via Engram — search prior context at the start of a task, save decisions/bugs/discoveries proactively, and write the end-of-session summary. Use whenever the main session needs to recall past work or persist a decision/fix/convention for future sessions.
-model: claude-haiku-4-5-20251001
+model: claude-haiku-5-5
 tools: mcp__plugin_engram_engram__mem_save, mcp__plugin_engram_engram__mem_search, mcp__plugin_engram_engram__mem_context, mcp__plugin_engram_engram__mem_session_summary, mcp__plugin_engram_engram__mem_get_observation, mcp__plugin_engram_engram__mem_save_prompt, mcp__plugin_engram_engram__mem_session_start, mcp__plugin_engram_engram__mem_session_end, mcp__plugin_engram_engram__mem_current_project, ToolSearch, Read
 ---
 

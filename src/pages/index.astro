@@ -10,13 +10,14 @@ import Button from "@/components/ui/button.astro";
 import StarIcon from "@/assets/icons/star40x40.svg";
 import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
+import RelatedPosts from "@/components/section/RelatedPosts.astro";
+import { getRecentPosts } from "@/utils/posts";
 import { generalFAQs } from "@/config/faqs";
 import {
   generatePageSEO,
-  generateBreadcrumbSchema,
-  generateFAQSchema,
+  ORGANIZATION_SCHEMA,
+  WEBSITE_SCHEMA,
 } from "@/config/seo";
-import { COMPANY_INFO } from "@/config/companyInfo";
 
 const homeSEO = generatePageSEO({
   title: "Agencia de Marketing Digital y Diseño Web",
@@ -26,16 +27,12 @@ const homeSEO = generatePageSEO({
   image: "/images/shine-og-image.png",
 });
 
-const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: COMPANY_INFO.url },
-]);
-
-const faqSchema = generateFAQSchema(generalFAQs);
+const recentPosts = await getRecentPosts(3);
 ---
 
 <MainLayout
   seoProps={homeSEO}
-  aditionalSchemas={[breadcrumbSchema, faqSchema]}
+  aditionalSchemas={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]}
 >
   <GlobalHero
     titleLine1="Diseño web, publicidad digital y"

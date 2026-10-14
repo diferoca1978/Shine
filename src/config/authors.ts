@@ -8,6 +8,8 @@
  */
 
 export interface Author {
+  /** Stable ASCII identifier used for the author's Person @id */
+  id: string;
   /** Author's full name */
   name: string;
   /** Role in the company */
@@ -35,11 +37,13 @@ export interface Author {
  */
 export const AUTHORS: Author[] = [
   {
-    name: "Rocio Parra",
+    id: "rocio-parra",
+    name: "Rocío Parra",
     role: "Co-fundadora & Estratega de Marca",
     bio: "Especialista en estrategia de marca personal y comunicación digital. Ayuda a profesionales y empresas a construir una presencia auténtica que conecta con su audiencia.",
     longBio:
       "Rocío lleva más de 10 años desarrollando estrategias de marketing digital para empresas y emprendedores en Colombia. Se especializa en posicionamiento de marca, estrategia de contenido y publicidad digital en Google Ads y Meta Ads. Antes de fundar Shine trabajó con empresas de distintos sectores tecnologicos (Microsoft, Ieducando Colombia Google Partner)",
+    url: "/nosotros/",
     credentials: [
       "Estrategia de marca personal",
       "Marketing digital",
@@ -51,11 +55,13 @@ export const AUTHORS: Author[] = [
     },
   },
   {
-    name: "Diego Rodriguez",
+    id: "diego-rodriguez",
+    name: "Diego Rodríguez",
     role: "Co-fundador & Desarrollador Web",
     bio: "Desarrollador web especializado en crear sitios de alto rendimiento con tecnologías modernas. Enfocado en experiencia de usuario y optimización para motores de búsqueda.",
     longBio:
       "Diego se especializa en desarrollo web con Astro Framework y creación de tiendas online con Tienda Nube. Cada sitio que construye pasa los Core Web Vitals de Google con puntajes de 90 a 100 en PageSpeed — no como objetivo, sino como estándar mínimo. Sitios escalables, mantenibles y optimizados para el SEO.",
+    url: "/nosotros/",
     credentials: [
       "Desarrollo web con Astro",
       "Optimización de rendimiento",
@@ -66,18 +72,3 @@ export const AUTHORS: Author[] = [
     },
   },
 ];
-
-export const DEFAULT_AUTHOR: Author = {
-  name: "Shine Agencia",
-  role: "Agencia de Marketing Digital y Diseño Web",
-  bio: "Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.",
-  credentials: ["Marketing digital", "Diseño web", "Estrategia de marca"],
-  socialMedia: {
-    linkedin: "https://www.linkedin.com/company/shine-agencia",
-    instagram: "https://www.instagram.com/shine.agencia",
-  },
-};
-
-export function getAuthorByName(name: string): Author {
-  return AUTHORS.find((author) => author.name === name) || DEFAULT_AUTHOR;
-}

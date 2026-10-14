@@ -205,6 +205,113 @@
         "El artículo tiene un solo H1 generado por la plantilla, encabezados H2 como preguntas y una llamada a la acción hacia /contacto/."
       ],
       "nota": "Nuevo artículo SEO/AEO sobre cuándo conviene migrar de WordPress a Astro, con las cifras contextualizadas y sin afirmar que Astro sea invulnerable."
+    },
+    {
+      "id": "fix-llms-full-blog-urls",
+      "status": "done",
+      "builders": ["seo-guide-lines"],
+      "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.1 (lines 99-118), finding M4 — src/pages/llms-full.txt.ts:14 and src/pages/llms/[slug].txt.ts:19 build each post link as `/${slug}`, so dist/llms-full.txt and the 5 dist/llms/<slug>.txt print `URL: https://shineagencia.com/<slug>`, a path with no page and no redirect (404). Posts live at /blog/<slug>/, which is their canonical.",
+      "acceptance": [
+        "After `pnpm build`, `grep -c '^URL: https://shineagencia.com/blog/.*/$' dist/llms-full.txt` returns 5, and line 5 of each of the 5 dist/llms/<slug>.txt reads `URL: https://shineagencia.com/blog/<slug>/`.",
+        "Each of those 10 URLs equals the `<link rel=\"canonical\">` href of the matching dist/blog/<slug>/index.html.",
+        "dist/llms.txt is byte-identical to a build taken right before the change (its /llms/<slug>.txt links were already correct).",
+        "`pnpm build` passes and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the 2026-10-12 SEO infra review. The review named only llms-full.txt; re-verification on dev @ 2928961 found the same defect in llms/[slug].txt.ts, so both endpoints are in scope."
+    },
+    {
+      "id": "fix-contactpage-schema-props",
+      "status": "done",
+      "builders": ["seo-guide-lines"],
+      "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.2 (lines 120-139), finding M5 — CONTACT_PAGE_SCHEMA (src/config/seo.ts:497-510) declares contactOption (TollFree), telephone, email and areaServed at :506-509. None of the 4 is a WebPage property, TollFree is false for a mobile number, and the Organization node already carries telephone, email and areaServed (:104, :105, :122).",
+      "acceptance": [
+        "The ContactPage node in the JSON-LD of dist/contacto/index.html has no contactOption, telephone, email or areaServed key, and `grep -rl TollFree dist` returns nothing.",
+        "Apart from those 4 keys, the JSON-LD block of dist/contacto/index.html is identical to a build taken right before the change (same @type, @id, name, description, url, isPartOf and about).",
+        "The visible page is unchanged: `git diff --name-only` lists only src/config/seo.ts and feature_list.json; feature_list.json changes are limited to this entry's required status flip and this acceptance-criterion clarification.",
+        "`pnpm build` passes and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the 2026-10-12 SEO infra review. Delegated here by specs 12 and 13."
+    },
+    {
+      "id": "fix-service-schema-props",
+      "status": "done",
+      "builders": ["seo-guide-lines"],
+      "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.3 (lines 141-178), finding M6 — generateServiceSchema (src/config/seo.ts:374-415) emits `keywords` (:381; not a Service property), a slashless availableChannel.serviceUrl (:393; differs from the canonical), a text servicePhone (:394; its range is ContactPoint), serviceOutput as the comma-joined benefits (:405-407; range Thing, and benefits are not outputs) and isPartOf (:409-413; not a Service property, and it types …/servicios as WebPage while /servicios/ types the same @id as CollectionPage).",
+      "acceptance": [
+        "In the Service node of each of dist/servicios/{diseno-web-estrategico,publicidad-digital,ecommerce}/index.html there is no keywords, serviceOutput or isPartOf key.",
+        "availableChannel.serviceUrl equals that page's `<link rel=\"canonical\">` href, with the trailing slash.",
+        "availableChannel.servicePhone is an object with `\"@type\": \"ContactPoint\"` whose telephone equals COMPANY_INFO.phone.",
+        "The Service @id, name, description, provider, areaServed and availableChannel.serviceLocation are identical to a build taken right before the change, and dist/servicios/index.html is byte-identical to it.",
+        "src/config/services.ts is unchanged (seoKeywords stays in the config).",
+        "`pnpm build` passes (the JSON-LD builder fails on any unresolved @id) and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the 2026-10-12 SEO infra review. Delegated here by specs 12 and 13. Linking each service page to its Service through a WebPage `about` node (helpers report § 7.2) is a graph-architecture change and stays out. Edits the function next to dedupe-service-robots-meta's; land them one after the other."
+    },
+    {
+      "id": "fix-blogposting-about-author-url",
+      "status": "done",
+      "builders": ["seo-guide-lines"],
+      "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.4 (lines 180-212), finding M8 — generateBlogPostSchema (src/config/seo.ts:288-291) hardcodes `about: { \"@type\": \"Thing\", name: \"Marketing Digital Auténtico\" }` on all 5 posts. Neither AUTHORS entry (src/config/authors.ts:40, :57) fills the declared `url` field (:31), so BlogPosting.author and the /nosotros Person nodes have no url. Helpers report § 6.4 (lines 175, 178): author.url should point to a page that identifies the author; /nosotros/ shows both bios (AboutBio.astro).",
+      "acceptance": [
+        "`grep -l 'Marketing Digital Auténtico' dist/blog/*/index.html` returns nothing, and no BlogPosting node in the 5 posts has an `about` key.",
+        "In each of the 5 dist/blog/<slug>/index.html, the BlogPosting author has `\"url\": \"https://shineagencia.com/nosotros/\"`.",
+        "In dist/nosotros/index.html both Person nodes have that same url, and their @id is still `https://shineagencia.com/nosotros#rocio-parra` / `#diego-rodriguez` (opaque and slashless on purpose — not changed).",
+        "No visible change: `git diff --name-only` lists only src/config/seo.ts and src/config/authors.ts.",
+        "`pnpm build` passes and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the 2026-10-12 SEO infra review. Delegated here by specs 12 and 13. Out: typing /nosotros as ProfilePage, deriving `about` from tags, linking the visible \"Por:\" byline. Shares the author block of generateBlogPostSchema (seo.ts:229-233) with remove-dead-seo-generators; whichever lands second rebases."
+    },
+    {
+      "id": "dedupe-service-robots-meta",
+      "status": "done",
+      "builders": ["seo-guide-lines"],
+      "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.5 (lines 214-229), finding M11 — the 3 dist/servicios/<slug>/index.html emit `<meta name=\"robots\" content=\"index, follow\">` twice while the other 27 HTML files in dist/ (404.html included) emit it once: astro-seo already emits it from `noindex: false` (src/config/seo.ts:344) and generateServiceSEO adds it again in extend.meta (:367).",
+      "acceptance": [
+        "Every HTML file under dist/ has exactly one `<meta name=\"robots\"` tag (count per file with grep -o … | wc -l over `find dist -name '*.html'`).",
+        "On the 3 service pages that tag's content is still `index, follow`, and their author and Content-Language meta tags are unchanged.",
+        "`pnpm build` passes and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the 2026-10-12 SEO infra review. Making generateServiceSEO call generatePageSEO is a refactor the fix doesn't need, so it stays out."
+    },
+    {
+      "id": "remove-dead-seo-generators",
+      "status": "done",
+      "builders": ["seo-guide-lines"],
+      "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.6 (lines 231-277), finding E3 — zero-caller code: src/config/seo.ts:512-583 (generateReviewsSchema, generateGoogleReviewsSchema), :594-693 (HowToStep, HowToOptions, generateHowToSchema, generateHowToSchemaWithPage), src/config/site.ts:12-15 (SITE_CONFIG.llms) and :18-24 (getServicesForLlms), src/config/authors.ts:86-88 (getAuthorByName). Unreachable fallbacks: DEFAULT_SEO (seo.ts:53-91, used only at MainLayout.astro:52, whose 12 callers all pass seoProps) and DEFAULT_AUTHOR (authors.ts:74-84, used at PostLayout.astro:27, src/pages/blog/[slug].astro:35, seo.ts:233 and authors.ts:87; the content.config.ts:51 enum makes it unreachable). Specs 11 (:66-69) and 12 (:100-103) delegated DEFAULT_SEO, DEFAULT_AUTHOR and SITE_CONFIG.llms here.",
+      "acceptance": [
+        "`grep -rnE 'generateReviewsSchema|generateGoogleReviewsSchema|HowToStep|HowToOptions|generateHowToSchema|getServicesForLlms|getAuthorByName|DEFAULT_SEO|DEFAULT_AUTHOR' src` returns nothing, and SITE_CONFIG has no `llms` key.",
+        "Where a fallback used to apply, the build now fails with an error naming the missing input. Negative check 1: temporarily drop `seoProps` from one MainLayout caller → `pnpm build` fails naming MainLayout. Negative check 2: temporarily rename one AUTHORS `name` → `pnpm build` fails naming the author. Both reverted.",
+        "Every .html, .txt and .xml file under dist/ is byte-identical to a build taken right before the change (`diff -r`).",
+        "`pnpm build` passes and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the 2026-10-12 SEO infra review. getServicesForLlms and getAuthorByName were found dead during re-verification on dev @ 2928961 and added. The two FAQ generators the review listed were already deleted by spec 11. Out: Date.now() in mockGoogleReviews.ts (spec 09 kept it on purpose), FAQItem (still used), MainLayout's title/description props."
+    },
+    {
+      "id": "fix-double-h1-service-pages",
+      "status": "done",
+      "builders": ["front-end-astro", "seo-guide-lines"],
+      "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.7 (lines 279-300), finding M14 — src/components/section/ourServices/ServicesStepsProcessAlt.astro renders the process title as <h1> (:28-33) and each step title as <h2> (:52-54), so dist/servicios/ecommerce/ and dist/servicios/publicidad-digital/ have 2 <h1> each. The sibling ServicesStepsProcess.astro already uses <h2> (:15) and <h3> (:84). Rule: one <h1> per page, H1 → H2 → H3 without skips (AGENTS.md § Skill routing).",
+      "acceptance": [
+        "dist/servicios/ecommerce/index.html and dist/servicios/publicidad-digital/index.html each contain exactly one `<h1`.",
+        "In ServicesStepsProcessAlt.astro the process title is an <h2> and each step title an <h3>; `git diff` shows only the tag names changing, with every class attribute intact.",
+        "Neither page skips a heading level in its built HTML outline.",
+        "Manual check at 360 px and 1280 px, light and dark: the process section looks the same as before.",
+        "`pnpm build` passes and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the 2026-10-12 SEO infra review. servicesStepsProcessAnimation2.js selects no heading tag, so the animation is unaffected. Seen again on 2026-10-13 during spec 16 step 6. Spec 16's amended <h1> acceptance criterion records these two pages' dev baseline of two <h1> and points to this entry. It is not fixed on the spec-16 branch."
+    },
+    {
+      "id": "refactor-shared-focus-ring-classes",
+      "status": "done",
+      "builders": ["front-end-astro"],
+      "source": "In-repo duplication, verified 2026-10-13 on feature/16-blog-internal-linking. The same focus-ring class list, `focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deepplum dark:focus-visible:outline-accentGold`, is written out three times. It is inline in src/components/ui/Breadcrumbs.astro:27. It is copied into a local `linkFocus` const in src/components/section/RelatedPosts.astro:18 and again in src/pages/blog/[slug].astro:47 (both added by spec 16, which reused the Breadcrumbs convention). A change to the site's focus ring would have to be made in three places by hand.",
+      "acceptance": [
+        "The focus-ring class list is defined in exactly one place. Breadcrumbs.astro, RelatedPosts.astro and blog/[slug].astro all consume it, so `grep -rn \"focus-visible:outline-deepplum\" src` matches only that definition.",
+        "The rendered focus behavior is unchanged: in dist/, the links in the breadcrumbs, the RelatedPosts cards and the post's 'Servicio relacionado' aside still get the same outline, offset, rounding and light/dark colors when focused (keyboard spot-check on one post page in light and dark).",
+        "No arbitrary `[...]` value or hardcoded color is introduced; only global.css tokens.",
+        "pnpm build passes; pnpm check reports no new errors."
+      ],
+      "nota": "Requested by the repo owner on 2026-10-13 during spec 16 step 7, as a refactor kept out of spec 16's scope. Moved here from the spec-16 branch so the two branches don't both append to this file. Blocked until spec 16 is merged into dev, because two of the three copies only exist on that branch. Not decided: how the class list is shared, either a Tailwind v4 `@utility` in global.css or an exported TS constant. If it is meant to become the site-wide focus-ring convention for every interactive element (not just these three files), that is a decision no document makes, so route it to /spec instead."
     }
   ]
 }

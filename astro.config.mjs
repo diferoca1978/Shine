@@ -26,7 +26,8 @@ export default defineConfig({
           "https://shineagencia.com/politicadeprivacidad/",
           "https://shineagencia.com/terminosycondiciones/",
           "https://shineagencia.com/404/",
-        ].includes(page),
+        ].includes(page) &&
+        !/^https:\/\/shineagencia\.com\/proyectos\/[^/]+\/$/.test(page),
     }),
     partytown(),
     // Exposes site content to in-browser AI agents via WebMCP (Chrome proposal).

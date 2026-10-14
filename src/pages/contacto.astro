@@ -1,15 +1,9 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import { generateBreadcrumbSchema, generatePageSEO, CONTACT_PAGE_SCHEMA } from "@/config/seo";
-import { COMPANY_INFO } from "@/config/companyInfo";
+import { generatePageSEO, CONTACT_PAGE_SCHEMA } from "@/config/seo";
 import ContactForm from "@/components/section/perPage/ContactForm.astro";
 import ContactInfo from "@/components/section/perPage/ContactInfo.astro";
 import GlobalHero from "@/components/global/GlobalHero.astro";
-
-const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-    { name: "Contacto", url: `${COMPANY_INFO.url}/contacto/` },
-]);
 
 const contactoSEO = generatePageSEO({
     title: "Contacto | Diagnóstico Digital Gratuito",
@@ -20,7 +14,7 @@ const contactoSEO = generatePageSEO({
 
 ---
 
-<MainLayout seoProps={contactoSEO} aditionalSchemas={[breadcrumbSchema, CONTACT_PAGE_SCHEMA]}>
+<MainLayout seoProps={contactoSEO} aditionalSchemas={[CONTACT_PAGE_SCHEMA]}>
     <GlobalHero
         titleLine1="Contacto"
         subtitleBefore="Cuéntanos tu idea, solicita tu sesión de diagnóstico y da el primer paso"

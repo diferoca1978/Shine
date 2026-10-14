@@ -3,7 +3,7 @@ title: "Astro vs WordPress: ¿Cuándo conviene una web estática?"
 slug: astro-vs-wordpress-web-estatica
 description: "¿Tu web corporativa necesita WordPress? Comparamos Astro y WordPress en velocidad, seguridad, mantenimiento y flexibilidad para ayudarte a decidir."
 pubDate: 2026-10-01
-author: Diego Rodriguez
+author: Diego Rodríguez
 image: "images/astrovswordPress.webp"
 imageAlt: "Desarrollo de una web estratégica con Astro Framework"
 tags:
@@ -14,13 +14,7 @@ tags:
     "Seguridad Web",
     "Rendimiento Web",
   ]
-faqs:
-  - question: "¿Astro es mejor que WordPress para cualquier página web?"
-    answer: "No. Astro suele ser una excelente opción para webs corporativas, portafolios, blogs y páginas de servicios que priorizan velocidad y seguridad. WordPress puede ser más conveniente para tiendas con WooCommerce, membresías, LMS o equipos que publican y gestionan contenido a diario desde un panel visual."
-  - question: "¿Una web hecha con Astro necesita mantenimiento?"
-    answer: "Sí, pero normalmente requiere menos mantenimiento operativo que una instalación de WordPress con múltiples plugins. Aun así, conviene actualizar dependencias, revisar formularios, comprobar el hosting y mantener el contenido y la seguridad al día."
-  - question: "¿Se puede editar una web Astro sin saber programar?"
-    answer: "Sí, si se conecta a un CMS desacoplado o se diseña un flujo de edición adaptado al proyecto. También pueden gestionarse cambios mediante Git, automatizaciones o un agente de IA con límites claros. Astro no obliga a exponer un panel WordPress."
+services: ["diseno-web-estrategico"]
 draft: false
 ---
 

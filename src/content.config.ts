@@ -1,6 +1,12 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { services } from "@/config/services";
+
+const serviceSlugs = services.map((service) => service.slug) as [
+  string,
+  ...string[],
+];
 
 const works = defineCollection({
   loader: glob({
@@ -48,18 +54,17 @@ const blog = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date(),
       modifiedDate: z.coerce.date().optional(),
-      author: z.enum(["Diego Rodriguez", "Rocio Parra"]),
+      author: z.enum(["Diego Rodríguez", "Rocío Parra"]),
       image: image(),
       imageAlt: z.string().optional(),
       tags: z.array(z.string()).optional(),
+      services: z.array(z.enum(serviceSlugs)).optional(),
       faqs: z
-        .array(
-          z.object({
-            question: z.string(),
-            answer: z.string(),
-          }),
-        )
-        .optional(),
+        .never({
+          error:
+            "Este sitio no emite FAQPage. Elimina el campo faqs del frontmatter y consulta AGENTS.md.",
+        })
+        .exactOptional(),
       draft: z.boolean().optional().default(false),
     }),
 });

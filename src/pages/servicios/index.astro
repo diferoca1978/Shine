@@ -4,7 +4,6 @@ import GlobalHero from "@/components/global/GlobalHero.astro";
 import ServiceCard from "@/components/ui/ServiceCard.astro";
 import { services } from "@/config/services";
 import {
-  generateBreadcrumbSchema,
   generateCollectionPageSchema,
   generatePageSEO,
 } from "@/config/seo";
@@ -17,24 +16,22 @@ const servicesSEO = generatePageSEO({
   path: "/servicios",
 });
 
-const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-  { name: "Servicios", url: `${COMPANY_INFO.url}/servicios/` },
-]);
-
 const collectionSchema = generateCollectionPageSchema({
   name: "Servicios",
   path: "/servicios",
   description: servicesSEO.description,
   hasPart: services.map((service) => ({
-    id: `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+    "@type": "Service",
+    "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
+    name: service.title,
+    url: `${COMPANY_INFO.url}/servicios/${service.slug}/`,
   })),
 });
 ---
 
 <MainLayout
   seoProps={servicesSEO}
-  aditionalSchemas={[breadcrumbSchema, collectionSchema]}
+  aditionalSchemas={[collectionSchema]}
 >
   <GlobalHero
     titleLine1="Tres servicios. Un solo equipo."

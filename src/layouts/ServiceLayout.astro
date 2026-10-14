@@ -1,20 +1,12 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
 import {
   generateBreadcrumbSchema,
   generateServiceSEO,
   generateServiceSchema,
-  generateFAQSchema,
 } from "@/config/seo";
-import { COMPANY_INFO } from "@/config/companyInfo";
 import type { Service } from "@/config/services";
-import { getFAQsByCategory } from "@/config/faqs";
-
-const slugToCategory: Record<string, string> = {
-  "diseno-web-estrategico": "diseno-web",
-  "publicidad-digital": "publicidad-digital",
-  "ecommerce": "ecommerce",
-};
 
 interface Props {
   service: Service;
@@ -27,19 +19,19 @@ const seo = generateServiceSEO(service);
 const schema = generateServiceSchema(service);
 
 const breadcrumbs = [
-  { name: "Inicio", url: `${COMPANY_INFO.url}/` },
-  { name: "Servicios", url: `${COMPANY_INFO.url}/servicios/` },
-  { name: service.title, url: `${COMPANY_INFO.url}/servicios/${service.slug}/` },
+  { name: "Inicio", path: "/" },
+  { name: "Servicios", path: "/servicios/" },
+  { name: service.title, path: `/servicios/${service.slug}/` },
 ];
 
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 
-const serviceFaqs = getFAQsByCategory(slugToCategory[service.slug] ?? "");
-const faqSchema = serviceFaqs.length ? generateFAQSchema(serviceFaqs) : null;
-
-const schemas = [breadcrumbSchema, schema, ...(faqSchema ? [faqSchema] : [])];
+const schemas = [breadcrumbSchema, schema];
 ---
 
 <MainLayout seoProps={seo} aditionalSchemas={schemas}>
+  <div class="max-w-7xl mx-auto px-4 pt-6">
+    <Breadcrumbs items={breadcrumbs} />
+  </div>
   <slot />
 </MainLayout>

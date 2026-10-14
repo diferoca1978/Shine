@@ -4,9 +4,13 @@ import { getCollection, render } from "astro:content";
 import PostLayout from "@/layouts/PostLayout.astro";
 import "highlight.js/styles/github-dark.css";
 import Prose from "@/components/ui/Prose.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
 import ArrowUp from "@/assets/icons/arrowUp.svg";
 import { getReadingTime } from "@/utils/readinTime";
-import { AUTHORS, DEFAULT_AUTHOR } from "@/config/authors";
+import { AUTHORS } from "@/config/authors";
+import { getServiceBySlug } from "@/config/services";
+import RelatedPosts from "@/components/section/RelatedPosts.astro";
+import { getRelatedPosts } from "@/utils/posts";
 
 // Generate all possible paths
 export async function getStaticPaths() {
@@ -19,14 +23,30 @@ export async function getStaticPaths() {
 
 // Per path let's generate the page
 const { post } = Astro.props;
+const breadcrumbs = [
+  { name: "Inicio", path: "/" },
+  { name: "Blog", path: "/blog/" },
+  { name: post.data.title, path: `/blog/${post.data.slug}/` },
+];
 
 // To render the blog content
 const { Content, headings } = await render(post);
 
 
 // Get author info from local config (enriches CMS data with bio, credentials, etc.)
-const author =
-  AUTHORS.find((author) => author.name === post.data.author) || DEFAULT_AUTHOR;
+const author = AUTHORS.find((author) => author.name === post.data.author);
+if (!author) {
+  throw new Error(
+    `Author "${post.data.author}" on blog post "${post.id}" is not registered in AUTHORS (src/config/authors.ts).`,
+  );
+}
+
+// Related content (services this post supports + sibling posts)
+const relatedServices = (post.data.services ?? []).flatMap((slug) => {
+  const service = getServiceBySlug(slug);
+  return service ? [service] : [];
+});
+const relatedPosts = await getRelatedPosts(post);
 
 // Add reading time
 const readingTime = post.body ? getReadingTime(post.body) : "";
@@ -40,34 +60,11 @@ const formatDate = (date: Date): string =>
   });
 ---
 
-<PostLayout post={post}>
+<PostLayout post={post} {breadcrumbs}>
   <article class="container md:mt-0 mx-auto px-2 py-8 md:py-12">
-    <nav class="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto" aria-label="Breadcrumb">
-      <ol class="flex items-center space-x-2 text-sm text-gray-600">
-        <li>
-          <a
-            href="/"
-            class="hover:text-deepdark-900 text-[min(5vw,16px)] transition-colors dark:text-softWhite/80"
-            >Inicio</a
-          >
-        </li>
-        <li class="text-deepdark-500 dark:text-softWhite/80">/</li>
-        <li>
-          <a
-            href="/blog/"
-            class="hover:text-deepdark-900 text-[min(5vw,16px)] transition-colors dark:text-softWhite/80"
-            >Blog</a
-          >
-        </li>
-        <li class="text-deepdark-500 dark:text-softWhite/80">/</li>
-        <li
-          class="text-deepdark-900 text-[min(5vw,16px)] font-bold dark:text-softWhite/80"
-          aria-current="page"
-        >
-          {post.data.title}
-        </li>
-      </ol>
-    </nav>
+    <div class="max-w-4xl px-4 sm:px-6 lg:px-8 mx-auto">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
     <div class="max-w-5xl px-2 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
       <div class="flex justify-center h-90 mx-auto mb-8">
         <Image
@@ -149,6 +146,41 @@ const formatDate = (date: Date): string =>
       </Prose>
     </div>
   </article>
+  {
+    relatedServices.length > 0 && (
+      <aside
+        aria-labelledby="related-service-label"
+        class="w-full pb-4 md:pb-6"
+      >
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="rounded-xl border border-smokyBlack/10 dark:border-softWhite/10 bg-softWhite/50 dark:bg-smokyBlack/50 p-5">
+            <p
+              id="related-service-label"
+              class="text-sm font-semibold uppercase tracking-wide text-smokyBlack/80 dark:text-softWhite/80 mb-3"
+            >
+              Servicio relacionado
+            </p>
+            <ul class="flex flex-col gap-2">
+              {relatedServices.map((service) => (
+                <li>
+                  <a
+                    href={`/servicios/${service.slug}/`}
+                    class:list={[
+                      "text-lg font-semibold text-deepplum dark:text-accentGold hover:underline hover:underline-offset-2",
+                      "focus-ring",
+                    ]}
+                  >
+                    {service.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </aside>
+    )
+  }
+  <RelatedPosts heading="Artículos relacionados" posts={relatedPosts} />
 </PostLayout>
 
 <script>
@@ -161,8 +193,6 @@ const formatDate = (date: Date): string =>
   });
 </script>
   
-
-
 
 
 

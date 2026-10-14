@@ -1,7 +1,8 @@
 ---
 import { SEO } from "astro-seo";
 import type { SEOProps } from "astro-seo";
-import type { JSONLDSchema } from "@/config/seo";
+import { JSONLD_STUB_REGISTRY, type JSONLDSchema } from "@/config/seo";
+import { buildJsonLdGraph } from "@/utils/jsonLdGraph";
 
 interface Props {
   seoProps: SEOProps;
@@ -9,14 +10,13 @@ interface Props {
 }
 
 const { seoProps, schemas = [] } = Astro.props;
+const jsonLdGraph = buildJsonLdGraph(
+  schemas,
+  Astro.url.pathname,
+  JSONLD_STUB_REGISTRY,
+);
 ---
 
 <SEO {...seoProps} />
 
-{
-  schemas.map((schema, index) => (
-    <Fragment key={`schema-${index}`}>
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-    </Fragment>
-  ))
-}
+<script type="application/ld+json" set:html={JSON.stringify(jsonLdGraph)} />

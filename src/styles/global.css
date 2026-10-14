@@ -118,6 +118,10 @@
   );
 }
 
+@utility focus-ring {
+  @apply focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deepplum dark:focus-visible:outline-accentGold;
+}
+
 /*
  * Theme toggle view transition — "circle-with-blur" variant, ported from
  * https://github.com/rudrodip/theme-toggle-effect (animation-registry.js).
