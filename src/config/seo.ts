@@ -2,7 +2,7 @@ import type { SEOProps } from "astro-seo";
 import type { ImageMetadata } from "astro";
 import type { Service } from "./services";
 import { services } from "./services";
-import { AUTHORS, DEFAULT_AUTHOR } from "./authors";
+import { AUTHORS } from "@/config/authors";
 import type { Author } from "./authors";
 import { COMPANY_INFO } from "./companyInfo";
 
@@ -46,47 +46,6 @@ export const JSONLD_STUB_REGISTRY: Record<string, JSONLDSchema> = {
     "@id": PROJECTS_ID,
     name: "Proyectos",
     url: `${COMPANY_INFO.url}/proyectos/`,
-  },
-};
-
-// Default SEO configuration
-export const DEFAULT_SEO: SEOProps = {
-  title: "Shine | Agencia de Marketing Digital y Diseño Web en Colombia",
-  description:
-    "Diseño web con Astro, Google Ads, Facebook Ads y ecommerce con Tienda Nube para empresas en Colombia. Bogotá. Agenda tu diagnóstico gratuito hoy.",
-  canonical: COMPANY_INFO.url,
-  openGraph: {
-    basic: {
-      title: "Shine | Agencia de Marketing Digital y Diseño Web en Colombia",
-      type: "website",
-      image: COMPANY_INFO.url + COMPANY_INFO.image,
-      url: COMPANY_INFO.url,
-    },
-    optional: {
-      description: COMPANY_INFO.description,
-      siteName: COMPANY_INFO.name,
-      locale: "es_CO",
-    },
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Shine | Agencia de Marketing Digital y Diseño Web en Colombia",
-    description: COMPANY_INFO.description,
-    image: COMPANY_INFO.url + COMPANY_INFO.image,
-  },
-  extend: {
-    meta: [
-      { name: "robots", content: "index, follow" },
-      { name: "author", content: COMPANY_INFO.name },
-      { name: "theme-color", content: "#FFD97D" },
-      { name: "msapplication-TileColor", content: "#FFD97D" },
-      { httpEquiv: "Content-Language", content: "es-CO" },
-      { name: "geo.region", content: "CO-DC" },
-      {
-        name: "geo.placename",
-        content: `${COMPANY_INFO.address.city}, ${COMPANY_INFO.address.country}`,
-      },
-    ],
   },
 };
 
@@ -230,14 +189,18 @@ export function generateBlogPostSchema(post: {
   const fullAuthor: Author | undefined = post.author?.name
     ? AUTHORS.find((a) => a.name === post.author!.name)
     : undefined;
-  const schemaAuthor = fullAuthor ?? DEFAULT_AUTHOR;
+  if (post.author && !fullAuthor) {
+    throw new Error(
+      `Author "${post.author.name}" on blog post "${post.id}" is not registered in AUTHORS (src/config/authors.ts).`,
+    );
+  }
   const sameAs = fullAuthor ? getAuthorSameAs(fullAuthor) : [];
 
-  // Build author schema - uses Person with @id if found in registry, falls back to Organization
+  // Use a registered Person, or Organization when no author is supplied
   const authorSchema = post.author
     ? {
       "@type": "Person",
-      "@id": `${COMPANY_INFO.url}/nosotros#${schemaAuthor.id}`,
+      "@id": `${COMPANY_INFO.url}/nosotros#${fullAuthor!.id}`,
       name: fullAuthor?.name ?? post.author.name,
       ...((fullAuthor?.role ?? post.author.role) && {
         jobTitle: fullAuthor?.role ?? post.author.role,
@@ -487,79 +450,6 @@ export const CONTACT_PAGE_SCHEMA: JSONLDSchema = {
   about: { "@id": COMPANY_INFO.url + "#organization" },
 };
 
-// Internal helper for reviews schema generation
-function generateReviewsSchema(
-  reviews: Array<{
-    author: string;
-    text: string;
-    rating: number;
-    datePublished: number;
-    image?: string;
-    platform: string;
-  }>,
-): JSONLDSchema {
-  // Calculate aggregate rating
-  const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-  const averageRating = reviews.length > 0 ? totalRating / reviews.length : 0;
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": COMPANY_INFO.url + "#organization-reviews",
-    name: COMPANY_INFO.name,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: averageRating.toFixed(1),
-      reviewCount: reviews.length,
-      bestRating: "5",
-      worstRating: "1",
-    },
-    review: reviews.map((review) => ({
-      "@type": "Review",
-      author: {
-        "@type": "Person",
-        name: review.author,
-        ...(review.image && { image: review.image }),
-      },
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: review.rating,
-        bestRating: "5",
-        worstRating: "1",
-      },
-      reviewBody: review.text,
-      datePublished: new Date(review.datePublished * 1000).toISOString(),
-      publisher: {
-        "@type": "Organization",
-        name: review.platform,
-      },
-    })),
-  };
-}
-
-// Specific generators for different platforms
-export function generateGoogleReviewsSchema(
-  reviews: Array<{
-    author_name: string;
-    text: string;
-    rating: number;
-    datePublished: number;
-    author_url?: string;
-    profile_photo_url: ImageMetadata;
-  }>,
-): JSONLDSchema {
-  const formattedReviews = reviews.map((review) => ({
-    author: review.author_name,
-    text: review.text,
-    rating: review.rating,
-    datePublished: review.datePublished,
-    image: review.profile_photo_url.src,
-    platform: "Google",
-  }));
-
-  return generateReviewsSchema(formattedReviews);
-}
-
 // ============================================================================
 // FAQ Content Types - For AEO (Answer Engine Optimization)
 // ============================================================================
@@ -567,107 +457,6 @@ export function generateGoogleReviewsSchema(
 export interface FAQItem {
   question: string;
   answer: string;
-}
-
-// ============================================================================
-// HowTo Schema - For instructional content and step-by-step guides
-// ============================================================================
-
-export interface HowToStep {
-  name: string;
-  text: string;
-  image?: string;
-  url?: string;
-}
-
-export interface HowToOptions {
-  name: string;
-  description: string;
-  steps: HowToStep[];
-  totalTime?: string; // ISO 8601 duration format (e.g., 'PT30M' for 30 minutes)
-  estimatedCost?: {
-    currency: string;
-    value: string;
-  };
-  image?: string;
-  supply?: string[]; // Tools or materials needed
-}
-
-/**
- * Generates HowTo schema for step-by-step guides.
- * Perfect for blog posts with tutorials or process explanations.
- *
- * @example
- * const howToSchema = generateHowToSchema({
- *   name: 'Cómo preparar tu rediseño web',
- *   description: 'Guía paso a paso para preparar tu negocio...',
- *   steps: [
- *     { name: 'Audita tu sitio', text: 'Analiza métricas actuales...' },
- *     { name: 'Define objetivos', text: 'Establece metas claras...' }
- *   ],
- *   totalTime: 'P2W' // 2 weeks
- * });
- */
-export function generateHowToSchema(options: HowToOptions): JSONLDSchema {
-  const schema: JSONLDSchema = {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    name: options.name,
-    description: options.description,
-    step: options.steps.map((step, index) => ({
-      "@type": "HowToStep",
-      position: index + 1,
-      name: step.name,
-      text: step.text,
-      ...(step.image && { image: COMPANY_INFO.url + step.image }),
-      ...(step.url && { url: COMPANY_INFO.url + step.url }),
-    })),
-  };
-
-  // Add optional properties if provided
-  if (options.totalTime) {
-    schema.totalTime = options.totalTime;
-  }
-
-  if (options.estimatedCost) {
-    schema.estimatedCost = {
-      "@type": "MonetaryAmount",
-      currency: options.estimatedCost.currency,
-      value: options.estimatedCost.value,
-    };
-  }
-
-  if (options.image) {
-    schema.image = COMPANY_INFO.url + options.image;
-  }
-
-  if (options.supply && options.supply.length > 0) {
-    schema.supply = options.supply.map((item) => ({
-      "@type": "HowToSupply",
-      name: item,
-    }));
-  }
-
-  return schema;
-}
-
-/**
- * Generates HowTo schema linked to a specific blog post or page.
- */
-export function generateHowToSchemaWithPage(
-  options: HowToOptions,
-  pageUrl: string,
-): JSONLDSchema {
-  const baseSchema = generateHowToSchema(options);
-
-  return {
-    ...baseSchema,
-    "@id": `${pageUrl}#howto`,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": pageUrl,
-    },
-  };
 }
 
 // ============================================================================

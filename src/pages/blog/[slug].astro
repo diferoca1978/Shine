@@ -7,7 +7,7 @@ import Prose from "@/components/ui/Prose.astro";
 import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
 import ArrowUp from "@/assets/icons/arrowUp.svg";
 import { getReadingTime } from "@/utils/readinTime";
-import { AUTHORS, DEFAULT_AUTHOR } from "@/config/authors";
+import { AUTHORS } from "@/config/authors";
 import { getServiceBySlug } from "@/config/services";
 import RelatedPosts from "@/components/section/RelatedPosts.astro";
 import { getRelatedPosts } from "@/utils/posts";
@@ -34,8 +34,12 @@ const { Content, headings } = await render(post);
 
 
 // Get author info from local config (enriches CMS data with bio, credentials, etc.)
-const author =
-  AUTHORS.find((author) => author.name === post.data.author) || DEFAULT_AUTHOR;
+const author = AUTHORS.find((author) => author.name === post.data.author);
+if (!author) {
+  throw new Error(
+    `Author "${post.data.author}" on blog post "${post.id}" is not registered in AUTHORS (src/config/authors.ts).`,
+  );
+}
 
 // Related content (services this post supports + sibling posts)
 const relatedServices = (post.data.services ?? []).flatMap((slug) => {

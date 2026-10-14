@@ -128,7 +128,7 @@ Structured data is rendered as one self-contained JSON-LD `@graph` per page
 by `SEOHead.astro`. `MainLayout` supplies the reduced Organization node from
 `JSONLD_STUB_REGISTRY` on every page. The full Organization schema is added
 only on `/` and `/nosotros`; the full WebSite schema is added only on `/`.
-Per-page schemas (Service, HowTo, BlogPosting) are combined into the same
+Per-page schemas (Service, BlogPosting) are combined into the same
 graph. `BreadcrumbList` is emitted only where `Breadcrumbs.astro` renders
 visible breadcrumbs — currently blog posts and service pages. The schema and
 component take the same items array. The graph builder resolves references
@@ -137,6 +137,10 @@ page path and unresolved `@id` if a reference has no definition; add the
 missing node or extend that registry. `<html lang>` is `es-CO` (Colombia) —
 not the harness default's generic `es-CO` placeholder. This is the real,
 final locale for this client; do not change it.
+
+`MainLayout` requires `seoProps` or both `title` and `description`; missing
+inputs fail the build with the layout and page path. Blog author names must
+resolve in `AUTHORS`; unknown names fail with the author and post ID.
 
 This site **does not emit `FAQPage` JSON-LD**. Google stopped showing FAQ
 results on **2026-05-07**, so the markup adds no benefit. Visible FAQ
@@ -172,9 +176,9 @@ PascalCase component files.
   via a `CompanyInfo` interface. Shine is remote: its entity is an
   `Organization`, never `LocalBusiness` or `ProfessionalService`, with no
   street address, `geo` or opening hours.
-- `seo.ts` — imports `COMPANY_INFO` from `./companyInfo`; owns `DEFAULT_SEO`,
-  `generatePageSEO()`, and the JSON-LD generator functions
-  (`generateServiceSchema`, `generateHowToSchema`, `generateBreadcrumbSchema`,
+- `seo.ts` — imports `COMPANY_INFO` from `./companyInfo`; owns
+  `generatePageSEO()` and the JSON-LD generator functions
+  (`generateServiceSchema`, `generateBreadcrumbSchema`,
   plus Organization/Person schema helpers).
 - `services.ts` — the 3 active services, typed `Service[]`: **Diseño Web con
   Astro**, **Google Ads & Facebook Ads (Publicidad Digital)**, **Ecommerce con
@@ -186,8 +190,7 @@ PascalCase component files.
   `seo.ts`.
 - `authors.ts` — author bio/credentials for blog posts (E-E-A-T + Person
   schema). **Note: named `authors.ts` here, not `authorBio.ts`.**
-- `site.ts` — `SITE_CONFIG` (derived from `COMPANY_INFO`) + llms.txt topic
-  metadata.
+- `site.ts` — `SITE_CONFIG` (derived from `COMPANY_INFO`).
 
 To add or change a service: update `src/config/services.ts`, then
 create/update `src/pages/servicios/<slug>.astro` using `ServiceLayout`; FAQs

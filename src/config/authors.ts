@@ -72,19 +72,3 @@ export const AUTHORS: Author[] = [
     },
   },
 ];
-
-export const DEFAULT_AUTHOR: Author = {
-  id: "shine-agencia",
-  name: "Shine Agencia",
-  role: "Agencia de Marketing Digital y Diseño Web",
-  bio: "Transformamos tu presencia digital con estrategia, propósito y autenticidad. Diseño web, marketing digital y contenido que refleja tu verdadera esencia.",
-  credentials: ["Marketing digital", "Diseño web", "Estrategia de marca"],
-  socialMedia: {
-    linkedin: "https://www.linkedin.com/company/shine-agencia",
-    instagram: "https://www.instagram.com/shine.agencia",
-  },
-};
-
-export function getAuthorByName(name: string): Author {
-  return AUTHORS.find((author) => author.name === name) || DEFAULT_AUTHOR;
-}

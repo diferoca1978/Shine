@@ -33,7 +33,6 @@ src/config/seo.ts
 ├── Type Definitions (TypeScript interfaces)
 ├── Company Configuration (COMPANY_INFO)
 ├── Keywords Configuration (MAIN_KEYWORDS)
-├── Default SEO (DEFAULT_SEO)
 ├── Dynamic SEO Generators
 │   ├── generateDynamicSEO()
 │   └── generateSEOWithAlternates()
@@ -47,6 +46,13 @@ src/config/seo.ts
     ├── generateBreadcrumbSchema()
     └── generateServiceSchema()
 ```
+
+**Shine repository contract:** Pass `seoProps` to `MainLayout`, or supply both
+`title` and `description` for `generatePageSEO()`. Missing inputs fail the
+build with the layout and page path; there is no default SEO object. Supplied
+blog author names must resolve in `AUTHORS` (`src/config/authors.ts`), or the
+build fails naming the author and post. Review and HowTo schema generators
+are not available. See `AGENTS.md` for the repository's current exports.
 
 ### 🎯 Fundamental Principles
 
@@ -189,7 +195,7 @@ Every website should have these core pages for optimal SEO/AEO/GEO:
 
 ```
 src/pages/
-├── index.astro                    # Homepage (REQUIRED - uses DEFAULT_SEO)
+├── index.astro                    # Homepage (REQUIRED - explicit page SEO)
 ├── about.astro                    # About/Team page (CRITICAL for E-E-A-T)
 ├── contact.astro                  # Contact page (REQUIRED for LocalBusiness schema)
 ├── services/                      # Service pages directory
@@ -361,7 +367,7 @@ Based on existing pages, prioritize SEO for:
    - Include FAQ sections where applicable
 
 2. **Homepage** (`/`):
-   - Use `DEFAULT_SEO` as base
+   - Generate explicit homepage SEO with `generatePageSEO()`
    - Include `ORGANIZATION_SCHEMA` and `WEBSITE_SCHEMA`
    - Feature primary keywords prominently
 
@@ -894,7 +900,6 @@ This pattern works for any service-based business. Replace bracketed placeholder
 // src/pages/services/diseno-web.astro
 // Example slug: "premium-web-design", "seo-consulting", "mobile-app-development"
 import MainLayout from "@/layouts/MainLayout.astro";
-import SeoHead from "@/components/SeoHead.astro";
 import {
   generateDynamicSEO,
   generateServiceSchema,
@@ -986,8 +991,7 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 const schemas = [serviceSchema, breadcrumbSchema];
 ---
 
-<MainLayout>
-  <SeoHead {seoProps} {schemas} />
+<MainLayout {seoProps} aditionalSchemas={schemas}>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -1298,16 +1302,18 @@ The homepage uses pre-configured schemas from `Seo.ts`. Customize the HTML conte
 ---
 // src/pages/index.astro
 import MainLayout from "@/layouts/MainLayout.astro";
-import SeoHead from "@/components/SeoHead.astro";
 import {
-  DEFAULT_SEO,
+  generatePageSEO,
   ORGANIZATION_SCHEMA,
   WEBSITE_SCHEMA
 } from "@/config/seo";
 
-// Use default SEO configured in Seo.ts
-// Make sure DEFAULT_SEO has your correct company info
-const seoProps = DEFAULT_SEO;
+// Supply the approved homepage title and description explicitly
+const seoProps = generatePageSEO({
+  title: "[Homepage title without brand suffix]",
+  description: "[Homepage meta description]",
+  path: "/"
+});
 
 // Required schemas for homepage (pre-configured in Seo.ts)
 // ORGANIZATION_SCHEMA: Your company/business details
@@ -1315,8 +1321,7 @@ const seoProps = DEFAULT_SEO;
 const schemas = [ORGANIZATION_SCHEMA, WEBSITE_SCHEMA];
 ---
 
-<MainLayout>
-  <SeoHead {seoProps} {schemas} />
+<MainLayout {seoProps} aditionalSchemas={schemas}>
 
   <!-- Hero Section - Include ALL primary keywords -->
   <section class="hero">
@@ -1491,7 +1496,6 @@ The About page is CRITICAL for E-E-A-T (Experience, Expertise, Authority, Trust)
 ---
 // src/pages/about.astro (or /nosotros.astro, /team.astro, /company.astro)
 import MainLayout from "@/layouts/MainLayout.astro";
-import SeoHead from "@/components/SeoHead.astro";
 import {
   generateDynamicSEO,
   generatePersonSchema,
@@ -1548,8 +1552,7 @@ const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 const schemas = [founderSchema, breadcrumbSchema];
 ---
 
-<MainLayout>
-  <SeoHead {seoProps} {schemas} />
+<MainLayout {seoProps} aditionalSchemas={schemas}>
 
   <!-- Hero Section -->
   <section class="about-hero">
@@ -1835,7 +1838,6 @@ The projects/portfolio page demonstrates your work and builds authority (E-E-A-T
 ---
 // src/pages/projects.astro (or /portfolio.astro, /work.astro, /case-studies.astro)
 import MainLayout from "@/layouts/MainLayout.astro";
-import SeoHead from "@/components/SeoHead.astro";
 import {
   generateDynamicSEO,
   generateBreadcrumbSchema
@@ -1858,8 +1860,7 @@ const breadcrumbs = [
 const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs);
 ---
 
-<MainLayout>
-  <SeoHead {seoProps} {schemas: [breadcrumbSchema]} />
+<MainLayout {seoProps} aditionalSchemas={[breadcrumbSchema]}>
 
   <h1>Our [Projects / Portfolio / Work]</h1>
 
@@ -2007,7 +2008,6 @@ CRITICAL for local SEO: NAP (Name, Address, Phone) must be identical everywhere 
 ---
 // src/pages/contact.astro (or /contacto.astro, /get-in-touch.astro)
 import MainLayout from "@/layouts/MainLayout.astro";
-import SeoHead from "@/components/SeoHead.astro";
 import {
   generateDynamicSEO,
   generateBreadcrumbSchema,
@@ -2075,8 +2075,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 const schemas = [localBusinessSchema, breadcrumbSchema];
 ---
 
-<MainLayout>
-  <SeoHead {seoProps} {schemas} />
+<MainLayout {seoProps} aditionalSchemas={schemas}>
 
   <h1>Contact [Company Name]</h1>
   <!-- or "Get in Touch", "Let's Talk", "Contact Us" -->
@@ -2351,7 +2350,7 @@ Choose the most specific `@type` for your business:
 
 #### Homepage (`/`)
 
-- [ ] Uses DEFAULT_SEO as base
+- [ ] Supplies explicit homepage SEO via `generatePageSEO()`
 - [ ] Includes ORGANIZATION_SCHEMA and WEBSITE_SCHEMA
 - [ ] Features all primary keywords in H1 and intro paragraph
 - [ ] Links to all main service pages
@@ -3052,7 +3051,6 @@ export const collections = {
 ---
 // src/pages/blog/index.astro
 import MainLayout from "@/layouts/MainLayout.astro";
-import SeoHead from "@/components/SeoHead.astro";
 import {
   generateDynamicSEO,
   BLOG_SCHEMA,
@@ -3075,8 +3073,7 @@ const schemas = [BLOG_SCHEMA, generateBreadcrumbSchema(breadcrumbs)];
 // Fetch blog posts (using content collections or manual list)
 ---
 
-<MainLayout>
-  <SeoHead {seoProps} {schemas} />
+<MainLayout {seoProps} aditionalSchemas={schemas}>
 
   <h1>Blog de Tu Agencia Digital</h1>
   <p>
@@ -3094,7 +3091,6 @@ const schemas = [BLOG_SCHEMA, generateBreadcrumbSchema(breadcrumbs)];
 ---
 // src/pages/blog/[slug].astro
 import MainLayout from "@/layouts/MainLayout.astro";
-import SeoHead from "@/components/SeoHead.astro";
 import {
   generateDynamicSEO,
   generateBlogPostSchema,
@@ -3131,8 +3127,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 const schemas = [blogSchema, breadcrumbSchema];
 ---
 
-<MainLayout>
-  <SeoHead {seoProps} {schemas} />
+<MainLayout {seoProps} aditionalSchemas={schemas}>
 
   <article>
     <header>

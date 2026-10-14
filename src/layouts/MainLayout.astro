@@ -4,7 +4,6 @@ import "@/styles/global.css";
 import SEOHead from "@/components/SEOHead.astro";
 import { Font } from "astro:assets";
 import {
-  DEFAULT_SEO,
   JSONLD_STUB_REGISTRY,
   ORGANIZATION_SCHEMA,
   generatePageSEO,
@@ -39,17 +38,21 @@ const {
 
 // Generate seo props if not provided
 
-const finalSeoProps = seoProps
-  ? seoProps
-  : title && description
-    ? generatePageSEO({
-        title: title || "",
-        description: description || "",
-        path,
-        image,
-        noindex: noIndex || false,
-      })
-    : DEFAULT_SEO;
+let finalSeoProps = seoProps;
+if (!finalSeoProps) {
+  if (!title || !description) {
+    throw new Error(
+      `MainLayout on page "${path}" requires seoProps or both title and description.`,
+    );
+  }
+  finalSeoProps = generatePageSEO({
+    title,
+    description,
+    path,
+    image,
+    noindex: noIndex || false,
+  });
+}
 
 // Keep the reduced Organization available on every page; owning pages add the full node.
 const baseSchemas: JSONLDSchema[] = [
