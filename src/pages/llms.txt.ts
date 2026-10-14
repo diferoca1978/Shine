@@ -23,7 +23,6 @@ export const GET: APIRoute = async () => {
   return llmsTxt({
     name: SITE_CONFIG.name,
     description: SITE_CONFIG.description,
-    site: SITE_CONFIG.url,
     items: postsToLlmsItems(posts, formatLlmsUrl),
     services: servicesToLlmsItems(),
     optional: [

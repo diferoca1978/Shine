@@ -113,7 +113,9 @@ automatic via `@astrojs/sitemap`. AI-crawler text endpoints:
 | `/llms/servicios/[slug].txt` | Individual service page |
 
 Built from generic helpers in `src/utils/llms.ts` — do not hand-write these
-pages per route, extend the helper.
+pages per route, extend the helper. The helper uses `siteUrl()` for absolute
+URLs: page paths use the canonical trailing slash, while `.txt` file paths
+remain unslashed.
 
 ### Layout chain — `src/layouts/`
 
