@@ -25,12 +25,12 @@ const { titleLine1, titleLine2, description, service } = Astro.props;
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-5">
       <!-- Left side heading -->
       <div class="col-span-2 lg:sticky lg:top-24 lg:self-start">
-        <h1
+        <h2
           class="text-smokyBlack dark:text-softWhite text-4xl font-bold uppercase"
         >
           {titleLine1}
           {titleLine2 && <span class="block">{titleLine2}</span>}
-        </h1>
+        </h2>
         {description && (
           <p class="text-smokyBlack dark:text-softWhite mt-6 text-lg">
             {description}
@@ -49,9 +49,9 @@ const { titleLine1, titleLine2, description, service } = Astro.props;
                 <div class="line bg-accentGold h-24 w-full rounded-xl" />
               </div>
               <div class="ml-8 max-w-lg">
-                <h2 class="text-smokyBlack dark:text-softWhite text-2xl font-bold">
+                <h3 class="text-smokyBlack dark:text-softWhite text-2xl font-bold">
                   {step.title}
-                </h2>
+                </h3>
                 <p class="text-smokyBlack dark:text-softWhite mt-2 text-lg">
                   {step.description}
                 </p>

@@ -288,7 +288,7 @@
     },
     {
       "id": "fix-double-h1-service-pages",
-      "status": "pending",
+      "status": "done",
       "builders": ["front-end-astro", "seo-guide-lines"],
       "source": "docs/revision-infraestructura-seo-2026-10-12.md § 3.7 (lines 279-300), finding M14 — src/components/section/ourServices/ServicesStepsProcessAlt.astro renders the process title as <h1> (:28-33) and each step title as <h2> (:52-54), so dist/servicios/ecommerce/ and dist/servicios/publicidad-digital/ have 2 <h1> each. The sibling ServicesStepsProcess.astro already uses <h2> (:15) and <h3> (:84). Rule: one <h1> per page, H1 → H2 → H3 without skips (AGENTS.md § Skill routing).",
       "acceptance": [
