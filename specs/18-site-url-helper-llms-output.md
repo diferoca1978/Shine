@@ -1,6 +1,6 @@
 # 18 — site URL helper for llms output
 
-**Status:** Draft <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Approved <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
@@ -49,14 +49,14 @@ The repo owner confirmed the split and `.txt` file behavior on 2026-10-13.
 
 ## Acceptance criteria
 
-- [ ] `dist/llms.txt` contains absolute same-origin links for all listed post and service `.txt` endpoints; every such link ends in `.txt` with no added slash.
-- [ ] The About and Contact links in `dist/llms.txt` use `https://shineagencia.com/nosotros/` and `https://shineagencia.com/contacto/`.
-- [ ] `dist/llms-full.txt` has `Site: https://shineagencia.com/` and every post `URL:` line uses `https://shineagencia.com/blog/<slug>/`.
-- [ ] Every built individual post text endpoint has a `URL:` line ending in `/blog/<slug>/`.
-- [ ] Every built service text endpoint has a `URL:` line ending in `/servicios/<slug>/`.
-- [ ] No generated absolute URL contains an accidental doubled path slash after the scheme and host.
-- [ ] The LLM outputs' non-URL text and item ordering match the baseline.
-- [ ] `pnpm verify` passes, and `AGENTS.md` documents the shared URL behavior for LLM outputs.
+- [x] `dist/llms.txt` contains absolute same-origin links for all listed post and service `.txt` endpoints; every such link ends in `.txt` with no added slash.
+- [x] The About and Contact links in `dist/llms.txt` use `https://shineagencia.com/nosotros/` and `https://shineagencia.com/contacto/`.
+- [x] `dist/llms-full.txt` has `Site: https://shineagencia.com/` and every post `URL:` line uses `https://shineagencia.com/blog/<slug>/`.
+- [x] Every built individual post text endpoint has a `URL:` line ending in `/blog/<slug>/`.
+- [x] Every built service text endpoint has a `URL:` line ending in `/servicios/<slug>/`.
+- [x] No generated absolute URL contains an accidental doubled path slash after the scheme and host.
+- [x] The LLM outputs' non-URL text and item ordering match the baseline.
+- [x] `pnpm verify` passes, and `AGENTS.md` documents the shared URL behavior for LLM outputs.
 
 ## Implementation plan
 

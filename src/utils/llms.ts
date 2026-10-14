@@ -1,6 +1,7 @@
 import type { BlogPost } from "./posts";
 import type { Service } from "@/config/services";
 import { getFAQsByCategory } from "@/config/faqs";
+import { siteUrl } from "@/utils/url";
 
 const slugToCategory: Record<string, string> = {
   "diseno-web-estrategico": "diseno-web",
@@ -10,7 +11,6 @@ const slugToCategory: Record<string, string> = {
 
 interface LlmsServiceConfig {
   service: Service;
-  site: string;
   link: string;
 }
 
@@ -29,7 +29,6 @@ interface LlmsFullItem extends LlmsItem {
 interface LlmsTxtConfig {
   name: string;
   description: string;
-  site: string;
   items: LlmsItem[];
   services?: LlmsItem[];
   optional?: LlmsItem[];
@@ -45,7 +44,6 @@ interface LlmsFullTxtConfig {
 
 interface LlmsPostConfig {
   post: BlogPost;
-  site: string;
   link: string;
 }
 
@@ -79,31 +77,31 @@ function header(name: string, description: string): string[] {
   return [`# ${name}`, "", `> ${description}`];
 }
 
-function linkList(title: string, items: LlmsItem[], site: string): string[] {
+function linkList(title: string, items: LlmsItem[]): string[] {
   return [
     "",
     `## ${title}`,
-    ...items.map((item) => `- [${item.title}](${site}${item.link}): ${item.description}`),
+    ...items.map((item) => `- [${item.title}](${siteUrl(item.link)}): ${item.description}`),
   ];
 }
 
-function postMeta(site: string, link: string, pubDate: Date, category: string): string[] {
-  return [`URL: ${site}${link}`, `Published: ${formatDate(pubDate)}`, `Category: ${category}`];
+function postMeta(link: string, pubDate: Date, category: string): string[] {
+  return [`URL: ${siteUrl(link)}`, `Published: ${formatDate(pubDate)}`, `Category: ${category}`];
 }
 
 export function llmsTxt(config: LlmsTxtConfig): Response {
   const sections = [
     header(config.name, config.description),
-    linkList("Posts", config.items, config.site),
+    linkList("Posts", config.items),
   ];
 
   // Services section - helps LLMs discover business offerings
   if (config.services?.length) {
-    sections.push(linkList("Services", config.services, config.site));
+    sections.push(linkList("Services", config.services));
   }
 
   if (config.optional?.length) {
-    sections.push(linkList("Optional", config.optional, config.site));
+    sections.push(linkList("Optional", config.optional));
   }
 
   return doc(...sections);
@@ -123,7 +121,7 @@ export function llmsFullTxt(config: LlmsFullTxtConfig): Response {
     "",
     `## ${item.title}`,
     "",
-    ...postMeta(config.site, item.link, item.pubDate, item.category),
+    ...postMeta(item.link, item.pubDate, item.category),
     "",
     `> ${item.description}`,
     "",
@@ -136,7 +134,7 @@ export function llmsFullTxt(config: LlmsFullTxtConfig): Response {
 }
 
 export function llmsPost(config: LlmsPostConfig): Response {
-  const { post, site, link } = config;
+  const { post, link } = config;
   const { title, description, pubDate, tags = [] } = post.data;
 
   return doc(
@@ -144,7 +142,7 @@ export function llmsPost(config: LlmsPostConfig): Response {
     "",
     `> ${description}`,
     "",
-    ...postMeta(site, link, pubDate, tags[0]),
+    ...postMeta(link, pubDate, tags[0]),
     "",
     stripMdx(post.body ?? ""),
   );
@@ -174,14 +172,14 @@ export function postsToLlmsFullItems(
 }
 
 export function llmsService(config: LlmsServiceConfig): Response {
-  const { service, site, link } = config;
+  const { service, link } = config;
 
   const sections: string[] = [
     `# ${service.title}`,
     "",
     `> ${service.seoDescription}`,
     "",
-    `URL: ${site}${link}`,
+    `URL: ${siteUrl(link)}`,
     `Category: Servicios`,
     "",
     "---",
