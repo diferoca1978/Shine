@@ -21,13 +21,17 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      filter: (page) =>
-        ![
-          "https://shineagencia.com/politicadeprivacidad/",
-          "https://shineagencia.com/terminosycondiciones/",
-          "https://shineagencia.com/404/",
-        ].includes(page) &&
-        !/^https:\/\/shineagencia\.com\/proyectos\/[^/]+\/$/.test(page),
+      filter: (page) => {
+        const pathname = new URL(page).pathname;
+
+        return (
+          ![
+            "/politicadeprivacidad/",
+            "/terminosycondiciones/",
+            "/404/",
+          ].includes(pathname) && !/^\/proyectos\/[^/]+\/$/.test(pathname)
+        );
+      },
     }),
     partytown(),
     // Exposes site content to in-browser AI agents via WebMCP (Chrome proposal).

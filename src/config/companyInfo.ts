@@ -1,3 +1,5 @@
+import { siteUrl } from "@/utils/url";
+
 export interface CompanyInfo {
   name: string;
   description: string;
@@ -27,7 +29,7 @@ export const COMPANY_INFO: CompanyInfo = {
   name: "Shine Agencia",
   description:
     "Diseño web con Astro, campañas Google Ads y Facebook Ads y ecommerce con Tienda Nube para empresas en Colombia. Bogotá. Agenda tu diagnóstico gratuito hoy.",
-  url: "https://shineagencia.com",
+  url: siteUrl("/").replace(/\/$/, ""),
   phone: "+57-3162560670",
   email: "rocio.shineagencia@gmail.com",
   address: {

@@ -5,10 +5,11 @@ import { services } from "./services";
 import { AUTHORS } from "@/config/authors";
 import type { Author } from "./authors";
 import { COMPANY_INFO } from "./companyInfo";
+import { siteUrl } from "@/utils/url";
 
 export type JSONLDSchema = Record<string, any>;
 
-const SITE_URL = `${COMPANY_INFO.url}/`;
+const SITE_URL = siteUrl("/");
 const ORGANIZATION_ID = `${COMPANY_INFO.url}#organization`;
 const WEBSITE_ID = `${COMPANY_INFO.url}#website`;
 const BLOG_ID = `${COMPANY_INFO.url}/blog#blog`;
@@ -33,19 +34,19 @@ export const JSONLD_STUB_REGISTRY: Record<string, JSONLDSchema> = {
     "@type": "Blog",
     "@id": BLOG_ID,
     name: "Blog - " + COMPANY_INFO.name,
-    url: `${COMPANY_INFO.url}/blog/`,
+    url: siteUrl("/blog"),
   },
   [SERVICES_ID]: {
     "@type": "CollectionPage",
     "@id": SERVICES_ID,
     name: "Servicios",
-    url: `${COMPANY_INFO.url}/servicios/`,
+    url: siteUrl("/servicios"),
   },
   [PROJECTS_ID]: {
     "@type": "CollectionPage",
     "@id": PROJECTS_ID,
     name: "Proyectos",
-    url: `${COMPANY_INFO.url}/proyectos/`,
+    url: siteUrl("/proyectos"),
   },
 };
 
@@ -96,7 +97,7 @@ export const ORGANIZATION_SCHEMA = {
         "@id": `${COMPANY_INFO.url}/servicios/${service.slug}#service`,
         name: service.title,
         description: service.seoDescription,
-        url: `${COMPANY_INFO.url}/servicios/${service.slug}/`,
+        url: siteUrl(`/servicios/${service.slug}`),
         provider: {
           "@id": COMPANY_INFO.url + "#organization",
         },
@@ -142,7 +143,7 @@ export function generateBlogSchema(
     name: "Blog - " + COMPANY_INFO.name,
     description:
       "Consejos prácticos sobre diseño web, publicidad digital y ecommerce para empresas y emprendedores en Colombia",
-    url: COMPANY_INFO.url + "/blog/",
+    url: siteUrl("/blog"),
     inLanguage: "es-CO",
     author: {
       "@id": COMPANY_INFO.url + "#organization",
@@ -155,7 +156,7 @@ export function generateBlogSchema(
       "@id": `${COMPANY_INFO.url}/blog/${post.id}#article`,
       headline: post.title,
       description: post.description,
-      url: `${COMPANY_INFO.url}/blog/${post.id}/`,
+      url: siteUrl(`/blog/${post.id}`),
       datePublished: post.publishDate.toISOString(),
       image: post.image
         ? COMPANY_INFO.url + post.image
@@ -195,6 +196,7 @@ export function generateBlogPostSchema(post: {
     );
   }
   const sameAs = fullAuthor ? getAuthorSameAs(fullAuthor) : [];
+  const authorUrl = fullAuthor?.url ?? post.author?.url;
 
   // Use a registered Person, or Organization when no author is supplied
   const authorSchema = post.author
@@ -209,9 +211,7 @@ export function generateBlogPostSchema(post: {
       ...(fullAuthor?.image && {
         image: COMPANY_INFO.url + fullAuthor.image,
       }),
-      ...((fullAuthor?.url ?? post.author.url) && {
-        url: COMPANY_INFO.url + (fullAuthor?.url ?? post.author.url),
-      }),
+      ...(authorUrl && { url: siteUrl(authorUrl) }),
       ...((fullAuthor?.credentials ?? post.author.credentials) && {
         knowsAbout: fullAuthor?.credentials ?? post.author.credentials,
       }),
@@ -230,7 +230,7 @@ export function generateBlogPostSchema(post: {
     "@id": `${COMPANY_INFO.url}/blog/${post.id}#article`,
     headline: post.title,
     description: post.description,
-    url: `${COMPANY_INFO.url}/blog/${post.id}/`,
+    url: siteUrl(`/blog/${post.id}`),
     datePublished: post.publishDate.toISOString(),
     ...(post.modifiedDate && { dateModified: post.modifiedDate.toISOString() }),
     author: authorSchema,
@@ -260,20 +260,14 @@ export function generatePageSEO(options: {
   image?: string;
   noindex?: boolean;
 }): SEOProps {
-  const normalizedPath = options.path.endsWith("/")
-    ? options.path
-    : options.path + "/";
-  const fullUrl = COMPANY_INFO.url + normalizedPath;
+  const fullUrl = siteUrl(options.path);
   const canonicalPath = options.canonicalPath ?? options.path;
-  const normalizedCanonicalPath = canonicalPath.endsWith("/")
-    ? canonicalPath
-    : canonicalPath + "/";
   const fullTitle = `${options.title} | ${COMPANY_INFO.name}`;
 
   return {
     title: fullTitle,
     description: options.description,
-    canonical: COMPANY_INFO.url + normalizedCanonicalPath,
+    canonical: siteUrl(canonicalPath),
     noindex: options.noindex || false,
     openGraph: {
       basic: {
@@ -298,7 +292,7 @@ export function generatePageSEO(options: {
 }
 
 export function generateServiceSEO(service: Service): SEOProps {
-  const serviceUrl = `${COMPANY_INFO.url}/servicios/${service.slug}/`;
+  const serviceUrl = siteUrl(`/servicios/${service.slug}`);
   const pageTitle = `${service.title} | ${COMPANY_INFO.name}`;
 
   return {
@@ -352,7 +346,7 @@ export function generateServiceSchema(service: Service): JSONLDSchema {
 
     availableChannel: {
       "@type": "ServiceChannel",
-      serviceUrl: `${COMPANY_INFO.url}/servicios/${service.slug}/`,
+      serviceUrl: siteUrl(`/servicios/${service.slug}`),
       servicePhone: {
         "@type": "ContactPoint",
         telephone: COMPANY_INFO.phone,
@@ -386,7 +380,7 @@ export function generateCollectionPageSchema(options: {
     "@id": COMPANY_INFO.url + normalizedPath,
     name: options.name,
     description: options.description,
-    url: COMPANY_INFO.url + normalizedPath + "/",
+    url: siteUrl(options.path),
     isPartOf: { "@id": COMPANY_INFO.url + "#website" },
     about: { "@id": COMPANY_INFO.url + "#organization" },
     hasPart: options.hasPart,
@@ -433,7 +427,7 @@ export function generateBreadcrumbSchema(
       "@type": "ListItem",
       position: index + 1,
       name: crumb.name,
-      item: COMPANY_INFO.url + crumb.path,
+      item: siteUrl(crumb.path),
     })),
   };
 }
@@ -445,7 +439,7 @@ export const CONTACT_PAGE_SCHEMA: JSONLDSchema = {
   "@id": COMPANY_INFO.url + "/contacto#contactpage",
   name: "Contacto — " + COMPANY_INFO.name,
   description: "Agenda tu sesión de diagnóstico digital gratuita con el equipo de Shine Agencia. Respuesta garantizada en 24 horas.",
-  url: COMPANY_INFO.url + "/contacto/",
+  url: siteUrl("/contacto"),
   isPartOf: { "@id": COMPANY_INFO.url + "#website" },
   about: { "@id": COMPANY_INFO.url + "#organization" },
 };
@@ -485,7 +479,7 @@ export function generateAuthorSchema(author: Author): JSONLDSchema {
     description: author.bio,
     jobTitle: author.role,
     ...(author.image && { image: COMPANY_INFO.url + author.image }),
-    ...(author.url && { url: COMPANY_INFO.url + author.url }),
+    ...(author.url && { url: siteUrl(author.url) }),
     worksFor: {
       "@id": COMPANY_INFO.url + "#organization",
     },
