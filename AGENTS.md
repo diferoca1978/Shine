@@ -59,6 +59,12 @@ a silent step before marking something done.
   Not a general-purpose 3D layer — don't assume it's available elsewhere
   without checking.
 - **astro-seo** + **@astrojs/sitemap** — SEO meta + auto sitemap.
+- **@shine/seo-core** — Shine's shared SEO package, pinned to a git tag in
+  `package.json`. This site uses its `createSiteUrl()` (behind
+  `src/utils/url.ts`) and its `check-seo` CLI
+  (`pnpm exec check-seo --dist dist --report`). Its build gate
+  (`shineSeo()`) is not wired in yet. The site keeps `astro-seo` and its own
+  `SEOHead.astro`.
 - **@astrojs/netlify** — deploy adapter (Netlify), domain `shineagencia.com`.
 - **@astrojs/partytown** — offloads third-party scripts (analytics/ads tags)
   to a web worker.
@@ -184,7 +190,9 @@ PascalCase component files.
   (`generateServiceSchema`, `generateBreadcrumbSchema`,
   plus Organization/Person schema helpers).
 - `src/utils/url.ts` — `siteUrl()` builds absolute same-origin page URLs from
-  Astro's configured `site`; `mediaUrl()` builds URLs for media fields.
+  Astro's configured `site`; `mediaUrl()` builds URLs for media fields. Both
+  come from `createSiteUrl()` in `@shine/seo-core`, fed with the Astro config
+  through `astro:config/client`; the file holds no URL logic of its own.
 - `services.ts` — the 3 active services, typed `Service[]`: **Diseño Web con
   Astro**, **Google Ads & Facebook Ads (Publicidad Digital)**, **Ecommerce con
   Tienda Nube**. Each entry has content fields (`title`, `subtitle`,
