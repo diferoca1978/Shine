@@ -17,6 +17,9 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.4
         version: 3.7.4
+      '@shine/seo-core':
+        specifier: github:diferoca1978/shine-seo-core#v0.1.1
+        version: https://codeload.github.com/diferoca1978/shine-seo-core/tar.gz/1cc19f6349ed8b64c1d3ecf44d33b6997177efe1(astro@7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@netlify/blobs@10.7.5(supports-color@7.2.0))(@types/node@25.7.0)(jiti@2.7.0)(yaml@2.9.0))
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.3.0(@types/node@25.7.0)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.0))
@@ -1595,6 +1598,14 @@ packages:
 
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
+
+  '@shine/seo-core@https://codeload.github.com/diferoca1978/shine-seo-core/tar.gz/1cc19f6349ed8b64c1d3ecf44d33b6997177efe1':
+    resolution: {gitHosted: true, integrity: sha512-7d6eSyNvMCn8cSNx9arS9E4mYCDb3uSTq3wzOuUz2J7my7JuRq0we7IjORr33TU1t1mrGIPNgp8vpgiSB35JNw==, tarball: https://codeload.github.com/diferoca1978/shine-seo-core/tar.gz/1cc19f6349ed8b64c1d3ecf44d33b6997177efe1}
+    version: 0.1.1
+    engines: {node: '>=22.12'}
+    hasBin: true
+    peerDependencies:
+      astro: '>=6.1.0'
 
   '@so-ric/colorspace@1.1.6':
     resolution: {integrity: sha512-/KiKkpHNOBgkFJwu9sh48LkHSMYGyuTcSFK/qMBdnOAlrRJzRSXAOFB5qwzaVQuDl8wAvHVMkaASQDReTahxuw==}
@@ -6274,6 +6285,10 @@ snapshots:
       '@types/hast': 3.0.4
 
   '@shikijs/vscode-textmate@10.0.2': {}
+
+  '@shine/seo-core@https://codeload.github.com/diferoca1978/shine-seo-core/tar.gz/1cc19f6349ed8b64c1d3ecf44d33b6997177efe1(astro@7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@netlify/blobs@10.7.5(supports-color@7.2.0))(@types/node@25.7.0)(jiti@2.7.0)(yaml@2.9.0))':
+    dependencies:
+      astro: 7.3.3(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@netlify/blobs@10.7.5(supports-color@7.2.0))(@types/node@25.7.0)(jiti@2.7.0)(yaml@2.9.0)
 
   '@so-ric/colorspace@1.1.6':
     dependencies:

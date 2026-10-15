@@ -312,6 +312,49 @@
         "pnpm build passes; pnpm check reports no new errors."
       ],
       "nota": "Requested by the repo owner on 2026-10-13 during spec 16 step 7, as a refactor kept out of spec 16's scope. Moved here from the spec-16 branch so the two branches don't both append to this file. Blocked until spec 16 is merged into dev, because two of the three copies only exist on that branch. Not decided: how the class list is shared, either a Tailwind v4 `@utility` in global.css or an exported TS constant. If it is meant to become the site-wide focus-ring convention for every interactive element (not just these three files), that is a decision no document makes, so route it to /spec instead."
+    },
+    {
+      "id": "seo-core-package-url-helper",
+      "status": "in_progress",
+      "builders": ["seo-guide-lines"],
+      "source": "~/scripts/skills/nuevo-cliente/SKILL.md (harness-tools) § Legacy sites, steps 1-2 (lines 192-198): install @shine/seo-core, keep the site's `site` and `trailingSlash`, and turn src/utils/url.ts into the package's two-line wrapper with the same export names, so no call changes. The wrapper's code is in the @shine/seo-core v0.1.1 README (node_modules/@shine/seo-core/README.md § Setting up a site › 2. `src/utils/url.ts`, lines 134-148). The repo owner approved adopting the package on legacy sites on 2026-10-14 (~/helpers-proyects/nuevo-scaffold-plan.md; Engram `mem_search \"núcleo SEO compartido gate nuevo-cliente\"`).",
+      "acceptance": [
+        "package.json lists `\"@shine/seo-core\": \"github:diferoca1978/shine-seo-core#v0.1.1\"` in dependencies, and pnpm-lock.yaml resolves it.",
+        "src/utils/url.ts imports `createSiteUrl` from `@shine/seo-core` and `site`, `trailingSlash`, `base`, `build` from `astro:config/client`, and exports `siteUrl` and `mediaUrl` from that call. It declares no function of its own: `grep -cE '^\\s*(export )?function' src/utils/url.ts` prints 0.",
+        "`git diff --name-only 9cca8a7 bed814e` lists only AGENTS.md, package.json, pnpm-lock.yaml and src/utils/url.ts. astro.config.mjs still has `site: \"https://shineagencia.com\"` and sets no `trailingSlash`.",
+        "Every .html, .txt and .xml file under dist/ is byte-identical to a build of 9cca8a7 (`diff -r`).",
+        "AGENTS.md § Tech stack lists @shine/seo-core, and § Config says `siteUrl()` and `mediaUrl()` come from its `createSiteUrl()`.",
+        "`pnpm build` passes and `pnpm check` reports 0 errors."
+      ],
+      "nota": "Implemented and committed (bed814e on seo-core) before this entry existed. The change followed /nuevo-cliente legacy directly instead of entering through the light lane, so this entry records it after the fact and spec-verifier checks it on seo-core. Checked on 2026-10-15 when it was written: dist/ identical apart from the `generatedAt` of _webmcp/manifest.json, and `pnpm check` 0 errors. Shine sets no trailingSlash ('ignore') and uses build.format 'directory', so createSiteUrl adds the slash exactly as the old url.ts did. The first `pnpm exec check-seo --dist dist --report` on this build gave 31 errors and 10 warnings. 5 errors go to drop-jsonld-noindex-pages and fix-404-canonical-og-url. The other 26 are on the 13 /proyectos/<slug>/ pages, which spec 15 canonicalizes to /proyectos/ on purpose; they need a spec. Out: the build gate (shineSeo()), the package's SeoHead and pages.ts. The site keeps astro-seo and SEOHead.astro."
+    },
+    {
+      "id": "drop-jsonld-noindex-pages",
+      "status": "pending",
+      "builders": ["seo-guide-lines"],
+      "source": "@shine/seo-core v0.1.1 README (node_modules/@shine/seo-core/README.md § The rules, line 561), rule `jsonld-noindex`: \"`noindex` pages and the 404 carry no JSON-LD\". `pnpm exec check-seo --dist dist --report` on bed814e reports it on the site's 3 noindex pages: dist/404.html, dist/politicadeprivacidad/index.html and dist/terminosycondiciones/index.html each carry 1 block (Organization). The node is the reduced Organization that src/layouts/MainLayout.astro:58-61 adds to every page, and src/components/SEOHead.astro:22 renders the graph without checking `noindex`.",
+      "acceptance": [
+        "dist/404.html, dist/politicadeprivacidad/index.html and dist/terminosycondiciones/index.html contain no `application/ld+json` (`grep -c` prints 0 for each).",
+        "Every other .html file under dist/ is byte-identical to a build taken right before the change (`diff -r`), so indexable pages keep their whole graph.",
+        "`pnpm exec check-seo --dist dist --report` reports no `jsonld-noindex` finding.",
+        "AGENTS.md § Layout chain no longer says the reduced Organization node is on every page: it says noindex pages and the 404 carry no JSON-LD.",
+        "`pnpm build` passes and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the first check-seo report (see seo-core-package-url-helper). Fixes 3 of its 31 errors. The decision comes from the page's own `noindex`, which is already in the seoProps SEOHead receives, so no page needs a new prop. Out: the canonical and og:url of the 404 (fix-404-canonical-og-url), and /proyectos/<slug>/ (spec pending)."
+    },
+    {
+      "id": "fix-404-canonical-og-url",
+      "status": "pending",
+      "builders": ["seo-guide-lines"],
+      "source": "@shine/seo-core v0.1.1 README (node_modules/@shine/seo-core/README.md § The rules): `canonical-self` (line 532) says \"The 404 has none\"; `url-resolves` (line 543) says \"Every page URL on the site leads to a page\". `pnpm exec check-seo --dist dist --report` on bed814e reports both on dist/404.html, which emits `<link rel=\"canonical\" href=\"https://shineagencia.com/404/\">` and `<meta property=\"og:url\" content=\"https://shineagencia.com/404/\">`. No dist/404/index.html exists, so that URL leads to no page. Both tags come from generatePageSEO({ path: \"/404\" }) in src/pages/404.astro:8-13.",
+      "acceptance": [
+        "dist/404.html has no `<link rel=\"canonical\"` and no `og:url` meta tag.",
+        "dist/404.html keeps `<title>Error 404 - Página no encontrada | Shine Agencia</title>`, its meta description and `<meta name=\"robots\" content=\"noindex, follow\">`.",
+        "`pnpm exec check-seo --dist dist --report` reports no `canonical-self` and no `url-resolves` finding on 404.html.",
+        "Every .html file under dist/ other than 404.html is byte-identical to a build taken right before the change (`diff -r`).",
+        "`pnpm build` passes and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the first check-seo report (see seo-core-package-url-helper). Fixes 2 of its 31 errors. astro-seo omits the canonical only when it gets `canonical: null` (node_modules/astro-seo/src/SEO.astro:155-157). Whenever `openGraph` is passed, it fills og:url with Astro.url.href if `basic.url` is missing (OpenGraphBasicTags.astro:8), so the 404 must pass no `openGraph`. The smallest change is in 404.astro alone, which builds its own seoProps instead of calling generatePageSEO. Out: the JSON-LD on the 404 (drop-jsonld-noindex-pages)."
     }
   ]
 }
