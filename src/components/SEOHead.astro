@@ -19,4 +19,6 @@ const jsonLdGraph = buildJsonLdGraph(
 
 <SEO {...seoProps} />
 
-<script type="application/ld+json" set:html={JSON.stringify(jsonLdGraph)} />
+{schemas.length > 0 && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdGraph)} />
+)}

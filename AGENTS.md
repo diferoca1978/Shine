@@ -147,7 +147,8 @@ not the harness default's generic `es-CO` placeholder. This is the real,
 final locale for this client; do not change it.
 
 `MainLayout` requires `seoProps` or both `title` and `description`; missing
-inputs fail the build with the layout and page path. Blog author names must
+inputs fail the build with the layout and page path. Noindex pages and the
+404 carry no JSON-LD. Blog author names must
 resolve in `AUTHORS`; unknown names fail with the author and post ID.
 
 This site **does not emit `FAQPage` JSON-LD**. Google stopped showing FAQ
