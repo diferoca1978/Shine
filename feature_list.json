@@ -344,7 +344,7 @@
     },
     {
       "id": "fix-404-canonical-og-url",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": "@shine/seo-core v0.1.1 README (node_modules/@shine/seo-core/README.md § The rules): `canonical-self` (line 532) says \"The 404 has none\"; `url-resolves` (line 543) says \"Every page URL on the site leads to a page\". `pnpm exec check-seo --dist dist --report` on bed814e reports both on dist/404.html, which emits `<link rel=\"canonical\" href=\"https://shineagencia.com/404/\">` and `<meta property=\"og:url\" content=\"https://shineagencia.com/404/\">`. No dist/404/index.html exists, so that URL leads to no page. Both tags come from generatePageSEO({ path: \"/404\" }) in src/pages/404.astro:8-13.",
       "acceptance": [
