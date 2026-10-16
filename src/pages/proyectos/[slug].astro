@@ -24,7 +24,7 @@ const industries = await getIndustriesWithProjects();
 const { collectionSchema } = await getProjectsIndexData();
 
 const projectSEO = generatePageSEO({
-  title: project.data.title,
+  title: `Proyecto ${project.data.title}`,
   description: project.data.result ?? project.data.description,
   path: `/proyectos/${project.data.slug}`,
   canonicalPath: "/proyectos",
