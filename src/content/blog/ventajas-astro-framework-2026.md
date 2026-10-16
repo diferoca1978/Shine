@@ -1,5 +1,5 @@
 ---
-title: "Por qué usar Astro Framework en 2026: Guía Técnica"
+title: "Por qué usar Astro Framework en 2026"
 slug: ventajas-astro-framework-2026
 description: "Descubre por qué Astro Framework supera a otros frameworks en 2026. Arquitectura 'Zero JS', carga ultrarrápida y optimización AEO para liderar en Google."
 pubDate: 2026-01-09

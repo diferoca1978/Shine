@@ -355,6 +355,49 @@
         "`pnpm build` passes and `pnpm check` reports 0 errors."
       ],
       "nota": "From the first check-seo report (see seo-core-package-url-helper). Fixes 2 of its 31 errors. astro-seo omits the canonical only when it gets `canonical: null` (node_modules/astro-seo/src/SEO.astro:155-157). Whenever `openGraph` is passed, it fills og:url with Astro.url.href if `basic.url` is missing (OpenGraphBasicTags.astro:8), so the 404 must pass no `openGraph`. The smallest change is in 404.astro alone, which builds its own seoProps instead of calling generatePageSEO. Out: the JSON-LD on the 404 (drop-jsonld-noindex-pages)."
+    },
+    {
+      "id": "shorten-blog-post-titles",
+      "status": "done",
+      "builders": ["seo-guide-lines"],
+      "source": "@shine/seo-core v0.1.1 rule `title-length` (node_modules/@shine/seo-core/README.md:535; bounds 30–60 code points inclusive in check-seo/rules.mjs:279). `pnpm exec check-seo --dist dist --report` on dev 776fab5 warns on 5 posts: astro-vs-wordpress-web-estatica (70), marca-personal-ai (73), marketing-digital-para-abogados (67), seguridad-web-astro-framework (66), ventajas-astro-framework-2026 (66). The audit gives the same ~60-character reference (docs/Auditoria_SEO_AEO_ShineAgencia.md:73) and lists 4 of these titles as over it (lines 84-87). seo-guide-lines (.claude/skills/seo-guide-lines/seo-guide-line.md:266-271) keeps the primary keyword first and the brand at the end. The `<title>` is the frontmatter `title` plus ` | Shine Agencia` (16 characters, generatePageSEO in src/config/seo.ts), so a post title needs at most 44 characters.",
+      "acceptance": [
+        "The frontmatter `title` of each post is exactly: astro-vs-wordpress-web-estatica.md `Astro vs WordPress: ¿Web estática o CMS?`; marca-personal-ai.md `Marca Personal en la Era de la IA`; marketing-digital-para-abogados.md `Marketing Digital para Abogados: Guía 2026`; seguridad-web-astro-framework.md `Seguridad Web: Cómo Astro Protege tu Sitio`; ventajas-astro-framework-2026.md `Por qué usar Astro Framework en 2026`.",
+        "In each of the 5 files, `git diff` changes only the `title:` line. slug, description, dates, tags and body are untouched, so no URL changes and no date is bumped.",
+        "Each dist/blog/<slug>/index.html has `<title><new title> | Shine Agencia</title>`, and its `<h1>` text equals the new title.",
+        "`pnpm exec check-seo --dist dist --report` reports no `title-length` finding under blog/.",
+        "`pnpm build` passes (the gate reports 0 errors) and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the warnings left out of spec 19. The proposed titles were written by the agent on 2026-10-16. They keep each post's primary keyword first. Review or reword them in `acceptance` before /spec-impl, because this entry is what authorizes them. Changing the frontmatter `title` also changes the post's H1, the BlogPosting `headline`, og:title, the blog cards, related posts and the llms outputs. That is intended: one title per post. Discarded: a separate `seoTitle` frontmatter field (a schema change, so a decision for the full lane), and dropping the brand suffix (seo-guide-line.md:271 keeps it)."
+    },
+    {
+      "id": "lengthen-project-detail-titles",
+      "status": "pending",
+      "builders": ["seo-guide-lines"],
+      "source": "@shine/seo-core v0.1.1 rule `title-length` (node_modules/@shine/seo-core/README.md:535; bounds 30–60 in check-seo/rules.mjs:279). `pnpm exec check-seo --dist dist --report` on dev 776fab5 warns on 3 project pages that are too short: proyectos/delta-irat (26, `Delta Irat | Shine Agencia`), proyectos/grupo-zenith (28) and proyectos/valmat-cyber (28). The title comes from `title: project.data.title` in src/pages/proyectos/[slug].astro:27.",
+      "acceptance": [
+        "src/pages/proyectos/[slug].astro:27 passes `` title: `Proyecto ${project.data.title}` `` to generatePageSEO. No file under src/content/works/ changes.",
+        "dist/proyectos/delta-irat/index.html has `<title>Proyecto Delta Irat | Shine Agencia</title>`, and its og:title and twitter:title equal it. The same pattern holds on the 13 slug pages.",
+        "dist/proyectos/index.html is byte-identical to a build taken right before the change, and so is the `application/ld+json` block of all 14 dist/proyectos/**/index.html files. Card titles and the CreativeWork `name` don't change.",
+        "`pnpm exec check-seo --dist dist --report` reports no `title-length` finding under proyectos/. The two 35-character project titles land exactly on 60.",
+        "`pnpm build` passes (the gate reports 0 errors) and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the warnings left out of spec 19. Low SEO value: the 13 slug pages canonicalize to /proyectos/ (spec 15), so Google uses that page's title. What the change improves is the og:title of a shared project link, which spec 15 keeps per slug. The prefix `Proyecto ` (9 characters) is the longest that keeps every one of the 13 titles inside 30–60, so it applies to all slugs, not just the 3 that warn. Only the SEO title changes. The `works` `title` stays the client's name, because cards, CreativeWork and the accordion use it."
+    },
+    {
+      "id": "shorten-long-meta-descriptions",
+      "status": "pending",
+      "builders": ["seo-guide-lines"],
+      "source": "@shine/seo-core v0.1.1 rule `description-length` (node_modules/@shine/seo-core/README.md:536; bounds 70–160 code points in check-seo/rules.mjs:280). `pnpm exec check-seo --dist dist --report` on dev 776fab5 warns on 2 pages. blog/marca-personal-ai is at 189 characters; its description is the frontmatter `description` of src/content/blog/marca-personal-ai.md. proyectos/aguilar-abogados-asociados is at 163; its description is the `result` field of src/content/works/aguilarAbogados.md (src/pages/proyectos/[slug].astro:28). The audit's reference is ~120-158 characters (docs/Auditoria_SEO_AEO_ShineAgencia.md:73).",
+      "acceptance": [
+        "src/content/blog/marca-personal-ai.md `description` is exactly `La IA está transformando cómo se posicionan los profesionales. Descubre por qué una marca personal auténtica es tu ventaja competitiva ante la automatización.` (158 characters).",
+        "src/content/works/aguilarAbogados.md `result` is exactly `Migró de un WordPress abandonado por años y sin redes sociales, con marca renovada, redes sociales activas y un sitio con gestor de contenido a su medida.` (154 characters).",
+        "In each of the 2 files, `git diff` changes only that one line.",
+        "dist/blog/marca-personal-ai/index.html carries the new text in its meta description and in the paragraph under the H1. dist/proyectos/aguilar-abogados-asociados/index.html carries the new `result` in its meta description.",
+        "`pnpm exec check-seo --dist dist --report` reports no `description-length` finding.",
+        "`pnpm build` passes (the gate reports 0 errors) and `pnpm check` reports 0 errors."
+      ],
+      "nota": "From the warnings left out of spec 19. The proposed text was written by the agent on 2026-10-16 by trimming the current wording. Nothing new is claimed. Review or reword it in `acceptance` before /spec-impl, because this entry is what authorizes it. Both fields are also visible: the post's description is shown under its H1 and on blog cards, and Aguilar's `result` is shown on its project card. Because `result` feeds the CreativeWork description in the /proyectos graph (spec 15), the JSON-LD of all 14 /proyectos pages changes too. Once all three warning entries are done, the report should end in `30 pages, 0 errors, 0 warnings, 26 ignored`."
     }
   ]
 }
