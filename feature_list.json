@@ -372,7 +372,7 @@
     },
     {
       "id": "lengthen-project-detail-titles",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": "@shine/seo-core v0.1.1 rule `title-length` (node_modules/@shine/seo-core/README.md:535; bounds 30–60 in check-seo/rules.mjs:279). `pnpm exec check-seo --dist dist --report` on dev 776fab5 warns on 3 project pages that are too short: proyectos/delta-irat (26, `Delta Irat | Shine Agencia`), proyectos/grupo-zenith (28) and proyectos/valmat-cyber (28). The title comes from `title: project.data.title` in src/pages/proyectos/[slug].astro:27.",
       "acceptance": [
