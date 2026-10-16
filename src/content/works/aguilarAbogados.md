@@ -7,7 +7,7 @@ description: "Desarrollo de sitio web corporativo para Aguilar Abogados Asociado
 image: "./img/aguilarabogados.webp"
 link: "https://aguilarabogadosasociados.com"
 industry: legal
-result: "Migró de un sitio en WordPress abandonado por años y sin redes sociales, con marca renovada, redes sociales activas y un sitio con gestor de contenido a su medida."
+result: "Migró de un WordPress abandonado por años y sin redes sociales, con marca renovada, redes sociales activas y un sitio con gestor de contenido a su medida."
 stack: ["Astro", "TypeScript", "TailwindCSS"]
 tags:
   [

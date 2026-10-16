@@ -386,7 +386,7 @@
     },
     {
       "id": "shorten-long-meta-descriptions",
-      "status": "pending",
+      "status": "done",
       "builders": ["seo-guide-lines"],
       "source": "@shine/seo-core v0.1.1 rule `description-length` (node_modules/@shine/seo-core/README.md:536; bounds 70–160 code points in check-seo/rules.mjs:280). `pnpm exec check-seo --dist dist --report` on dev 776fab5 warns on 2 pages. blog/marca-personal-ai is at 189 characters; its description is the frontmatter `description` of src/content/blog/marca-personal-ai.md. proyectos/aguilar-abogados-asociados is at 163; its description is the `result` field of src/content/works/aguilarAbogados.md (src/pages/proyectos/[slug].astro:28). The audit's reference is ~120-158 characters (docs/Auditoria_SEO_AEO_ShineAgencia.md:73).",
       "acceptance": [
