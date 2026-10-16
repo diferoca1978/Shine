@@ -1,5 +1,5 @@
 ---
-title: "Seguridad Web en 2026: Cómo Astro Protege tu Sitio"
+title: "Seguridad Web: Cómo Astro Protege tu Sitio"
 slug: seguridad-web-astro-framework
 description: "Descubre cómo proteger tu sitio web de hackers y ataques. Aprende por qué Astro Framework es la opción más segura para tu negocio en 2026."
 pubDate: 2026-01-15

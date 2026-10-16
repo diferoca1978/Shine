@@ -1,6 +1,6 @@
 ---
 
-title: "Marketing Digital para Abogados: Guía Completa 2026"
+title: "Marketing Digital para Abogados: Guía 2026"
 slug: marketing-digital-para-abogados
 description: "Estrategias de marketing digital para abogados en 2026: SEO, Google My Business y redes sociales para atraer clientes calificados a tu despacho jurídico."
 pubDate: 2026-04-30
