@@ -1,5 +1,5 @@
 ---
-title: "Astro vs WordPress: ¿Cuándo conviene una web estática?"
+title: "Astro vs WordPress: ¿Web estática o CMS?"
 slug: astro-vs-wordpress-web-estatica
 description: "¿Tu web corporativa necesita WordPress? Comparamos Astro y WordPress en velocidad, seguridad, mantenimiento y flexibilidad para ayudarte a decidir."
 pubDate: 2026-10-01

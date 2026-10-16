@@ -54,11 +54,10 @@ if (!finalSeoProps) {
   });
 }
 
-// Keep the reduced Organization available on every page; owning pages add the full node.
-const baseSchemas: JSONLDSchema[] = [
-  JSONLD_STUB_REGISTRY[ORGANIZATION_SCHEMA["@id"]],
-];
-const allSchemas: JSONLDSchema[] = [...baseSchemas, ...aditionalSchemas];
+// Noindex pages and the 404 must not emit JSON-LD.
+const allSchemas: JSONLDSchema[] = finalSeoProps.noindex
+  ? []
+  : [JSONLD_STUB_REGISTRY[ORGANIZATION_SCHEMA["@id"]], ...aditionalSchemas];
 ---
 
 <html lang="es-CO" class="scrollbar-hide">

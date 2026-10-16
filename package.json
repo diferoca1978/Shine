@@ -16,6 +16,7 @@
     "@astrojs/netlify": "^8.2.6",
     "@astrojs/partytown": "^2.1.7",
     "@astrojs/sitemap": "^3.7.4",
+    "@shine/seo-core": "github:diferoca1978/shine-seo-core#v0.1.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.3",
     "astro-seo": "^1.2.0",
