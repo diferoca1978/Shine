@@ -80,7 +80,10 @@ a silent step before marking something done.
   astro-harness scaffold does not ship with — do not remove it or treat it
   as a scaffold placeholder.**
 - **Content collections** (`src/content.config.ts`, `astro:content` glob
-  loader) — `works` (portfolio, `src/content/works/*.md`) and `blog`
+  loader) — `works` (portfolio, `src/content/works/*.md`; each entry carries an
+  `industry` enum whose labels and order live in `src/utils/projects.ts`
+  (`INDUSTRY_LABELS`, `INDUSTRY_ORDER`) — a new industry is added there and
+  in the enum) and `blog`
   (`src/content/blog/*.md`, `draft: true` excluded from production). The
   `blog` schema has an optional `services` field: an array of service slugs
   taken from `src/config/services.ts`. An unknown slug fails `pnpm build`.
@@ -102,7 +105,7 @@ a silent step before marking something done.
 `proyectos/[slug].astro` ·
 `/politicadeprivacidad`, `/terminosycondiciones`, `/404`.
 
-The 13 `/proyectos/<slug>/` routes represent client-side state of
+The 14 `/proyectos/<slug>/` routes represent client-side state of
 `/proyectos/` (spec 08). They canonicalize to `/proyectos/`, emit the same
 JSON-LD graph as the index, and are excluded from the sitemap. Their
 `og:url` intentionally stays on each slug to preserve per-project share

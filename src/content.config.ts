@@ -22,7 +22,7 @@ const works = defineCollection({
       description: z.string(),
       image: image(),
       link: z.string(),
-      industry: z.enum(["legal", "salud", "tecnologia"]),
+      industry: z.enum(["legal", "salud", "tecnologia", "ingenieria-construccion"]),
       result: z.string().optional(),
       stack: z.array(z.string()).optional(),
       tags: z.array(z.string()).optional(),
