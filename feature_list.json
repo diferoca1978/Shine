@@ -398,6 +398,22 @@
         "`pnpm build` passes (the gate reports 0 errors) and `pnpm check` reports 0 errors."
       ],
       "nota": "From the warnings left out of spec 19. The proposed text was written by the agent on 2026-10-16 by trimming the current wording. Nothing new is claimed. Review or reword it in `acceptance` before /spec-impl, because this entry is what authorizes it. Both fields are also visible: the post's description is shown under its H1 and on blog cards, and Aguilar's `result` is shown on its project card. Because `result` feeds the CreativeWork description in the /proyectos graph (spec 15), the JSON-LD of all 14 /proyectos pages changes too. Once all three warning entries are done, the report should end in `30 pages, 0 errors, 0 warnings, 26 ignored`."
+    },
+    {
+      "id": "projects-mobile-category-title",
+      "status": "done",
+      "builders": ["front-end-astro"],
+      "source": "Repo owner's request of 2026-10-22 (session reviewing spec 20, Engram #1318): the mobile category menu on /proyectos needs a title above it. Owner's decisions of the same day: the text is \"Selecciona categoría\", and the title is always visible on mobile, not only while the menu is closed. The menu is the trigger button `#proyectos-sidebar-trigger` at src/components/section/perPage/ProjectsAccordion.astro:22-34, which is `lg:hidden` and today shows only `<group> · <project>`.",
+      "acceptance": [
+        "src/components/section/perPage/ProjectsAccordion.astro renders one new element immediately before `#proyectos-sidebar-trigger` whose text is exactly `Selecciona categoría`. It is hidden from `lg` up, with the same `lg:hidden` the trigger uses, so desktop is unchanged.",
+        "The element is always rendered on mobile: it carries no `hidden` state and no script toggles it, so it is visible with the menu closed. With the menu open, the dialog (`fixed inset-0`) covers it, so the in-dialog caption carries the same text (see the next item). It is a visible caption in the style of the existing `Categorías` caption (ProjectsAccordion.astro:41), using only `global.css` tokens through Tailwind utilities, with no inline `style`, no arbitrary values and no `<br />`.",
+        "The trigger button keeps its current markup and accessible name (`<group> · <project>`): it gains no `aria-labelledby`, and the close button is untouched. The in-dialog mobile caption (the `lg:hidden` row inside `#proyectos-sidebar`, ProjectsAccordion.astro:41-43) changes its text from `Categorías` to `Selecciona categoría`, so the same title shows with the menu open. The desktop caption (`hidden lg:block`) keeps `Categorías`.",
+        "`git diff` touches only src/components/section/perPage/ProjectsAccordion.astro. No script under src/utils/scripts/ and no src/content/ file changes.",
+        "After `pnpm build`, `grep -o 'Selecciona categoría' dist/proyectos/index.html | wc -l` and the same on dist/proyectos/delta-irat/index.html both output 2 (page title and in-dialog caption), and both matches sit in elements whose class list contains `lg:hidden`. `Categorías` still appears once, in the desktop caption. The `application/ld+json` block of all 15 dist/proyectos/**/index.html files is byte-identical to a build taken right before the change.",
+        "In `pnpm dev` at a mobile width, /proyectos/ shows the title above the trigger button, and opening the menu shows the same text as the dialog's caption, and closing it brings the page title back; at `lg` width neither is shown and the desktop sidebar still reads `Categorías` (checked by a human).",
+        "`pnpm build` passes and its build gate (`shineSeo()`, which loads the `ignore` list from astro.config.mjs) ends in `31 pages, 0 errors, 0 warnings, 28 ignored`, the same as a build of dev. `pnpm check` reports 0 errors. The standalone `pnpm exec check-seo` CLI does not load that ignore list, so it is not the criterion."
+      ],
+      "nota": "Routed to the light lane by the owner on 2026-10-22 (title = feature, accordion scroll = spec 21). The text and visibility were decided by the owner in the session of 2026-10-23, so `source` and `acceptance` are theirs to confirm before /spec-impl. Out: the accordion GSAP script and the scroll behavior (spec 21), ProjectDetail, ProjectsHero, and any change to the desktop sidebar. Spec 21 only touches projectsAccordionAnimation.js, so the two branches don't conflict."
     }
   ]
 }
