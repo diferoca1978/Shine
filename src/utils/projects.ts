@@ -4,12 +4,18 @@ import { generateCollectionPageSchema, generateProjectSchema } from "@/config/se
 export type Project = CollectionEntry<"works">;
 export type Industry = Project["data"]["industry"];
 
-export const INDUSTRY_ORDER: Industry[] = ["legal", "salud", "tecnologia"];
+export const INDUSTRY_ORDER: Industry[] = [
+  "legal",
+  "salud",
+  "tecnologia",
+  "ingenieria-construccion",
+];
 
 export const INDUSTRY_LABELS: Record<Industry, string> = {
   legal: "Legal",
   salud: "Salud",
   tecnologia: "Tecnología",
+  "ingenieria-construccion": "Ingeniería y construcción",
 };
 
 const byMostRecent = (a: Project, b: Project) =>
