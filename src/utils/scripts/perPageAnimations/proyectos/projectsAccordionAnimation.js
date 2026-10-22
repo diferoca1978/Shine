@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import { lenis } from "@/utils/scripts/lenis/lenisSmooth.js";
 
 // Derives the active project slug from the current URL — /proyectos/<slug>/
 // resolves to <slug>; a bare /proyectos/ falls back to the slug this page
@@ -59,6 +60,30 @@ export const projectsAccordionAnimation = () => {
       industryTriggers.forEach((other) =>
         setIndustryOpen(other, other === industryTrigger && !alreadyOpen),
       );
+
+      if (alreadyOpen) return;
+
+      // Measured after the toggle: the previous panel is already collapsed, so
+      // the trigger's position is final and the scroll won't land short.
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (sidebar.classList.contains("fixed")) {
+        // Mobile dialog: the sidebar itself scrolls (body is locked), not the window.
+        const delta =
+          industryTrigger.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
+        sidebar.scrollTo({
+          top: sidebar.scrollTop + delta,
+          behavior: reduceMotion ? "auto" : "smooth",
+        });
+      } else {
+        // Desktop: window scroll is owned by Lenis, so go through it. Target the
+        // two-column wrapper, not the header: scrolling to the header leaves the
+        // project detail's image/title scrolled out of view.
+        lenis.scrollTo(sidebar.parentElement, {
+          offset: -80,
+          duration: reduceMotion ? 0 : undefined,
+        });
+      }
     });
   });
 
