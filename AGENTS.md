@@ -105,7 +105,7 @@ a silent step before marking something done.
 `proyectos/[slug].astro` ·
 `/politicadeprivacidad`, `/terminosycondiciones`, `/404`.
 
-The 14 `/proyectos/<slug>/` routes represent client-side state of
+The 15 `/proyectos/<slug>/` routes represent client-side state of
 `/proyectos/` (spec 08). They canonicalize to `/proyectos/`, emit the same
 JSON-LD graph as the index, and are excluded from the sitemap. Their
 `og:url` intentionally stays on each slug to preserve per-project share
