@@ -16,6 +16,10 @@ const primaryNav = navBarLinksConst.filter((item) => item.path !== "/contacto/")
 const ctaHref = "/contacto/";
 const currentPathRaw = decodeURIComponent(Astro.url.pathname);
 const currentPath = currentPathRaw !== "/" ? currentPathRaw : "/";
+const activeServiceIdx = Math.max(
+  0,
+  services.findIndex((service) => currentPath.replace(/\/$/, "") === `/servicios/${service.slug}`),
+);
 ---
 
 <header
@@ -52,7 +56,7 @@ const currentPath = currentPathRaw !== "/" ? currentPathRaw : "/";
         <button
           id="dd-trigger"
           type="button"
-          class="flex items-center gap-1.5 tracking-wide text-softWhite/70 hover:text-softWhite focus:outline-none"
+          class="flex items-center gap-1.5 tracking-wide text-softWhite/70 hover:text-softWhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGold focus-visible:ring-offset-2 rounded-sm"
           aria-haspopup="true"
           aria-expanded="false"
           aria-controls="dd-panel"
@@ -62,7 +66,7 @@ const currentPath = currentPathRaw !== "/" ? currentPathRaw : "/";
         </button>
 
         <!-- Dropdown panel -->
-        <div id="dd-panel" class="absolute top-full left-0 z-50 hidden pt-5" role="menu" aria-label="Servicios">
+        <div id="dd-panel" class="absolute top-full left-1/2 -translate-x-1/2 z-50 hidden pt-5" role="menu" aria-label="Servicios">
           <div class="flex overflow-hidden rounded-2xl border border-accentGold/10 bg-smokyBlack shadow-2xl">
             <!-- Left: service list -->
             <ul class="w-64 py-3" role="none">
@@ -71,16 +75,16 @@ const currentPath = currentPathRaw !== "/" ? currentPathRaw : "/";
                   <li role="none">
                     <a
                       href={`/servicios/${service.slug}/`}
-                      class="dd-svc-link group flex items-center gap-2 border-l-2 border-transparent px-5 py-4 hover:border-accentGold hover:bg-smokyBlack/50 data-[state=active]:border-accentGold data-[state=active]:bg-smokyBlack/50 focus:outline-none"
+                      class="dd-svc-link group flex items-center gap-2 border-l-2 border-transparent px-5 py-4 hover:border-accentGold hover:bg-smokyBlack/50 data-[state=active]:border-accentGold data-[state=active]:bg-smokyBlack/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accentGold"
                       data-idx={i}
-                      data-state={i === 0 ? "active" : undefined}
+                      data-state={i === activeServiceIdx ? "active" : undefined}
                       role="menuitem"
                     >
                       <span class="line-clamp-2 flex-1 text-sm leading-snug text-softWhite/60 group-hover:text-softWhite group-data-[state=active]:text-softWhite">
                         {service.title}
                       </span>
                       <DiagonalArrow
-                        class="h-3.5 w-3.5 shrink-0 text-accentGold opacity-0 group-hover:opacity-100 group-data-[state=active]:opacity-100"
+                        class="h-3.5 w-3.5 shrink-0 text-accentGold"
                         aria-hidden="true"
                       />
                     </a>
@@ -94,7 +98,7 @@ const currentPath = currentPathRaw !== "/" ? currentPathRaw : "/";
               {
                 services.map((service, i) => (
                   <div
-                    class:list={["dd-desc-panel flex h-full flex-col gap-4", i !== 0 && "hidden"]}
+                    class:list={["dd-desc-panel flex h-full flex-col gap-4", i !== activeServiceIdx && "hidden"]}
                     data-panel={i}
                   >
                     <div class="h-px w-8 bg-accentGold" />
