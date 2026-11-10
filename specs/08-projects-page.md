@@ -1,6 +1,6 @@
 # 08 — projects page
 
-**Status:** Approved <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Implemented <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
@@ -224,18 +224,18 @@ This spec introduces client-facing copy in two places:
 - [ ] All 13 `works/*.md` files have `slug` + `industry` set;
       `grep -l 'industry: "legal"' src/content/works/*.md | wc -l` → 10,
       `salud` → 1, `tecnologia` → 2.
-- [ ] `recurrirabogados.md`'s `title` reads `Recurrir Abogados`.
-- [ ] All 13 `works/*.md` files have a non-empty `result` field after the
+- [x] `recurrirabogados.md`'s `title` reads `Recurrir Abogados`.
+- [x] All 13 `works/*.md` files have a non-empty `result` field after the
       intake step (Cardozo Abogados' sourced from the design artifact,
       the other 12 from repo-owner intake).
-- [ ] No new `--color-*` entries appear in `src/styles/global.css`'s
+- [x] No new `--color-*` entries appear in `src/styles/global.css`'s
       `@theme` block — confirmed by diff.
 - [ ] `find dist/proyectos -name index.html | wc -l` → 14 (index + 13
       slugs) after `pnpm build`.
 - [ ] Exactly one `<h1>` and thirteen `<h2>` per project page
       (`grep -o '<h1' dist/proyectos/<slug>/index.html | wc -l` → 1,
       `<h2` → 13).
-- [ ] Exactly one `aria-current="true"` per page.
+- [x] Exactly one `aria-current="true"` per page.
 - [ ] Every project page has a distinct `<link rel="canonical">` — no
       duplicates across the 14 files.
 - [ ] Home page (`dist/index.html`) contains the new "Ver los 13
@@ -251,19 +251,19 @@ This spec introduces client-facing copy in two places:
       to the trigger — and DOM-inspected to confirm it is a sibling of
       `<header>`, not nested inside it or any other `backdrop-blur-*`
       ancestor.
-- [ ] Dark mode renders correctly using only existing tokens (`smokyBlack`,
+- [x] Dark mode renders correctly using only existing tokens (`smokyBlack`,
       `softWhite`, `softBeige`, `accentGold`, `accentGreen`) at the
       opacities specified in Decisions — no hardcoded hex/oklch literals
       in any new component.
-- [ ] `prefers-reduced-motion: reduce` makes the accordion open/close and
+- [x] `prefers-reduced-motion: reduce` makes the accordion open/close and
       card swap instant (no animation).
-- [ ] Clicking through 2–3 projects and pressing Back restores the
+- [x] Clicking through 2–3 projects and pressing Back restores the
       correct prior project and URL without a new "Document" network
       request (only the initial load fetches one).
 - [ ] `view-source` on two different `/proyectos/<slug>/` URLs shows
       distinct `<title>`, meta description, and JSON-LD.
-- [ ] `pnpm check` reports no new errors versus the step-1 baseline.
-- [ ] `pnpm build` passes.
+- [x] `pnpm check` reports no new errors versus the step-1 baseline.
+- [x] `pnpm build` passes.
 
 ## Implementation plan
 
