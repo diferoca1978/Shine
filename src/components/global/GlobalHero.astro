@@ -38,11 +38,10 @@ const {
           <h2
             class="hero-subtitle text-[min(7vw,42px)] text-smokyBlack dark:text-softWhite italic mb-6 invisible"
           >
-            {subtitleBefore}
+            {subtitleBefore}{" "}
             <span class="font-bold text-deepplum dark:text-accentGold"
               >{subtitleHighlight}</span
-            >
-            {subtitleAfter}
+            >{subtitleAfter && " "}{subtitleAfter}
           </h2>
         </div>
         <div class="description-wrapper">
