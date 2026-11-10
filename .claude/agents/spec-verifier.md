@@ -1,7 +1,7 @@
 ---
 name: spec-verifier
 description: Verifies the acceptance criteria of either a full-lane spec (`specs/NN-slug.md`, checking off its "Acceptance criteria" section) or a light-lane feature (a `feature_list.json` entry's `acceptance` array, plus confirming its `source` text actually landed) after a coder agent has implemented it. Runs every criterion for real (grep counts, `pnpm build`, live screen checks) against the actual result — never assumes a pass. Use after implementation work against either lane, before reporting it done.
-model: claude-haiku-5-5
+model: haiku
 tools: Read, Grep, Glob, Edit, Write, NotebookEdit, Bash, Skill, mcp__context7__resolve-library-id, mcp__context7__query-docs
 ---
 
@@ -33,7 +33,7 @@ of "done" from memory. This project is **Astro** (not Next.js) — see
    a prior report claimed were satisfied.
 2. For each criterion:
    - If it names a concrete command (`grep`, `pnpm build`, `git diff
-     --name-only`, etc.), run it verbatim against the real repo/build output
+--name-only`, etc.), run it verbatim against the real repo/build output
      and compare the actual result to what the criterion expects. Note real
      file paths can differ in casing or slug from what the spec assumed
      (e.g. `dist/nosotros/index.html` vs a differently-cased or

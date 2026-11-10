@@ -414,6 +414,20 @@
         "`pnpm build` passes and its build gate (`shineSeo()`, which loads the `ignore` list from astro.config.mjs) ends in `31 pages, 0 errors, 0 warnings, 28 ignored`, the same as a build of dev. `pnpm check` reports 0 errors. The standalone `pnpm exec check-seo` CLI does not load that ignore list, so it is not the criterion."
       ],
       "nota": "Routed to the light lane by the owner on 2026-10-22 (title = feature, accordion scroll = spec 21). The text and visibility were decided by the owner in the session of 2026-10-23, so `source` and `acceptance` are theirs to confirm before /spec-impl. Out: the accordion GSAP script and the scroll behavior (spec 21), ProjectDetail, ProjectsHero, and any change to the desktop sidebar. Spec 21 only touches projectsAccordionAnimation.js, so the two branches don't conflict."
+    },
+    {
+      "id": "navbar-services-trigger-focus-ring",
+      "status": "pending",
+      "builders": ["front-end-astro"],
+      "source": "Spec 08 acceptance criterion at specs/08-projects-page.md:245 (keyboard: \"visible focus ring\"), reported as FAIL by the spec-verifier on 2026-11-10. The desktop \"Servicios\" dropdown trigger `#dd-trigger` at src/components/global/Navbar.astro:55 has `focus:outline-none` and no replacement, so its keyboard focus is invisible. The same component already has a visible ring on the mobile menu button at Navbar.astro:140 (`focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGold focus-visible:ring-offset-2 rounded-sm`). The `focus-ring` utility in src/styles/global.css:121 is not a fit here: its light-mode outline is `deepplum`, and the navbar is `bg-smokyBlack/90` in both themes (Navbar.astro:22). The repo owner routed this to the light lane on 2026-11-10.",
+      "acceptance": [
+        "In src/components/global/Navbar.astro, `#dd-trigger` no longer carries `focus:outline-none`. It carries the same ring classes as the mobile menu button at Navbar.astro:140 (`focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accentGold focus-visible:ring-offset-2 rounded-sm`), with `focus-visible:` so a mouse click shows no ring.",
+        "`git diff` touches only src/components/global/Navbar.astro, and only the class attribute of `#dd-trigger`. Its `aria-*` attributes, its id and the dropdown script are unchanged.",
+        "After `pnpm build`, `dist/index.html` contains the `#dd-trigger` button with `focus-visible:ring-accentGold` in its class list and without `focus:outline-none`.",
+        "In `pnpm dev` at `lg` width, pressing Tab from the logo lands on \"Servicios\" and shows a visible gold ring in light and dark mode, and a mouse click on it shows no ring (checked by a human).",
+        "`pnpm build` passes with the same build-gate summary as a build of dev, and `pnpm check` reports 0 errors."
+      ],
+      "nota": "Kept to the trigger the verifier reported. Not decided: the dropdown's service links at Navbar.astro:74 (`.dd-svc-link`) also have `focus:outline-none` with no ring. The panel shows active state through `data-[state=active]` border/background, so whether that is enough of a focus indicator is the owner's call; add it to `acceptance` before /spec-impl if wanted. A site-wide focus-ring convention stays with `refactor-shared-focus-ring-classes`."
     }
   ]
 }
