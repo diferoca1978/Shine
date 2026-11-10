@@ -26,7 +26,7 @@ export const globalHeroAnimation = () => {
 
       if (reducedMotion) {
         // No animation — just make elements visible immediately
-        gsap.set(elements, { autoAlpha: 1, clearProps: "all" });
+        gsap.set(elements, { autoAlpha: 1 });
         return;
       }
 
