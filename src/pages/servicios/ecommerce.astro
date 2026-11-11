@@ -2,9 +2,7 @@
 import ServiceLayout from "@/layouts/ServiceLayout.astro";
 import { getServiceBySlug } from "@/config/services";
 import CTABanner from "@/components/ui/CTABanner.astro";
-import GlobalHero from "@/components/global/GlobalHero.astro";
-import Button from "@/components/ui/button.astro";
-import StarIcon from "@/assets/icons/star40x40.svg";
+import EcommerceHero from "@/components/section/ourServices/EcommerceHero.astro";
 import ServicesStepsProcessAlt from "@/components/section/ourServices/ServicesStepsProcessAlt.astro";
 import ServiceProblemSection from "@/components/section/ourServices/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolutionSection.astro";
@@ -26,25 +24,7 @@ const relatedPosts = await getPostsByService(service.slug);
 
 <ServiceLayout service={service}>
   <!-- Hero -->
-  <GlobalHero
-    titleLine1="Tu negocio ya está listo"
-    titleLine2="para vender por internet"
-    subtitleBefore="Creamos tu tienda online con Tienda Nube:"
-    subtitleHighlight="diseño personalizado, medios de pago colombianos"
-    subtitleAfter="y lista para vender desde el primer día"
-    descriptionLine1="Pasá de vender por WhatsApp e Instagram a tener tu propia tienda online profesional."
-    descriptionLine2="Sin depender de intermediarios. Con el control total de tu negocio."
-  >
-    <Button
-      slot="cta"
-      href="/contacto/"
-      variant="primary"
-      animation={true}
-      className="w-fit mx-auto"
-    >
-      Agenda tu diagnóstico de ecommerce gratuito <StarIcon />
-    </Button>
-  </GlobalHero>
+  <EcommerceHero />
   <!-- Problem -->
   <ServiceProblemSection
     title={service.problem!}

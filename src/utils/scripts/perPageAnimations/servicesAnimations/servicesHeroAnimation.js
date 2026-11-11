@@ -3,14 +3,13 @@ import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(SplitText);
 
-export const globalHeroAnimation = () => {
+export const servicesHeroAnimation = () => {
   const heroTitle = document.querySelector(".hero-title");
   const heroSubtitle = document.querySelector(".hero-subtitle");
   const heroDescription = document.querySelector(".description-text");
 
   const elements = [heroTitle, heroSubtitle, heroDescription].filter(Boolean);
 
-  // Create matchMedia instance
   const mm = gsap.matchMedia();
 
   // Store split instances for cleanup
@@ -25,8 +24,9 @@ export const globalHeroAnimation = () => {
       const { reducedMotion } = context.conditions;
 
       if (reducedMotion) {
-        // No animation — just make elements visible immediately
-        gsap.set(elements, { autoAlpha: 1, clearProps: "all" });
+        // No animation — just make elements visible immediately.
+        // No clearProps: the `invisible` class would hide them again.
+        gsap.set(elements, { autoAlpha: 1 });
         return;
       }
 
@@ -50,20 +50,22 @@ export const globalHeroAnimation = () => {
       }
 
       if (heroSubtitle) {
-        const splitSubtitle = SplitText.create(heroSubtitle, { type: "words, chars" });
-        splitInstances.push(splitSubtitle);
-
-        gsap.from(splitSubtitle.chars, {
-          yPercent: "random(-100, 100)",
-          rotation: "random(-30, 30)",
-          ease: "back.out(2)",
-          autoAlpha: 0,
-          delay: 0.3,
-          stagger: {
-            amount: 0.7,
-            from: "random",
-          },
+        // Line-by-line fade up from the bottom. autoSplit re-splits on resize /
+        // font load; returning the tween from onSplit keeps its progress in sync.
+        const splitSubtitle = SplitText.create(heroSubtitle, {
+          type: "lines",
+          autoSplit: true,
+          onSplit: (self) =>
+            gsap.from(self.lines, {
+              y: 40,
+              autoAlpha: 0,
+              duration: 0.8,
+              delay: 0.3,
+              stagger: 0.15,
+              ease: "power3.out",
+            }),
         });
+        splitInstances.push(splitSubtitle);
       }
 
       if (heroDescription) {

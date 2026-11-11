@@ -1,0 +1,71 @@
+---
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
+
+const rotatingWords = ["Diseño web", "Publicidad digital", "E-commerce"];
+---
+
+<section class="hero-section w-full mx-auto">
+  <div class="wrapper max-w-7xl mx-auto px-4 py-8 md:py-16 lg:py-20">
+    <div
+      class="flex flex-col items-center justify-center min-h-[60vh] md:min-h-[70vh] text-center"
+    >
+      <div class="">
+        <div class="title-wrapper">
+          <h1 class="hero-title hero-title--typewriter invisible font-medium text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-4">
+            <span class="sr-only">Diseño web, publicidad digital y e-commerce para negocios que quieren vender más</span>
+            <span
+              aria-hidden="true"
+              class="block whitespace-nowrap text-2xl sm:text-4xl md:text-5xl lg:text-7xl"
+            >
+              <span
+                class="hero-typed font-bold uppercase text-deepplum dark:text-accentGold"
+                data-words={JSON.stringify(rotatingWords)}
+              >
+                {rotatingWords[0]}
+              </span>
+              <span
+                class="hero-caret font-bold text-deepplum dark:text-accentGold"
+              >
+                |
+              </span>
+            </span>
+            <span
+              aria-hidden="true"
+              class="hero-title-tail block mt-2 text-2xl sm:text-4xl lg:text-6xl"
+            >
+              para negocios que quieren vender más
+            </span>
+          </h1>
+        </div>
+        <div class="subtitle-wrapper max-w-5xl mx-auto">
+          <h2
+            class="hero-subtitle text-smokyBlack dark:text-softWhite italic mb-6 invisible text-[min(5vw,28px)]"
+          >
+            Construimos sitios con Astro Framework que cargan en menos de 1 segundo, gestionamos{" "}
+            <span class="font-bold text-deepplum dark:text-accentGold"
+              >campañas publicitarias en Google y Meta</span
+            >{" "}y creamos tiendas online.
+          </h2>
+        </div>
+        <div class="description-wrapper">
+          <p
+            class="description-text text-[min(5vw,24px)] text-smokyBlack dark:text-softWhite mb-8 max-w-2xl mx-auto invisible break-keep"
+          >
+            <span class="block"> </span>
+          </p>
+        </div>
+        <div class="flex justify-center mb-4">
+          <Button href="/contacto/" variant="primary" animation={true}>
+      Agenda tu Diagnóstico Estratégico <StarIcon />
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { homeHeroAnimation } from "@/utils/scripts/perPageAnimations/home/homeHeroAnimation.js";
+  homeHeroAnimation();
+</script>

@@ -446,7 +446,7 @@ Delegation is **not free**: every subagent starts cold and re-derives context
 - **No `<br />` tags** — wrap the segment in `<span class="block">` instead;
   use Tailwind spacing utilities (`mb-*`, `space-y-*`) between elements.
 - Animations live in `src/utils/scripts/globalAnimations/` (site-wide: navbar,
-  hero, background) or `src/utils/scripts/perPageAnimations/<page>/`
+  background) or `src/utils/scripts/perPageAnimations/<page>/`
   (per-page) — loaded via `<script>` tags directly in the component that uses
   them, no global bundle. Do **not** add animation logic inside components.
   Every GSAP timeline **must** be wrapped in `gsap.matchMedia()` with a

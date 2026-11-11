@@ -2,9 +2,7 @@
 import ServiceLayout from "@/layouts/ServiceLayout.astro";
 import { getServiceBySlug } from "@/config/services";
 import CTABanner from "@/components/ui/CTABanner.astro";
-import GlobalHero from "@/components/global/GlobalHero.astro";
-import Button from "@/components/ui/button.astro";
-import StarIcon from "@/assets/icons/star40x40.svg";
+import PublicidadHero from "@/components/section/ourServices/PublicidadHero.astro";
 import ServicesStepsProcessAlt from "@/components/section/ourServices/ServicesStepsProcessAlt.astro";
 import ServiceProblemSection from "@/components/section/ourServices/ServiceProblemSection.astro";
 import ServiceSolutionSection from "@/components/section/ourServices/ServiceSolutionSection.astro";
@@ -26,25 +24,7 @@ const relatedPosts = await getPostsByService(service.slug);
 
 <ServiceLayout service={service}>
   <!-- Hero -->
-  <GlobalHero
-    titleLine1="Deja de invertir en pauta"
-    titleLine2="y no saber si funciona"
-    subtitleBefore="Gestionamos tus campañas en Google Ads y Facebook Ads para que"
-    subtitleHighlight="cada peso invertido"
-    subtitleAfter="traiga clientes reales, no solo clics"
-    descriptionLine1="Diseñamos, configuramos y optimizamos campañas publicitarias en Google y Meta"
-    descriptionLine2="para empresas y emprendedores en Colombia que quieren resultados medibles."
-  >
-    <Button
-      slot="cta"
-      href="/contacto/"
-      variant="primary"
-      animation={true}
-      className="w-fit mx-auto"
-    >
-      Agenda tu diagnóstico de pauta gratuito <StarIcon />
-    </Button>
-  </GlobalHero>
+  <PublicidadHero />
   <!-- Problem -->
   <ServiceProblemSection
     title={service.problem!}

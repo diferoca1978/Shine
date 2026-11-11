@@ -1,13 +1,11 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import GlobalHero from "@/components/global/GlobalHero.astro";
+import HomeHero from "@/components/section/landing/HomeHero.astro";
 import ClientHurts from "@/components/section/landing/ClientHurts.astro";
 import Solution from "@/components/section/landing/Solution.astro";
 import ServicesLanding from "@/components/section/landing/ServicesLanding.astro";
 import LatestProjects2 from "@/components/section/landing/LatestProjects.2.astro";
 import CTABanner from "@/components/ui/CTABanner.astro";
-import Button from "@/components/ui/button.astro";
-import StarIcon from "@/assets/icons/star40x40.svg";
 import SocialProof from "@/components/global/SocialProof.astro";
 import FAQ from "@/components/section/FAQ.astro";
 import RelatedPosts from "@/components/section/RelatedPosts.astro";
@@ -34,19 +32,7 @@ const recentPosts = await getRecentPosts(3);
   seoProps={homeSEO}
   aditionalSchemas={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]}
 >
-  <GlobalHero
-    titleLine1="Diseño web, publicidad digital y"
-    titleLine2="e-commerce para negocios que quieren vender más"
-    subtitleBefore="Construimos sitios con Astro Framework que cargan en menos de 1 segundo, gestionamos"
-    subtitleHighlight="campañas en Google y Meta"
-    subtitleAfter="y creamos tiendas online."
-    descriptionLine1="" 
-    descriptionLine2=""
-  >
-    <Button slot="cta" href="/contacto/" variant="primary" animation={true}>
-      Agenda tu Diagnóstico Estratégico <StarIcon />
-    </Button>
-  </GlobalHero>
+  <HomeHero />
   <Solution />
   <ClientHurts />
   <ServicesLanding />

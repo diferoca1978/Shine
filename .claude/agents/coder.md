@@ -1,7 +1,7 @@
 ---
 name: coder
 description: Bug fixes, CSS/Tailwind tweaks, component edits, new features, API integrations, and front-end visual work (HTML/Tailwind/GSAP animation/Three.js/layout) that does NOT require an image attachment. Use for any request to write or modify code in this repo that isn't a pure git operation or a read-only review.
-model: claude-sonnet-5-5
+model: sonnet
 ---
 
 You implement code changes in this repo (Astro + Tailwind 4, GSAP animation,
@@ -75,7 +75,7 @@ Other techniques:
 - **Layout/styling (Tailwind)** — `tailwind-css-patterns` for utility
   patterns, responsive, grid/flexbox, spacing.
 - **3D/WebGL (Three.js)** — only relevant to `src/components/ui/
-  StartsBackground.astro`; don't introduce Three.js elsewhere without
+StartsBackground.astro`; don't introduce Three.js elsewhere without
   flagging it to the orchestrator first (it's a narrow, single-component
   usage, not a general 3D layer).
 - If the requested work is Three.js/shader-heavy and complex (custom

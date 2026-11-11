@@ -3,7 +3,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import { generatePageSEO, CONTACT_PAGE_SCHEMA } from "@/config/seo";
 import ContactForm from "@/components/section/perPage/ContactForm.astro";
 import ContactInfo from "@/components/section/perPage/ContactInfo.astro";
-import GlobalHero from "@/components/global/GlobalHero.astro";
+import ContactHero from "@/components/section/perPage/ContactHero.astro";
 
 const contactoSEO = generatePageSEO({
     title: "Contacto | Diagnóstico Digital Gratuito",
@@ -15,11 +15,7 @@ const contactoSEO = generatePageSEO({
 ---
 
 <MainLayout seoProps={contactoSEO} aditionalSchemas={[CONTACT_PAGE_SCHEMA]}>
-    <GlobalHero
-        titleLine1="Contacto"
-        subtitleBefore="Cuéntanos tu idea, solicita tu sesión de diagnóstico y da el primer paso"
-        subtitleHighlight="hacia tu visibilidad digital."
-    />
+    <ContactHero />
     <ContactForm />
     <ContactInfo />
 </MainLayout>
