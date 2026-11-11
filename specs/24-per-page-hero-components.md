@@ -1,6 +1,6 @@
 # 24 — Per-page hero components
 
-**Status:** Approved <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Implemented <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
@@ -136,7 +136,7 @@ that its page passes on `dev` at `1c43bb2` (the merge of PR #208):
 - [x] `grep -rn "GlobalHero\|globalHeroAnimation" src/` returns nothing, and
       neither `src/components/global/GlobalHero.astro` nor
       `src/utils/scripts/globalAnimations/globalHeroAnimation.js` exists.
-- [ ] `git log --follow src/components/section/landing/HomeHero.astro`
+- [x] `git log --follow src/components/section/landing/HomeHero.astro`
       shows the history of `GlobalHero.astro`.
 - [x] None of the six hero components declares `interface Props`.
 - [x] Each of the six animation files wraps its tweens in
