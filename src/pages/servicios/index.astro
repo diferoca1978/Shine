@@ -1,6 +1,6 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import GlobalHero from "@/components/global/GlobalHero.astro";
+import ServicesHero from "@/components/section/ourServices/ServicesHero.astro";
 import ServiceCard from "@/components/ui/ServiceCard.astro";
 import { services } from "@/config/services";
 import {
@@ -34,14 +34,7 @@ const collectionSchema = generateCollectionPageSchema({
   seoProps={servicesSEO}
   aditionalSchemas={[collectionSchema]}
 >
-  <GlobalHero
-    titleLine1="Tres servicios. Un solo equipo."
-    titleLine2="Resultados medibles."
-    subtitleBefore="Diseño web con Astro, publicidad en Google y Meta, y"
-    subtitleHighlight="tiendas online con Tienda Nube"
-    subtitleAfter="— todo en el mismo equipo."
-    descriptionLine1="Elige el servicio que tu negocio necesita hoy. Sin humo, con resultados medibles."
-  />
+  <ServicesHero />
 
   <section class="services-list-wrapper w-full mx-auto">
     <div class="max-w-7xl mx-auto px-4 pb-16 md:pb-20">

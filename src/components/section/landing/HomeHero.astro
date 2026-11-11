@@ -1,27 +1,8 @@
 ---
-interface Props {
-  titleLine1: string;
-  titleLine2?: string;
-  rotatingWords?: string[];
-  titleTail?: string;
-  subtitleBefore: string;
-  subtitleHighlight: string;
-  subtitleAfter?: string;
-  descriptionLine1?: string;
-  descriptionLine2?: string;
-}
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
 
-const {
-  titleLine1,
-  titleLine2,
-  rotatingWords,
-  titleTail,
-  subtitleBefore,
-  subtitleHighlight,
-  subtitleAfter,
-  descriptionLine1,
-  descriptionLine2,
-} = Astro.props;
+const rotatingWords = ["Diseño web", "Publicidad digital", "E-commerce"];
 ---
 
 <section class="hero-section w-full mx-auto">
@@ -31,68 +12,53 @@ const {
     >
       <div class="">
         <div class="title-wrapper">
-          {
-            rotatingWords && rotatingWords.length > 0 ? (
-              <h1 class="hero-title hero-title--typewriter invisible font-medium text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-4">
-                <span class="sr-only">{titleLine1}</span>
-                <span
-                  aria-hidden="true"
-                  class="block whitespace-nowrap text-2xl sm:text-4xl md:text-5xl lg:text-7xl"
-                >
-                  <span
-                    class="hero-typed font-bold uppercase text-deepplum dark:text-accentGold"
-                    data-words={JSON.stringify(rotatingWords)}
-                  >
-                    {rotatingWords[0]}
-                  </span>
-                  <span
-                    class="hero-caret font-bold text-deepplum dark:text-accentGold"
-                  >
-                    |
-                  </span>
-                </span>
-                <span
-                  aria-hidden="true"
-                  class="hero-title-tail block mt-2 text-2xl sm:text-4xl lg:text-6xl"
-                >
-                  {titleTail}
-                </span>
-              </h1>
-            ) : (
-          <h1
-            class="hero-title invisible text-4xl md:text-7xl font-medium text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-4"
-          >
-            {titleLine1}
-            <span class="block"> {titleLine2}</span>
+          <h1 class="hero-title hero-title--typewriter invisible font-medium text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-4">
+            <span class="sr-only">Diseño web, publicidad digital y e-commerce para negocios que quieren vender más</span>
+            <span
+              aria-hidden="true"
+              class="block whitespace-nowrap text-2xl sm:text-4xl md:text-5xl lg:text-7xl"
+            >
+              <span
+                class="hero-typed font-bold uppercase text-deepplum dark:text-accentGold"
+                data-words={JSON.stringify(rotatingWords)}
+              >
+                {rotatingWords[0]}
+              </span>
+              <span
+                class="hero-caret font-bold text-deepplum dark:text-accentGold"
+              >
+                |
+              </span>
+            </span>
+            <span
+              aria-hidden="true"
+              class="hero-title-tail block mt-2 text-2xl sm:text-4xl lg:text-6xl"
+            >
+              para negocios que quieren vender más
+            </span>
           </h1>
-            )
-          }
         </div>
         <div class="subtitle-wrapper max-w-5xl mx-auto">
           <h2
-            class:list={[
-              "hero-subtitle text-smokyBlack dark:text-softWhite italic mb-6 invisible",
-              rotatingWords && rotatingWords.length > 0
-                ? "text-[min(5vw,28px)]"
-                : "text-[min(7vw,42px)]",
-            ]}
+            class="hero-subtitle text-smokyBlack dark:text-softWhite italic mb-6 invisible text-[min(5vw,28px)]"
           >
-            {subtitleBefore}{" "}
+            Construimos sitios con Astro Framework que cargan en menos de 1 segundo, gestionamos{" "}
             <span class="font-bold text-deepplum dark:text-accentGold"
-              >{subtitleHighlight}</span
-            >{subtitleAfter && " "}{subtitleAfter}
+              >campañas publicitarias en Google y Meta</span
+            >{" "}y creamos tiendas online.
           </h2>
         </div>
         <div class="description-wrapper">
           <p
             class="description-text text-[min(5vw,24px)] text-smokyBlack dark:text-softWhite mb-8 max-w-2xl mx-auto invisible break-keep"
           >
-            {descriptionLine1}
-            <span class="block"> {descriptionLine2}</span>
+            <span class="block"> </span>
           </p>
         </div>
         <div class="flex justify-center mb-4">
-          <slot name="cta" />
+          <Button href="/contacto/" variant="primary" animation={true}>
+      Agenda tu Diagnóstico Estratégico <StarIcon />
+          </Button>
         </div>
       </div>
     </div>
@@ -100,6 +66,6 @@ const {
 </section>
 
 <script>
-  import { globalHeroAnimation } from "@/utils/scripts/globalAnimations/globalHeroAnimation.js";
-  globalHeroAnimation();
+  import { homeHeroAnimation } from "@/utils/scripts/perPageAnimations/home/homeHeroAnimation.js";
+  homeHeroAnimation();
 </script>

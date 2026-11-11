@@ -8,7 +8,7 @@
       "id": "page-home",
       "status": "done",
       "builders": ["front-end-astro", "seo-guide-lines"],
-      "nota": "index.astro — GlobalHero, ClientHurts, Solution, ServicesLanding, LatestProjects variants, SocialProof, CTABanner."
+      "nota": "index.astro — HomeHero, ClientHurts, Solution, ServicesLanding, LatestProjects variants, SocialProof, CTABanner."
     },
     {
       "id": "page-nosotros",

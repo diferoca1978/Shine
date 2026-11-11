@@ -3,14 +3,14 @@ import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(SplitText);
 
-export const globalHeroAnimation = () => {
+export const homeHeroAnimation = () => {
   const heroTitle = document.querySelector(".hero-title");
   const heroSubtitle = document.querySelector(".hero-subtitle");
   const heroDescription = document.querySelector(".description-text");
 
   const elements = [heroTitle, heroSubtitle, heroDescription].filter(Boolean);
 
-  // Typewriter title (home): only exists when GlobalHero receives rotatingWords
+  // Typewriter title (home hero)
   const isTypewriter = !!heroTitle?.classList.contains("hero-title--typewriter");
   const typed = isTypewriter ? heroTitle.querySelector(".hero-typed") : null;
   const caret = isTypewriter ? heroTitle.querySelector(".hero-caret") : null;
@@ -126,22 +126,6 @@ export const globalHeroAnimation = () => {
             ease: "power3.out",
           });
         }
-      }
-
-      if (heroTitle && !useTypewriter) {
-        const splitTitle = SplitText.create(heroTitle, { type: "words, chars" });
-        splitInstances.push(splitTitle);
-
-        gsap.from(splitTitle.chars, {
-          yPercent: "random(-100, 100)",
-          rotation: "random(-30, 30)",
-          ease: "back.out(2)",
-          autoAlpha: 0,
-          stagger: {
-            amount: 0.7,
-            from: "random",
-          },
-        });
       }
 
       if (heroSubtitle) {
