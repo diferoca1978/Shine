@@ -34,10 +34,10 @@ export const publicidadHeroAnimation = () => {
       gsap.set(elements, { autoAlpha: 1 });
 
       if (heroTitle) {
-        const splitTitle = SplitText.create(heroTitle, { type: "words, chars" });
+        const splitTitle = SplitText.create(heroTitle, { type: "words" });
         splitInstances.push(splitTitle);
 
-        gsap.from(splitTitle.chars, {
+        gsap.from(splitTitle.words, {
           yPercent: "random(-100, 100)",
           rotation: "random(-30, 30)",
           ease: "back.out(2)",
@@ -69,10 +69,10 @@ export const publicidadHeroAnimation = () => {
       }
 
       if (heroDescription) {
-        const splitDescription = SplitText.create(heroDescription, { type: "words, chars" });
+        const splitDescription = SplitText.create(heroDescription, { type: "words" });
         splitInstances.push(splitDescription);
 
-        gsap.from(splitDescription.chars, {
+        gsap.from(splitDescription.words, {
           yPercent: "random(-100, 100)",
           rotation: "random(-30, 30)",
           ease: "back.out(2)",
