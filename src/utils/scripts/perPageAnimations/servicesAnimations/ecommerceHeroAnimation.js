@@ -34,19 +34,22 @@ export const ecommerceHeroAnimation = () => {
       gsap.set(elements, { autoAlpha: 1 });
 
       if (heroTitle) {
-        const splitTitle = SplitText.create(heroTitle, { type: "words" });
-        splitInstances.push(splitTitle);
-
-        gsap.from(splitTitle.words, {
-          yPercent: "random(-100, 100)",
-          rotation: "random(-30, 30)",
-          ease: "back.out(2)",
-          autoAlpha: 0,
-          stagger: {
-            amount: 0.7,
-            from: "random",
-          },
+        // Line-by-line slide in, alternating sides (line 1 from the left, line 2
+        // from the right...). autoSplit re-splits on resize / font load; returning
+        // the tween from onSplit keeps its progress in sync.
+        const splitTitle = SplitText.create(heroTitle, {
+          type: "lines",
+          autoSplit: true,
+          onSplit: (self) =>
+            gsap.from(self.lines, {
+              x: (i) => (i % 2 === 0 ? -120 : 120),
+              autoAlpha: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              stagger: 0.12,
+            }),
         });
+        splitInstances.push(splitTitle);
       }
 
       if (heroSubtitle) {
@@ -69,20 +72,23 @@ export const ecommerceHeroAnimation = () => {
       }
 
       if (heroDescription) {
-        const splitDescription = SplitText.create(heroDescription, { type: "words" });
-        splitInstances.push(splitDescription);
-
-        gsap.from(splitDescription.words, {
-          yPercent: "random(-100, 100)",
-          rotation: "random(-30, 30)",
-          ease: "back.out(2)",
-          autoAlpha: 0,
-          delay: 0.6,
-          stagger: {
-            amount: 0.7,
-            from: "random",
-          },
+        // Line-by-line slide in, alternating sides (restarts from the left),
+        // starting after the title. autoSplit re-splits on resize / font load;
+        // returning the tween from onSplit keeps its progress in sync.
+        const splitDescription = SplitText.create(heroDescription, {
+          type: "lines",
+          autoSplit: true,
+          onSplit: (self) =>
+            gsap.from(self.lines, {
+              x: (i) => (i % 2 === 0 ? -120 : 120),
+              autoAlpha: 0,
+              duration: 0.8,
+              delay: 0.6,
+              ease: "power3.out",
+              stagger: 0.12,
+            }),
         });
+        splitInstances.push(splitDescription);
       }
 
       // Cleanup: revert all split text instances when media query no longer matches
