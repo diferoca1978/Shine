@@ -1,0 +1,56 @@
+---
+import Button from "@/components/ui/button.astro";
+import StarIcon from "@/assets/icons/star40x40.svg";
+---
+
+<section class="hero-section w-full mx-auto">
+  <div class="wrapper max-w-7xl mx-auto px-4 py-8 md:py-16 lg:py-20">
+    <div
+      class="flex flex-col items-center justify-center min-h-[60vh] md:min-h-[70vh] text-center"
+    >
+      <div class="">
+        <div class="title-wrapper">
+          <h1
+            class="hero-title invisible text-4xl md:text-7xl font-medium text-smokyBlack dark:text-softWhite leading-tight tracking-tight mb-4"
+          >
+            Diseño web con Astro en Colombia:
+            <span class="block"> sitios que cargan en menos de 1 segundo</span>
+          </h1>
+        </div>
+        <div class="subtitle-wrapper max-w-5xl mx-auto">
+          <h2
+            class="hero-subtitle text-smokyBlack dark:text-softWhite italic mb-6 invisible text-[min(7vw,42px)]"
+          >
+            Construimos tu sitio web desde cero con Astro Framework —{" "}
+            <span class="font-bold text-deepplum dark:text-accentGold"
+              >la tecnología que supera a WordPress</span
+            >{" "}en velocidad, seguridad y posicionamiento en Google.
+          </h2>
+        </div>
+        <div class="description-wrapper">
+          <p
+            class="description-text text-[min(5vw,24px)] text-smokyBlack dark:text-softWhite mb-8 max-w-2xl mx-auto invisible break-keep"
+          >
+            Creamos sitios web ultrarrápidos, seguros y optimizados para empresas y emprendedores
+            <span class="block"> en Colombia que necesitan una presencia digital que sí vende.</span>
+          </p>
+        </div>
+        <div class="flex justify-center mb-4">
+          <Button
+            href="/contacto/"
+            variant="primary"
+            animation={true}
+            className="w-fit mx-auto"
+          >
+      Agenda tu Diagnóstico Web Gratuito <StarIcon />
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { disenoWebHeroAnimation } from "@/utils/scripts/perPageAnimations/servicesAnimations/disenoWebHeroAnimation.js";
+  disenoWebHeroAnimation();
+</script>
