@@ -118,30 +118,42 @@ export const homeHeroAnimation = () => {
         }
 
         if (tail) {
-          gsap.from(tail, {
-            y: 40,
-            autoAlpha: 0,
-            duration: 0.8,
-            delay: 0.3,
-            ease: "power3.out",
+          // Line slide: each line wrapper comes in from alternating sides (the
+          // tail is a single line on desktop, so it slides in from the left).
+          // autoSplit re-splits on resize / font load; returning the tween from
+          // onSplit keeps its progress in sync.
+          const splitTail = SplitText.create(tail, {
+            type: "lines",
+            autoSplit: true,
+            onSplit: (self) =>
+              gsap.from(self.lines, {
+                x: (i) => (i % 2 === 0 ? -120 : 120),
+                autoAlpha: 0,
+                duration: 0.8,
+                delay: 0.3,
+                ease: "power3.out",
+                stagger: 0.12,
+              }),
           });
+          splitInstances.push(splitTail);
         }
       }
 
       if (heroSubtitle) {
-        // Line-by-line fade up from the bottom. autoSplit re-splits on resize /
+        // Line slide: lines alternate sides (first from the left, second from
+        // the right...), starting after the tail. autoSplit re-splits on resize /
         // font load; returning the tween from onSplit keeps its progress in sync.
         const splitSubtitle = SplitText.create(heroSubtitle, {
           type: "lines",
           autoSplit: true,
           onSplit: (self) =>
             gsap.from(self.lines, {
-              y: 40,
+              x: (i) => (i % 2 === 0 ? -120 : 120),
               autoAlpha: 0,
               duration: 0.8,
-              delay: 0.3,
-              stagger: 0.15,
+              delay: 0.6,
               ease: "power3.out",
+              stagger: 0.12,
             }),
         });
         splitInstances.push(splitSubtitle);
