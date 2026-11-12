@@ -1,85 +1,249 @@
-<div id="cursor-follower">
-    <div id="blob" class="blob"></div>
-</div>
+<canvas id="cursor-trail" aria-hidden="true"></canvas>
 
 <script>
-    import { gsap, Power2 } from "gsap";
+    import { gsap } from "gsap";
+
+    const STRAND_COUNT = 5;
+    const NODES_PER_STRAND = 10;
+    const LINE_WIDTH = 1.5;
+    const SPRING_BASE = 0.4;
+    const SPRING_SPREAD = 0.025;
+    const DAMPENING = 0.1;
+    const FRICTION = 0.5;
+    const FRICTION_STEP = 0.002;
+    const TENSION = 0.98;
+    const STRAND_ALPHA_DARK = 0.2;
+    const STRAND_ALPHA_LIGHT = 0.45;
+    const SETTLE_DISTANCE = 0.5;
+    const SETTLE_SPEED = 0.05;
+    const STEP = 1 / 60;
+    const MAX_STEPS_PER_FRAME = 4;
+
+    interface SpringNode {
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+    }
+
+    let initialized = false;
 
     function init() {
-        const isTouchDevice = window.matchMedia("(hover: none)").matches;
+        if (initialized) return;
+        initialized = true;
 
-        if (isTouchDevice) return;
+        if (window.matchMedia("(hover: none)").matches) return;
 
-        var mouse = { x: 0, y: 0 };
-        var pos = { x: 0, y: 0 };
-        var ratio = 0.65;
-        var blob = document.getElementById("blob");
-        var magicCursor = document.getElementById("cursor-follower");
+        const canvas = document.getElementById(
+            "cursor-trail",
+        ) as HTMLCanvasElement | null;
+        const ctx = canvas?.getContext("2d");
 
-        if (!blob || !magicCursor) return;
+        if (!canvas || !ctx) return;
 
-        gsap.set(blob, { xPercent: -50, yPercent: -50 });
+        const strokeColor =
+            getComputedStyle(document.documentElement)
+                .getPropertyValue("--color-accentGold")
+                .trim() || "gold";
 
-        document.addEventListener("mousemove", mouseMove);
+        const mm = gsap.matchMedia();
 
-        function updatePosition() {
-            pos.x += (mouse.x - pos.x) * ratio;
-            pos.y += (mouse.y - pos.y) * ratio;
-            gsap.to(blob, { duration: 0.5, x: pos.x, y: pos.y });
-        }
+        mm.add(
+            {
+                reducedMotion: "(prefers-reduced-motion: reduce)",
+                fullMotion: "(prefers-reduced-motion: no-preference)",
+            },
+            (context) => {
+                const { reducedMotion } = context.conditions as {
+                    reducedMotion: boolean;
+                };
 
-        function mouseMove(e: MouseEvent) {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        }
+                // Reduced motion: no trail, no ticker, no listeners.
+                if (reducedMotion) return;
 
-        gsap.ticker.add(updatePosition);
+                const pointer = { x: 0, y: 0 };
+                const strands: SpringNode[][] = Array.from(
+                    { length: STRAND_COUNT },
+                    () =>
+                        Array.from({ length: NODES_PER_STRAND }, () => ({
+                            x: 0,
+                            y: 0,
+                            vx: 0,
+                            vy: 0,
+                        })),
+                );
+                let started = false;
+                let idle = true;
+                let accumulator = 0;
+                let lastTime = gsap.ticker.time;
 
-        let parallaxWraps = document.querySelectorAll("[data-cursor-hover]");
-
-        parallaxWraps.forEach(function (wrap) {
-            function magneticElement(
-                e: MouseEvent,
-                target: HTMLElement,
-                movement: number,
-            ) {
-                var boundingRect = target.getBoundingClientRect();
-                var relX = e.clientX - boundingRect.left;
-                var relY = e.clientY - boundingRect.top;
-
-                gsap.to(target, {
-                    duration: 0.3,
-                    x:
-                        ((relX - boundingRect.width / 2) / boundingRect.width) *
-                        movement,
-                    y:
-                        ((relY - boundingRect.height / 2) /
-                            boundingRect.height) *
-                        movement,
-                    ease: Power2.easeOut,
-                });
-            }
-
-            wrap.addEventListener("mouseenter", function () {
-                gsap.to(blob, { duration: 0.5, opacity: 0.5 });
-            });
-
-            wrap.addEventListener("mouseleave", function () {
-                gsap.to(blob, { duration: 0.5, opacity: 0.2 });
-
-                if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
-                    gsap.to(wrap, { duration: 0.3, scale: 1, x: 0, y: 0 });
+                function resize() {
+                    // Re-read on every resize: zoom or a monitor change alters devicePixelRatio.
+                    const RENDER_SCALE = Math.max(
+                        window.devicePixelRatio || 1,
+                        2,
+                    );
+                    canvas!.width = Math.round(window.innerWidth * RENDER_SCALE);
+                    canvas!.height = Math.round(
+                        window.innerHeight * RENDER_SCALE,
+                    );
+                    ctx!.setTransform(RENDER_SCALE, 0, 0, RENDER_SCALE, 0, 0);
+                    ctx!.lineWidth = LINE_WIDTH;
+                    ctx!.lineCap = "round";
+                    ctx!.lineJoin = "round";
+                    ctx!.strokeStyle = strokeColor;
                 }
-            });
 
-            wrap.addEventListener("mousemove", function (e) {
-                if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
-                    magneticElement(e as MouseEvent, wrap as HTMLElement, 10);
+                function onMouseMove(e: MouseEvent) {
+                    pointer.x = e.clientX;
+                    pointer.y = e.clientY;
+
+                    if (!started) {
+                        started = true;
+                        for (const strand of strands) {
+                            for (const node of strand) {
+                                node.x = pointer.x;
+                                node.y = pointer.y;
+                                node.vx = 0;
+                                node.vy = 0;
+                            }
+                        }
+                    }
+
+                    if (idle) {
+                        idle = false;
+                        accumulator = 0;
+                        lastTime = gsap.ticker.time;
+                    }
                 }
-            });
-        });
 
-        magicCursor?.classList.add("active");
+                function stepPhysics() {
+                    for (let s = 0; s < STRAND_COUNT; s++) {
+                        const strand = strands[s];
+                        const friction = FRICTION + s * FRICTION_STEP;
+                        let k = SPRING_BASE + (s / STRAND_COUNT) * SPRING_SPREAD;
+
+                        for (let j = 0; j < NODES_PER_STRAND; j++) {
+                            const node = strand[j];
+
+                            if (j === 0) {
+                                node.vx += (pointer.x - node.x) * k;
+                                node.vy += (pointer.y - node.y) * k;
+                            } else {
+                                const prev = strand[j - 1];
+                                node.vx += (prev.x - node.x) * k;
+                                node.vy += (prev.y - node.y) * k;
+                                node.vx += prev.vx * DAMPENING;
+                                node.vy += prev.vy * DAMPENING;
+                            }
+
+                            node.vx *= friction;
+                            node.vy *= friction;
+                            node.x += node.vx;
+                            node.y += node.vy;
+                            k *= TENSION;
+                        }
+                    }
+                }
+
+                function isSettled() {
+                    for (const strand of strands) {
+                        for (const node of strand) {
+                            if (
+                                Math.hypot(
+                                    node.x - pointer.x,
+                                    node.y - pointer.y,
+                                ) > SETTLE_DISTANCE ||
+                                Math.hypot(node.vx, node.vy) > SETTLE_SPEED
+                            ) {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                }
+
+                function clearCanvas() {
+                    ctx!.globalCompositeOperation = "source-over";
+                    ctx!.globalAlpha = 1;
+                    ctx!.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                }
+
+                function draw(time: number) {
+                    const dt = Math.min(time - lastTime, 1);
+                    lastTime = time;
+
+                    if (!started || idle) return;
+
+                    accumulator += dt;
+                    let steps = 0;
+                    while (accumulator >= STEP && steps < MAX_STEPS_PER_FRAME) {
+                        stepPhysics();
+                        accumulator -= STEP;
+                        steps++;
+                    }
+                    // Drop the excess so a tab switch does not explode the springs.
+                    if (accumulator >= STEP) accumulator = 0;
+
+                    if (isSettled()) {
+                        clearCanvas();
+                        idle = true;
+                        return;
+                    }
+
+                    const isDark =
+                        document.documentElement.classList.contains("dark");
+
+                    clearCanvas();
+                    ctx!.globalAlpha = isDark
+                        ? STRAND_ALPHA_DARK
+                        : STRAND_ALPHA_LIGHT;
+                    ctx!.globalCompositeOperation = isDark
+                        ? "lighter"
+                        : "source-over";
+
+                    for (const strand of strands) {
+                        ctx!.beginPath();
+                        ctx!.moveTo(strand[0].x, strand[0].y);
+
+                        for (let j = 1; j < NODES_PER_STRAND - 1; j++) {
+                            const node = strand[j];
+                            const next = strand[j + 1];
+                            ctx!.quadraticCurveTo(
+                                node.x,
+                                node.y,
+                                (node.x + next.x) / 2,
+                                (node.y + next.y) / 2,
+                            );
+                        }
+
+                        const last = strand[NODES_PER_STRAND - 1];
+                        ctx!.lineTo(last.x, last.y);
+                        ctx!.stroke();
+                    }
+
+                    ctx!.globalAlpha = 1;
+                    ctx!.globalCompositeOperation = "source-over";
+                }
+
+                resize();
+                window.addEventListener("resize", resize);
+                document.addEventListener("mousemove", onMouseMove);
+                gsap.ticker.add(draw);
+
+                return () => {
+                    gsap.ticker.remove(draw);
+                    document.removeEventListener("mousemove", onMouseMove);
+                    window.removeEventListener("resize", resize);
+                    started = false;
+                    idle = true;
+                    ctx!.setTransform(1, 0, 0, 1, 0, 0);
+                    ctx!.globalCompositeOperation = "source-over";
+                    ctx!.globalAlpha = 1;
+                    ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
+                };
+            },
+        );
     }
 
     document.addEventListener("astro:page-load", init);
@@ -87,47 +251,12 @@
 </script>
 
 <style>
-    #cursor-follower {
+    #cursor-trail {
         position: fixed;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        pointer-events: none;
-        height: 100vh;
+        inset: 0;
         width: 100vw;
+        height: 100vh;
+        pointer-events: none;
         z-index: 9999;
-        -webkit-transition: opacity 0.2s ease-in-out 1s;
-        transition: opacity 0.2s ease-in-out 1s;
-    }
-
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-
-    #cursor-follower.active {
-        animation: fadeIn 2s forwards;
-        -webkit-animation: fadeIn 2s forwards;
-        -moz-animation: fadeIn 2s forwards;
-        -o-animation: fadeIn 2s forwards;
-        -ms-animation: fadeIn 2s forwards;
-    }
-
-    #blob {
-        position: fixed;
-        border-radius: 100px;
-        filter: blur(70px);
-        opacity: 20%;
-        top: 0;
-        left: 0;
-        height: 250px;
-        width: 250px;
-        background-color: #ffde00;
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
     }
 </style>
