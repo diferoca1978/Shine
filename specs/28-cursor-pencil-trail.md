@@ -1,6 +1,6 @@
 # 28 — Cursor pencil trail
 
-**Status:** Approved <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Implemented <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
