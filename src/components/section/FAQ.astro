@@ -14,7 +14,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="faq-section w-full py-16 md:py-24">
+<section data-faq class="faq-section w-full py-16 md:py-24">
   <div class="max-w-4xl mx-auto px-4">
     <!-- Header -->
     <div class="text-center mb-12">
@@ -32,6 +32,7 @@ const {
     <div class="space-y-4">
       {faqs.map((faq) => (
         <details
+          data-faq-item
           class="group border border-smokyBlack/10 dark:border-softWhite/10 rounded-xl overflow-hidden bg-white/50 dark:bg-smokyBlack/50 backdrop-blur-sm"
         >
           <summary
@@ -51,10 +52,12 @@ const {
               </svg>
             </span>
           </summary>
-          <div class="px-6 pb-6 pt-2">
-            <p class="text-[min(4vw,16px)] text-smokyBlack/80 dark:text-softWhite/80 leading-relaxed">
-              {faq.answer}
-            </p>
+          <div data-faq-answer>
+            <div class="px-6 pb-6 pt-2">
+              <p class="text-[min(4vw,16px)] text-smokyBlack/80 dark:text-softWhite/80 leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
           </div>
         </details>
       ))}
@@ -74,11 +77,15 @@ const {
   }
 
   /* Smooth open/close transition */
-  details[open] summary {
+  details[open]:not([data-closing]) summary {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   }
 
-  :global(.dark) details[open] summary {
+  :global(.dark) details[open]:not([data-closing]) summary {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 </style>
+
+<script>
+  import "@/utils/scripts/globalAnimations/faqAnimation.js";
+</script>
