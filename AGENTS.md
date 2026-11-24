@@ -30,15 +30,12 @@ pnpm preview      # preview the build
 pnpm check        # astro check (type/diagnostics on .astro)
 pnpm verify       # ./init.sh — build + astro check + customization lint (the gate)
 pnpm lint:client  # ./harness/lint-customization.sh alone (advisory placeholder scan)
-pnpm test:email   # Playwright E2E test for the contact form (Chromium only)
-npx playwright test --ui   # interactive Playwright UI
 ```
 
 > The lockfile is `pnpm-lock.yaml` — always use `pnpm`, never `npm` or `bun`.
 
-There is no unit-test runner beyond the one Playwright contact-form spec. For
-everything else, **`pnpm verify` is the test suite**: if it builds and type-
-checks, most breakage is already excluded. **`pnpm verify` is on-demand, not
+There is no test runner: **`pnpm verify` is the test suite**. If it builds and
+type-checks, most breakage is already excluded. **`pnpm verify` is on-demand, not
 run automatically** — only run it when the user explicitly asks (e.g. "run
 verify", "check it builds"). Do not run it by default after every change or as
 a silent step before marking something done.
@@ -92,7 +89,6 @@ a silent step before marking something done.
   the markdown natively via content collections.
 - **highlight.js** — code-block syntax highlighting in blog posts.
 - **tailwind-merge** — conditional/merged Tailwind class composition.
-- **Playwright** — E2E test for the contact form only (`tests/`).
 
 ## Architecture (real — verify against the tree, don't assume)
 
