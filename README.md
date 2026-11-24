@@ -15,7 +15,6 @@ Marketing agency website built with **Astro 6**, deployed on **Netlify**. Featur
 | 3D         | Three.js                                         |
 | Carousel   | Swiper                                           |
 | SEO        | astro-seo + custom JSON-LD schema generators     |
-| Testing    | Playwright                                       |
 | Deployment | Netlify                                          |
 
 ---
@@ -28,14 +27,6 @@ npm run dev          # Dev server → http://localhost:4321
 npm run build        # Production build → ./dist/
 npm run preview      # Preview production build locally
 npm run astro ...    # Run Astro CLI commands
-```
-
-### Testing
-
-```bash
-npm run test:email              # Contact form E2E test (Chromium only)
-npx playwright test             # Run all Playwright tests
-npx playwright test --ui        # Interactive Playwright UI
 ```
 
 ---

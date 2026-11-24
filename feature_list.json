@@ -432,6 +432,20 @@
         "`pnpm build` passes with the same build-gate summary as a build of dev, and `pnpm check` reports 0 errors."
       ],
       "nota": "Started with only the trigger the verifier reported. The `.dd-svc-link` question was left open, and on 2026-11-10 the owner decided to include them in this entry (see source). The owner then added the current-page active state and the always-visible arrows (see source). Not decided, and outside this entry: navbarAnimation.js moves `active` only on `mouseenter`. So within one page, after hovering another service, the dropdown keeps that one active until reload, and keyboard focus doesn't move `active` (the script handles only Enter/Space/Escape on the trigger). A site-wide focus-ring convention stays with `refactor-shared-focus-ring-classes`."
+    },
+    {
+      "id": "remove-email-e2e-test",
+      "status": "in_progress",
+      "builders": [],
+      "source": "Repo owner's request of 2026-11-24: create a branch and remove everything related to the Playwright email-sending test, which has not worked for a long time. Evidence gathered that day: the scheduled workflow `sending-email-test` fails on every run listed (6 of 6, 2026-11-07 to 2026-11-22); it installs with `npm ci`, but the repo only has pnpm-lock.yaml.",
+      "acceptance": [
+        ".github/workflows/sending-email-test.yml, playwright.config.ts and the tests/ folder (contact-form.spec.ts, example.spec.ts) no longer exist.",
+        "package.json has no `test:email` script and no `@playwright/test`; pnpm-lock.yaml has no `playwright` entry, and `pnpm install --frozen-lockfile` passes.",
+        "AGENTS.md, README.md and .gitignore no longer mention Playwright or `test:email`.",
+        "The contact form and its email delivery are untouched: `git diff` against dev touches nothing under src/, and the `resend` dependency stays.",
+        "`pnpm build` ends with the same gate summary as a build of dev (32 pages, 0 errors, 0 warnings, 30 ignored), and `pnpm check` reports 0 errors."
+      ],
+      "nota": "tests/example.spec.ts and the dependency go too because nothing else in the repo uses Playwright. CHECKPOINTS.md keeps its manual `A test email sends successfully` item: it is a human check, not the Playwright test. Out of the repo and not done here: the GitHub Actions secrets EMAIL_USERNAME, EMAIL_PASSWORD, NOTIFICATION_EMAIL and RESEND_API_KEY. GitHub runs schedules from main, so the runs stop only when this reaches main."
     }
   ]
 }

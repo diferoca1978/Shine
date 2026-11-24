@@ -34,10 +34,5 @@ todo.md
 # Local Netlify folder
 .netlify
 
-# Playwright
-test-results/
-playwright-report/
-playwright/.cache/
-
 # Graphify artifacts
 graphify-out/
