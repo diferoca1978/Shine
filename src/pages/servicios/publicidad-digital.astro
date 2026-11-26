@@ -12,6 +12,9 @@ import FAQ from "@/components/section/FAQ.astro";
 import RelatedPosts from "@/components/section/RelatedPosts.astro";
 import { getPostsByService } from "@/utils/posts";
 import { publicidadDigitalFAQs } from "@/config/faqs";
+import problemMp4 from "@/assets/videos/dolor-publicidad.mp4";
+import problemWebm from "@/assets/videos/dolor-publicidad.webm";
+import problemPoster from "@/assets/images/dolor-publicidad-poster.webp";
 
 const service = getServiceBySlug("publicidad-digital");
 
@@ -20,6 +23,13 @@ if (!service) {
 }
 
 const relatedPosts = await getPostsByService(service.slug);
+
+const problemVideo = {
+  mp4: problemMp4,
+  webm: problemWebm,
+  poster: problemPoster,
+  label: "Animación: los tres problemas de una pauta que no convierte",
+};
 ---
 
 <ServiceLayout service={service}>
@@ -33,6 +43,7 @@ const relatedPosts = await getPostsByService(service.slug);
     introText={service.introText!}
     problems={service.hurts!}
     imagePosition="right"
+    video={problemVideo}
   />
   <!-- Solution -->
   <ServiceSolutionSection
