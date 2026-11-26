@@ -259,6 +259,7 @@ Tailwind 4 Vite plugin, not PostCSS.
 | Navigation                                     | `src/utils/navigation.ts` holds the link data (`navBarLinksConst`), consumed by `src/components/global/Navbar.astro` and `Footer.astro`                                                         |
 | `lang` / locale                                | `src/layouts/MainLayout.astro` (`<html lang="es-CO">`) — final, do not change                                                                                                                    |
 | Pages                                          | `src/pages/*.astro` + `src/pages/servicios/`, `src/pages/blog/`                                                                                                                                  |
+| Section videos (looping films)                 | `src/assets/videos/*.{mp4,webm}` + poster in `src/assets/images/` (WebP), imported by the page and passed as the section's `video` prop · rendered by `src/components/ui/LoopVideo.astro`. Project case-study videos are separate: `media.video` in the `projects` collection (`src/content.config.ts`) |
 
 > **Colors** live **only** in `global.css` because Tailwind 4 reads them there
 > to generate utilities. Never mirror colors into a `.ts` file.
