@@ -22,7 +22,7 @@ export function gsapProblemAnimation() {
       const { reducedMotion } = context.conditions;
 
       if (reducedMotion) {
-        gsap.set(allElements, { autoAlpha: 1, clearProps: "all" });
+        gsap.set(allElements, { autoAlpha: 1 });
         return;
       }
 
