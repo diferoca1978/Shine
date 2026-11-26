@@ -12,6 +12,9 @@ import FAQ from "@/components/section/FAQ.astro";
 import RelatedPosts from "@/components/section/RelatedPosts.astro";
 import { getPostsByService } from "@/utils/posts";
 import { ecommerceFAQs } from "@/config/faqs";
+import problemMp4 from "@/assets/videos/dolor-ecommerce.mp4";
+import problemWebm from "@/assets/videos/dolor-ecommerce.webm";
+import problemPoster from "@/assets/images/dolor-ecommerce-poster.webp";
 
 const service = getServiceBySlug("ecommerce");
 
@@ -20,6 +23,13 @@ if (!service) {
 }
 
 const relatedPosts = await getPostsByService(service.slug);
+
+const problemVideo = {
+  mp4: problemMp4,
+  webm: problemWebm,
+  poster: problemPoster,
+  label: "Animación: los tres problemas de vender solo por WhatsApp e Instagram",
+};
 ---
 
 <ServiceLayout service={service}>
@@ -33,6 +43,7 @@ const relatedPosts = await getPostsByService(service.slug);
     introText={service.introText!}
     problems={service.hurts!}
     imagePosition="right"
+    video={problemVideo}
   />
   <!-- Solution -->
   <ServiceSolutionSection
@@ -50,7 +61,7 @@ const relatedPosts = await getPostsByService(service.slug);
   <ServicesStepsProcessAlt
     titleLine1="De cero a tu tienda"
     titleLine2="lista para vender"
-    description="Sin sorpresas ni tecnicismos. Nos encargamos de todo — del diseño a los medios de pago — para que tu tienda esté lista para vender desde el primer día, y tú sepas exactamente cómo operarla."
+    description="Sin sorpresas ni tecnicismos. Nos encargamos de todo desde el diseño hasta las pasarelas de pago, para que tu tienda esté lista para vender desde el primer día, y tú sepas exactamente cómo operarla."
     service={service}
   />
   <!-- Social proof -->
@@ -67,7 +78,7 @@ const relatedPosts = await getPostsByService(service.slug);
   <div class="px-2">
     <CTABanner
       title="¿Listo para vender online sin depender de nadie?"
-      description="Tu tienda online puede estar lista en menos de 4 semanas. Empieza con un diagnóstico gratuito — sin compromiso. Sin complicaciones. Con acompañamiento real."
+      description="Tu tienda online puede estar lista en menos de 4 semanas. Empieza con un diagnóstico gratuito sin compromiso. Sin complicaciones. Con acompañamiento real."
       buttonText="Agenda tu diagnóstico de ecommerce gratuito"
       buttonHref="/contacto/"
       variant="default"

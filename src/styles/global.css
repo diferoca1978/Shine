@@ -122,6 +122,15 @@
   @apply focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-deepplum dark:focus-visible:outline-accentGold;
 }
 
+/* A wordmark set inline in running text: sized in em so it scales with the
+   surrounding font size, and nudged down to sit on the text's baseline. */
+@utility inline-logo {
+  display: inline-block;
+  height: 0.85em;
+  width: auto;
+  vertical-align: -0.1em;
+}
+
 /*
  * Theme toggle view transition — "circle-with-blur" variant, ported from
  * https://github.com/rudrodip/theme-toggle-effect (animation-registry.js).
