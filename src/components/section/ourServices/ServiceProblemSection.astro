@@ -1,5 +1,13 @@
 ---
 import { Image } from "astro:assets";
+import LoopVideo from "@/components/ui/LoopVideo.astro";
+
+interface ProblemVideo {
+  mp4: string;
+  webm: string;
+  poster: ImageMetadata;
+  label: string;
+}
 
 interface Props {
   title: string;
@@ -8,6 +16,7 @@ interface Props {
   introText?: string;
   problems: string[];
   imagePosition?: "left" | "right";
+  video?: ProblemVideo;
 }
 
 const {
@@ -17,6 +26,7 @@ const {
   introText,
   problems,
   imagePosition = "left",
+  video,
 } = Astro.props;
 ---
 
@@ -71,12 +81,23 @@ const {
         <div
           class="relative overflow-hidden rounded-2xl shadow-2xl shadow-smokyBlack/10 dark:shadow-softWhite/5"
         >
-          <Image
-            src={image}
-            alt={imageAlt}
-            priority
-            class="w-full h-auto object-cover"
-          />
+          {
+            video ? (
+              <LoopVideo
+                mp4={video.mp4}
+                webm={video.webm}
+                poster={video.poster}
+                label={video.label}
+              />
+            ) : (
+              <Image
+                src={image}
+                alt={imageAlt}
+                priority
+                class="w-full h-auto object-cover"
+              />
+            )
+          }
         </div>
       </div>
 

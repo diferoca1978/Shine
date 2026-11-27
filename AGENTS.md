@@ -30,15 +30,12 @@ pnpm preview      # preview the build
 pnpm check        # astro check (type/diagnostics on .astro)
 pnpm verify       # ./init.sh — build + astro check + customization lint (the gate)
 pnpm lint:client  # ./harness/lint-customization.sh alone (advisory placeholder scan)
-pnpm test:email   # Playwright E2E test for the contact form (Chromium only)
-npx playwright test --ui   # interactive Playwright UI
 ```
 
 > The lockfile is `pnpm-lock.yaml` — always use `pnpm`, never `npm` or `bun`.
 
-There is no unit-test runner beyond the one Playwright contact-form spec. For
-everything else, **`pnpm verify` is the test suite**: if it builds and type-
-checks, most breakage is already excluded. **`pnpm verify` is on-demand, not
+There is no test runner: **`pnpm verify` is the test suite**. If it builds and
+type-checks, most breakage is already excluded. **`pnpm verify` is on-demand, not
 run automatically** — only run it when the user explicitly asks (e.g. "run
 verify", "check it builds"). Do not run it by default after every change or as
 a silent step before marking something done.
@@ -92,7 +89,6 @@ a silent step before marking something done.
   the markdown natively via content collections.
 - **highlight.js** — code-block syntax highlighting in blog posts.
 - **tailwind-merge** — conditional/merged Tailwind class composition.
-- **Playwright** — E2E test for the contact form only (`tests/`).
 
 ## Architecture (real — verify against the tree, don't assume)
 
@@ -263,6 +259,7 @@ Tailwind 4 Vite plugin, not PostCSS.
 | Navigation                                     | `src/utils/navigation.ts` holds the link data (`navBarLinksConst`), consumed by `src/components/global/Navbar.astro` and `Footer.astro`                                                         |
 | `lang` / locale                                | `src/layouts/MainLayout.astro` (`<html lang="es-CO">`) — final, do not change                                                                                                                    |
 | Pages                                          | `src/pages/*.astro` + `src/pages/servicios/`, `src/pages/blog/`                                                                                                                                  |
+| Section videos (looping films)                 | `src/assets/videos/*.{mp4,webm}` + poster in `src/assets/images/` (WebP), imported by the page and passed as the section's `video` prop · rendered by `src/components/ui/LoopVideo.astro`. Project case-study videos are separate: `media.video` in the `projects` collection (`src/content.config.ts`) |
 
 > **Colors** live **only** in `global.css` because Tailwind 4 reads them there
 > to generate utilities. Never mirror colors into a `.ts` file.
