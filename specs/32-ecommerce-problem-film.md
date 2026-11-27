@@ -1,6 +1,6 @@
 # 32 — Ecommerce problem film
 
-**Status:** Draft <!-- Draft | Approved — only a human may change this to Approved -->
+**Status:** Implemented <!-- Draft | Approved — only a human may change this to Approved -->
 
 ## Goal
 
@@ -53,12 +53,12 @@ service, as specs 30 and 31 did for diseño web and publicidad digital.
 
 ## Acceptance criteria
 
-- [ ] The film plays muted only while the panel is at least half visible and
+- [x] The film plays muted only while the panel is at least half visible and
       pauses when it leaves; only the poster loads before that.
-- [ ] With `prefers-reduced-motion: reduce` it does not autoplay; the poster
+- [x] With `prefers-reduced-motion: reduce` it does not autoplay; the poster
       shows and the play button works.
-- [ ] The video reserves its 3:4 box (no layout shift).
-- [ ] `pnpm build` ends with the same gate summary as a build of dev and
+- [x] The video reserves its 3:4 box (no layout shift).
+- [x] `pnpm build` ends with the same gate summary as a build of dev and
       `pnpm check` reports 0 errors.
 
 ## Implementation plan
